@@ -7,7 +7,6 @@
   },
   "dependencies": {
     "apollo-client": "^0.5.24",
-    "auth0-js": "^7.6.0",
     "graphql-tag": "^1.1.2",
     "history": "^4.5.0",
     "react": "^15.4.1",
