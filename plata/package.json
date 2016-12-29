@@ -6,11 +6,10 @@
     "react-scripts": "0.8.4"
   },
   "dependencies": {
-    "apollo-client": "^0.5.24",
-    "graphql-tag": "^1.1.2",
+    "firebase": "^3.6.4",
     "history": "^4.5.0",
+    "re-base": "^2.5.2",
     "react": "^15.4.1",
-    "react-apollo": "^0.7.2",
     "react-dom": "^15.4.1",
     "react-router": "^4.0.0-2",
     "semantic-ui-react": "^0.62.2"
