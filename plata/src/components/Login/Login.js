@@ -26,6 +26,7 @@ class Login extends Component {
     evt.preventDefault();
     console.log(this.state);
     login(this.state.email, this.state.pwd);
+    this.setState({ email: '', pwd: '' });
   }
 
   render() {
