@@ -21,6 +21,9 @@
   },
   "rules": {
     "vars-on-top": "warn",
-    "prefer-template": "off"
+    "prefer-template": "off",
+    "linebreak-style": ["error", "windows"],
+    "import/no-extraneous-dependencies": "off",
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
   }
 }
