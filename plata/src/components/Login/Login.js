@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Form } from 'semantic-ui-react';
+import { login } from '../../firebase/auth';
 
 class Login extends Component {
   constructor() {
@@ -24,6 +25,7 @@ class Login extends Component {
   onFormSubmit(evt) {
     evt.preventDefault();
     console.log(this.state);
+    login(this.state.email, this.state.pwd);
   }
 
   render() {

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Match from 'react-router/Match';
 import Miss from 'react-router/Miss';
 import { Container, Header } from 'semantic-ui-react';
+import { firebaseAuth } from '../../firebase';
 import Home from '../Home/Home';
 import Login from '../Login/Login';
 import './App.css';
@@ -12,6 +13,11 @@ const NoMatch = () => (
 );
 
 class App extends Component {
+  componentDidMount() {
+    firebaseAuth.onAuthStateChanged((user) => {
+      console.log(user);
+    });
+  }
   render() {
     return (
       <div className="App">
