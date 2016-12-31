@@ -2,3 +2,14 @@ html, body {
   font-family: 'Lato', sans-serif;
   font-weight: 300;
 }
+
+h1 {
+  font-weight: 300 !important;
+  font-size: 3rem !important;
+}
+
+.brand {
+  color: #bfbfbf;
+  background-color: #446CB3;
+  /*font family: monda */
+}
