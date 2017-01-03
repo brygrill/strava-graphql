@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import Router from 'next/router';
 import App from '../components/App';
 
-class Dashboard extends Component {
+class DashboardPage extends Component {
   static async getInitialProps() {
     console.log('dashboard initial props');
     return { authed: true };
@@ -25,8 +25,8 @@ class Dashboard extends Component {
   }
 }
 
-Dashboard.propTypes = {
+DashboardPage.propTypes = {
   authed: PropTypes.bool,
 };
 
-export default Dashboard;
+export default DashboardPage;

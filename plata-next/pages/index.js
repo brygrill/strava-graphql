@@ -3,12 +3,12 @@ import React, { Component } from 'react';
 import Link from 'next/link';
 import App from '../components/App';
 
-class Home extends Component {
+class HomePage extends Component {
   static async getInitialProps() {
     console.log('index initial props');
     return {};
   }
-  constructor(props) {
+  constructor() {
     super();
     console.log('index constructor');
   }
@@ -24,4 +24,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default HomePage;

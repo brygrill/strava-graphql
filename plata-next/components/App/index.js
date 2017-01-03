@@ -1,21 +1,16 @@
 import React, { PropTypes } from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import { Container } from 'semantic-ui-react';
 import Head from '../Head';
-import './tap';
-
-// Set theme
-const muiTheme = getMuiTheme({ userAgent: false });
 
 const App = (props) => {
   return (
     <div>
       <Head title={props.pgTitle} />
-      <MuiThemeProvider muiTheme={muiTheme}>
+      <Container fluid>
         <div>
           {props.children}
         </div>
-      </MuiThemeProvider>
+      </Container>
     </div>
   );
 };

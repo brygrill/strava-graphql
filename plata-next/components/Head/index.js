@@ -20,8 +20,8 @@ const Header = (props) => {
         <meta name="author" content="Plata" />
         <meta name="description" content="Simply Plan Your Training" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css" />
-        <link href="https://cdn.muicss.com/mui-0.9.7/css/mui.min.css" rel="stylesheet" type="text/css" media="screen" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" type="text/css" href="/static/styles/main.css" />
       </Head>
     </div>

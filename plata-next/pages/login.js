@@ -1,24 +1,25 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import App from '../components/App';
+import Login from '../components/Login';
 
-class Login extends Component {
+class LoginPage extends Component {
   static async getInitialProps() {
     console.log('login initial props');
     return {};
   }
-  constructor(props) {
+  constructor() {
     super();
     console.log('login constructor');
   }
 
   render() {
     return (
-      <App>
-        <h1>login page!</h1>
+      <App pgTitle="Login">
+        <Login />
       </App>
     );
   }
 }
 
-export default Login;
+export default LoginPage;
