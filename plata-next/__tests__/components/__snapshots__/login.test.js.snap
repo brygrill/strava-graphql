@@ -1,0 +1,43 @@
+exports[`test Login component should render a login form 1`] = `
+<div>
+  <div
+    className="ui centered grid">
+    <div
+      className="row">
+      <div
+        className="computer only four wide column" />
+      <div
+        className="center aligned sixteen wide mobile twelve wide column">
+        <div
+          className="field">
+          <label>
+            Email:
+          </label>
+          <div
+            className="ui input">
+            <input
+              name="email"
+              placeholder="email"
+              required={undefined}
+              type="text" />
+          </div>
+        </div>
+        <div
+          className="field">
+          <label>
+            Password:
+          </label>
+          <div
+            className="ui input">
+            <input
+              name="password"
+              placeholder="password"
+              required={undefined}
+              type="text" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
