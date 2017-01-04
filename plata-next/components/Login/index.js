@@ -1,18 +1,26 @@
 import React from 'react';
-import { Grid, Form } from 'semantic-ui-react';
+import { Grid, Header, Form, Segment } from 'semantic-ui-react';
 
 const Login = () => {
   return (
-    <div>
-      <Grid centered>
-        <Grid.Row>
-          <Grid.Column width={4} only="computer" />
-          <Grid.Column width={12} mobile={16} textAlign="center">
-            <Form.Input label="Email:" name="email" placeholder="email" />
-            <Form.Input label="Password:" name="password" placeholder="password" />
-          </Grid.Column>
-        </Grid.Row>
+    <div className="plata-height-100">
+      <Grid textAlign="center" verticalAlign="middle" className="plata-height-100">
+        <Grid.Column className="login-column">
+          <Header as="h2" content="Log-in to your Dashboard" />
+          <Form size="large">
+            <Segment>
+              <Form.Input icon="user" iconPosition="left" name="email" placeholder="Email Address" />
+              <Form.Input icon="lock" iconPosition="left" name="password" placeholder="Password" />
+              <Form.Button fluid primary size="large">Login</Form.Button>
+            </Segment>
+          </Form>
+        </Grid.Column>
       </Grid>
+      <style jsx>{`
+      .login-column {
+        max-width: 450px;
+      }
+    `}</style>
     </div>
   );
 };
