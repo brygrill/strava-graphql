@@ -1,6 +1,6 @@
 /* eslint-disable react/prefer-stateless-function */
-/* eslint-disable class-methods-use-this */
 import React, { Component } from 'react';
+import Router from 'next/router';
 import App from '../components/App';
 import Login from '../components/Login';
 
@@ -11,14 +11,27 @@ class LoginPage extends Component {
 
   constructor() {
     super();
-    this.onLoginSubmit = this.onLoginSubmit.bind(this);
-    this.emailInput = this.emailInput.bind(this);
-    this.pwInput = this.pwInput.bind(this);
+    this.onEmailChange = this.onEmailChange.bind(this);
+    this.onPwdChange = this.onPwdChange.bind(this);
+    this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.state = {
+      email: '',
+      pwd: '',
+    };
   }
 
-  onLoginSubmit(evt) {
+  onEmailChange(evt, val) {
+    this.setState({ email: val.value });
+  }
+
+  onPwdChange(evt, val) {
+    this.setState({ pwd: val.value });
+  }
+
+  onFormSubmit(evt) {
     evt.preventDefault();
-    console.log(evt);
+    this.setState({ email: '', pwd: '' });
+    Router.push('/dashboard');
   }
 
   render() {
@@ -26,9 +39,11 @@ class LoginPage extends Component {
       <App pgTitle="Login">
         <Login
           title="Log-in to your Dashboard"
-          emailRef={this.emailInput}
-          pwRef={this.pwInput}
-          handleSubmit={this.onLoginSubmit}
+          emailVal={this.state.email}
+          emailChange={this.onEmailChange}
+          pwdVal={this.state.pwd}
+          pwdChange={this.onPwdChange}
+          handleSubmit={this.onFormSubmit}
         />
       </App>
     );

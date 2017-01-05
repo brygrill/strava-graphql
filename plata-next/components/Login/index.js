@@ -15,6 +15,8 @@ const Login = (props) => {
                 name="email"
                 type="email"
                 placeholder="Email Address"
+                value={props.emailVal}
+                onChange={props.emailChange}
               />
               <Form.Input
                 icon="lock"
@@ -22,6 +24,8 @@ const Login = (props) => {
                 name="password"
                 type="password"
                 placeholder="Password"
+                value={props.pwdVal}
+                onChange={props.pwdChange}
               />
               <Form.Button fluid primary size="large">Login</Form.Button>
             </Segment>
@@ -43,6 +47,10 @@ Login.defaultProps = {
 
 Login.propTypes = {
   title: PropTypes.string,
+  emailVal: PropTypes.string.isRequired,
+  emailChange: PropTypes.func.isRequired,
+  pwdVal: PropTypes.string.isRequired,
+  pwdChange: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
 };
 
