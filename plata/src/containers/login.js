@@ -1,12 +1,11 @@
 /* eslint-disable react/prefer-stateless-function */
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { login } from '../firebase/auth';
 import Login from '../components/Login';
 
 class LoginPage extends Component {
-
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.onEmailChange = this.onEmailChange.bind(this);
     this.onPwdChange = this.onPwdChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -27,7 +26,9 @@ class LoginPage extends Component {
   onFormSubmit(evt) {
     evt.preventDefault();
     login(this.state.email, this.state.pwd)
-      .then(() => {
+      .then((resp) => {
+        console.log(resp);
+        this.context.router.transitionTo({ pathname: '/dashboard' });
         this.setState({ email: '', pwd: '' });
       })
       .catch((err) => {
@@ -52,8 +53,8 @@ class LoginPage extends Component {
   }
 }
 
-LoginPage.propTypes = {
-  currentUser: PropTypes.shape,
+LoginPage.contextTypes = {
+  router: React.PropTypes.object,
 };
 
 export default LoginPage;

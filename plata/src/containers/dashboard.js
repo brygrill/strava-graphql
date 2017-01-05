@@ -1,36 +1,49 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component, PropTypes } from 'react';
-import Router from 'next/router';
-import { currentUser } from '../firebase/auth';
-import App from '../components/App';
+import { Button } from 'semantic-ui-react';
+import { logout } from '../firebase/auth';
 
-class DashboardPage extends Component {
-  static async getInitialProps() {
-    console.log(currentUser);
-    return { currentUser };
-  }
+class Dashboard extends Component {
   constructor() {
     super();
-    console.log('dashboard constructor');
+    this.onLogout = this.onLogout.bind(this);
+    this.state = {
+      user: null,
+    };
+    console.log(this);
+  }
+
+  onLogout() {
+    logout()
+      .then(() => {
+        this.context.router.transitionTo({ pathname: '/' });
+        //this.setState({ user: null });
+      })
+      .catch(() => {
+        this.context.router.transitionTo({ pathname: '/' });
+        //this.setState({ user: null });
+      });
   }
 
   render() {
-    // If not authed,
-    // Send to login
-    console.log(this.props.currentUser);
-    if (!this.props.currentUser) {
-      return Router.push('/login');
-    }
     return (
-      <App pgTitle="Dashboard">
-        <h1>dashboard!</h1>
-      </App>
+      <div>
+        <h1>Dashboard!</h1>
+        <Button
+          content={'logout'}
+          onClick={this.onLogout}
+        />
+      </div>
     );
   }
 }
 
-DashboardPage.propTypes = {
-  currentUser: PropTypes.shape,
+Dashboard.propTypes = {
+  authed: PropTypes.bool.isRequired,
 };
 
-export default DashboardPage;
+Dashboard.contextTypes = {
+  router: React.PropTypes.object,
+};
+
+export default Dashboard;
