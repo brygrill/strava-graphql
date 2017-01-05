@@ -1,12 +1,14 @@
 /* eslint-disable react/prefer-stateless-function */
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Router from 'next/router';
+import { login, currentUser } from '../firebase/auth';
 import App from '../components/App';
 import Login from '../components/Login';
 
 class LoginPage extends Component {
   static async getInitialProps() {
-    return {};
+    console.log(currentUser);
+    return { currentUser };
   }
 
   constructor() {
@@ -30,11 +32,24 @@ class LoginPage extends Component {
 
   onFormSubmit(evt) {
     evt.preventDefault();
-    this.setState({ email: '', pwd: '' });
-    Router.push('/dashboard');
+    login(this.state.email, this.state.pwd)
+      .then(() => {
+        this.setState({ email: '', pwd: '' });
+        Router.push('/dashboard');
+      })
+      .catch((err) => {
+        if (err.code === 'auth/wrong-password') {
+          console.log('wrong pwd');
+        }
+      });
   }
 
   render() {
+    // If already authed,
+    // send directly to dashboard
+    if (this.props.currentUser) {
+      return Router.push('/dashboard');
+    }
     return (
       <App pgTitle="Login">
         <Login
@@ -50,5 +65,9 @@ class LoginPage extends Component {
     );
   }
 }
+
+LoginPage.propTypes = {
+  currentUser: PropTypes.shape,
+};
 
 export default LoginPage;
