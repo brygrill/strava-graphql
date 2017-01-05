@@ -1,15 +1,9 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component, PropTypes } from 'react';
-import Router from 'next/router';
-import { login, currentUser } from '../firebase/auth';
-import App from '../components/App';
+import { login } from '../firebase/auth';
 import Login from '../components/Login';
 
 class LoginPage extends Component {
-  static async getInitialProps() {
-    console.log(currentUser);
-    return { currentUser };
-  }
 
   constructor() {
     super();
@@ -35,7 +29,6 @@ class LoginPage extends Component {
     login(this.state.email, this.state.pwd)
       .then(() => {
         this.setState({ email: '', pwd: '' });
-        Router.push('/dashboard');
       })
       .catch((err) => {
         if (err.code === 'auth/wrong-password') {
@@ -45,23 +38,16 @@ class LoginPage extends Component {
   }
 
   render() {
-    // If already authed,
-    // send directly to dashboard
-    if (this.props.currentUser) {
-      return Router.push('/dashboard');
-    }
     return (
-      <App pgTitle="Login">
-        <Login
-          title="Log-in to your Dashboard"
-          colWidth="500px"
-          emailVal={this.state.email}
-          emailChange={this.onEmailChange}
-          pwdVal={this.state.pwd}
-          pwdChange={this.onPwdChange}
-          handleSubmit={this.onFormSubmit}
-        />
-      </App>
+      <Login
+        title="Log-in to your Dashboard"
+        colWidth="500px"
+        emailVal={this.state.email}
+        emailChange={this.onEmailChange}
+        pwdVal={this.state.pwd}
+        pwdChange={this.onPwdChange}
+        handleSubmit={this.onFormSubmit}
+      />
     );
   }
 }
