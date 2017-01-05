@@ -39,6 +39,7 @@ class LoginPage extends Component {
       <App pgTitle="Login">
         <Login
           title="Log-in to your Dashboard"
+          colWidth="500px"
           emailVal={this.state.email}
           emailChange={this.onEmailChange}
           pwdVal={this.state.pwd}

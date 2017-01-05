@@ -2,10 +2,13 @@ import React, { PropTypes } from 'react';
 import { Grid, Header, Form, Segment } from 'semantic-ui-react';
 
 const Login = (props) => {
+  const styles = {
+    maxWidth: props.colWidth,
+  };
   return (
     <div className="plata-height-100">
       <Grid textAlign="center" verticalAlign="middle" className="plata-height-100">
-        <Grid.Column className="login-column">
+        <Grid.Column style={styles}>
           <Header as="h2" content={props.title} />
           <Form size="large" onSubmit={props.handleSubmit}>
             <Segment>
@@ -32,21 +35,18 @@ const Login = (props) => {
           </Form>
         </Grid.Column>
       </Grid>
-      <style jsx>{`
-      .login-column {
-        max-width: 450px;
-      }
-    `}</style>
     </div>
   );
 };
 
 Login.defaultProps = {
   title: 'Login',
+  colWidth: '450px',
 };
 
 Login.propTypes = {
   title: PropTypes.string,
+  colWidth: PropTypes.string,
   emailVal: PropTypes.string.isRequired,
   emailChange: PropTypes.func.isRequired,
   pwdVal: PropTypes.string.isRequired,

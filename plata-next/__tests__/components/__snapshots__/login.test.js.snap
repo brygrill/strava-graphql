@@ -1,42 +1,69 @@
 exports[`test Login component should render a login form 1`] = `
-<div>
+<div
+  className="plata-height-100">
   <div
-    className="ui centered grid">
+    className="ui center aligned middle aligned grid plata-height-100">
     <div
-      className="row">
-      <div
-        className="computer only four wide column" />
-      <div
-        className="center aligned sixteen wide mobile twelve wide column">
+      className="column"
+      style={
+        Object {
+          "maxWidth": "450px",
+        }
+      }>
+      <h2
+        className="ui header">
+        Login
+      </h2>
+      <form
+        className="ui large form"
+        onSubmit={[Function]}>
         <div
-          className="field">
-          <label>
-            Email:
-          </label>
+          className="ui segment">
           <div
-            className="ui input">
-            <input
-              name="email"
-              placeholder="email"
+            className="field">
+            <div
+              className="ui left icon input">
+              <i
+                aria-hidden="true"
+                className="user icon" />
+              <input
+                name="email"
+                onChange={[Function]}
+                placeholder="Email Address"
+                required={undefined}
+                type="email"
+                value="my@email.com" />
+            </div>
+          </div>
+          <div
+            className="field">
+            <div
+              className="ui left icon input">
+              <i
+                aria-hidden="true"
+                className="lock icon" />
+              <input
+                name="password"
+                onChange={[Function]}
+                placeholder="Password"
+                required={undefined}
+                type="password"
+                value="" />
+            </div>
+          </div>
+          <div
+            className="field">
+            <button
+              className="ui large fluid primary button"
+              onClick={[Function]}
               required={undefined}
-              type="text" />
+              tabIndex={undefined}
+              type={undefined}>
+              Login
+            </button>
           </div>
         </div>
-        <div
-          className="field">
-          <label>
-            Password:
-          </label>
-          <div
-            className="ui input">
-            <input
-              name="password"
-              placeholder="password"
-              required={undefined}
-              type="text" />
-          </div>
-        </div>
-      </div>
+      </form>
     </div>
   </div>
 </div>
