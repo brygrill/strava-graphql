@@ -1,7 +1,24 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component, PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { Button } from 'semantic-ui-react';
-import { logout } from '../firebase/auth';
+import { doLogout } from '../redux/actions';
+
+const mapStateToProps = (state) => {
+  // Pass Redux State as Container Props
+  return {
+    authed: state.reducer.authed,
+    loading: state.reducer.isFetching,
+    error: state.reducer.error,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout: bindActionCreators(doLogout, dispatch),
+  };
+};
 
 class Dashboard extends Component {
   constructor() {
@@ -13,16 +30,20 @@ class Dashboard extends Component {
     console.log(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+    if (nextProps.authed !== this.props.authed) {
+      console.log('new props!!!');
+      console.log(nextProps);
+      this.setState({ authed: nextProps.authed });
+    }
+  }
+
   onLogout() {
-    logout()
-      .then(() => {
-        this.context.router.transitionTo({ pathname: '/' });
-        //this.setState({ user: null });
-      })
-      .catch(() => {
-        this.context.router.transitionTo({ pathname: '/' });
-        //this.setState({ user: null });
-      });
+    console.log('do something in redux');
+    console.log(this.context);
+    this.props.logout();
+    this.context.router.replace('/');
   }
 
   render() {
@@ -38,12 +59,8 @@ class Dashboard extends Component {
   }
 }
 
-Dashboard.propTypes = {
-  authed: PropTypes.bool.isRequired,
-};
-
 Dashboard.contextTypes = {
   router: React.PropTypes.object,
 };
 
-export default Dashboard;
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

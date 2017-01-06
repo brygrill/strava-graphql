@@ -1,75 +1,87 @@
 /* eslint-disable react/prefer-stateless-function */
-import React, { Component } from 'react';
-import { Match, BrowserRouter, Miss, Redirect } from 'react-router';
-import firebase from 'firebase';
-import { firebaseAuth } from '../firebase';
+import React, { Component, PropTypes } from 'react';
+import { Router, Route } from 'react-router';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { doLogin } from '../redux/actions';
 
 import Home from './home';
-import Login from './login';
 import Dashboard from './dashboard';
 
+const mapStateToProps = (state, ownProps) => {
+  console.log(state, ownProps);
+  // Pass Redux State as Container Props
+  return {
+    authed: state.reducer.authed,
+    loading: state.reducer.isFetching,
+    error: state.reducer.error,
+    //query: ownProps.location.query,
+    //action: ownProps.location.action,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: bindActionCreators(doLogin, dispatch),
+  };
+};
+
+const Wrapper = (props) => {
+  return (
+    <div>
+      <h1>wrapper</h1>
+      {props.children}
+    </div>
+  );
+};
+
+const NotFound = () => {
+  return (<h1>404</h1>);
+};
+
+const DashboardEnter = () => {
+  console.log('dashboard enter');
+}
+
 class App extends Component {
-  constructor() {
-    super();
-    //this.authChange = this.authChange.bind(this);
+  constructor(props) {
+    super(props);
     this.state = {
-      authed: false,
+      authed: props.authed,
       user: null,
     };
+    console.log(props);
   }
 
-  componentDidMount() {
-    if (firebase.User) {
-      console.log(firebase.User);
-      //this.setState({ authed: true, user: firebase.user });
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+    if (nextProps.lastUpdated !== this.props.lastUpdated) {
+      console.log('new props!!!');
+      console.log(nextProps);
     }
-    this.authChange();
-  }
-
-  authChange() {
-    firebaseAuth().onAuthStateChanged((user) => {
-      if (user) {
-        console.log(user);
-        this.setState({ authed: true, user });
-      } else {
-        console.log('here');
-        //this.setState({ authed: false, user: null });
-      }
-    });
   }
 
   render() {
-    console.log(this.state);
     return (
-      <BrowserRouter>
-        <div>
-          <h1>App</h1>
-          <Match pattern="/" exactly component={Home} />
-          <Match pattern="/login" component={Login} />
-          <Match
-            pattern="/dashboard"
-            exactly
-            render={() => (
-              this.state.authed ? (
-                <Dashboard
-                  authed={this.state.authed}
-                  user={this.state.user}
-                />
-              ) : (
-                <Redirect
-                  to={{
-                    pathname: '/login',
-                    state: { authed: this.state.authed },
-                  }}
-                />
-              )
-            )}
-          />
-          <Miss render={() => <h3>404</h3>} />
-        </div>
-      </BrowserRouter>
+      <Router history={this.props.history}>
+        <Route component={Wrapper}>
+          <Route path="/" component={Home} />
+          <Route path="/dashboard" component={Dashboard} onEnter={DashboardEnter} />
+          <Route path="*" component={NotFound} />
+        </Route>
+      </Router>
     );
   }
 }
 
-export default App;
+App.propTypes = {
+  authed: PropTypes.bool.isRequired,
+  history: PropTypes.object.isRequired,
+  lastUpdated: PropTypes.number,
+};
+
+Wrapper.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
