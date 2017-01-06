@@ -4,12 +4,12 @@ import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Button } from 'semantic-ui-react';
-import { doLogin } from '../redux/actions';
+import { loginUserSuccess } from '../redux/actions';
 
 const mapStateToProps = (state) => {
   // Pass Redux State as Container Props
   return {
-    authed: state.reducer.authed,
+    isAuthenticated: state.reducer.isAuthenticated,
     loading: state.reducer.isFetching,
     error: state.reducer.error,
   };
@@ -17,7 +17,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    login: bindActionCreators(doLogin, dispatch),
+    login: bindActionCreators(loginUserSuccess, dispatch),
   };
 };
 
@@ -26,7 +26,7 @@ class HomePage extends Component {
     super(props);
     this.onLogin = this.onLogin.bind(this);
     this.state = {
-      authed: props.authed,
+      authed: props.isAuthenticated,
       user: null,
     };
     console.log(props);
@@ -48,7 +48,7 @@ class HomePage extends Component {
 
   onLogin() {
     console.log('do something in redux');
-    this.props.login();
+    this.props.login('ABCD1234');
   }
 
   render() {

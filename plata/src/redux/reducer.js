@@ -1,29 +1,59 @@
-import { LOGIN, LOGOUT, REQUEST_NETWORK, FAIL_NETWORK } from './actions';
+import {
+  LOGIN_USER_REQUEST,
+  LOGIN_USER_SUCCESS,
+  LOGIN_USER_FAILURE,
+  LOGOUT_USER,
+  FETCH_PROTECTED_DATA_REQUEST,
+  FETCH_PROTECTED_DATA_FAIL,
+  RECEIVE_PROTECTED_DATA,
+} from './actions';
 
 const initialState = {
-  authed: false,
+  isAuthenticating: false,
+  isAuthenticated: false,
+  statusText: null,
   isFetching: false,
   error: false,
+  data: null,
 };
 
 function reducer(state = initialState, action) {
   switch (action.type) {
-    case LOGIN:
+    case LOGIN_USER_REQUEST:
       return Object.assign({}, state, {
-        authed: true,
+        isAuthenticating: true,
+        statusText: null,
       });
-    case LOGOUT:
+    case LOGIN_USER_SUCCESS:
       return Object.assign({}, state, {
-        authed: false,
+        isAuthenticating: false,
+        isAuthenticated: true,
+        statusText: 'Login Success!',
       });
-    case REQUEST_NETWORK:
+    case LOGIN_USER_FAILURE:
+      return Object.assign({}, state, {
+        isAuthenticating: false,
+        isAuthenticated: false,
+        statusText: 'Authentication Failure.',
+      });
+    case LOGOUT_USER:
+      return Object.assign({}, state, {
+        isAuthenticated: false,
+        statusText: 'Logout Success!',
+      });
+    case FETCH_PROTECTED_DATA_REQUEST:
       return Object.assign({}, state, {
         isFetching: true,
       });
-    case FAIL_NETWORK:
+    case FETCH_PROTECTED_DATA_FAIL:
       return Object.assign({}, state, {
         isFetching: false,
         error: true,
+      });
+    case RECEIVE_PROTECTED_DATA:
+      return Object.assign({}, state, {
+        isFetching: false,
+        data: action.data,
       });
     default:
       return state;
