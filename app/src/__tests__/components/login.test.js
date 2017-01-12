@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
-import Login from '../../components/Login';
+import Login from '../../components/LoginForm';
 
 const mockFunc = (val) => {
   console.log(val);

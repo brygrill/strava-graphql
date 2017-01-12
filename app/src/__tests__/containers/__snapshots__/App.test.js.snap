@@ -1,0 +1,21 @@
+exports[`test App shows the home page! 1`] = `
+<div>
+  <h1>
+    App
+  </h1>
+  <h1>
+    Home!
+  </h1>
+</div>
+`;
+
+exports[`test Home pages shows the home page! 1`] = `
+<div>
+  <h1>
+    App
+  </h1>
+  <h1>
+    Home!
+  </h1>
+</div>
+`;
