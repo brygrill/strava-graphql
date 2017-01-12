@@ -1,6 +1,5 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
-import { login } from '../firebase/auth';
 import Login from '../components/Login';
 
 class LoginPage extends Component {
@@ -25,17 +24,7 @@ class LoginPage extends Component {
 
   onFormSubmit(evt) {
     evt.preventDefault();
-    login(this.state.email, this.state.pwd)
-      .then((resp) => {
-        console.log(resp);
-        this.context.router.transitionTo({ pathname: '/dashboard' });
-        this.setState({ email: '', pwd: '' });
-      })
-      .catch((err) => {
-        if (err.code === 'auth/wrong-password') {
-          console.log('wrong pwd');
-        }
-      });
+    console.log(this.state);
   }
 
   render() {
