@@ -1,0 +1,13 @@
+{
+  "name": "plata-app-server",
+  "version": "0.0.1",
+  "description": "Express server for plata app",
+  "author": "Bryan Grill",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.15.2"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}
