@@ -1,0 +1,15 @@
+exports[`<ContainerComponent /> Matches snapshot with child 1`] = `
+<div>
+  <div
+    className="ui text container"
+    style={
+      Object {
+        "paddingTop": "1rem",
+      }
+    }>
+    <h1>
+      TEST!
+    </h1>
+  </div>
+</div>
+`;

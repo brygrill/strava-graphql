@@ -1,0 +1,18 @@
+exports[`<HomePage /> Matches snapshot 1`] = `
+<div>
+  <div
+    className="ui text container"
+    style={
+      Object {
+        "paddingTop": "1rem",
+      }
+    }>
+    <img
+      alt={undefined}
+      className="ui fluid image"
+      height={undefined}
+      src="logo.svg"
+      width={undefined} />
+  </div>
+</div>
+`;

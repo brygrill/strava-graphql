@@ -1,0 +1,157 @@
+exports[`<LoginComponent /> Matches snapshot with error 1`] = `
+<div>
+  <div
+    className="ui very padded segment">
+    <h2
+      className="ui center aligned header">
+      <i
+        aria-hidden="true"
+        className="trophy icon" />
+      <div
+        className="content">
+        Team Manager Login
+      </div>
+    </h2>
+    <form
+      className="ui form"
+      onSubmit={[Function]}>
+      <div
+        className="fields">
+        <div
+          className="twelve wide field">
+          <label>
+            Email
+          </label>
+          <div
+            className="ui input">
+            <input
+              name="email"
+              onChange={[Function]}
+              required={undefined}
+              type="email"
+              value="" />
+          </div>
+        </div>
+        <div
+          className="twelve wide field">
+          <label>
+            Password
+          </label>
+          <div
+            className="ui input">
+            <input
+              name="pwd"
+              onChange={[Function]}
+              required={undefined}
+              type="password"
+              value="" />
+          </div>
+        </div>
+      </div>
+      <div
+        className="field">
+        <button
+          className="ui button"
+          onClick={[Function]}
+          required={undefined}
+          tabIndex={undefined}
+          type={undefined}>
+          Submit
+        </button>
+      </div>
+    </form>
+    <div
+      className="ui error message">
+      <div
+        className="content">
+        <div
+          className="header">
+          Login Error
+        </div>
+        <p>
+          Please enter valid credentials.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<LoginComponent /> Matches snapshot with no error 1`] = `
+<div>
+  <div
+    className="ui very padded segment">
+    <h2
+      className="ui center aligned header">
+      <i
+        aria-hidden="true"
+        className="trophy icon" />
+      <div
+        className="content">
+        Team Manager Login
+      </div>
+    </h2>
+    <form
+      className="ui form"
+      onSubmit={[Function]}>
+      <div
+        className="fields">
+        <div
+          className="twelve wide field">
+          <label>
+            Email
+          </label>
+          <div
+            className="ui input">
+            <input
+              name="email"
+              onChange={[Function]}
+              required={undefined}
+              type="email"
+              value="" />
+          </div>
+        </div>
+        <div
+          className="twelve wide field">
+          <label>
+            Password
+          </label>
+          <div
+            className="ui input">
+            <input
+              name="pwd"
+              onChange={[Function]}
+              required={undefined}
+              type="password"
+              value="" />
+          </div>
+        </div>
+      </div>
+      <div
+        className="field">
+        <button
+          className="ui button"
+          onClick={[Function]}
+          required={undefined}
+          tabIndex={undefined}
+          type={undefined}>
+          Submit
+        </button>
+      </div>
+    </form>
+    <div
+      className="ui error hidden message">
+      <div
+        className="content">
+        <div
+          className="header">
+          Login Error
+        </div>
+        <p>
+          Please enter valid credentials.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
