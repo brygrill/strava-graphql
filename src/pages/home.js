@@ -2,10 +2,12 @@
 /* eslint-disable react/jsx-wrap-multilines */
 /* eslint-disable react/jsx-indent */
 import React, { Component } from 'react';
-import { Loader, Dimmer } from 'semantic-ui-react';
+import { Loader, Dimmer, Image } from 'semantic-ui-react';
 
 //import ScheduleComponent from '../components/schedule';
 import ContainerComponent from '../components/container';
+
+import logo from '../images/logo.svg';
 
 //import getSchedule from '../firebase/get-schedule';
 
@@ -26,7 +28,7 @@ class HomePage extends Component {
           <Loader />
         </Dimmer>
       : <ContainerComponent>
-          <div>hi</div>
+          <Image src={logo} fluid />
         </ContainerComponent>;
     return content;
   }
