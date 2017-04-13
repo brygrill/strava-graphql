@@ -2,11 +2,13 @@
   "extends": ["airbnb", "plugin:react/recommended"],
   "env": {
     "browser": true,
-    "node": true,
     "jest": true
   },
+  "parser": "babel-eslint",
   "plugins": [
-    "react"
+    "react",
+    "flowtype",
+    "class-property"
   ],
   "settings": {
     "react": {
@@ -22,8 +24,13 @@
   "rules": {
     "vars-on-top": "warn",
     "prefer-template": "off",
-
+    "arrow-body-style": "off",
+    "no-underscore-dangle": "off",
+    "import/no-unresolved": [2, { "caseSensitive": false }],
     "import/no-extraneous-dependencies": "off",
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/forbid-prop-types": "off",
+    "arrow-parens": "off",
+    "react/prefer-stateless-function": "off"
   }
 }

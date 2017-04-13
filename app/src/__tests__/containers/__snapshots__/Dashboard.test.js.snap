@@ -1,7 +1,0 @@
-exports[`test Dashboard shows dashboard page! 1`] = `
-<div>
-  <h1>
-    Dashboard!
-  </h1>
-</div>
-`;

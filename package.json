@@ -1,0 +1,67 @@
+{
+  "name": "plata-app",
+  "version": "0.0.1",
+  "description": "App to manage exercising",
+  "repository": "https://github.com/brygrill/plata-app.git",
+  "author": "Bryan Grill",
+  "license": "MIT",
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "coverageDirectory": "./coverage/"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.1",
+    "babel-plugin-lodash": "^3.2.11",
+    "babel-plugin-transform-class-properties": "^6.23.0",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-stage-3": "^6.22.0",
+    "codecov": "^2.1.0",
+    "enzyme": "^2.8.0",
+    "eslint": "^3.15.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-class-property": "^1.0.3",
+    "eslint-plugin-flowtype": "^2.30.4",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.2 || ^4.0.0",
+    "eslint-plugin-react": "^6.9.0",
+    "flow-bin": "^0.42.0",
+    "lint-staged": "^3.4.0",
+    "pre-commit": "^1.2.2",
+    "prettier": "^0.22.0",
+    "react-addons-test-utils": "^15.5.1",
+    "react-scripts": "0.9.5",
+    "react-test-renderer": "^15.5.4"
+  },
+  "dependencies": {
+    "firebase": "^3.7.4",
+    "lodash": "^4.17.4",
+    "moment": "^2.18.1",
+    "react": "^15.5.3",
+    "react-dom": "^15.5.3",
+    "react-router-dom": "^4.1.0",
+    "semantic-ui-react": "^0.67.2"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --single-quote --trailing-comma all --write",
+      "git add"
+    ]
+  },
+  "pre-commit": [
+    "lint-staged"
+  ],
+  "scripts": {
+    "flow": "flow; test $? -eq 0 -o $? -eq 2",
+    "format": "prettier --single-quote --trailing-comma all --write './src/**/*.js'",
+    "lint-staged": "lint-staged",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "cov": "yarn run test -- --coverage",
+    "rpt": "codecov -t $CODECOV",
+    "deploy": "yarn run build && firebase deploy --only hosting"
+  }
+}
