@@ -1,7 +1,7 @@
 exports[`<LoginPage /> Matches snapshot 1`] = `
 <div>
   <div
-    className="ui text container"
+    className="ui container"
     style={
       Object {
         "paddingTop": "1rem",

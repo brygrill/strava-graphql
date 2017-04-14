@@ -1,18 +1,68 @@
 exports[`<HomePage /> Matches snapshot 1`] = `
 <div>
   <div
-    className="ui text container"
+    className="ui container"
     style={
       Object {
         "paddingTop": "1rem",
       }
     }>
-    <img
-      alt={undefined}
-      className="ui fluid image"
-      height={undefined}
-      src="logo.svg"
-      width={undefined} />
+    <div
+      className="ui relaxed grid">
+      <div
+        className="row">
+        <div
+          className="right floated sixteen wide column">
+          <button
+            className="ui inverted button right floated"
+            onClick={[Function]}
+            tabIndex={undefined}>
+            Log In
+          </button>
+        </div>
+      </div>
+      <div
+        className="row" />
+      <div
+        className="row" />
+      <div
+        className="row" />
+      <div
+        className="row" />
+      <div
+        className="computer only row" />
+      <div
+        className="computer only row" />
+      <div
+        className="computer only row" />
+      <div
+        className="computer only row" />
+      <div
+        className="row">
+        <div
+          className="sixteen wide column">
+          <div>
+            <img
+              alt={undefined}
+              className="ui large centered image"
+              height={undefined}
+              src="logo_white.png"
+              width={undefined} />
+            <h1
+              className="ui center aligned header"
+              style={
+                Object {
+                  "color": "#fff",
+                  "fontSize": "2.5rem",
+                  "fontWeight": 300,
+                }
+              }>
+              Simply Plan Your Training.
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 `;
