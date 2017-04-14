@@ -1,7 +1,9 @@
+/* Globals */
 body {
   background-color: #1CAF9A;
 }
 
+/* Plata Custom */
 plata-full-height {
   height: 100% !important;
 }
@@ -10,4 +12,9 @@ plata-custom-header {
   font-family: 'Lato', sans-serif;
   font-weight: 300;
   color: #fff;
+}
+
+/* Semantic Override */
+.ui.inverted.button:hover {
+  color: #1CAF9A;
 }

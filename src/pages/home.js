@@ -33,7 +33,7 @@ class HomePage extends Component {
         <Grid relaxed>
           <Grid.Row>
             <Grid.Column floated="right" width={16}>
-              <Button content="Sign In" floated="right" />
+              <Button content="Log In" floated="right" inverted />
             </Grid.Column>
           </Grid.Row>
           {_.times(4, () => {
