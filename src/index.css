@@ -1,1 +1,16 @@
+body {
+  background-color: #1CAF9A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+plata-full-height {
+  height: 100% !important;
+}
+
+plata-custom-header {
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  color: #fff;
+}

@@ -2,19 +2,17 @@
 /* eslint-disable react/jsx-wrap-multilines */
 /* eslint-disable react/jsx-indent */
 import React, { Component } from 'react';
-import { Loader, Dimmer, Image } from 'semantic-ui-react';
+import { Header, Image } from 'semantic-ui-react';
 
-//import ScheduleComponent from '../components/schedule';
 import ContainerComponent from '../components/container';
 
-import logo from '../images/logo.svg';
+import logo from '../images/logo_white.png';
 
-//import getSchedule from '../firebase/get-schedule';
-
-/*async function buildSchedule() {
-  const schedule = await getSchedule('grill');
-  return schedule;
-}*/
+const subHeaderStyle = {
+  fontWeight: 300,
+  color: '#fff',
+  fontSize: '2.5rem',
+};
 
 class HomePage extends Component {
   state = {
@@ -23,14 +21,17 @@ class HomePage extends Component {
   };
 
   render() {
-    const content = this.state.loading
-      ? <Dimmer active>
-          <Loader />
-        </Dimmer>
-      : <ContainerComponent>
-          <Image src={logo} fluid />
-        </ContainerComponent>;
-    return content;
+    return (
+      <ContainerComponent>
+        <Image src={logo} size="large" centered />
+        <Header
+          as="h1"
+          content="Simply Plan Your Training."
+          textAlign="center"
+          style={subHeaderStyle}
+        />
+      </ContainerComponent>
+    );
   }
 }
 
