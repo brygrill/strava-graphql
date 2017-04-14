@@ -13,7 +13,7 @@ class ContainerComponent extends Component {
   render() {
     return (
       <div>
-        <Container text style={pagePadding}>
+        <Container style={pagePadding}>
           {this.props.children}
         </Container>
       </div>
