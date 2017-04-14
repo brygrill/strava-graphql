@@ -22,26 +22,15 @@ exports[`<HomePage /> Matches snapshot 1`] = `
         </div>
       </div>
       <div
-        className="row" />
-      <div
-        className="row" />
-      <div
-        className="row" />
-      <div
-        className="row" />
-      <div
-        className="computer only row" />
-      <div
-        className="computer only row" />
-      <div
-        className="computer only row" />
-      <div
-        className="computer only row" />
-      <div
         className="row">
         <div
           className="sixteen wide column">
-          <div>
+          <div
+            style={
+              Object {
+                "paddingTop": "16rem",
+              }
+            }>
             <img
               alt={undefined}
               className="ui large centered image"
