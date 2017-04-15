@@ -54,12 +54,9 @@ class HomePage extends Component {
         <Grid relaxed>
           <Grid.Row>
             <Grid.Column floated="right" width={16}>
-              <Button
-                content="Log In"
-                floated="right"
-                inverted
-                onClick={<Link to="/login" />}
-              />
+              <Link to="/login">
+                <Button content="Log In" floated="right" inverted />
+              </Link>
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
