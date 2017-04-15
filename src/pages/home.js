@@ -2,6 +2,7 @@
 /* eslint-disable react/prefer-stateless-function */
 
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Header, Image, Button, Grid } from 'semantic-ui-react';
 import MediaQuery from 'react-responsive';
 import Transition from 'react-motion-ui-pack';
@@ -53,7 +54,12 @@ class HomePage extends Component {
         <Grid relaxed>
           <Grid.Row>
             <Grid.Column floated="right" width={16}>
-              <Button content="Log In" floated="right" inverted />
+              <Button
+                content="Log In"
+                floated="right"
+                inverted
+                onClick={<Link to="/login" />}
+              />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
