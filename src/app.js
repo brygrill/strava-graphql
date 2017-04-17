@@ -2,11 +2,17 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
+import base from './firebase';
+
 import HomePage from './pages/home';
 import LoginPage from './pages/login';
 import DashboardPage from './pages/dashboard';
 
 class App extends Component {
+  componentWillMount() {
+    console.log(base);
+  }
+
   render() {
     return (
       <Router>
