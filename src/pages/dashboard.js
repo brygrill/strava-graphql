@@ -1,7 +1,10 @@
-import React from 'react';
+// @flow
+import React, { Component } from 'react';
 
-const Dashboard = () => {
-  return <div>Hi</div>;
-};
+class DashboardPage extends Component {
+  render() {
+    return <div>Hi</div>;
+  }
+}
 
-export default Dashboard;
+export default DashboardPage;

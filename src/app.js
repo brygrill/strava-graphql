@@ -1,20 +1,23 @@
-import React from 'react';
+// @flow
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import Home from './pages/home';
-import Login from './pages/login';
-import Dashboard from './pages/dashboard';
+import HomePage from './pages/home';
+import LoginPage from './pages/login';
+import DashboardPage from './pages/dashboard';
 
-const App = () => {
-  return (
-    <Router>
-      <div>
-        <Route exact path="/" component={Home} />
-        <Route path="/login" component={Login} />
-        <Route path="/dashboard" component={Dashboard} />
-      </div>
-    </Router>
-  );
-};
+class App extends Component {
+  render() {
+    return (
+      <Router>
+        <div>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/login" component={LoginPage} />
+          <Route path="/dashboard" component={DashboardPage} />
+        </div>
+      </Router>
+    );
+  }
+}
 
 export default App;
