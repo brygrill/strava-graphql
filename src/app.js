@@ -8,7 +8,15 @@ import HomePage from './pages/home';
 import LoginPage from './pages/login';
 import DashboardPage from './pages/dashboard';
 
+import PrivateRoute from './routes/private';
+
 class App extends Component {
+  state = {
+    loading: true,
+    authed: false,
+    user: null,
+  };
+
   componentWillMount() {
     console.log(base);
   }
@@ -19,7 +27,11 @@ class App extends Component {
         <div>
           <Route exact path="/" component={HomePage} />
           <Route path="/login" component={LoginPage} />
-          <Route path="/dashboard" component={DashboardPage} />
+          <PrivateRoute
+            authed={this.state.authed}
+            path="/go"
+            component={DashboardPage}
+          />
         </div>
       </Router>
     );
