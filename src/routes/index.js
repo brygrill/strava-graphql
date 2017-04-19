@@ -1,13 +1,24 @@
+/* eslint-disable react/jsx-indent-props */
+/* eslint-disable react/jsx-closing-bracket-location */
 // @flow
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-export const PrivateRoute = ({ component: Component, authed, ...rest }) => {
+type Props = {
+  component: Function,
+  appState: Object,
+};
+
+export const PrivateRoute = ({
+  component: Component,
+  appState,
+  ...rest
+}: Props) => {
   return (
     <Route
       {...rest}
       render={(props: { location: Object }) =>
-        (authed
+        (appState.authed
           ? <Component {...props} />
           : <Redirect
               to={{ pathname: '/login', state: { from: props.location } }}
@@ -16,12 +27,16 @@ export const PrivateRoute = ({ component: Component, authed, ...rest }) => {
   );
 };
 
-export const LoginRoute = ({ component: Component, authed, ...rest }) => {
+export const PublicRoute = ({
+  component: Component,
+  appState,
+  ...rest
+}: Props) => {
   return (
     <Route
       {...rest}
       render={(props: { location: Object }) =>
-        (!authed
+        (!appState.authed
           ? <Component {...props} />
           : <Redirect
               to={{ pathname: '/go', state: { from: props.location } }}
@@ -30,17 +45,31 @@ export const LoginRoute = ({ component: Component, authed, ...rest }) => {
   );
 };
 
-export const ChildRoute = ({ component: Component, appState, ...rest }) => {
+export const AppRoute = ({
+  component: Component,
+  appState,
+  ...rest
+}: Props) => {
   return (
     <Route
+      exact
       {...rest}
       render={props => <Component appState={appState} {...props} />}
     />
   );
 };
 
-export const NoMatchRoute = ({ component: Component, ...rest }) => {
-  return <Route {...rest} render={props => <Component {...props} />} />;
+export const NoMatchRoute = ({
+  component: Component,
+  appState,
+  ...rest
+}: Props) => {
+  return (
+    <Route
+      {...rest}
+      render={props => <Component appState={appState} {...props} />}
+    />
+  );
 };
 
 // thanks: https://github.com/tylermcginnis/react-router-firebase-auth/blob/master/src/components/index.js

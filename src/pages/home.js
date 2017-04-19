@@ -42,9 +42,7 @@ const PlataHero = (props: { mobile: boolean }) => {
 
 // Render hero page
 export default class HomePage extends Component {
-  state = {
-    loading: false,
-  };
+  state = {};
 
   props: {
     appState: Object,

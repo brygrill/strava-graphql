@@ -9,7 +9,7 @@ import LoginPage from './pages/login';
 import DashboardPage from './pages/dashboard';
 import NotFound from './pages/notfound';
 
-import { PrivateRoute, LoginRoute, ChildRoute, NoMatchRoute } from './routes';
+import { PrivateRoute, PublicRoute, AppRoute, NoMatchRoute } from './routes';
 
 export default class App extends Component {
   state = {
@@ -26,18 +26,18 @@ export default class App extends Component {
     return (
       <Router>
         <Switch>
-          <LoginRoute
+          <AppRoute path="/" exact appState={this.state} component={HomePage} />
+          <PublicRoute
             path="/login"
-            authed={this.state.authed}
+            appState={this.state}
             component={LoginPage}
           />
           <PrivateRoute
             path="/go"
-            authed={this.state.authed}
+            appState={this.state}
             component={DashboardPage}
           />
-          <ChildRoute path="/" appState={this.state} component={HomePage} />
-          <NoMatchRoute component={NotFound} />
+          <NoMatchRoute appState={this.state} component={NotFound} />
         </Switch>
       </Router>
     );
