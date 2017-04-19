@@ -13,12 +13,16 @@ exports[`<HomePage /> Matches snapshot 1`] = `
         className="row">
         <div
           className="right floated sixteen wide column">
-          <button
-            className="ui inverted button right floated"
-            onClick={[Function]}
-            tabIndex={undefined}>
-            Log In
-          </button>
+          <a
+            href="/login"
+            onClick={[Function]}>
+            <button
+              className="ui inverted button right floated"
+              onClick={[Function]}
+              tabIndex={undefined}>
+              Log In
+            </button>
+          </a>
         </div>
       </div>
       <div
