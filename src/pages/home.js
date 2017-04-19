@@ -1,5 +1,4 @@
 // @flow
-
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Header, Image, Button, Grid } from 'semantic-ui-react';
@@ -47,7 +46,12 @@ class HomePage extends Component {
     loading: false,
   };
 
+  props: {
+    appState: Object,
+  };
+
   render() {
+    console.log(this.props);
     return (
       <ContainerComponent>
         <Grid relaxed>
