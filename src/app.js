@@ -1,16 +1,17 @@
 // @flow
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import base from './firebase';
 
 import HomePage from './pages/home';
 import LoginPage from './pages/login';
 import DashboardPage from './pages/dashboard';
+import NotFound from './pages/notfound';
 
-import { PrivateRoute, LoginRoute, ChildRoute } from './routes';
+import { PrivateRoute, LoginRoute, ChildRoute, NoMatchRoute } from './routes';
 
-class App extends Component {
+export default class App extends Component {
   state = {
     loading: true,
     authed: false,
@@ -36,10 +37,9 @@ class App extends Component {
             component={DashboardPage}
           />
           <ChildRoute path="/" appState={this.state} component={HomePage} />
+          <NoMatchRoute component={NotFound} />
         </Switch>
       </Router>
     );
   }
 }
-
-export default App;

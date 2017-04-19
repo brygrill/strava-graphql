@@ -41,7 +41,7 @@ const PlataHero = (props: { mobile: boolean }) => {
 };
 
 // Render hero page
-class HomePage extends Component {
+export default class HomePage extends Component {
   state = {
     loading: false,
   };
@@ -79,5 +79,3 @@ class HomePage extends Component {
     );
   }
 }
-
-export default HomePage;

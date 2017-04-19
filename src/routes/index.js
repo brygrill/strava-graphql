@@ -3,7 +3,6 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
 export const PrivateRoute = ({ component: Component, authed, ...rest }) => {
-  console.log('here');
   return (
     <Route
       {...rest}
@@ -18,7 +17,6 @@ export const PrivateRoute = ({ component: Component, authed, ...rest }) => {
 };
 
 export const LoginRoute = ({ component: Component, authed, ...rest }) => {
-  console.log('here');
   return (
     <Route
       {...rest}
@@ -33,13 +31,16 @@ export const LoginRoute = ({ component: Component, authed, ...rest }) => {
 };
 
 export const ChildRoute = ({ component: Component, appState, ...rest }) => {
-  console.log('here');
   return (
     <Route
       {...rest}
       render={props => <Component appState={appState} {...props} />}
     />
   );
+};
+
+export const NoMatchRoute = ({ component: Component, ...rest }) => {
+  return <Route {...rest} render={props => <Component {...props} />} />;
 };
 
 // thanks: https://github.com/tylermcginnis/react-router-firebase-auth/blob/master/src/components/index.js
