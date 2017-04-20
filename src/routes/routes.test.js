@@ -1,13 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { MemoryRouter } from 'react-router-dom';
-import renderer from 'react-test-renderer';
 import { PrivateRoute, PublicRoute, AppRoute, NoMatchRoute } from './index';
 
 const Public = () => <h3>Public</h3>;
 const Protected = () => <h3>Protected</h3>;
-const Home = () => <h3>Protected</h3>;
-const NotFound = () => <h3>Protected</h3>;
+const Home = () => <h3>Home</h3>;
+const NotFound = () => <h3>Not Found</h3>;
 
 const unAuthedState = {
   authed: false,
