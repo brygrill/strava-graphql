@@ -13,14 +13,14 @@ class LoginComponent extends Component {
     error: boolean,
   };
 
-  updateField = evt => {
+  updateField = (evt: Event) => {
     const target = evt.target;
     const field = target.name;
     const value = target.value;
     this.setState({ [field]: value });
   };
 
-  handleSubmit = evt => {
+  handleSubmit = (evt: Event) => {
     evt.preventDefault();
     this.props.login(this.state);
     this.setState({
