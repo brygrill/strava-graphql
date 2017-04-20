@@ -1,4 +1,5 @@
 // @flow
+/* global SyntheticEvent */
 import React, { Component } from 'react';
 import { Segment, Header, Form, Message } from 'semantic-ui-react';
 
@@ -13,14 +14,16 @@ class LoginComponent extends Component {
     error: boolean,
   };
 
-  updateField = (evt: Event) => {
+  updateField = (evt: SyntheticEvent) => {
     const target = evt.target;
-    const field = target.name;
-    const value = target.value;
-    this.setState({ [field]: value });
+    if (target instanceof HTMLInputElement) {
+      const field = target.name;
+      const value = target.value;
+      this.setState({ [field]: value });
+    }
   };
 
-  handleSubmit = (evt: Event) => {
+  handleSubmit = (evt: SyntheticEvent) => {
     evt.preventDefault();
     this.props.login(this.state);
     this.setState({

@@ -25,7 +25,7 @@ class LoginPage extends Component {
     //this.authListener();
   }
 
-  submitCredentials = creds => {
+  submitCredentials = (creds: Object) => {
     /*    login(creds)
       .then(() => {
         this.setState({ error: false });
