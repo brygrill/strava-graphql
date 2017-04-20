@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react';
 import { Segment, Header, Form, Message } from 'semantic-ui-react';
 

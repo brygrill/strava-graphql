@@ -1,3 +1,4 @@
+// @flow
 import rebase from 're-base';
 
 const base = rebase.createClass({
