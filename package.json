@@ -60,6 +60,7 @@
     "flow": "flow",
     "format": "prettier --single-quote --trailing-comma all --write './src/**/*.js'",
     "lint-staged": "lint-staged",
+    "gen": "zsh scripts/gen.sh",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
