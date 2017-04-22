@@ -1,15 +1,8 @@
 // @flow
 /* global SyntheticEvent */
 import React, { Component } from 'react';
-import {
-  Grid,
-  Segment,
-  Form,
-  Message,
-  Image,
-  Button,
-  Divider,
-} from 'semantic-ui-react';
+import { Grid, Segment, Form, Message, Image } from 'semantic-ui-react';
+import LoginGoogleComponent from './login-google-btn';
 
 // Styles
 const buttonStyle = {
@@ -72,8 +65,9 @@ class LoginComponent extends Component {
         >
           <Segment raised>
             <Image src={logo} size="small" centered />
+            <LoginGoogleComponent />
             <Form size="large" onSubmit={this.handleSubmit}>
-              <Segment basic padded>
+              <Segment basic>
                 <Form.Input
                   icon="user"
                   iconPosition="left"
@@ -99,15 +93,9 @@ class LoginComponent extends Component {
                   content="LOGIN"
                   style={buttonStyle}
                 />
-                <Divider horizontal>Or</Divider>
-                <Button
-                  color="google plus"
-                  icon="google"
-                  size="large"
-                  content="Login with Google"
-                />
               </Segment>
             </Form>
+
             <Message
               hidden={!this.props.error}
               error

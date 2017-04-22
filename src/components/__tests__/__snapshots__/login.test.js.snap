@@ -21,11 +21,43 @@ exports[`<LoginComponent /> Matches snapshot with error 1`] = `
         height={undefined}
         src={undefined}
         width={undefined} />
+      <div
+        style={
+          Object {
+            "padding": "2rem 1rem 0 1rem",
+          }
+        }>
+        <button
+          className="ui large button"
+          onClick={[Function]}
+          style={
+            Object {
+              "backgroundStyle": "#d4d4d5",
+            }
+          }
+          tabIndex={undefined}>
+          <i
+            aria-hidden="true"
+            className="google icon" />
+           
+          Login with Google
+        </button>
+        <div
+          className="ui horizontal divider"
+          style={
+            Object {
+              "margin": 0,
+              "paddingTop": "1rem",
+            }
+          }>
+          Or
+        </div>
+      </div>
       <form
         className="ui large form"
         onSubmit={[Function]}>
         <div
-          className="ui basic padded segment">
+          className="ui basic segment">
           <div
             className="field">
             <div
@@ -74,20 +106,6 @@ exports[`<LoginComponent /> Matches snapshot with error 1`] = `
               LOGIN
             </button>
           </div>
-          <div
-            className="ui horizontal divider">
-            Or
-          </div>
-          <button
-            className="ui google plus large button"
-            onClick={[Function]}
-            tabIndex={undefined}>
-            <i
-              aria-hidden="true"
-              className="google icon" />
-             
-            Login with Google
-          </button>
         </div>
       </form>
       <div
@@ -131,11 +149,43 @@ exports[`<LoginComponent /> Matches snapshot with no error 1`] = `
         height={undefined}
         src={undefined}
         width={undefined} />
+      <div
+        style={
+          Object {
+            "padding": "2rem 1rem 0 1rem",
+          }
+        }>
+        <button
+          className="ui large button"
+          onClick={[Function]}
+          style={
+            Object {
+              "backgroundStyle": "#d4d4d5",
+            }
+          }
+          tabIndex={undefined}>
+          <i
+            aria-hidden="true"
+            className="google icon" />
+           
+          Login with Google
+        </button>
+        <div
+          className="ui horizontal divider"
+          style={
+            Object {
+              "margin": 0,
+              "paddingTop": "1rem",
+            }
+          }>
+          Or
+        </div>
+      </div>
       <form
         className="ui large form"
         onSubmit={[Function]}>
         <div
-          className="ui basic padded segment">
+          className="ui basic segment">
           <div
             className="field">
             <div
@@ -184,20 +234,6 @@ exports[`<LoginComponent /> Matches snapshot with no error 1`] = `
               LOGIN
             </button>
           </div>
-          <div
-            className="ui horizontal divider">
-            Or
-          </div>
-          <button
-            className="ui google plus large button"
-            onClick={[Function]}
-            tabIndex={undefined}>
-            <i
-              aria-hidden="true"
-              className="google icon" />
-             
-            Login with Google
-          </button>
         </div>
       </form>
       <div
