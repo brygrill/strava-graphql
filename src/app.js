@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
-import base from './rebase';
+//import base from './rebase';
 
 import HomePage from './pages/home';
 import LoginPage from './pages/login';
