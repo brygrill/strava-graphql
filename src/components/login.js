@@ -1,15 +1,28 @@
 // @flow
 /* global SyntheticEvent */
 import React, { Component } from 'react';
-import { Segment, Header, Form, Message } from 'semantic-ui-react';
+import { Grid, Segment, Form, Message, Image } from 'semantic-ui-react';
+
+// Styles
+const buttonStyle = {
+  backgroundColor: '#1CAF9A',
+};
 
 class LoginComponent extends Component {
+  defaultProps: {
+    colWidth: '450px',
+    mobile: true,
+  };
+
   state = {
     email: '',
     pwd: '',
   };
 
   props: {
+    colWidth: string,
+    mobile: boolean,
+    logo: string,
     login: Function,
     error: boolean,
   };
@@ -33,44 +46,58 @@ class LoginComponent extends Component {
   };
 
   render() {
+    const { colWidth, logo, mobile } = this.props;
+    const topPadding = {
+      paddingTop: mobile ? '8rem' : '16rem',
+    };
+    const formWidth = {
+      maxWidth: colWidth,
+    };
     return (
-      <div>
-        <Segment padded="very">
-          <Header
-            as="h2"
-            textAlign="center"
-            icon="trophy"
-            content="Team Manager Login"
-          />
-          <Form onSubmit={this.handleSubmit}>
-            <Form.Group>
-              <Form.Input
-                label="Email"
-                type="email"
-                name="email"
-                width={12}
-                value={this.state.email}
-                onChange={this.updateField}
-              />
-              <Form.Input
-                label="Password"
-                type="password"
-                name="pwd"
-                width={12}
-                value={this.state.pwd}
-                onChange={this.updateField}
-              />
-            </Form.Group>
-            <Form.Button>Submit</Form.Button>
-          </Form>
-          <Message
-            hidden={!this.props.error}
-            error
-            header="Login Error"
-            content="Please enter valid credentials."
-          />
-        </Segment>
-      </div>
+      <Grid relaxed centered style={topPadding}>
+        <Grid.Column
+          width={16}
+          style={formWidth}
+          textAlign="center"
+          verticalAlign="middle"
+          className="ppd-padding-1"
+        >
+          <Segment raised>
+            <Image src={logo} size="small" centered />
+            <Form size="large" onSubmit={this.handleSubmit}>
+              <Segment basic padded>
+                <Form.Input
+                  icon="user"
+                  iconPosition="left"
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  value={this.state.email}
+                  onChange={this.updateField}
+                />
+                <Form.Input
+                  icon="lock"
+                  iconPosition="left"
+                  name="password"
+                  type="password"
+                  placeholder="Password"
+                  value={this.state.pwd}
+                  onChange={this.updateField}
+                />
+                <Form.Button fluid primary size="large" style={buttonStyle}>
+                  LOGIN
+                </Form.Button>
+              </Segment>
+            </Form>
+            <Message
+              hidden={!this.props.error}
+              error
+              header="Login Error"
+              content="Please enter valid credentials."
+            />
+          </Segment>
+        </Grid.Column>
+      </Grid>
     );
   }
 }

@@ -1,9 +1,10 @@
 // @flow
 import React, { Component } from 'react';
+import MediaQuery from 'react-responsive';
 
 import ContainerComponent from '../components/container';
 import LoginComponent from '../components/login';
-
+import logo from '../images/logo_sm.png';
 //import { auth, login } from '../firebase/init/auth';
 
 class LoginPage extends Component {
@@ -26,6 +27,7 @@ class LoginPage extends Component {
   }
 
   submitCredentials = (creds: Object) => {
+    console.log(creds);
     /*    login(creds)
       .then(() => {
         this.setState({ error: false });
@@ -38,10 +40,19 @@ class LoginPage extends Component {
   render() {
     return (
       <ContainerComponent>
-        <LoginComponent
-          login={this.submitCredentials}
-          error={this.state.error}
-        />
+        <MediaQuery maxDeviceWidth={1224}>
+          {matches => {
+            return (
+              <LoginComponent
+                logo={logo}
+                mobile={matches}
+                colWidth="500px"
+                login={this.submitCredentials}
+                error={this.state.error}
+              />
+            );
+          }}
+        </MediaQuery>
       </ContainerComponent>
     );
   }

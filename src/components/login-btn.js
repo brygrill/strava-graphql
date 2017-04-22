@@ -11,7 +11,7 @@ export default class LoginButtonComponent extends Component {
   };
 
   props: {
-    authed: Boolean,
+    authed: boolean,
     authedTo: string,
     authedLabel: string,
     noAuthedTo: string,

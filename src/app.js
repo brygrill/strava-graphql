@@ -14,12 +14,12 @@ import { PrivateRoute, PublicRoute, AppRoute, NoMatchRoute } from './routes';
 export default class App extends Component {
   state = {
     loading: true,
-    authed: true,
+    authed: false,
     user: null,
   };
 
   componentWillMount() {
-    console.log(base);
+    //console.log(base);
   }
 
   render() {
