@@ -1,11 +1,11 @@
 // @flow
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Header, Image, Button, Grid } from 'semantic-ui-react';
+import { Header, Image, Grid } from 'semantic-ui-react';
 import MediaQuery from 'react-responsive';
 import Transition from 'react-motion-ui-pack';
 
 import ContainerComponent from '../components/container';
+import LoginButtonComponent from '../components/login-btn';
 
 import logo from '../images/logo_white.png';
 
@@ -49,15 +49,19 @@ export default class HomePage extends Component {
   };
 
   render() {
-    console.log(this.props);
+    const { appState } = this.props;
     return (
       <ContainerComponent>
         <Grid relaxed>
           <Grid.Row>
             <Grid.Column floated="right" width={16}>
-              <Link to="/login">
-                <Button content="Log In" floated="right" inverted />
-              </Link>
+              <LoginButtonComponent
+                authed={appState.authed}
+                authedTo="/go"
+                authedLabel="DASHBOARD"
+                noAuthedTo="/login"
+                noAuthedLabel="LOGIN"
+              />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>

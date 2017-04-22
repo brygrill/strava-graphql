@@ -1,0 +1,25 @@
+exports[`<LoginButtonComponent /> Matches snapshot when authed 1`] = `
+<a
+  href="/go"
+  onClick={[Function]}>
+  <button
+    className="ui inverted button right floated"
+    onClick={[Function]}
+    tabIndex={undefined}>
+    DASHBOARD
+  </button>
+</a>
+`;
+
+exports[`<LoginButtonComponent /> Matches snapshot when no authed 1`] = `
+<a
+  href="/login"
+  onClick={[Function]}>
+  <button
+    className="ui inverted button right floated"
+    onClick={[Function]}
+    tabIndex={undefined}>
+    LOGIN
+  </button>
+</a>
+`;

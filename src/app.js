@@ -14,7 +14,7 @@ import { PrivateRoute, PublicRoute, AppRoute, NoMatchRoute } from './routes';
 export default class App extends Component {
   state = {
     loading: true,
-    authed: false,
+    authed: true,
     user: null,
   };
 

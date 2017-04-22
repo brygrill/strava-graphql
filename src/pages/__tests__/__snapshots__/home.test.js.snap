@@ -20,7 +20,7 @@ exports[`<HomePage /> Matches snapshot 1`] = `
               className="ui inverted button right floated"
               onClick={[Function]}
               tabIndex={undefined}>
-              Log In
+              LOGIN
             </button>
           </a>
         </div>
