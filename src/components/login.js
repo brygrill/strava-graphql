@@ -1,7 +1,15 @@
 // @flow
 /* global SyntheticEvent */
 import React, { Component } from 'react';
-import { Grid, Segment, Form, Message, Image } from 'semantic-ui-react';
+import {
+  Grid,
+  Segment,
+  Form,
+  Message,
+  Image,
+  Button,
+  Divider,
+} from 'semantic-ui-react';
 
 // Styles
 const buttonStyle = {
@@ -84,9 +92,20 @@ class LoginComponent extends Component {
                   value={this.state.pwd}
                   onChange={this.updateField}
                 />
-                <Form.Button fluid primary size="large" style={buttonStyle}>
-                  LOGIN
-                </Form.Button>
+                <Form.Button
+                  fluid
+                  primary
+                  size="large"
+                  content="LOGIN"
+                  style={buttonStyle}
+                />
+                <Divider horizontal>Or</Divider>
+                <Button
+                  color="google plus"
+                  icon="google"
+                  size="large"
+                  content="Login with Google"
+                />
               </Segment>
             </Form>
             <Message

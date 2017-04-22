@@ -74,6 +74,20 @@ exports[`<LoginComponent /> Matches snapshot with error 1`] = `
               LOGIN
             </button>
           </div>
+          <div
+            className="ui horizontal divider">
+            Or
+          </div>
+          <button
+            className="ui google plus large button"
+            onClick={[Function]}
+            tabIndex={undefined}>
+            <i
+              aria-hidden="true"
+              className="google icon" />
+             
+            Login with Google
+          </button>
         </div>
       </form>
       <div
@@ -170,6 +184,20 @@ exports[`<LoginComponent /> Matches snapshot with no error 1`] = `
               LOGIN
             </button>
           </div>
+          <div
+            className="ui horizontal divider">
+            Or
+          </div>
+          <button
+            className="ui google plus large button"
+            onClick={[Function]}
+            tabIndex={undefined}>
+            <i
+              aria-hidden="true"
+              className="google icon" />
+             
+            Login with Google
+          </button>
         </div>
       </form>
       <div

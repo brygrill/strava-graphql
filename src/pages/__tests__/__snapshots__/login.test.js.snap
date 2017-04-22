@@ -82,6 +82,20 @@ exports[`<LoginPage /> Matches snapshot 1`] = `
                   LOGIN
                 </button>
               </div>
+              <div
+                className="ui horizontal divider">
+                Or
+              </div>
+              <button
+                className="ui google plus large button"
+                onClick={[Function]}
+                tabIndex={undefined}>
+                <i
+                  aria-hidden="true"
+                  className="google icon" />
+                 
+                Login with Google
+              </button>
             </div>
           </form>
           <div
