@@ -9,6 +9,10 @@ const buttonStyle = {
   backgroundColor: '#1CAF9A',
 };
 
+const segmentStyle = {
+  paddingTop: '2rem',
+};
+
 class LoginComponent extends Component {
   defaultProps: {
     colWidth: '450px',
@@ -49,7 +53,7 @@ class LoginComponent extends Component {
   render() {
     const { colWidth, logo, mobile } = this.props;
     const topPadding = {
-      paddingTop: mobile ? '8rem' : '16rem',
+      paddingTop: mobile ? '6rem' : '16rem',
     };
     const formWidth = {
       maxWidth: colWidth,
@@ -63,7 +67,7 @@ class LoginComponent extends Component {
           verticalAlign="middle"
           className="ppd-padding-1"
         >
-          <Segment raised>
+          <Segment raised style={segmentStyle}>
             <Image src={logo} size="small" centered />
             <LoginGoogleComponent />
             <Form size="large" onSubmit={this.handleSubmit}>

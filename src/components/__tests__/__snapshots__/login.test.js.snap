@@ -14,7 +14,12 @@ exports[`<LoginComponent /> Matches snapshot with error 1`] = `
       }
     }>
     <div
-      className="ui raised segment">
+      className="ui raised segment"
+      style={
+        Object {
+          "paddingTop": "2rem",
+        }
+      }>
       <img
         alt={undefined}
         className="ui small centered image"
@@ -142,7 +147,12 @@ exports[`<LoginComponent /> Matches snapshot with no error 1`] = `
       }
     }>
     <div
-      className="ui raised segment">
+      className="ui raised segment"
+      style={
+        Object {
+          "paddingTop": "2rem",
+        }
+      }>
       <img
         alt={undefined}
         className="ui small centered image"
