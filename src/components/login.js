@@ -2,6 +2,7 @@
 /* global SyntheticEvent */
 import React, { Component } from 'react';
 import { Grid, Segment, Form, Message, Image } from 'semantic-ui-react';
+import base from '../rebase';
 import LoginGoogleComponent from './login-google-btn';
 
 // Styles
@@ -23,6 +24,11 @@ class LoginComponent extends Component {
     email: '',
     pwd: '',
   };
+
+  componentDidMount() {
+    console.log('CDM Login Page');
+    base.authGetOAuthRedirectResult(this.handleGoogleLoginSuccess);
+  }
 
   props: {
     colWidth: string,
@@ -50,6 +56,20 @@ class LoginComponent extends Component {
     });
   };
 
+  handleGoogleLoginError = (err: Object) => {
+    if (err) console.log(err);
+  };
+
+  handleGoogleLoginSuccess = (err: Object, authData: Object) => {
+    if (err) console.log(err);
+    if (authData) console.log(authData);
+  };
+
+  handleGoogleLogin = (evt: SyntheticEvent) => {
+    evt.preventDefault();
+    base.authWithOAuthRedirect('google', this.handleGoogleLoginError);
+  };
+
   render() {
     const { colWidth, logo, mobile } = this.props;
     const topPadding = {
@@ -69,7 +89,7 @@ class LoginComponent extends Component {
         >
           <Segment raised style={segmentStyle}>
             <Image src={logo} size="small" centered />
-            <LoginGoogleComponent />
+            <LoginGoogleComponent handleClick={this.handleGoogleLogin} />
             <Form size="large" onSubmit={this.handleSubmit}>
               <Segment basic>
                 <Form.Input

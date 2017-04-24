@@ -18,9 +18,9 @@ const btnStyle = {
 };
 
 export default class LoginGoogleComponent extends Component {
-  defaultProps: {};
-  state = {};
-  props: {};
+  props: {
+    handleClick: Function,
+  };
   render() {
     return (
       <div style={componentStyle}>
@@ -29,6 +29,7 @@ export default class LoginGoogleComponent extends Component {
           size="large"
           content="Login with Google"
           style={btnStyle}
+          onClick={this.props.handleClick}
         />
         <Divider horizontal style={dividerStyle}>Or</Divider>
       </div>

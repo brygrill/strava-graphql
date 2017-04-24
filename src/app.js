@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
-//import base from './rebase';
+import base from './rebase';
 
 import HomePage from './pages/home';
 import LoginPage from './pages/login';
@@ -15,12 +15,17 @@ export default class App extends Component {
   state = {
     loading: true,
     authed: false,
-    user: null,
+    user: {},
   };
 
   componentWillMount() {
-    //console.log(base);
+    base.onAuth(this.updateAuthState);
   }
+
+  updateAuthState = (user: Object) => {
+    if (user) this.setState({ authed: true, user });
+    if (!user) this.setState({ authed: false, user: {} });
+  };
 
   render() {
     return (
