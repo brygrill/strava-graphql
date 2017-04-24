@@ -27,7 +27,7 @@ class LoginComponent extends Component {
 
   componentDidMount() {
     console.log('CDM Login Page');
-    base.authGetOAuthRedirectResult(this.handleGoogleLoginSuccess);
+    //base.authGetOAuthRedirectResult(this.handleGoogleLoginSuccess);
   }
 
   props: {

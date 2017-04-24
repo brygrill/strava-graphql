@@ -23,28 +23,33 @@ export default class App extends Component {
   }
 
   updateAuthState = (user: Object) => {
-    if (user) this.setState({ authed: true, user });
-    if (!user) this.setState({ authed: false, user: {} });
+    if (user) this.setState({ loading: false, authed: true, user });
+    if (!user) this.setState({ loading: false, authed: false, user: {} });
   };
 
   render() {
-    return (
-      <Router>
-        <Switch>
-          <AppRoute path="/" exact appState={this.state} component={HomePage} />
-          <PublicRoute
-            path="/login"
-            appState={this.state}
-            component={LoginPage}
-          />
-          <PrivateRoute
-            path="/go"
-            appState={this.state}
-            component={DashboardPage}
-          />
-          <NoMatchRoute appState={this.state} component={NotFound} />
-        </Switch>
-      </Router>
-    );
+    return this.state.loading
+      ? <h1>Loading...</h1>
+      : <Router>
+          <Switch>
+            <AppRoute
+              path="/"
+              exact
+              appState={this.state}
+              component={HomePage}
+            />
+            <PublicRoute
+              path="/login"
+              appState={this.state}
+              component={LoginPage}
+            />
+            <PrivateRoute
+              path="/go"
+              appState={this.state}
+              component={DashboardPage}
+            />
+            <NoMatchRoute appState={this.state} component={NotFound} />
+          </Switch>
+        </Router>;
   }
 }
