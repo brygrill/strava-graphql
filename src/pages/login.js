@@ -7,24 +7,12 @@ import LoginComponent from '../components/login';
 import logo from '../images/logo_sm.png';
 //import { auth, login } from '../firebase/init/auth';
 
+import { colors } from '../css';
+
 class LoginPage extends Component {
   state = {
     error: false,
   };
-
-  componentWillMount() {
-    /*    this.authListener = auth().onAuthStateChanged(user => {
-      if (user) {
-        console.log('user exists and sent to manager');
-      } else {
-        console.log('no user');
-      }
-    });*/
-  }
-
-  componentWillUnMount() {
-    //this.authListener();
-  }
 
   submitCredentials = (creds: Object) => {
     console.log(creds);
@@ -49,6 +37,7 @@ class LoginPage extends Component {
                 colWidth="500px"
                 login={this.submitCredentials}
                 error={this.state.error}
+                btnColor={colors.primary}
               />
             );
           }}

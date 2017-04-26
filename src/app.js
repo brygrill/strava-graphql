@@ -14,6 +14,8 @@ import { PrivateRoute, PublicRoute, AppRoute, NoMatchRoute } from './routes';
 
 import LoadingComponent from './components/loading';
 
+import { colors } from './css';
+
 export default class App extends Component {
   state = {
     loading: true,
@@ -22,7 +24,8 @@ export default class App extends Component {
   };
 
   componentWillMount() {
-    //base.onAuth(this.updateAuthState);
+    console.log('CDM: App.js');
+    base.onAuth(this.updateAuthState);
   }
 
   updateAuthState = (user: Object) => {
@@ -32,7 +35,11 @@ export default class App extends Component {
 
   render() {
     return this.state.loading
-      ? <LoadingComponent msg="Dropping the Hammer..." size="large" />
+      ? <LoadingComponent
+          msg="Dropping the Hammer..."
+          size="large"
+          back={colors.primary}
+        />
       : <Router>
           <Switch>
             <AppRoute

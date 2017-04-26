@@ -103,7 +103,7 @@ exports[`<LoginComponent /> Matches snapshot with error 1`] = `
               required={undefined}
               style={
                 Object {
-                  "backgroundColor": "#1CAF9A",
+                  "backgroundColor": undefined,
                 }
               }
               tabIndex={undefined}
@@ -236,7 +236,7 @@ exports[`<LoginComponent /> Matches snapshot with no error 1`] = `
               required={undefined}
               style={
                 Object {
-                  "backgroundColor": "#1CAF9A",
+                  "backgroundColor": undefined,
                 }
               }
               tabIndex={undefined}

@@ -6,10 +6,6 @@ import base from '../rebase';
 import LoginGoogleComponent from './login-google-btn';
 
 // Styles
-const buttonStyle = {
-  backgroundColor: '#1CAF9A',
-};
-
 const segmentStyle = {
   paddingTop: '2rem',
 };
@@ -27,7 +23,6 @@ class LoginComponent extends Component {
 
   componentDidMount() {
     console.log('CDM Login Page');
-    //base.authGetOAuthRedirectResult(this.handleGoogleLoginSuccess);
   }
 
   props: {
@@ -36,6 +31,7 @@ class LoginComponent extends Component {
     logo: string,
     login: Function,
     error: boolean,
+    btnColor: string,
   };
 
   updateField = (evt: SyntheticEvent) => {
@@ -60,24 +56,20 @@ class LoginComponent extends Component {
     if (err) console.log(err);
   };
 
-  handleGoogleLoginSuccess = (err: Object, authData: Object) => {
-    if (err) console.log(err);
-    if (authData) console.log(authData);
-  };
-
   handleGoogleLogin = (evt: SyntheticEvent) => {
     evt.preventDefault();
     base.authWithOAuthRedirect('google', this.handleGoogleLoginError);
   };
 
   render() {
-    const { colWidth, logo, mobile } = this.props;
+    const { colWidth, logo, mobile, btnColor } = this.props;
     const topPadding = {
       paddingTop: mobile ? '6rem' : '16rem',
     };
     const formWidth = {
       maxWidth: colWidth,
     };
+    const btnBackColor = { backgroundColor: btnColor };
     return (
       <Grid relaxed centered style={topPadding}>
         <Grid.Column
@@ -115,7 +107,7 @@ class LoginComponent extends Component {
                   primary
                   size="large"
                   content="LOGIN"
-                  style={buttonStyle}
+                  style={btnBackColor}
                 />
               </Segment>
             </Form>
