@@ -2,6 +2,18 @@
 body {
   background-color: #1CAF9A;
 }
+/* Plata Colors */
+plata-primary-blue {
+  background-color: #1CAF9A
+}
+
+plata-light-blue {
+  background-color: #47EAD3 !important
+}
+
+plata-dark-blue {
+  background-color: #0A5B4F
+}
 
 /* Plata Custom */
 plata-full-height {

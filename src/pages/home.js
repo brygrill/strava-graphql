@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { Header, Image, Grid } from 'semantic-ui-react';
 import MediaQuery from 'react-responsive';
-import Transition from 'react-motion-ui-pack';
 
 import ContainerComponent from '../components/container';
 import LoginButtonComponent from '../components/login-btn';
@@ -26,17 +25,15 @@ const setHeroStyle = mobile => {
 // Hero component logo and subheader
 const PlataHero = (props: { mobile: boolean }) => {
   return (
-    <Transition component={false} enter={{ opacity: 1 }} leave={{ opacity: 0 }}>
-      <div style={setHeroStyle(props.mobile).base} key="plata-hero-1">
-        <Image src={logo} size="large" centered />
-        <Header
-          as="h1"
-          content="Simply Plan Your Training."
-          textAlign="center"
-          style={setHeroStyle(props.mobile).header}
-        />
-      </div>
-    </Transition>
+    <div style={setHeroStyle(props.mobile).base} key="plata-hero-1">
+      <Image src={logo} size="large" centered />
+      <Header
+        as="h1"
+        content="Simply Plan Your Training."
+        textAlign="center"
+        style={setHeroStyle(props.mobile).header}
+      />
+    </div>
   );
 };
 

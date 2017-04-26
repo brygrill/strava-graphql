@@ -32,7 +32,6 @@ exports[`<HomePage /> Matches snapshot 1`] = `
           <div
             style={
               Object {
-                "opacity": 0,
                 "paddingTop": "16rem",
               }
             }>

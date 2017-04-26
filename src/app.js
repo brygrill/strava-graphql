@@ -1,4 +1,5 @@
 // @flow
+/* eslint-disable react/jsx-indent */
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
@@ -11,6 +12,8 @@ import NotFound from './pages/notfound';
 
 import { PrivateRoute, PublicRoute, AppRoute, NoMatchRoute } from './routes';
 
+import LoadingComponent from './components/loading';
+
 export default class App extends Component {
   state = {
     loading: true,
@@ -19,7 +22,7 @@ export default class App extends Component {
   };
 
   componentWillMount() {
-    base.onAuth(this.updateAuthState);
+    //base.onAuth(this.updateAuthState);
   }
 
   updateAuthState = (user: Object) => {
@@ -29,7 +32,7 @@ export default class App extends Component {
 
   render() {
     return this.state.loading
-      ? <h1>Loading...</h1>
+      ? <LoadingComponent msg="Dropping the Hammer..." size="large" />
       : <Router>
           <Switch>
             <AppRoute
