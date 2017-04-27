@@ -1,6 +1,8 @@
 // @flow
 import React, { Component } from 'react';
 
+//import base from '../rebase';
+
 export default class DashboardPage extends Component {
   state = {};
 
@@ -9,7 +11,7 @@ export default class DashboardPage extends Component {
   };
 
   render() {
-    console.log(this.props);
+    console.log(this.props.appState);
     return <div>Hi</div>;
   }
 }

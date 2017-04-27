@@ -68,7 +68,7 @@ class LoginComponent extends Component {
         >
           <Segment raised style={segmentStyle}>
             <Image src={logo} size="small" centered />
-            <LoginGoogleComponent handleClick={loginGmail} />
+            <LoginGoogleComponent handleClick={loginGmail} hideGoogle />
             <Form size="large" onSubmit={this.handleSubmit}>
               <Segment basic>
                 <Form.Input

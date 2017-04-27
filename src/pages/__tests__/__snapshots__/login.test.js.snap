@@ -37,6 +37,7 @@ exports[`<LoginPage /> Matches snapshot 1`] = `
           <div
             style={
               Object {
+                "display": "none",
                 "padding": "2rem 1rem 0 1rem",
               }
             }>
