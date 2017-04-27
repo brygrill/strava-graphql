@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
-import LoginGoogleComponent from '../login-google-btn';
+import LoginGoogleComponent from '../login/login-google-btn';
 
 describe('<LoginGoogleComponent />', () => {
   it('Renders without crashing', () => {

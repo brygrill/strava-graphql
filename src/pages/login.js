@@ -1,11 +1,14 @@
 // @flow
+/* global SyntheticEvent */
 import React, { Component } from 'react';
 import MediaQuery from 'react-responsive';
 
+import base from '../rebase';
+
 import ContainerComponent from '../components/container';
 import LoginComponent from '../components/login';
+
 import logo from '../images/logo_sm.png';
-//import { auth, login } from '../firebase/init/auth';
 
 import { colors } from '../css';
 
@@ -14,7 +17,7 @@ class LoginPage extends Component {
     error: false,
   };
 
-  submitCredentials = (creds: Object) => {
+  handleEmailLogin = (creds: Object) => {
     console.log(creds);
     /*    login(creds)
       .then(() => {
@@ -23,6 +26,15 @@ class LoginPage extends Component {
       .catch(() => {
         this.setState({ error: true });
       });*/
+  };
+
+  handleGoogleLoginError = (err: Object) => {
+    if (err) this.setState({ error: true });
+  };
+
+  handleGoogleLogin = (evt: SyntheticEvent) => {
+    evt.preventDefault();
+    base.authWithOAuthRedirect('google', this.handleGoogleLoginError);
   };
 
   render() {
@@ -35,9 +47,10 @@ class LoginPage extends Component {
                 logo={logo}
                 mobile={matches}
                 colWidth="500px"
-                login={this.submitCredentials}
                 error={this.state.error}
                 btnColor={colors.primary}
+                loginEmail={this.handleEmailLogin}
+                loginGmail={this.handleGoogleLogin}
               />
             );
           }}

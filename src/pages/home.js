@@ -4,7 +4,7 @@ import { Header, Image, Grid } from 'semantic-ui-react';
 import MediaQuery from 'react-responsive';
 
 import ContainerComponent from '../components/container';
-import LoginButtonComponent from '../components/login-btn';
+import LoginButtonComponent from '../components/login/login-header-btn';
 
 import logo from '../images/logo_white.png';
 

@@ -2,7 +2,6 @@
 /* global SyntheticEvent */
 import React, { Component } from 'react';
 import { Grid, Segment, Form, Message, Image } from 'semantic-ui-react';
-import base from '../rebase';
 import LoginGoogleComponent from './login-google-btn';
 
 // Styles
@@ -21,17 +20,14 @@ class LoginComponent extends Component {
     pwd: '',
   };
 
-  componentDidMount() {
-    console.log('CDM Login Page');
-  }
-
   props: {
     colWidth: string,
     mobile: boolean,
     logo: string,
-    login: Function,
     error: boolean,
     btnColor: string,
+    loginEmail: Function,
+    loginGmail: Function,
   };
 
   updateField = (evt: SyntheticEvent) => {
@@ -45,24 +41,15 @@ class LoginComponent extends Component {
 
   handleSubmit = (evt: SyntheticEvent) => {
     evt.preventDefault();
-    this.props.login(this.state);
+    this.props.loginEmail(this.state);
     this.setState({
       email: '',
       pwd: '',
     });
   };
 
-  handleGoogleLoginError = (err: Object) => {
-    if (err) console.log(err);
-  };
-
-  handleGoogleLogin = (evt: SyntheticEvent) => {
-    evt.preventDefault();
-    base.authWithOAuthRedirect('google', this.handleGoogleLoginError);
-  };
-
   render() {
-    const { colWidth, logo, mobile, btnColor } = this.props;
+    const { colWidth, logo, mobile, btnColor, loginGmail } = this.props;
     const topPadding = {
       paddingTop: mobile ? '6rem' : '16rem',
     };
@@ -81,7 +68,7 @@ class LoginComponent extends Component {
         >
           <Segment raised style={segmentStyle}>
             <Image src={logo} size="small" centered />
-            <LoginGoogleComponent handleClick={this.handleGoogleLogin} />
+            <LoginGoogleComponent handleClick={loginGmail} />
             <Form size="large" onSubmit={this.handleSubmit}>
               <Segment basic>
                 <Form.Input

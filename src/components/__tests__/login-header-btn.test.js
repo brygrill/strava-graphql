@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
 import { MemoryRouter } from 'react-router-dom';
-import LoginButtonComponent from '../login-btn';
+import LoginButtonComponent from '../login/login-header-btn';
 
 describe('<LoginButtonComponent />', () => {
   it('Renders without crashing', () => {
