@@ -1,5 +1,7 @@
 // @flow
 /* eslint-disable react/jsx-indent */
+/* eslint-disable react/jsx-indent-props */
+/* eslint-disable react/jsx-closing-bracket-location */
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
@@ -24,7 +26,6 @@ export default class App extends Component {
   };
 
   componentWillMount() {
-    console.log('CDM: App.js');
     base.onAuth(this.updateAuthState);
   }
 

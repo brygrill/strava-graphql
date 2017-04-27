@@ -1,6 +1,6 @@
+// @flow
 /* eslint-disable react/jsx-indent-props */
 /* eslint-disable react/jsx-closing-bracket-location */
-// @flow
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
@@ -19,7 +19,7 @@ export const PrivateRoute = ({
       {...rest}
       render={(props: { location: Object }) =>
         (appState.authed
-          ? <Component {...props} />
+          ? <Component appState={appState} {...props} />
           : <Redirect
               to={{ pathname: '/login', state: { from: props.location } }}
             />)}
@@ -37,7 +37,7 @@ export const PublicRoute = ({
       {...rest}
       render={(props: { location: Object }) =>
         (!appState.authed
-          ? <Component {...props} />
+          ? <Component appState={appState} {...props} />
           : <Redirect
               to={{ pathname: '/go', state: { from: props.location } }}
             />)}
