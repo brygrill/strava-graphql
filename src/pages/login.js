@@ -17,24 +17,25 @@ class LoginPage extends Component {
     error: false,
   };
 
-  handleEmailLogin = (creds: Object) => {
-    console.log(creds);
-    /*    login(creds)
-      .then(() => {
-        this.setState({ error: false });
-      })
-      .catch(() => {
-        this.setState({ error: true });
-      });*/
-  };
-
-  handleGoogleLoginError = (err: Object) => {
+  handleLoginError = (err: Object) => {
     if (err) this.setState({ error: true });
   };
 
+  handleEmailLogin = (creds: Object) => {
+    base.authWithPassword(
+      {
+        email: creds.email,
+        password: creds.password,
+      },
+      this.handleLoginError,
+    );
+  };
+
   handleGoogleLogin = (evt: SyntheticEvent) => {
+    // if auth is successful...
+    // auth listener in app.jswill handle updating state
     evt.preventDefault();
-    base.authWithOAuthRedirect('google', this.handleGoogleLoginError);
+    base.authWithOAuthRedirect('google', this.handleLoginError);
   };
 
   render() {

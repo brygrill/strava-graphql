@@ -17,7 +17,7 @@ class LoginComponent extends Component {
 
   state = {
     email: '',
-    pwd: '',
+    password: '',
   };
 
   props: {
@@ -44,7 +44,7 @@ class LoginComponent extends Component {
     this.props.loginEmail(this.state);
     this.setState({
       email: '',
-      pwd: '',
+      password: '',
     });
   };
 
@@ -86,7 +86,7 @@ class LoginComponent extends Component {
                   name="password"
                   type="password"
                   placeholder="Password"
-                  value={this.state.pwd}
+                  value={this.state.password}
                   onChange={this.updateField}
                 />
                 <Form.Button
