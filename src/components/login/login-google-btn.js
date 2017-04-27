@@ -5,7 +5,7 @@ import { Button, Divider } from 'semantic-ui-react';
 // Set div and divider padding
 // so its equal with main login
 const componentStyle = {};
-componentStyle.padding = '2rem 1rem 0 1rem';
+componentStyle.padding = '1rem 1rem 0 1rem';
 
 const dividerStyle = {
   margin: 0,
@@ -19,7 +19,7 @@ const btnStyle = {
 export default class LoginGoogleComponent extends Component {
   props: {
     handleClick: Function,
-    hideGoogle: Boolean,
+    hideGoogle: boolean,
   };
   render() {
     if (this.props.hideGoogle) componentStyle.display = 'none';

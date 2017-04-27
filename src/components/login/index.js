@@ -1,12 +1,21 @@
 // @flow
 /* global SyntheticEvent */
 import React, { Component } from 'react';
-import { Grid, Segment, Form, Message, Image } from 'semantic-ui-react';
+import { Grid, Segment, Form, Message, Image, Header } from 'semantic-ui-react';
 import LoginGoogleComponent from './login-google-btn';
+
+import { colors, fonts } from '../../css';
 
 // Styles
 const segmentStyle = {
   paddingTop: '2rem',
+};
+
+// Header Styles
+const headerStyles = {
+  marginTop: '1rem',
+  fontWeight: fonts.light,
+  color: colors.gray1,
 };
 
 class LoginComponent extends Component {
@@ -68,6 +77,11 @@ class LoginComponent extends Component {
         >
           <Segment raised style={segmentStyle}>
             <Image src={logo} size="small" centered />
+            <Header
+              size="medium"
+              content="Login and Get After It."
+              style={headerStyles}
+            />
             <LoginGoogleComponent handleClick={loginGmail} hideGoogle />
             <Form size="large" onSubmit={this.handleSubmit}>
               <Segment basic>
