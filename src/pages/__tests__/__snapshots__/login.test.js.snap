@@ -22,128 +22,143 @@ exports[`<LoginPage /> Matches snapshot 1`] = `
           }
         }>
         <div
-          className="ui raised segment"
-          style={
-            Object {
-              "paddingTop": "2rem",
-            }
-          }>
-          <img
-            alt={undefined}
-            className="ui small centered image"
-            height={undefined}
-            src="logo_sm.png"
-            width={undefined} />
+          className="blurring dimmable">
           <div
-            className="ui medium header"
-            style={
-              Object {
-                "color": "#ABB7B7",
-                "fontWeight": "300",
-                "marginTop": "1rem",
-              }
-            }>
-            Login and Get After It.
-          </div>
-          <div
-            style={
-              Object {
-                "display": "none",
-                "padding": "1rem 1rem 0 1rem",
-              }
-            }>
-            <button
-              className="ui large button"
-              onClick={[Function]}
-              style={
-                Object {
-                  "backgroundStyle": "#d4d4d5",
-                }
-              }
-              tabIndex={undefined}>
-              <i
-                aria-hidden="true"
-                className="google icon" />
-               
-              Login with Google
-            </button>
-            <div
-              className="ui horizontal divider"
-              style={
-                Object {
-                  "margin": 0,
-                  "paddingTop": "1rem",
-                }
-              }>
-              Or
-            </div>
-          </div>
-          <form
-            className="ui large form"
-            onSubmit={[Function]}>
-            <div
-              className="ui basic segment">
-              <div
-                className="field">
-                <div
-                  className="ui left icon input">
-                  <i
-                    aria-hidden="true"
-                    className="user icon" />
-                  <input
-                    name="email"
-                    onChange={[Function]}
-                    placeholder="Email"
-                    required={undefined}
-                    type="email"
-                    value="" />
-                </div>
-              </div>
-              <div
-                className="field">
-                <div
-                  className="ui left icon input">
-                  <i
-                    aria-hidden="true"
-                    className="lock icon" />
-                  <input
-                    name="password"
-                    onChange={[Function]}
-                    placeholder="Password"
-                    required={undefined}
-                    type="password"
-                    value="" />
-                </div>
-              </div>
-              <div
-                className="field">
-                <button
-                  className="ui large fluid primary button"
-                  onClick={[Function]}
-                  required={undefined}
-                  style={
-                    Object {
-                      "backgroundColor": "#1CAF9A",
-                    }
-                  }
-                  tabIndex={undefined}
-                  type={undefined}>
-                  LOGIN
-                </button>
-              </div>
-            </div>
-          </form>
-          <div
-            className="ui error hidden message">
+            className="ui segment ui inverted dimmer"
+            onClick={[Function]}>
             <div
               className="content">
               <div
-                className="header">
-                Login Error
+                className="center">
+                <div
+                  className="ui loader" />
               </div>
-              <p>
-                Please enter valid credentials.
-              </p>
+            </div>
+          </div>
+          <div
+            className="ui raised segment"
+            style={
+              Object {
+                "paddingTop": "2rem",
+              }
+            }>
+            <img
+              alt={undefined}
+              className="ui small centered image"
+              height={undefined}
+              src="logo_sm.png"
+              width={undefined} />
+            <div
+              className="ui medium header"
+              style={
+                Object {
+                  "color": "#ABB7B7",
+                  "fontWeight": "300",
+                  "marginTop": "1rem",
+                }
+              }>
+              Login and Get After It.
+            </div>
+            <div
+              style={
+                Object {
+                  "display": "none",
+                  "padding": "1rem 1rem 0 1rem",
+                }
+              }>
+              <button
+                className="ui large button"
+                onClick={[Function]}
+                style={
+                  Object {
+                    "backgroundStyle": "#d4d4d5",
+                  }
+                }
+                tabIndex={undefined}>
+                <i
+                  aria-hidden="true"
+                  className="google icon" />
+                 
+                Login with Google
+              </button>
+              <div
+                className="ui horizontal divider"
+                style={
+                  Object {
+                    "margin": 0,
+                    "paddingTop": "1rem",
+                  }
+                }>
+                Or
+              </div>
+            </div>
+            <form
+              className="ui large form"
+              onSubmit={[Function]}>
+              <div
+                className="ui basic segment">
+                <div
+                  className="field">
+                  <div
+                    className="ui left icon input">
+                    <i
+                      aria-hidden="true"
+                      className="user icon" />
+                    <input
+                      name="email"
+                      onChange={[Function]}
+                      placeholder="Email"
+                      required={undefined}
+                      type="email"
+                      value="" />
+                  </div>
+                </div>
+                <div
+                  className="field">
+                  <div
+                    className="ui left icon input">
+                    <i
+                      aria-hidden="true"
+                      className="lock icon" />
+                    <input
+                      name="password"
+                      onChange={[Function]}
+                      placeholder="Password"
+                      required={undefined}
+                      type="password"
+                      value="" />
+                  </div>
+                </div>
+                <div
+                  className="field">
+                  <button
+                    className="ui large fluid primary button"
+                    onClick={[Function]}
+                    required={undefined}
+                    style={
+                      Object {
+                        "backgroundColor": "#1CAF9A",
+                      }
+                    }
+                    tabIndex={undefined}
+                    type={undefined}>
+                    LOGIN
+                  </button>
+                </div>
+              </div>
+            </form>
+            <div
+              className="ui error hidden message">
+              <div
+                className="content">
+                <div
+                  className="header">
+                  Login Error
+                </div>
+                <p>
+                  Please enter valid credentials.
+                </p>
+              </div>
             </div>
           </div>
         </div>

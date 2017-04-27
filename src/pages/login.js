@@ -15,13 +15,15 @@ import { colors } from '../css';
 class LoginPage extends Component {
   state = {
     error: false,
+    loading: false,
   };
 
   handleLoginError = (err: Object) => {
-    if (err) this.setState({ error: true });
+    if (err) this.setState({ error: true, loading: false });
   };
 
   handleEmailLogin = (creds: Object) => {
+    this.setState({ loading: true });
     base.authWithPassword(
       {
         email: creds.email,
@@ -48,8 +50,9 @@ class LoginPage extends Component {
                 logo={logo}
                 mobile={matches}
                 colWidth="500px"
-                error={this.state.error}
                 btnColor={colors.primary}
+                error={this.state.error}
+                loading={this.state.loading}
                 loginEmail={this.handleEmailLogin}
                 loginGmail={this.handleGoogleLogin}
               />

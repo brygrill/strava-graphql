@@ -1,7 +1,16 @@
 // @flow
 /* global SyntheticEvent */
 import React, { Component } from 'react';
-import { Grid, Segment, Form, Message, Image, Header } from 'semantic-ui-react';
+import {
+  Grid,
+  Segment,
+  Form,
+  Message,
+  Image,
+  Header,
+  Dimmer,
+  Loader,
+} from 'semantic-ui-react';
 import LoginGoogleComponent from './login-google-btn';
 
 import { colors, fonts } from '../../css';
@@ -33,8 +42,9 @@ class LoginComponent extends Component {
     colWidth: string,
     mobile: boolean,
     logo: string,
-    error: boolean,
     btnColor: string,
+    error: boolean,
+    loading: boolean,
     loginEmail: Function,
     loginGmail: Function,
   };
@@ -58,7 +68,8 @@ class LoginComponent extends Component {
   };
 
   render() {
-    const { colWidth, logo, mobile, btnColor, loginGmail } = this.props;
+    const { colWidth, logo, mobile, btnColor, loading, loginGmail } = this
+      .props;
     const topPadding = {
       paddingTop: mobile ? '6rem' : '16rem',
     };
@@ -75,52 +86,58 @@ class LoginComponent extends Component {
           verticalAlign="middle"
           className="ppd-padding-1"
         >
-          <Segment raised style={segmentStyle}>
-            <Image src={logo} size="small" centered />
-            <Header
-              size="medium"
-              content="Login and Get After It."
-              style={headerStyles}
-            />
-            <LoginGoogleComponent handleClick={loginGmail} hideGoogle />
-            <Form size="large" onSubmit={this.handleSubmit}>
-              <Segment basic>
-                <Form.Input
-                  icon="user"
-                  iconPosition="left"
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  value={this.state.email}
-                  onChange={this.updateField}
-                />
-                <Form.Input
-                  icon="lock"
-                  iconPosition="left"
-                  name="password"
-                  type="password"
-                  placeholder="Password"
-                  value={this.state.password}
-                  onChange={this.updateField}
-                />
-                <Form.Button
-                  fluid
-                  primary
-                  size="large"
-                  content="LOGIN"
-                  style={btnBackColor}
-                />
-              </Segment>
-            </Form>
+          <Dimmer.Dimmable blurring>
+            <Dimmer active={loading} as={Segment} inverted>
+              <Loader />
+            </Dimmer>
+            <Segment raised style={segmentStyle}>
+              <Image src={logo} size="small" centered />
+              <Header
+                size="medium"
+                content="Login and Get After It."
+                style={headerStyles}
+              />
+              <LoginGoogleComponent handleClick={loginGmail} hideGoogle />
+              <Form size="large" onSubmit={this.handleSubmit}>
+                <Segment basic>
+                  <Form.Input
+                    icon="user"
+                    iconPosition="left"
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    value={this.state.email}
+                    onChange={this.updateField}
+                  />
+                  <Form.Input
+                    icon="lock"
+                    iconPosition="left"
+                    name="password"
+                    type="password"
+                    placeholder="Password"
+                    value={this.state.password}
+                    onChange={this.updateField}
+                  />
+                  <Form.Button
+                    fluid
+                    primary
+                    size="large"
+                    content="LOGIN"
+                    style={btnBackColor}
+                  />
+                </Segment>
+              </Form>
 
-            <Message
-              hidden={!this.props.error}
-              error
-              header="Login Error"
-              content="Please enter valid credentials."
-            />
-          </Segment>
+              <Message
+                hidden={!this.props.error}
+                error
+                header="Login Error"
+                content="Please enter valid credentials."
+              />
+            </Segment>
+          </Dimmer.Dimmable>
         </Grid.Column>
+
       </Grid>
     );
   }
