@@ -8,6 +8,27 @@ import LoginButtonComponent from '../components/login/login-header-btn';
 
 import logo from '../images/logo_white.png';
 
+// Styles to make flex layout work
+const pageStyle = {
+  padding: 0,
+  margin: 0,
+  width: '100%',
+};
+
+const loginRowStyle = {
+  display: 'block',
+  padding: 0,
+  marginTop: '1rem',
+};
+
+const loginColStyle = {
+  padding: 0,
+};
+
+const headerColStyle = {
+  marginTop: '-1rem',
+};
+
 // Set styles for hero logo based on screen size
 const setHeroStyle = mobile => {
   return {
@@ -25,7 +46,7 @@ const setHeroStyle = mobile => {
 // Hero component logo and subheader
 const PlataHero = (props: { mobile: boolean }) => {
   return (
-    <div style={setHeroStyle(props.mobile).base} key="plata-hero-1">
+    <div key="plata-hero-1">
       <Image src={logo} size="large" centered />
       <Header
         as="h1"
@@ -49,9 +70,14 @@ export default class HomePage extends Component {
     const { appState } = this.props;
     return (
       <ContainerComponent>
-        <Grid relaxed>
-          <Grid.Row>
-            <Grid.Column floated="right" width={16}>
+        <Grid
+          width={16}
+          style={pageStyle}
+          textAlign="center"
+          verticalAlign="middle"
+        >
+          <Grid.Row style={loginRowStyle}>
+            <Grid.Column floated="right" width={16} style={loginColStyle}>
               <LoginButtonComponent
                 authed={appState.authed}
                 authedTo="/dashboard"
@@ -61,18 +87,15 @@ export default class HomePage extends Component {
               />
             </Grid.Column>
           </Grid.Row>
-          <Grid.Row>
-            <Grid.Column width={16}>
+          <div>
+            <Grid.Column width={16} style={headerColStyle}>
               <MediaQuery maxDeviceWidth={1224}>
                 {matches => {
-                  if (matches) {
-                    return <PlataHero mobile />;
-                  }
-                  return <PlataHero mobile={false} />;
+                  return <PlataHero mobile={matches} />;
                 }}
               </MediaQuery>
             </Grid.Column>
-          </Grid.Row>
+          </div>
         </Grid>
       </ContainerComponent>
     );
