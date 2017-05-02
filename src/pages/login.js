@@ -35,7 +35,7 @@ class LoginPage extends Component {
 
   handleGoogleLogin = (evt: SyntheticEvent) => {
     // if auth is successful...
-    // auth listener in app.jswill handle updating state
+    // auth listener in app.js will handle updating state
     evt.preventDefault();
     base.authWithOAuthRedirect('google', this.handleLoginError);
   };

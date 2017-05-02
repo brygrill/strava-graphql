@@ -5,6 +5,11 @@ import { Container } from 'semantic-ui-react';
 
 const pagePadding = {
   paddingTop: '1rem',
+  height: '100%',
+};
+
+const fullHeight = {
+  height: '100%',
 };
 
 const DefaultChild = () => <h3>Home</h3>;
@@ -20,7 +25,7 @@ class ContainerComponent extends Component {
 
   render() {
     return (
-      <div>
+      <div style={fullHeight}>
         <Container style={pagePadding}>
           {this.props.children}
         </Container>

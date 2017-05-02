@@ -94,11 +94,19 @@ class LoginComponent extends Component {
               <Image src={logo} size="small" centered />
               <Header
                 size="medium"
-                content="Login and Get After It."
+                content="Simply Plan Your Training."
                 style={headerStyles}
               />
-              <LoginGoogleComponent handleClick={loginGmail} hideGoogle />
-              <Form size="large" onSubmit={this.handleSubmit}>
+              <LoginGoogleComponent
+                handleClick={loginGmail}
+                hideGoogle={false}
+                hideEmailPwd
+              />
+              <Form
+                size="large"
+                onSubmit={this.handleSubmit}
+                style={{ display: 'none' }}
+              >
                 <Segment basic>
                   <Form.Input
                     icon="user"

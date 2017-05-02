@@ -1,6 +1,13 @@
 /* Globals */
 body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
   background-color: #1CAF9A;
+}
+
+#root {
+  height: 100%;
 }
 
 /* Plata Custom */
