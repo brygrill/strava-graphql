@@ -4,8 +4,8 @@ import type { Children } from 'react';
 import { Container } from 'semantic-ui-react';
 
 const pagePadding = {
-  paddingTop: '1rem',
   height: '100%',
+  display: 'flex',
 };
 
 const fullHeight = {

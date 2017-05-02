@@ -16,8 +16,16 @@ import LoginGoogleComponent from './login-google-btn';
 import { colors, fonts } from '../../css';
 
 // Styles
+const flexLayout = {
+  justifyContent: 'center',
+  alignContent: 'center',
+  width: '100%',
+  margin: 0,
+};
+
 const segmentStyle = {
   paddingTop: '2rem',
+  margin: 0,
 };
 
 // Header Styles
@@ -68,23 +76,19 @@ class LoginComponent extends Component {
   };
 
   render() {
-    const { colWidth, logo, mobile, btnColor, loading, loginGmail } = this
-      .props;
-    const topPadding = {
-      paddingTop: mobile ? '6rem' : '16rem',
-    };
-    const formWidth = {
+    const { colWidth, logo, btnColor, loading, loginGmail } = this.props;
+    const formStyle = {
       maxWidth: colWidth,
+      padding: 0,
     };
     const btnBackColor = { backgroundColor: btnColor };
     return (
-      <Grid relaxed centered style={topPadding}>
+      <Grid relaxed centered columns={16} style={flexLayout}>
         <Grid.Column
           width={16}
-          style={formWidth}
+          style={formStyle}
           textAlign="center"
           verticalAlign="middle"
-          className="ppd-padding-1"
         >
           <Dimmer.Dimmable blurring>
             <Dimmer active={loading} as={Segment} inverted>
@@ -94,7 +98,7 @@ class LoginComponent extends Component {
               <Image src={logo} size="small" centered />
               <Header
                 size="medium"
-                content="Simply Plan Your Training."
+                content="Login and Plan Your Training."
                 style={headerStyles}
               />
               <LoginGoogleComponent
