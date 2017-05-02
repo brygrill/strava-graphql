@@ -22,7 +22,9 @@ export default class App extends Component {
   state = {
     loading: true,
     authed: false,
-    user: {},
+    user: {
+      uid: null,
+    },
   };
 
   componentWillMount() {
@@ -30,8 +32,10 @@ export default class App extends Component {
   }
 
   updateAuthState = (user: Object) => {
-    if (user) this.setState({ loading: false, authed: true, user });
-    if (!user) this.setState({ loading: false, authed: false, user: {} });
+    if (user)
+      this.setState({ loading: false, authed: true, user: { uid: user.uid } });
+    if (!user)
+      this.setState({ loading: false, authed: false, user: { uid: null } });
   };
 
   render() {
@@ -55,7 +59,7 @@ export default class App extends Component {
               component={LoginPage}
             />
             <PrivateRoute
-              path="/go"
+              path="/dashboard"
               appState={this.state}
               component={DashboardPage}
             />

@@ -39,7 +39,7 @@ export const PublicRoute = ({
         (!appState.authed
           ? <Component appState={appState} {...props} />
           : <Redirect
-              to={{ pathname: '/go', state: { from: props.location } }}
+              to={{ pathname: '/dashboard', state: { from: props.location } }}
             />)}
     />
   );

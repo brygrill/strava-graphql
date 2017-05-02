@@ -54,7 +54,7 @@ export default class HomePage extends Component {
             <Grid.Column floated="right" width={16}>
               <LoginButtonComponent
                 authed={appState.authed}
-                authedTo="/go"
+                authedTo="/dashboard"
                 authedLabel="DASHBOARD"
                 noAuthedTo="/login"
                 noAuthedLabel="LOGIN"
