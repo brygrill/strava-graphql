@@ -66,6 +66,7 @@
     "test": "react-scripts test --env=jsdom",
     "cov": "yarn run test -- --coverage",
     "rpt": "codecov -t $CODECOV",
-    "deploy": "yarn run build && firebase deploy --only hosting"
+    "deploy": "yarn run build && firebase deploy --only hosting",
+    "functions": "firebase deploy --only functions"
   }
 }
