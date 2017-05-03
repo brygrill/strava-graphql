@@ -1,18 +1,44 @@
 exports[`<HomePage /> Matches snapshot 1`] = `
-<div>
+<div
+  style={
+    Object {
+      "height": "100%",
+    }
+  }>
   <div
     className="ui container"
     style={
       Object {
-        "paddingTop": "1rem",
+        "display": "flex",
+        "height": "100%",
       }
     }>
     <div
-      className="ui relaxed grid">
+      className="ui center aligned middle aligned grid"
+      style={
+        Object {
+          "margin": 0,
+          "padding": 0,
+          "width": "100%",
+        }
+      }
+      width={16}>
       <div
-        className="row">
+        className="row"
+        style={
+          Object {
+            "display": "block",
+            "marginTop": "1rem",
+            "padding": 0,
+          }
+        }>
         <div
-          className="right floated sixteen wide column">
+          className="right floated sixteen wide column"
+          style={
+            Object {
+              "padding": 0,
+            }
+          }>
           <a
             href="/login"
             onClick={[Function]}>
@@ -25,16 +51,15 @@ exports[`<HomePage /> Matches snapshot 1`] = `
           </a>
         </div>
       </div>
-      <div
-        className="row">
+      <div>
         <div
-          className="sixteen wide column">
-          <div
-            style={
-              Object {
-                "paddingTop": "16rem",
-              }
-            }>
+          className="sixteen wide column"
+          style={
+            Object {
+              "marginTop": "-1rem",
+            }
+          }>
+          <div>
             <img
               alt={undefined}
               className="ui large centered image"

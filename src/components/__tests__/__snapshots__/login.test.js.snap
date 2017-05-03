@@ -1,16 +1,20 @@
 exports[`<LoginComponent /> Matches snapshot with error 1`] = `
 <div
-  className="ui centered relaxed grid"
+  className="ui centered relaxed sixteen column grid"
   style={
     Object {
-      "paddingTop": "16rem",
+      "alignContent": "center",
+      "justifyContent": "center",
+      "margin": 0,
+      "width": "100%",
     }
   }>
   <div
-    className="center aligned middle aligned sixteen wide column ppd-padding-1"
+    className="center aligned middle aligned sixteen wide column"
     style={
       Object {
         "maxWidth": undefined,
+        "padding": 0,
       }
     }>
     <div
@@ -31,6 +35,7 @@ exports[`<LoginComponent /> Matches snapshot with error 1`] = `
         className="ui raised segment"
         style={
           Object {
+            "margin": 0,
             "paddingTop": "2rem",
           }
         }>
@@ -49,13 +54,12 @@ exports[`<LoginComponent /> Matches snapshot with error 1`] = `
               "marginTop": "1rem",
             }
           }>
-          Login and Get After It.
+          Login and Plan Your Training.
         </div>
         <div
           style={
             Object {
-              "display": "none",
-              "padding": "1rem 1rem 0 1rem",
+              "padding": "1rem",
             }
           }>
           <button
@@ -77,6 +81,7 @@ exports[`<LoginComponent /> Matches snapshot with error 1`] = `
             className="ui horizontal divider"
             style={
               Object {
+                "display": "none",
                 "margin": 0,
                 "paddingTop": "1rem",
               }
@@ -86,7 +91,12 @@ exports[`<LoginComponent /> Matches snapshot with error 1`] = `
         </div>
         <form
           className="ui large form"
-          onSubmit={[Function]}>
+          onSubmit={[Function]}
+          style={
+            Object {
+              "display": "none",
+            }
+          }>
           <div
             className="ui basic segment">
             <div
@@ -160,17 +170,21 @@ exports[`<LoginComponent /> Matches snapshot with error 1`] = `
 
 exports[`<LoginComponent /> Matches snapshot with no error 1`] = `
 <div
-  className="ui centered relaxed grid"
+  className="ui centered relaxed sixteen column grid"
   style={
     Object {
-      "paddingTop": "16rem",
+      "alignContent": "center",
+      "justifyContent": "center",
+      "margin": 0,
+      "width": "100%",
     }
   }>
   <div
-    className="center aligned middle aligned sixteen wide column ppd-padding-1"
+    className="center aligned middle aligned sixteen wide column"
     style={
       Object {
         "maxWidth": undefined,
+        "padding": 0,
       }
     }>
     <div
@@ -191,6 +205,7 @@ exports[`<LoginComponent /> Matches snapshot with no error 1`] = `
         className="ui raised segment"
         style={
           Object {
+            "margin": 0,
             "paddingTop": "2rem",
           }
         }>
@@ -209,13 +224,12 @@ exports[`<LoginComponent /> Matches snapshot with no error 1`] = `
               "marginTop": "1rem",
             }
           }>
-          Login and Get After It.
+          Login and Plan Your Training.
         </div>
         <div
           style={
             Object {
-              "display": "none",
-              "padding": "1rem 1rem 0 1rem",
+              "padding": "1rem",
             }
           }>
           <button
@@ -237,6 +251,7 @@ exports[`<LoginComponent /> Matches snapshot with no error 1`] = `
             className="ui horizontal divider"
             style={
               Object {
+                "display": "none",
                 "margin": 0,
                 "paddingTop": "1rem",
               }
@@ -246,7 +261,12 @@ exports[`<LoginComponent /> Matches snapshot with no error 1`] = `
         </div>
         <form
           className="ui large form"
-          onSubmit={[Function]}>
+          onSubmit={[Function]}
+          style={
+            Object {
+              "display": "none",
+            }
+          }>
           <div
             className="ui basic segment">
             <div

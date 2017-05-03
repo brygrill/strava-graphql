@@ -1,24 +1,34 @@
 exports[`<LoginPage /> Matches snapshot 1`] = `
-<div>
+<div
+  style={
+    Object {
+      "height": "100%",
+    }
+  }>
   <div
     className="ui container"
     style={
       Object {
-        "paddingTop": "1rem",
+        "display": "flex",
+        "height": "100%",
       }
     }>
     <div
-      className="ui centered relaxed grid"
+      className="ui centered relaxed sixteen column grid"
       style={
         Object {
-          "paddingTop": "16rem",
+          "alignContent": "center",
+          "justifyContent": "center",
+          "margin": 0,
+          "width": "100%",
         }
       }>
       <div
-        className="center aligned middle aligned sixteen wide column ppd-padding-1"
+        className="center aligned middle aligned sixteen wide column"
         style={
           Object {
             "maxWidth": "500px",
+            "padding": 0,
           }
         }>
         <div
@@ -39,6 +49,7 @@ exports[`<LoginPage /> Matches snapshot 1`] = `
             className="ui raised segment"
             style={
               Object {
+                "margin": 0,
                 "paddingTop": "2rem",
               }
             }>
@@ -57,13 +68,12 @@ exports[`<LoginPage /> Matches snapshot 1`] = `
                   "marginTop": "1rem",
                 }
               }>
-              Login and Get After It.
+              Login and Plan Your Training.
             </div>
             <div
               style={
                 Object {
-                  "display": "none",
-                  "padding": "1rem 1rem 0 1rem",
+                  "padding": "1rem",
                 }
               }>
               <button
@@ -85,6 +95,7 @@ exports[`<LoginPage /> Matches snapshot 1`] = `
                 className="ui horizontal divider"
                 style={
                   Object {
+                    "display": "none",
                     "margin": 0,
                     "paddingTop": "1rem",
                   }
@@ -94,7 +105,12 @@ exports[`<LoginPage /> Matches snapshot 1`] = `
             </div>
             <form
               className="ui large form"
-              onSubmit={[Function]}>
+              onSubmit={[Function]}
+              style={
+                Object {
+                  "display": "none",
+                }
+              }>
               <div
                 className="ui basic segment">
                 <div

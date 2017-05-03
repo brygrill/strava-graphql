@@ -1,10 +1,16 @@
 exports[`<ContainerComponent /> Matches snapshot with child 1`] = `
-<div>
+<div
+  style={
+    Object {
+      "height": "100%",
+    }
+  }>
   <div
     className="ui container"
     style={
       Object {
-        "paddingTop": "1rem",
+        "display": "flex",
+        "height": "100%",
       }
     }>
     <h1>
