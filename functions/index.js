@@ -1,4 +1,3 @@
-// @flow
 /* eslint-disable object-shorthand */
 
 const functions = require('firebase-functions');
