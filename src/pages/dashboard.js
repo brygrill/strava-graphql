@@ -9,12 +9,16 @@ export default class DashboardPage extends Component {
   };
 
   componentDidMount() {
-    const { user } = this.props.appState;
-    base.syncState(`schedules/${user.uid}`, {
-      context: this,
-      state: 'userSchedule',
-      isNullable: true,
-    });
+    try {
+      const { user } = this.props.appState;
+      base.syncState(`schedules/${user.uid}`, {
+        context: this,
+        state: 'userSchedule',
+        isNullable: true,
+      });
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   props: {

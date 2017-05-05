@@ -3,9 +3,17 @@ exports[`<LoginButtonComponent /> Matches snapshot when authed 1`] = `
   href="/go"
   onClick={[Function]}>
   <button
-    className="ui inverted button right floated"
+    className="ui inverted right floated button"
     onClick={[Function]}
     tabIndex={undefined}>
+    <i
+      aria-hidden="true"
+      className="dashboard icon"
+      style={
+        Object {
+          "opacity": 1,
+        }
+      } />
     DASHBOARD
   </button>
 </a>
@@ -16,9 +24,17 @@ exports[`<LoginButtonComponent /> Matches snapshot when no authed 1`] = `
   href="/login"
   onClick={[Function]}>
   <button
-    className="ui inverted button right floated"
+    className="ui inverted right floated button"
     onClick={[Function]}
     tabIndex={undefined}>
+    <i
+      aria-hidden="true"
+      className="trophy icon"
+      style={
+        Object {
+          "opacity": 1,
+        }
+      } />
     LOGIN
   </button>
 </a>

@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from 'semantic-ui-react';
+import { Button, Icon } from 'semantic-ui-react';
 
 export default class LoginButtonComponent extends Component {
   defaultProps: {
@@ -23,12 +23,10 @@ export default class LoginButtonComponent extends Component {
       .props;
     return (
       <Link to={authed ? authedTo : noAuthedTo}>
-        <Button
-          icon={authed ? 'dashboard' : null}
-          content={authed ? authedLabel : noAuthedLabel}
-          floated="right"
-          inverted
-        />
+        <Button floated="right" inverted>
+          <Icon name={authed ? 'dashboard' : 'trophy'} style={{ opacity: 1 }} />
+          {authed ? authedLabel : noAuthedLabel}
+        </Button>
       </Link>
     );
   }

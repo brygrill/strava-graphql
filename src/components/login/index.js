@@ -14,7 +14,7 @@ import {
 } from 'semantic-ui-react';
 import LoginGoogleComponent from './login-google-btn';
 
-import { colors, fonts, padding1 } from '../../css';
+import { colors, fonts, paddingBot1 } from '../../css';
 
 // Styles
 const flexLayout = {
@@ -55,7 +55,6 @@ class LoginComponent extends Component {
 
   props: {
     colWidth: string,
-    mobile: boolean,
     logo: string,
     headerImg: string,
     btnColor: string,
@@ -104,7 +103,7 @@ class LoginComponent extends Component {
               <Loader />
             </Dimmer>
             <Segment raised style={segmentStyle}>
-              <div style={padding1}>
+              <div style={paddingBot1}>
                 <Image src={headerImg} size="tiny" centered />
               </div>
               <Image src={logo} size="small" centered />

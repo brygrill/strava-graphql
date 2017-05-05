@@ -12,3 +12,23 @@ export const fonts = {
 export const padding1 = {
   padding: '1rem',
 };
+
+export const paddingBot1 = {
+  paddingBottom: '1rem',
+};
+
+export const pageStyle = {
+  padding: 0,
+  margin: 0,
+  width: '100%',
+};
+
+export const loginRowStyle = {
+  display: 'block',
+  padding: 0,
+  marginTop: '1rem',
+};
+
+export const loginColStyle = {
+  padding: 0,
+};

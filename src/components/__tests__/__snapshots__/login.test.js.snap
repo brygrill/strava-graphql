@@ -39,6 +39,19 @@ exports[`<LoginComponent /> Matches snapshot with error 1`] = `
             "paddingTop": "2rem",
           }
         }>
+        <div
+          style={
+            Object {
+              "paddingBottom": "1rem",
+            }
+          }>
+          <img
+            alt={undefined}
+            className="ui tiny centered image"
+            height={undefined}
+            src={undefined}
+            width={undefined} />
+        </div>
         <img
           alt={undefined}
           className="ui small centered image"
@@ -49,12 +62,25 @@ exports[`<LoginComponent /> Matches snapshot with error 1`] = `
           className="ui medium header"
           style={
             Object {
-              "color": "#ABB7B7",
               "fontWeight": "300",
               "marginTop": "1rem",
             }
           }>
-          Login and Plan Your Training.
+          Simple Weekly Training Plans.
+        </div>
+        <div
+          className="ui hidden divider" />
+        <div
+          className="ui small header"
+          style={
+            Object {
+              "color": "#ABB7B7",
+              "fontWeight": "300",
+              "marginBottom": 0,
+              "marginTop": "1rem",
+            }
+          }>
+          Get started by signing in with your Google account.
         </div>
         <div
           style={
@@ -209,6 +235,19 @@ exports[`<LoginComponent /> Matches snapshot with no error 1`] = `
             "paddingTop": "2rem",
           }
         }>
+        <div
+          style={
+            Object {
+              "paddingBottom": "1rem",
+            }
+          }>
+          <img
+            alt={undefined}
+            className="ui tiny centered image"
+            height={undefined}
+            src={undefined}
+            width={undefined} />
+        </div>
         <img
           alt={undefined}
           className="ui small centered image"
@@ -219,12 +258,25 @@ exports[`<LoginComponent /> Matches snapshot with no error 1`] = `
           className="ui medium header"
           style={
             Object {
-              "color": "#ABB7B7",
               "fontWeight": "300",
               "marginTop": "1rem",
             }
           }>
-          Login and Plan Your Training.
+          Simple Weekly Training Plans.
+        </div>
+        <div
+          className="ui hidden divider" />
+        <div
+          className="ui small header"
+          style={
+            Object {
+              "color": "#ABB7B7",
+              "fontWeight": "300",
+              "marginBottom": 0,
+              "marginTop": "1rem",
+            }
+          }>
+          Get started by signing in with your Google account.
         </div>
         <div
           style={

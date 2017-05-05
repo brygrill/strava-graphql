@@ -43,10 +43,18 @@ exports[`<HomePage /> Matches snapshot 1`] = `
             href="/login"
             onClick={[Function]}>
             <button
-              className="ui inverted button right floated"
+              className="ui inverted right floated button"
               onClick={[Function]}
               tabIndex={undefined}>
-              LOGIN
+              <i
+                aria-hidden="true"
+                className="trophy icon"
+                style={
+                  Object {
+                    "opacity": 1,
+                  }
+                } />
+              Get Started
             </button>
           </a>
         </div>
@@ -58,27 +66,7 @@ exports[`<HomePage /> Matches snapshot 1`] = `
             Object {
               "marginTop": "-1rem",
             }
-          }>
-          <div>
-            <img
-              alt={undefined}
-              className="ui large centered image"
-              height={undefined}
-              src="logo_white.png"
-              width={undefined} />
-            <h1
-              className="ui center aligned header"
-              style={
-                Object {
-                  "color": "#fff",
-                  "fontSize": "2.5rem",
-                  "fontWeight": 300,
-                }
-              }>
-              Simply Plan Your Training.
-            </h1>
-          </div>
-        </div>
+          } />
       </div>
     </div>
   </div>
