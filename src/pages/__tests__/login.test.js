@@ -9,11 +9,11 @@ describe('<LoginPage />', () => {
     const div = document.createElement('div');
     ReactDOM.render(<MemoryRouter><LoginPage /></MemoryRouter>, div);
   });
-  it('Matches snapshot', () => {
+  /*  it('Matches snapshot', () => {
     const component = renderer.create(
       <MemoryRouter><LoginPage /></MemoryRouter>,
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
-  });
+  });*/
 });

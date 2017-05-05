@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import type { Children } from 'react';
 import { Container } from 'semantic-ui-react';
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
 const pagePadding = {
   height: '100%',
@@ -26,9 +27,17 @@ class ContainerComponent extends Component {
   render() {
     return (
       <div style={fullHeight}>
-        <Container style={pagePadding}>
-          {this.props.children}
-        </Container>
+        <CSSTransitionGroup
+          transitionName="plata-transition"
+          transitionAppear
+          transitionAppearTimeout={500}
+          transitionEnter={false}
+          transitionLeave={false}
+        >
+          <Container style={pagePadding}>
+            {this.props.children}
+          </Container>
+        </CSSTransitionGroup>
       </div>
     );
   }

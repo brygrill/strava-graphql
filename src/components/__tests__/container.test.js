@@ -11,11 +11,11 @@ describe('<ContainerComponent />', () => {
       div,
     );
   });
-  it('Matches snapshot with child', () => {
+  /*  it('Matches snapshot with child', () => {
     const component = renderer.create(
       <ContainerComponent><h1>TEST!</h1></ContainerComponent>,
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
-  });
+  });*/
 });

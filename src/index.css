@@ -25,3 +25,21 @@ plata-custom-header {
 .ui.inverted.button:hover {
   color: #1CAF9A;
 }
+
+.plata-transition-appear {
+  opacity: 0.01;
+}
+
+.plata-transition-appear.plata-transition-appear-active {
+  opacity: 1;
+  transition: opacity .5s ease-in;
+}
+
+.plata-transition-leave {
+  opacity: 1;
+}
+
+.plata-transition-leave.plata-transition-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
