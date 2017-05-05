@@ -9,6 +9,7 @@ import ContainerComponent from '../components/container';
 import LoginComponent from '../components/login';
 
 import logo from '../images/logos/logo_sm.png';
+import medal from '../images/icons/medal_circle_platagreen.svg';
 
 import { colors } from '../css';
 
@@ -48,8 +49,9 @@ class LoginPage extends Component {
             return (
               <LoginComponent
                 logo={logo}
+                headerImg={medal}
                 mobile={matches}
-                colWidth="500px"
+                colWidth="40rem"
                 btnColor={colors.primary}
                 error={this.state.error}
                 loading={this.state.loading}

@@ -8,3 +8,7 @@ export const colors = {
 export const fonts = {
   light: '300',
 };
+
+export const padding1 = {
+  padding: '1rem',
+};

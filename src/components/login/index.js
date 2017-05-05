@@ -10,10 +10,11 @@ import {
   Header,
   Dimmer,
   Loader,
+  Divider,
 } from 'semantic-ui-react';
 import LoginGoogleComponent from './login-google-btn';
 
-import { colors, fonts } from '../../css';
+import { colors, fonts, padding1 } from '../../css';
 
 // Styles
 const flexLayout = {
@@ -31,6 +32,12 @@ const segmentStyle = {
 // Header Styles
 const headerStyles = {
   marginTop: '1rem',
+  fontWeight: fonts.light,
+};
+
+const signInMsgStyles = {
+  marginTop: '1rem',
+  marginBottom: 0,
   fontWeight: fonts.light,
   color: colors.gray1,
 };
@@ -50,6 +57,7 @@ class LoginComponent extends Component {
     colWidth: string,
     mobile: boolean,
     logo: string,
+    headerImg: string,
     btnColor: string,
     error: boolean,
     loading: boolean,
@@ -76,7 +84,8 @@ class LoginComponent extends Component {
   };
 
   render() {
-    const { colWidth, logo, btnColor, loading, loginGmail } = this.props;
+    const { colWidth, logo, headerImg, btnColor, loading, loginGmail } = this
+      .props;
     const formStyle = {
       maxWidth: colWidth,
       padding: 0,
@@ -95,11 +104,20 @@ class LoginComponent extends Component {
               <Loader />
             </Dimmer>
             <Segment raised style={segmentStyle}>
+              <div style={padding1}>
+                <Image src={headerImg} size="tiny" centered />
+              </div>
               <Image src={logo} size="small" centered />
               <Header
                 size="medium"
-                content="Login and Plan Your Training."
+                content="Simple Weekly Training Plans."
                 style={headerStyles}
+              />
+              <Divider hidden />
+              <Header
+                size="small"
+                content="Get started by signing in with your Google account."
+                style={signInMsgStyles}
               />
               <LoginGoogleComponent
                 handleClick={loginGmail}
