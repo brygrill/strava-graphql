@@ -8,7 +8,7 @@ import base from '../rebase';
 import ContainerComponent from '../components/container';
 import LoginComponent from '../components/login';
 
-import logo from '../images/logo_sm.png';
+import logo from '../images/logos/logo_sm.png';
 
 import { colors } from '../css';
 

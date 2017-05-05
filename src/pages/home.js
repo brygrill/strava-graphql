@@ -6,7 +6,12 @@ import MediaQuery from 'react-responsive';
 import ContainerComponent from '../components/container';
 import LoginButtonComponent from '../components/login/login-header-btn';
 
-import logo from '../images/logo_white.png';
+import logo from '../images//logos/logo_white.png';
+
+import swim from '../images/icons/swim_circle_white.svg';
+import bike from '../images/icons/bike_circle_white.svg';
+import run from '../images/icons/run_circle_white.svg';
+import lift from '../images/icons/lift_circle_white.svg';
 
 // Styles to make flex layout work
 const pageStyle = {
@@ -29,6 +34,10 @@ const headerColStyle = {
   marginTop: '-1rem',
 };
 
+const iconGroupStyle = {
+  textAlign: 'center',
+};
+
 // Set styles for hero logo based on screen size
 const setHeroStyle = mobile => {
   return {
@@ -44,16 +53,22 @@ const setHeroStyle = mobile => {
 };
 
 // Hero component logo and subheader
-const PlataHero = (props: { mobile: boolean }) => {
+const PlataHero = (props: { mobile: boolean, tiny: boolean }) => {
   return (
     <div key="plata-hero-1">
-      <Image src={logo} size="large" centered />
+      <Image src={logo} size={props.mobile ? 'medium' : 'large'} centered />
       <Header
         as="h1"
-        content="Simply Plan Your Training."
+        content="Simple Weekly Training Templates."
         textAlign="center"
         style={setHeroStyle(props.mobile).header}
       />
+      <Image.Group size={props.tiny ? 'mini' : 'tiny'} style={iconGroupStyle}>
+        <Image src={swim} />
+        <Image src={bike} />
+        <Image src={run} />
+        <Image src={lift} />
+      </Image.Group>
     </div>
   );
 };
@@ -81,18 +96,22 @@ export default class HomePage extends Component {
               <LoginButtonComponent
                 authed={appState.authed}
                 authedTo="/dashboard"
-                authedLabel="DASHBOARD"
+                authedLabel="Dashboard"
                 noAuthedTo="/login"
-                noAuthedLabel="LOGIN"
+                noAuthedLabel="Get Started"
               />
             </Grid.Column>
           </Grid.Row>
           <div>
             <Grid.Column width={16} style={headerColStyle}>
-              <MediaQuery maxDeviceWidth={1224}>
-                {matches => {
-                  return <PlataHero mobile={matches} />;
-                }}
+              <MediaQuery minDeviceWidth={1224}>
+                <PlataHero mobile={false} tiny={false} />
+              </MediaQuery>
+              <MediaQuery minWidth={321} maxWidth={1224}>
+                <PlataHero mobile tiny={false} />
+              </MediaQuery>
+              <MediaQuery maxWidth={320}>
+                <PlataHero mobile tiny />
               </MediaQuery>
             </Grid.Column>
           </div>

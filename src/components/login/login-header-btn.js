@@ -24,6 +24,7 @@ export default class LoginButtonComponent extends Component {
     return (
       <Link to={authed ? authedTo : noAuthedTo}>
         <Button
+          icon={authed ? 'dashboard' : null}
           content={authed ? authedLabel : noAuthedLabel}
           floated="right"
           inverted
