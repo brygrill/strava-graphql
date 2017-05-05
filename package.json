@@ -45,6 +45,7 @@
     "react-dom": "^15.5.4",
     "react-responsive": "^1.2.10",
     "react-router-dom": "^4.1.1",
+    "react-transition-group": "^1.1.3",
     "semantic-ui-react": "^0.68.2"
   },
   "lint-staged": {
