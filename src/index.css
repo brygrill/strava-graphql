@@ -3,22 +3,23 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  background-color: #1CAF9A;
+  /* background-color: #1CAF9A; */
 }
 
 #root {
   height: 100%;
 }
 
-/* Plata Custom */
-plata-full-height {
-  height: 100% !important;
+.plata-background {
+  background-image: url('https://firebasestorage.googleapis.com/v0/b/plata-fire-public/o/background.jpg?alt=media');
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
-plata-custom-header {
-  font-family: 'Lato', sans-serif;
-  font-weight: 300;
-  color: #fff;
+.plata-background-color {
+  background-color: #1CAF9A;
 }
 
 /* Semantic Override */

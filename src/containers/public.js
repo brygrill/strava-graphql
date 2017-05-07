@@ -5,6 +5,10 @@ import type { Children } from 'react';
 
 import BaseContainer from './base';
 
+import MenuComponent from '../components/menu';
+
+import logo from '../images/logos/logo_sm.png';
+
 const DefaultChild = () => <h3>Public Container</h3>;
 
 class PublicContainer extends Component {
@@ -19,7 +23,7 @@ class PublicContainer extends Component {
   render() {
     return (
       <BaseContainer>
-        <div>Some Menu and stuff</div>
+        <MenuComponent logo={logo} />
         {this.props.children}
       </BaseContainer>
     );

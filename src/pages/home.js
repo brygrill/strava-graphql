@@ -7,6 +7,10 @@ import PublicContainer from '../containers/public';
 
 import LoginButtonComponent from '../components/login/login-header-btn';
 
+import { basePageStyle } from '../css';
+
+import background from '../images/background.jpg';
+
 import logo from '../images//logos/logo_white.png';
 
 import swim from '../images/icons/swim_circle_white.svg';
@@ -32,6 +36,11 @@ const headerColStyle = {
 
 const iconGroupStyle = {
   textAlign: 'center',
+};
+
+const imgStyles = {
+  flex: 1,
+  resizeMode: 'cover',
 };
 
 // Set styles for hero logo based on screen size
@@ -81,7 +90,29 @@ export default class HomePage extends Component {
     const { appState } = this.props;
     return (
       <PublicContainer>
-        hi
+        <Grid style={{ paddingTop: '3rem' }}>
+          <Grid.Row style={{ height: '40rem' }}>
+            <Grid.Column
+              width={16}
+              only="computer"
+              className="plata-background"
+            >
+              a bad ass app
+            </Grid.Column>
+            <Grid.Column
+              width={16}
+              only="mobile tablet"
+              className="plata-background-color"
+            >
+              a bad ass app
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row style={{ height: '20rem' }}>
+            <Grid.Column width={16}>
+              some other interesting stuff
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       </PublicContainer>
     );
   }
