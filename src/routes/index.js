@@ -21,7 +21,7 @@ export const PrivateRoute = ({
         (appState.authed
           ? <Component appState={appState} {...props} />
           : <Redirect
-              to={{ pathname: '/login', state: { from: props.location } }}
+              to={{ pathname: '/', state: { from: props.location } }}
             />)}
     />
   );

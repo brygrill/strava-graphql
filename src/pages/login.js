@@ -6,13 +6,13 @@ import { Grid, Button, Icon } from 'semantic-ui-react';
 
 import base from '../rebase';
 
-import ContainerComponent from '../components/container';
+import BaseContainer from '../containers/base';
 import LoginComponent from '../components/login';
 
 import logo from '../images/logos/logo_sm.png';
 import medal from '../images/icons/medal_circle_platagreen.svg';
 
-import { colors, loginRowStyle, loginColStyle, pageStyle } from '../css';
+import { colors, loginRowStyle, loginColStyle, basePageStyle } from '../css';
 
 class LoginPage extends Component {
   state = {
@@ -44,10 +44,10 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <ContainerComponent>
+      <BaseContainer>
         <Grid
           width={16}
-          style={pageStyle}
+          style={basePageStyle}
           textAlign="center"
           verticalAlign="middle"
         >
@@ -74,7 +74,7 @@ class LoginPage extends Component {
             />
           </div>
         </Grid>
-      </ContainerComponent>
+      </BaseContainer>
     );
   }
 }

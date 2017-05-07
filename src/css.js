@@ -17,10 +17,12 @@ export const paddingBot1 = {
   paddingBottom: '1rem',
 };
 
-export const pageStyle = {
+export const basePageStyle = {
+  height: '100%',
+  width: '100%',
+  display: 'flex',
   padding: 0,
   margin: 0,
-  width: '100%',
 };
 
 export const loginRowStyle = {

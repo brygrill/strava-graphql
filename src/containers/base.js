@@ -1,21 +1,13 @@
 // @flow
 import React, { Component } from 'react';
 import type { Children } from 'react';
-import { Container } from 'semantic-ui-react';
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
-const pagePadding = {
-  height: '100%',
-  display: 'flex',
-};
+import { basePageStyle } from '../css';
 
-const fullHeight = {
-  height: '100%',
-};
+const DefaultChild = () => <h3>Base Container</h3>;
 
-const DefaultChild = () => <h3>Home</h3>;
-
-class ContainerComponent extends Component {
+class BaseContainer extends Component {
   defaultProps: {
     children: DefaultChild,
   };
@@ -26,7 +18,7 @@ class ContainerComponent extends Component {
 
   render() {
     return (
-      <div style={fullHeight}>
+      <div style={basePageStyle}>
         <CSSTransitionGroup
           transitionName="plata-transition"
           transitionAppear
@@ -34,13 +26,13 @@ class ContainerComponent extends Component {
           transitionEnter={false}
           transitionLeave={false}
         >
-          <Container style={pagePadding}>
+          <div style={basePageStyle}>
             {this.props.children}
-          </Container>
+          </div>
         </CSSTransitionGroup>
       </div>
     );
   }
 }
 
-export default ContainerComponent;
+export default BaseContainer;

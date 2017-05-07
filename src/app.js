@@ -8,11 +8,10 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import base from './rebase';
 
 import HomePage from './pages/home';
-import LoginPage from './pages/login';
 import DashboardPage from './pages/dashboard';
 import NotFound from './pages/notfound';
 
-import { PrivateRoute, PublicRoute, AppRoute, NoMatchRoute } from './routes';
+import { PrivateRoute, AppRoute, NoMatchRoute } from './routes';
 
 import LoadingComponent from './components/loading';
 
@@ -41,7 +40,7 @@ export default class App extends Component {
   render() {
     return this.state.loading
       ? <LoadingComponent
-          msg="Dropping the Hammer..."
+          msg="Getting to work..."
           size="large"
           back={colors.primary}
         />
@@ -52,11 +51,6 @@ export default class App extends Component {
               exact
               appState={this.state}
               component={HomePage}
-            />
-            <PublicRoute
-              path="/login"
-              appState={this.state}
-              component={LoginPage}
             />
             <PrivateRoute
               path="/dashboard"

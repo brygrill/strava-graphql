@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import { Header, Image, Grid } from 'semantic-ui-react';
 import MediaQuery from 'react-responsive';
 
-import ContainerComponent from '../components/container';
+import PublicContainer from '../containers/public';
+
 import LoginButtonComponent from '../components/login/login-header-btn';
 
 import logo from '../images//logos/logo_white.png';
@@ -14,11 +15,6 @@ import run from '../images/icons/run_circle_white.svg';
 import lift from '../images/icons/lift_circle_white.svg';
 
 // Styles to make flex layout work
-const pageStyle = {
-  padding: 0,
-  margin: 0,
-  width: '100%',
-};
 
 const loginRowStyle = {
   display: 'block',
@@ -84,6 +80,15 @@ export default class HomePage extends Component {
   render() {
     const { appState } = this.props;
     return (
+      <PublicContainer>
+        hi
+      </PublicContainer>
+    );
+  }
+}
+
+/*
+
       <ContainerComponent>
         <Grid
           width={16}
@@ -117,6 +122,4 @@ export default class HomePage extends Component {
           </div>
         </Grid>
       </ContainerComponent>
-    );
-  }
-}
+ */
