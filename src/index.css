@@ -10,8 +10,9 @@ body {
   height: 100%;
 }
 
+/* Plata Custom */
 .plata-background {
-  background-image: url('https://firebasestorage.googleapis.com/v0/b/plata-fire-public/o/background.jpg?alt=media');
+  background-image: url('https://firebasestorage.googleapis.com/v0/b/plata-fire-public/o/plata-app-back-home-green.jpg?alt=media');
   background-size: cover;
   background-position: 50% 50%;
   background-repeat: no-repeat;
@@ -22,11 +23,38 @@ body {
   background-color: #1CAF9A;
 }
 
-/* Semantic Override */
-.ui.inverted.button:hover {
-  color: #1CAF9A;
+/* Signup Homepage */
+.plata-signup-btn {
+  background-color: #DB0A5B !important;
+  color: #FFF !important;
+  text-shadow: none;
+  background-image: none;
 }
 
+.plata-signup-btn:hover {
+  background-color: #f40b64 !important;
+}
+
+.plata-signup-btn:focus, .plata-signup-btn:active {
+  background-color: #c30950 !important;
+}
+
+/* Login Homepage */
+.plata-login-btn {
+  color: #fff !important;
+  text-shadow: none;
+  background-image: none;
+}
+
+.plata-login-btn:hover {
+  background-color: #0d7363 !important;
+}
+
+.plata-login-btn:focus, .plata-login-btn:active {
+  background-color: #08453c !important;
+}
+
+/* CSS Transition Group */
 .plata-transition-appear {
   opacity: 0.01;
 }
