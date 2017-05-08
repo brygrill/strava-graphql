@@ -90,26 +90,25 @@ export default class HomePage extends Component {
     const { appState } = this.props;
     return (
       <PublicContainer>
-        <Grid style={{ paddingTop: '3rem' }}>
-          <Grid.Row style={{ height: '40rem' }}>
-            <Grid.Column
-              width={16}
-              only="computer"
-              className="plata-background"
-            >
-              a bad ass app
-            </Grid.Column>
-            <Grid.Column
-              width={16}
-              only="mobile tablet"
-              className="plata-background-color"
-            >
+        <Grid style={{ paddingTop: '52.91px' }}>
+          <Grid.Row style={{ height: '50rem' }} className="plata-background">
+            <Grid.Column width={16} verticalAlign="middle">
               a bad ass app
             </Grid.Column>
           </Grid.Row>
           <Grid.Row style={{ height: '20rem' }}>
             <Grid.Column width={16}>
               some other interesting stuff
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row style={{ height: '20rem' }}>
+            <Grid.Column width={16}>
+              some other interesting stuff
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row style={{ height: '20rem' }}>
+            <Grid.Column width={16}>
+              sign up
             </Grid.Column>
           </Grid.Row>
         </Grid>

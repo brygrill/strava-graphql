@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
-import { Menu, Image } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import { Menu, Image, Button } from 'semantic-ui-react';
 
 export default class MenuComponent extends Component {
   defaultProps: {};
@@ -9,44 +10,23 @@ export default class MenuComponent extends Component {
     logo: string,
   };
 
-  handleItemClick = (evt: Event & { target: HTMLButtonElement }) => {
-    console.log('click');
-    const target = evt.target;
-    const name = target.name;
-    this.setState({ activeItem: name });
-  };
-
   render() {
-    const { activeItem } = this.state;
     return (
-      <Menu stackable fixed="top">
+      <Menu fixed="top" inverted borderless style={{ background: '#4d4d4d' }}>
         <Menu.Item>
-          <Image src={this.props.logo} size="tiny" alt="Plata logo" />
+          <Link to="/">
+            <Image src={this.props.logo} size="tiny" alt="Plata logo" />
+          </Link>
         </Menu.Item>
 
-        <Menu.Item
-          name="features"
-          active={activeItem === 'features'}
-          onClick={this.handleItemClick}
-        >
-          Features
-        </Menu.Item>
-
-        <Menu.Item
-          name="testimonials"
-          active={activeItem === 'testimonials'}
-          onClick={this.handleItemClick}
-        >
-          Testimonials
-        </Menu.Item>
-
-        <Menu.Item
-          name="sign-in"
-          active={activeItem === 'sign-in'}
-          onClick={this.handleItemClick}
-        >
-          Sign-in
-        </Menu.Item>
+        <Menu.Menu position="right">
+          <Menu.Item>
+            <Button content="Log In" />
+          </Menu.Item>
+          <Menu.Item>
+            <Button primary content="Sign Up" />
+          </Menu.Item>
+        </Menu.Menu>
       </Menu>
     );
   }
