@@ -1,15 +1,10 @@
 // @flow
 import React, { Component } from 'react';
 import { Header, Image, Grid } from 'semantic-ui-react';
-import MediaQuery from 'react-responsive';
 
 import PublicContainer from '../containers/public';
 
-import LoginButtonComponent from '../components/login/login-header-btn';
-
-import { basePageStyle } from '../css';
-
-import background from '../images/background.jpg';
+import { colors } from '../css';
 
 import logo from '../images//logos/logo_white.png';
 
@@ -18,29 +13,8 @@ import bike from '../images/icons/bike_circle_white.svg';
 import run from '../images/icons/run_circle_white.svg';
 import lift from '../images/icons/lift_circle_white.svg';
 
-// Styles to make flex layout work
-
-const loginRowStyle = {
-  display: 'block',
-  padding: 0,
-  marginTop: '1rem',
-};
-
-const loginColStyle = {
-  padding: 0,
-};
-
-const headerColStyle = {
-  marginTop: '-1rem',
-};
-
 const iconGroupStyle = {
   textAlign: 'center',
-};
-
-const imgStyles = {
-  flex: 1,
-  resizeMode: 'cover',
 };
 
 // Set styles for hero logo based on screen size
@@ -87,11 +61,10 @@ export default class HomePage extends Component {
   };
 
   render() {
-    const { appState } = this.props;
     return (
       <PublicContainer>
         <Grid style={{ paddingTop: '52.91px' }}>
-          <Grid.Row style={{ height: '50rem' }} className="plata-background">
+          <Grid.Row style={{ height: '40rem' }} className="plata-background">
             <Grid.Column width={16} verticalAlign="middle">
               a bad ass app
             </Grid.Column>
@@ -106,7 +79,7 @@ export default class HomePage extends Component {
               some other interesting stuff
             </Grid.Column>
           </Grid.Row>
-          <Grid.Row style={{ height: '20rem' }}>
+          <Grid.Row style={{ height: '20rem', backgroundColor: colors.light }}>
             <Grid.Column width={16}>
               sign up
             </Grid.Column>

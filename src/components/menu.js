@@ -7,7 +7,7 @@ const btnItemStyle = mobile => {
   return {
     paddingTop: '1.25rem',
     paddingBottom: '1.25rem',
-    paddingLeft: mobile ? '.5rem' : '1rem',
+    paddingLeft: 0,
     paddingRight: mobile ? '.5rem' : '1rem',
   };
 };
