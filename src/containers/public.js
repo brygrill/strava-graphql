@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import type { Children } from 'react';
 import MediaQuery from 'react-responsive';
-//import { Container } from 'semantic-ui-react';
 
 import BaseContainer from './base';
 

@@ -1,8 +1,10 @@
 // @flow
 import React, { Component } from 'react';
-import { Header, Image, Grid } from 'semantic-ui-react';
+import { Header, Image, Grid, Button } from 'semantic-ui-react';
 
 import PublicContainer from '../containers/public';
+
+import RowComponent from '../components/row';
 
 import { colors } from '../css';
 
@@ -13,8 +15,19 @@ import bike from '../images/icons/bike_circle_white.svg';
 import run from '../images/icons/run_circle_white.svg';
 import lift from '../images/icons/lift_circle_white.svg';
 
-const iconGroupStyle = {
-  textAlign: 'center',
+const styles = {
+  align: {
+    textAlign: 'center',
+  },
+  height20: {
+    height: '20rem',
+  },
+  height40: {
+    height: '40rem',
+  },
+  backgroundLight: {
+    backgroundColor: colors.light,
+  },
 };
 
 // Set styles for hero logo based on screen size
@@ -42,7 +55,7 @@ const PlataHero = (props: { mobile: boolean, tiny: boolean }) => {
         textAlign="center"
         style={setHeroStyle(props.mobile).header}
       />
-      <Image.Group size={props.tiny ? 'mini' : 'tiny'} style={iconGroupStyle}>
+      <Image.Group size={props.tiny ? 'mini' : 'tiny'} style={styles.textAlign}>
         <Image src={swim} />
         <Image src={bike} />
         <Image src={run} />
@@ -54,8 +67,6 @@ const PlataHero = (props: { mobile: boolean, tiny: boolean }) => {
 
 // Render hero page
 export default class HomePage extends Component {
-  state = {};
-
   props: {
     appState: Object,
   };
@@ -64,65 +75,40 @@ export default class HomePage extends Component {
     return (
       <PublicContainer>
         <Grid style={{ paddingTop: '52.91px' }}>
-          <Grid.Row style={{ height: '40rem' }} className="plata-background">
-            <Grid.Column width={16} verticalAlign="middle">
-              a bad ass app
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row style={{ height: '20rem' }}>
-            <Grid.Column width={16}>
-              some other interesting stuff
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row style={{ height: '20rem' }}>
-            <Grid.Column width={16}>
-              some other interesting stuff
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row style={{ height: '20rem', backgroundColor: colors.light }}>
-            <Grid.Column width={16}>
-              sign up
-            </Grid.Column>
-          </Grid.Row>
+          <RowComponent
+            style={Object.assign({}, styles.height40)}
+            className="plata-background"
+            width={16}
+            align="middle"
+          >
+            <Header
+              content="Simply Plan Your Training"
+              textAlign="center"
+              as="h1"
+              inverted
+            />
+            <Header
+              content="Plata lets you quickly view and manage your weekly training schedule, so you can focus on hitting your workouts."
+              textAlign="center"
+              as="h2"
+              inverted
+            />
+            <Button content="Lets Go" className="plata-signup-btn" />
+          </RowComponent>
+          <RowComponent style={Object.assign({}, styles.height20)} width={16}>
+            some other interesting stuff
+          </RowComponent>
+          <RowComponent style={Object.assign({}, styles.height20)} width={16}>
+            some other interesting stuff
+          </RowComponent>
+          <RowComponent
+            style={Object.assign({}, styles.height20, styles.backgroundLight)}
+            width={16}
+          >
+            sign up
+          </RowComponent>
         </Grid>
       </PublicContainer>
     );
   }
 }
-
-/*
-
-      <ContainerComponent>
-        <Grid
-          width={16}
-          style={pageStyle}
-          textAlign="center"
-          verticalAlign="middle"
-        >
-          <Grid.Row style={loginRowStyle}>
-            <Grid.Column floated="right" width={16} style={loginColStyle}>
-              <LoginButtonComponent
-                authed={appState.authed}
-                authedTo="/dashboard"
-                authedLabel="Dashboard"
-                noAuthedTo="/login"
-                noAuthedLabel="Get Started"
-              />
-            </Grid.Column>
-          </Grid.Row>
-          <div>
-            <Grid.Column width={16} style={headerColStyle}>
-              <MediaQuery minDeviceWidth={1224}>
-                <PlataHero mobile={false} tiny={false} />
-              </MediaQuery>
-              <MediaQuery minWidth={321} maxWidth={1224}>
-                <PlataHero mobile tiny={false} />
-              </MediaQuery>
-              <MediaQuery maxWidth={320}>
-                <PlataHero mobile tiny />
-              </MediaQuery>
-            </Grid.Column>
-          </div>
-        </Grid>
-      </ContainerComponent>
- */
