@@ -6,13 +6,13 @@ import { Grid, Button, Icon } from 'semantic-ui-react';
 
 import base from '../rebase';
 
-import BaseContainer from '../containers/base';
+//import BaseContainer from '../containers/base';
 import LoginComponent from '../components/login';
 
 import logo from '../images/logos/logo_sm.png';
 import medal from '../images/icons/medal_circle_platagreen.svg';
 
-import { colors, loginRowStyle, loginColStyle, basePageStyle } from '../css';
+//import { colors, loginRowStyle, loginColStyle, basePageStyle } from '../css';
 
 class LoginPage extends Component {
   state = {

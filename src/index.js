@@ -6,7 +6,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import theme from './theme';
 import App from './app';
-import './index.css';
+import './theme/index.css';
 
 injectTapEventPlugin();
 
