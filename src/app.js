@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import base from './rebase';
 
-import HomePage from './pages/home';
+import HomePage from './pages/HomePage';
 import DashboardPage from './pages/dashboard';
 import NotFound from './pages/notfound';
 

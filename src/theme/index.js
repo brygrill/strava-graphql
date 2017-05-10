@@ -27,4 +27,7 @@ export default {
     pickerHeaderColor: fade(fullWhite, 0.12),
     clockCircleColor: fade(fullWhite, 0.12),
   },
+  toolbar: {
+    backgroundColor: '#212121',
+  },
 };

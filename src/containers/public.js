@@ -7,10 +7,6 @@ import BaseContainer from './base';
 
 import MenuComponent from '../components/menu';
 
-import { colors } from '../css';
-
-import logo from '../images/logos/logo_white_sm.png';
-
 const DefaultChild = () => <h3>Public Container</h3>;
 
 class PublicContainer extends Component {
