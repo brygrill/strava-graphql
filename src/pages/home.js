@@ -1,5 +1,7 @@
 // @flow
 import React, { Component } from 'react';
+import Paper from 'material-ui/Paper';
+import FlatButton from 'material-ui/FlatButton';
 import { Header, Image, Grid, Button } from 'semantic-ui-react';
 
 import PublicContainer from '../containers/public';
@@ -14,6 +16,14 @@ import swim from '../images/icons/swim_circle_white.svg';
 import bike from '../images/icons/bike_circle_white.svg';
 import run from '../images/icons/run_circle_white.svg';
 import lift from '../images/icons/lift_circle_white.svg';
+
+const style = {
+  height: 100,
+  width: 100,
+  margin: 20,
+  textAlign: 'center',
+  display: 'inline-block',
+};
 
 const styles = {
   align: {
@@ -73,6 +83,22 @@ export default class HomePage extends Component {
 
   render() {
     return (
+      <div className="mdl-grid">
+        <div className="mdl-cell mdl-cell--6-col">
+          <Paper style={style} zDepth={1} />
+        </div>
+        <div className="mdl-cell mdl-cell--4-col">
+          <FlatButton label="Primary" primary />
+        </div>
+        <div className="mdl-cell mdl-cell--2-col">
+          <FlatButton label="Secondary" secondary />
+        </div>
+      </div>
+    );
+  }
+}
+
+/*
       <PublicContainer>
         <Grid style={{ paddingTop: '52.91px' }}>
           <RowComponent
@@ -109,6 +135,6 @@ export default class HomePage extends Component {
           </RowComponent>
         </Grid>
       </PublicContainer>
-    );
-  }
-}
+
+
+ */
