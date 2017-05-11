@@ -5,7 +5,7 @@ import Paper from 'material-ui/Paper';
 import FlatButton from 'material-ui/FlatButton';
 
 import BaseContainer from '../components/BaseContainer';
-import Toolbar from '../components/Toolbar';
+import HomeHeader from '../components/HomeHeader';
 
 const style = {
   height: 100,
@@ -22,17 +22,36 @@ export default class HomePage extends Component {
   };
 
   render() {
+    console.log(this.props.appState.authed);
     return (
-      <BaseContainer>
-        <Toolbar />
-        <div className="mdl-grid">
-          <div className="mdl-cell mdl-cell--6-col">
+      <BaseContainer authed={this.props.appState.authed}>
+        <div className="mdl-grid plata-background plata-section-40">
+          <HomeHeader
+            headline="Plata helps you plan your running & triathlon training."
+            subhead="Add your plan to Plata. View and update it from anywhere. Focus on your swimming, biking and running."
+          />
+        </div>
+
+        <div className="mdl-grid plata-section-40">
+          <div className="mdl-cell mdl-cell--12-col">
             <Paper style={style} zDepth={1} />
           </div>
-          <div className="mdl-cell mdl-cell--4-col">
+          <div className="mdl-cell mdl-cell--6-col">
             <FlatButton label="Primary" primary />
           </div>
-          <div className="mdl-cell mdl-cell--2-col">
+          <div className="mdl-cell mdl-cell--6-col">
+            <FlatButton label="Secondary" secondary />
+          </div>
+        </div>
+
+        <div className="mdl-grid plata-section-30 plata-back-dark">
+          <div className="mdl-cell mdl-cell--12-col">
+            <Paper style={style} zDepth={1} />
+          </div>
+          <div className="mdl-cell mdl-cell--6-col">
+            <FlatButton label="Primary" primary />
+          </div>
+          <div className="mdl-cell mdl-cell--6-col">
             <FlatButton label="Secondary" secondary />
           </div>
         </div>

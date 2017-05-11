@@ -1,6 +1,8 @@
 // @flow
 import React, { Component } from 'react';
 
+import BaseContainer from '../components/BaseContainer';
+
 import base from '../rebase';
 
 export default class DashboardPage extends Component {
@@ -26,7 +28,12 @@ export default class DashboardPage extends Component {
   };
 
   render() {
-    console.log(this.state);
-    return <div>Hi</div>;
+    return (
+      <BaseContainer authed={this.props.appState.authed}>
+        <div className="mdl-grid">
+          dashboard
+        </div>
+      </BaseContainer>
+    );
   }
 }

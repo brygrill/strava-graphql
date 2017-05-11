@@ -8,14 +8,10 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import base from './rebase';
 
 import HomePage from './pages/HomePage';
-import DashboardPage from './pages/dashboard';
+import DashboardPage from './pages/DashboardPage';
 import NotFound from './pages/notfound';
 
 import { AppRoute, NoMatchRoute } from './routes';
-
-import LoadingComponent from './components/loading';
-
-import { colors } from './css';
 
 export default class App extends Component {
   state = {
@@ -40,11 +36,7 @@ export default class App extends Component {
   render() {
     const { loading, authed } = this.state;
     return loading
-      ? <LoadingComponent
-          msg="Getting to work..."
-          size="large"
-          back={colors.primary}
-        />
+      ? <div>Loading...</div>
       : <Router>
           <Switch>
             <AppRoute

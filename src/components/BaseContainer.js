@@ -3,22 +3,27 @@ import React, { Component } from 'react';
 import type { Children } from 'react';
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
-import { basePageStyle } from '../css';
+import AppBar from './AppBar';
+
+import { basePageStyle } from '../theme/css';
 
 const DefaultChild = () => <h3>Base Container</h3>;
 
 class BaseContainer extends Component {
   defaultProps: {
     children: DefaultChild,
+    authed: false,
   };
 
   props: {
     children?: Children,
+    authed?: Boolean,
   };
 
   render() {
+    console.log(this.props);
     return (
-      <div style={basePageStyle}>
+      <div>
         <CSSTransitionGroup
           transitionName="plata-transition"
           transitionAppear
@@ -27,6 +32,7 @@ class BaseContainer extends Component {
           transitionLeave={false}
         >
           <div style={basePageStyle}>
+            <AppBar authed={this.props.authed} />
             {this.props.children}
           </div>
         </CSSTransitionGroup>
