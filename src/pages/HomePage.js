@@ -17,6 +17,10 @@ const style = {
 
 // Render hero page
 export default class HomePage extends Component {
+  handleSignUpClick() {
+    console.log('signup!');
+  }
+
   props: {
     appState: Object,
   };
@@ -29,6 +33,8 @@ export default class HomePage extends Component {
           <HomeHeader
             headline="Plata helps you plan your running & triathlon training."
             subhead="Add your plan to Plata. View and update it from anywhere. Focus on your swimming, biking and running."
+            btnLabel="Join The Beta"
+            onBtnClick={this.handleSignUpClick}
           />
         </div>
 

@@ -32,8 +32,8 @@ export default class AppBarComponent extends Component {
         showMenuIconButton={authed}
         iconElementRight={
           authed
-            ? <FlatButton label="Logout" onTapTouch={this.handleLogOutClick} />
-            : <FlatButton label="Login" onTapTouch={this.handleLogInClick} />
+            ? <FlatButton label="Logout" onTouchTap={this.handleLogOutClick} />
+            : <FlatButton label="Login" onTouchTap={this.handleLogInClick} />
         }
         onLeftIconButtonTouchTap={this.handleMenuClick}
       />

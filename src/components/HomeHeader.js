@@ -1,10 +1,13 @@
 // @flow
 import React, { Component } from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class BaseContainer extends Component {
   props: {
     headline: string,
     subhead: string,
+    btnLabel: string,
+    onBtnClick: Function,
   };
 
   render() {
@@ -15,6 +18,11 @@ class BaseContainer extends Component {
       >
         <h1 style={{ fontSize: '3rem' }}>{this.props.headline}</h1>
         <h3 style={{ fontSize: '1.5rem' }}>{this.props.subhead}</h3>
+        <RaisedButton
+          label={this.props.btnLabel}
+          secondary
+          onTouchTap={this.props.onBtnClick}
+        />
       </div>
     );
   }
