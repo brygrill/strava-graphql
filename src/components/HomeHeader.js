@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 
-class BaseContainer extends Component {
+export default class HomeHeaderComponent extends Component {
   props: {
     headline: string,
     subhead: string,
@@ -29,5 +29,3 @@ class BaseContainer extends Component {
     );
   }
 }
-
-export default BaseContainer;

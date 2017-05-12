@@ -1,12 +1,4 @@
-/* Plata Custom */
-.plata-background {
-  background-image: url('https://firebasestorage.googleapis.com/v0/b/plata-fire-public/o/plata-app-header-img-black.jpg?alt=media');
-  background-size: cover;
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
-
+/* Heights */
 .plata-section-40 {
   height: 40rem;
 }
@@ -19,10 +11,32 @@
   height: 20rem;
 }
 
+/* Backgrounds */
+.plata-background-img {
+  background-image: url('https://firebasestorage.googleapis.com/v0/b/plata-fire-public/o/plata-app-header-img-black.jpg?alt=media');
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.plata-back-prime {
+  background-color: #039be5;
+}
+
+.plata-back-prime-light {
+  background-color: #63ccff;
+}
+
+.plata-back-prime-dark {
+  background-color: #006db3;
+}
+
 .plata-back-dark {
   background-color: #212121;
 }
 
+/* Text */
 .plata-color-white {
   color: #fff;
 }
