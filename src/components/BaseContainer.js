@@ -21,7 +21,6 @@ class BaseContainer extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <div>
         <CSSTransitionGroup
