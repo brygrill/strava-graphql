@@ -9,7 +9,7 @@ import base from './rebase';
 
 import HomePage from './pages/HomePage';
 import DashboardPage from './pages/DashboardPage';
-import NotFound from './pages/notfound';
+import NotFound from './pages/NotFoundPage';
 
 import { AppRoute, NoMatchRoute } from './routes';
 
