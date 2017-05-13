@@ -1,14 +1,18 @@
 /* Heights */
+.plata-section-50 {
+  min-height: 50rem;
+}
+
 .plata-section-40 {
-  height: 40rem;
+  min-height: 40rem;
 }
 
 .plata-section-30 {
-  height: 30rem;
+  min-height: 30rem;
 }
 
 .plata-section-20 {
-  height: 20rem;
+  min-height: 20rem;
 }
 
 /* Backgrounds */
@@ -29,7 +33,7 @@
 }
 
 .plata-back-prime-dark {
-  background-color: #006db3;
+  background-color: #000;
 }
 
 .plata-back-dark {

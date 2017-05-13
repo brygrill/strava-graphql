@@ -46,7 +46,7 @@ export default class HomePage extends Component {
   render() {
     return (
       <BaseContainer authed={this.props.appState.authed}>
-        <div className="mdl-grid plata-background-img plata-section-40">
+        <div className="mdl-grid plata-background-img plata-section-50">
           <HomeHeader
             headline="Plata helps you plan your running & triathlon training."
             subhead="Add your plan to Plata. View and update it from anywhere. Focus on your swim, bike, run."
@@ -67,7 +67,7 @@ export default class HomePage extends Component {
           </div>
         </div>
 
-        <div className="mdl-grid plata-section-30 plata-back-prime-dark">
+        <div className="mdl-grid plata-section-40 plata-back-prime-dark">
           <HomeFooter
             btnLabel="Get Started - It's Free"
             onBtnClick={this.handleJoinClick}
