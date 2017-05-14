@@ -33,16 +33,33 @@
 }
 
 .plata-back-prime-dark {
-  background-color: #000;
+  background-color: #006db3;
 }
 
-.plata-back-dark {
+.plata-back-grey {
   background-color: #212121;
+}
+
+.plata-back-grey-light {
+  background-color: #484848;
+}
+
+.plata-back-grey-dark {
+  background-color: #000000;
 }
 
 /* Text */
 .plata-color-white {
   color: #fff;
+}
+
+/* Padding */
+.plata-padding-1 {
+  padding: 1rem;
+}
+
+.plata-padding-2 {
+  padding: 2rem;
 }
 
 /* CSS Transition Group */
@@ -62,4 +79,17 @@
 .plata-transition-leave.plata-transition-leave-active {
   opacity: 0.01;
   transition: opacity 300ms ease-in;
+}
+
+/* Custom Component Classes */
+.home-cards-section {
+  padding: 1rem;
+}
+
+/* Media Queries */
+/* Desktop and up */
+@media (min-width: 992px) {
+  .home-cards-section {
+    padding: 10rem 2rem;
+  }
 }

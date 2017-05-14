@@ -1,20 +1,22 @@
 // @flow
 import React, { Component } from 'react';
-
-import Paper from 'material-ui/Paper';
+import type { Children } from 'react';
 
 import BaseContainer from '../components/BaseContainer';
-import HomeHeader from '../components/HomeHeader';
+import Hero from '../components/HomeHero';
+import Card from '../components/HomeCard';
 import HomeFooter from '../components/HomeFooter';
 import JoinModal from '../components/JoinModal';
 
-const style = {
-  height: '100%',
-  width: '100%',
-  textAlign: 'center',
-  display: 'inline-block',
-};
+import swim from '../images/icons/swim_circle_white.svg';
 
+const CardWrapper = (props: { children: Children }) => {
+  return (
+    <div className="mdl-cell mdl-cell--4-col mdl-cell--middle plata-padding-2">
+      {props.children}
+    </div>
+  );
+};
 // Render hero page
 export default class HomePage extends Component {
   state = {
@@ -47,7 +49,7 @@ export default class HomePage extends Component {
     return (
       <BaseContainer authed={this.props.appState.authed}>
         <div className="mdl-grid plata-background-img plata-section-50">
-          <HomeHeader
+          <Hero
             headline="Plata helps you plan your running & triathlon training."
             subhead="Add your plan to Plata. View and update it from anywhere. Focus on your swim, bike, run."
             btnLabel="Let's Go"
@@ -55,16 +57,36 @@ export default class HomePage extends Component {
           />
         </div>
 
-        <div className="mdl-grid plata-section-40">
-          <div className="mdl-cell mdl-cell--4-col">
-            <Paper style={style} zDepth={1} />
-          </div>
-          <div className="mdl-cell mdl-cell--4-col">
-            <Paper style={style} zDepth={1} />
-          </div>
-          <div className="mdl-cell mdl-cell--4-col">
-            <Paper style={style} zDepth={1} />
-          </div>
+        <div className="mdl-grid plata-section-40 home-cards-section">
+          <CardWrapper>
+            <Card
+              title="Set Your Plan"
+              img={swim}
+              alt="set plata plan card"
+              imgClass="plata-back-prime-light"
+              content="Select a plan length. Build a weekly schedule. Tailor each week."
+            />
+          </CardWrapper>
+
+          <CardWrapper>
+            <Card
+              title="Set Your Plan"
+              img={swim}
+              alt="set plata plan card"
+              imgClass="plata-back-prime-light"
+              content="Select a plan length. Build a weekly schedule. Tailor each week."
+            />
+          </CardWrapper>
+
+          <CardWrapper>
+            <Card
+              title="Set Your Plan"
+              img={swim}
+              alt="set plata plan card"
+              imgClass="plata-back-prime-light"
+              content="Select a plan length. Build a weekly schedule. Tailor each week."
+            />
+          </CardWrapper>
         </div>
 
         <div className="mdl-grid plata-section-40 plata-back-prime-dark">

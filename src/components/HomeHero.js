@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 
-export default class HomeHeaderComponent extends Component {
+export default class HomeHeroComponent extends Component {
   props: {
     headline: string,
     subhead: string,
