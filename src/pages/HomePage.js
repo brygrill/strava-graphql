@@ -12,7 +12,7 @@ import swim from '../images/icons/swim_circle_white.svg';
 
 const CardWrapper = (props: { children: Children }) => {
   return (
-    <div className="mdl-cell mdl-cell--4-col mdl-cell--middle plata-padding-2">
+    <div className="mdl-cell mdl-cell--4-col-desktop mdl-cell--6-col-tablet mdl-cell--1-offset-tablet mdl-cell--12-col mdl-cell--middle home-individual-card">
       {props.children}
     </div>
   );

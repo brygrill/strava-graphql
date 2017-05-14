@@ -86,10 +86,45 @@
   padding: 1rem;
 }
 
+.home-individual-card {
+  padding: 2rem;
+}
+
 /* Media Queries */
-/* Desktop and up */
+/* Small screen and Up */
+@media (min-width: 576px) {
+}
+
+/* Tablets and Up */
+@media (min-width: 768px) {
+}
+
+/* Desktop and Up */
 @media (min-width: 992px) {
   .home-cards-section {
+    padding: 8rem 2rem;
+  }
+  .home-individual-card {
+    padding: 3rem;
+  }
+}
+
+/* Large Desktops and Up */
+@media (min-width: 1200px) {
+  .home-cards-section {
     padding: 10rem 2rem;
+  }
+  .home-individual-card {
+    padding: 4rem;
+  }
+}
+
+/* Super Large Screens and Up */
+@media (min-width: 1400px) {
+  .home-cards-section {
+    padding: 10rem 5rem;
+  }
+  .home-individual-card {
+    padding: 5rem;
   }
 }
