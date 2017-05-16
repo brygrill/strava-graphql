@@ -8,11 +8,9 @@ import Card from '../components/HomeCard';
 import HomeFooter from '../components/HomeFooter';
 import JoinModal from '../components/JoinModal';
 
-import swim from '../images/icons/swim_circle_white.svg';
-
 const CardWrapper = (props: { children: Children }) => {
   return (
-    <div className="mdl-cell mdl-cell--4-col-desktop mdl-cell--6-col-tablet mdl-cell--1-offset-tablet mdl-cell--12-col mdl-cell--middle home-individual-card">
+    <div className="mdl-cell mdl-cell--4-col-desktop mdl-cell--6-col-tablet mdl-cell--1m-offset-tablet mdl-cell--12-col mdl-cell--middle plata-home-individual-card">
       {props.children}
     </div>
   );
@@ -57,34 +55,31 @@ export default class HomePage extends Component {
           />
         </div>
 
-        <div className="mdl-grid plata-section-40 home-cards-section">
+        <div className="mdl-grid plata-section-40 plata-home-cards-section">
           <CardWrapper>
             <Card
-              title="Set Your Plan"
-              img={swim}
-              alt="set plata plan card"
-              imgClass="plata-back-prime-light"
-              content="Select a plan length. Build a weekly schedule. Tailor each week."
+              title="Create"
+              background="#4caf50"
+              icon="fa fa-calendar-check-o"
+              content="Select a plan length, build a weekly template & customize each week."
             />
           </CardWrapper>
 
           <CardWrapper>
             <Card
-              title="Set Your Plan"
-              img={swim}
-              alt="set plata plan card"
-              imgClass="plata-back-prime-light"
-              content="Select a plan length. Build a weekly schedule. Tailor each week."
+              title="View"
+              background="#fbc02d"
+              icon="fa fa-tachometer"
+              content="View workout details, weekly schedule & stats from any device."
             />
           </CardWrapper>
 
           <CardWrapper>
             <Card
-              title="Set Your Plan"
-              img={swim}
-              alt="set plata plan card"
-              imgClass="plata-back-prime-light"
-              content="Select a plan length. Build a weekly schedule. Tailor each week."
+              title="Adjust"
+              background="#00acc1"
+              icon="fa fa-sliders"
+              content="Adjust details & move workouts across days or weeks with ease."
             />
           </CardWrapper>
         </div>

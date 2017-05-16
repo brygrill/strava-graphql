@@ -1,23 +1,31 @@
 // @flow
 import React, { Component } from 'react';
 import { Card, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import FontIcon from 'material-ui/FontIcon';
 
 export default class HomeCard extends Component {
   props: {
     title: string,
-    img: string,
-    alt: string,
-    imgClass: string,
+    background: string,
+    icon: string,
     content: string,
   };
   render() {
-    const { title, img, alt, imgClass, content } = this.props;
+    const { title, background, icon, content } = this.props;
     return (
       <Card>
-        <CardMedia>
-          <img src={img} alt={alt} className={imgClass} />
+        <CardMedia
+          className="plata-home-card-media"
+          style={{ backgroundColor: background }}
+        >
+          <div>
+            <FontIcon
+              className={icon}
+              style={{ fontSize: '6rem', color: '#fff' }}
+            />
+          </div>
         </CardMedia>
-        <CardTitle title={title} />
+        <CardTitle title={title} className="plata-home-card-title" />
         <CardText>
           {content}
         </CardText>
