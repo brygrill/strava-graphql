@@ -25,8 +25,8 @@ export default class HomeCard extends Component {
             />
           </div>
         </CardMedia>
-        <CardTitle title={title} className="plata-home-card-title" />
-        <CardText>
+        <CardTitle title={title} />
+        <CardText className="plata-home-card-content">
           {content}
         </CardText>
       </Card>

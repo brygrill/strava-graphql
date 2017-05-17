@@ -60,17 +60,17 @@ export default class HomePage extends Component {
             <Card
               title="Create"
               background="#4caf50"
-              icon="fa fa-calendar-check-o"
-              content="Select a plan length, build a weekly template & customize each week."
+              icon="fa fa-wrench"
+              content="Build a weekly template & customize each week of your plan."
             />
           </CardWrapper>
 
           <CardWrapper>
             <Card
-              title="View"
+              title="Manage"
               background="#fbc02d"
               icon="fa fa-tachometer"
-              content="View workout details, weekly schedule & stats from any device."
+              content="View workouts, weekly schedule & stats from any device."
             />
           </CardWrapper>
 
@@ -79,7 +79,7 @@ export default class HomePage extends Component {
               title="Adjust"
               background="#00acc1"
               icon="fa fa-sliders"
-              content="Adjust details & move workouts across days or weeks with ease."
+              content="Update workout details & move workouts around with ease."
             />
           </CardWrapper>
         </div>

@@ -8,4 +8,7 @@ export default {
     primary3Color: '#63ccff',
   },
   toolbar: {},
+  cardText: {
+    textColor: 'rgba(0,0,0,.54)',
+  },
 };

@@ -95,8 +95,9 @@
   padding: 4rem;
 }
 
-.plata-home-card-title {
-  /*text-align: center;*/
+.plata-home-card-content {
+  min-height: 5rem !important;
+  font-size: 1.25rem !important;
 }
 
 /* Media Queries */
