@@ -7,12 +7,15 @@ export default class AppFooter extends Component {
   props: {};
   render() {
     return (
-      <footer className="mdl-mini-footer">
-        <div className="mdl-mini-footer__left-section">
-          Plata footer
-        </div>
+      <footer className="mdl-mini-footer plata-app-footer">
         <div className="mdl-mini-footer__right-section">
-          Link to github
+          <a
+            href="https://github.com/brygrill/plata-app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i className="fa fa-github fa-fw fa-2x" />{' '}
+          </a>
         </div>
       </footer>
     );

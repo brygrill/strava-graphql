@@ -84,7 +84,7 @@ export default class HomePage extends Component {
         <div className="mdl-grid plata-section-40 plata-home-cards-section">
           {cardContent.map(card => {
             return (
-              <CardWrapper>
+              <CardWrapper key={card.title}>
                 <Card
                   title={card.title}
                   background={card.background}

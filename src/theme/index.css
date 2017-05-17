@@ -82,6 +82,9 @@
 }
 
 /* Custom Component Classes */
+.plata-app-footer a{
+  color: #ffffff;
+}
 .plata-home-cards-section {
   padding: 1rem;
 }
