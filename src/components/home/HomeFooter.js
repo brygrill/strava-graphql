@@ -2,9 +2,9 @@
 import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import swim from '../images/icons/swim_circle_white.svg';
-import bike from '../images/icons/bike_circle_white.svg';
-import run from '../images/icons/run_circle_white.svg';
+import swim from '../../images/icons/swim_circle_white.svg';
+import bike from '../../images/icons/bike_circle_white.svg';
+import run from '../../images/icons/run_circle_white.svg';
 
 const iconStyle = {
   height: '5rem',
