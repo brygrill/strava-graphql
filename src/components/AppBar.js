@@ -4,36 +4,29 @@ import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 
 export default class AppBarComponent extends Component {
-  defaultProps: {
-    authed: false,
-  };
-
   props: {
-    authed?: Boolean,
+    authed: Boolean,
+    rightBtnLabel: string,
+    rightBtnHandler: Function,
   };
 
-  handleMenuClick(evt: SyntheticEvent) {
-    console.log('click');
-  }
+  handleMenuClick = (evt: SyntheticEvent) => {
+    console.log('click menu');
+  };
 
-  handleLogInClick(evt: SyntheticEvent) {
-    console.log('login');
-  }
-
-  handleLogOutClick(evt: SyntheticEvent) {
-    console.log('logout');
-  }
+  handleTitleClick = (evt: SyntheticEvent) => {
+    console.log('click title');
+  };
 
   render() {
-    const { authed } = this.props;
+    const { authed, rightBtnLabel, rightBtnHandler } = this.props;
     return (
       <AppBar
-        title="PLATA"
+        title={<span className="plata-appbar-title">PLATA</span>}
         showMenuIconButton={authed}
+        onTitleTouchTap={this.handleTitleClick}
         iconElementRight={
-          authed
-            ? <FlatButton label="Logout" onTouchTap={this.handleLogOutClick} />
-            : <FlatButton label="Login" onTouchTap={this.handleLogInClick} />
+          <FlatButton label={rightBtnLabel} onTouchTap={rightBtnHandler} />
         }
         onLeftIconButtonTouchTap={this.handleMenuClick}
       />

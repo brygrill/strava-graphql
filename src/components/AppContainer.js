@@ -3,19 +3,17 @@ import React, { Component } from 'react';
 import type { Children } from 'react';
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
-import AppBar from './AppBar';
+import AppFooter from './AppFooter';
 
 const DefaultChild = () => <h3>Base Container</h3>;
 
 class BaseContainer extends Component {
   defaultProps: {
     children: DefaultChild,
-    authed: false,
   };
 
   props: {
     children?: Children,
-    authed?: Boolean,
   };
 
   render() {
@@ -29,8 +27,8 @@ class BaseContainer extends Component {
           transitionLeave={false}
         >
           <div>
-            <AppBar authed={this.props.authed} />
             {this.props.children}
+            <AppFooter />
           </div>
         </CSSTransitionGroup>
       </div>

@@ -11,7 +11,7 @@ import HomePage from './pages/HomePage';
 import DashboardPage from './pages/DashboardPage';
 import NotFound from './pages/NotFoundPage';
 
-import { AppRoute, NoMatchRoute } from './routes';
+import { AppRoute, PrivateRoute, NoMatchRoute } from './routes';
 
 export default class App extends Component {
   state = {
@@ -34,7 +34,7 @@ export default class App extends Component {
   };
 
   render() {
-    const { loading, authed } = this.state;
+    const { loading } = this.state;
     return loading
       ? <div>Loading...</div>
       : <Router>
@@ -43,7 +43,12 @@ export default class App extends Component {
               path="/"
               exact
               appState={this.state}
-              component={authed ? DashboardPage : HomePage}
+              component={HomePage}
+            />
+            <PrivateRoute
+              path="/dashboard"
+              appState={this.state}
+              component={DashboardPage}
             />
             <NoMatchRoute appState={this.state} component={NotFound} />
           </Switch>

@@ -82,6 +82,10 @@
 }
 
 /* Custom Component Classes */
+.plata-appbar-title {
+  cursor: pointer;
+}
+
 .plata-app-footer a{
   color: #ffffff;
 }

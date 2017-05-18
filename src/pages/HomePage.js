@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 import type { Children } from 'react';
 
 import AppContainer from '../components/AppContainer';
-import AppFooter from '../components/AppFooter';
+import AppBar from '../components/AppBar';
 import Hero from '../components/home/HomeHero';
 import Card from '../components/home/HomeCard';
 import HomeFooter from '../components/home/HomeFooter';
-import JoinModal from '../components/JoinModal';
+import AuthModal from '../components/AuthModal';
 
 // Grid to wrap cards
 const CardWrapper = (props: { children: Children }) => {
@@ -52,11 +52,20 @@ export default class HomePage extends Component {
     this.setState({ joinModalOpen: true });
   };
 
-  handleJoinSubmit = () => {
+  handleLoginClick = () => {
+    console.log('Open Login Modal!');
+    this.setState({ loginModalOpen: true });
+  };
+
+  handleDashboardClick = () => {
+    this.props.history.push('/dashboard');
+  };
+
+  handleGoogleOAuthSubmit = () => {
     console.log('Open OAuth...');
     // rebase function here
     // show loader...
-    this.setState({ joinModalOpen: false });
+    this.setState({ joinModalOpen: false, loginModalOpen: false });
   };
 
   handleCancelModal = () => {
@@ -66,11 +75,21 @@ export default class HomePage extends Component {
 
   props: {
     appState: Object,
+    history: Object,
   };
 
   render() {
+    const { authed } = this.props.appState;
     return (
-      <AppContainer authed={this.props.appState.authed}>
+      <AppContainer>
+
+        <AppBar
+          authed={authed}
+          rightBtnLabel={authed ? 'Dashboard' : 'Login'}
+          rightBtnHandler={
+            authed ? this.handleDashboardClick : this.handleLoginClick
+          }
+        />
 
         <div className="mdl-grid plata-background-img plata-section-50">
           <Hero
@@ -103,12 +122,18 @@ export default class HomePage extends Component {
           />
         </div>
 
-        <AppFooter />
-
-        <JoinModal
+        <AuthModal
+          title="Signup with Google"
           open={this.state.joinModalOpen}
           handleCancel={this.handleCancelModal}
-          handleSubmit={this.handleJoinSubmit}
+          handleSubmit={this.handleGoogleOAuthSubmit}
+        />
+
+        <AuthModal
+          title="Signin with Google"
+          open={this.state.loginModalOpen}
+          handleCancel={this.handleCancelModal}
+          handleSubmit={this.handleGoogleOAuthSubmit}
         />
 
       </AppContainer>
