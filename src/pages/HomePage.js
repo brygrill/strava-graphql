@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import type { Children } from 'react';
 
+import base from '../rebase';
+
 import AppContainer from '../components/AppContainer';
 import AppBar from '../components/AppBar';
 import Hero from '../components/home/HomeHero';
@@ -44,33 +46,39 @@ const cardContent = [
 export default class HomePage extends Component {
   state = {
     joinModalOpen: false,
-    loginModalOpen: false,
+    error: false,
+    loading: false,
   };
+
+  componentDidMount() {
+    base.authGetOAuthRedirectResult(this.handleOAuthResult);
+  }
 
   handleJoinClick = () => {
-    console.log('signup!');
     this.setState({ joinModalOpen: true });
-  };
-
-  handleLoginClick = () => {
-    console.log('Open Login Modal!');
-    this.setState({ loginModalOpen: true });
   };
 
   handleDashboardClick = () => {
     this.props.history.push('/dashboard');
   };
 
-  handleGoogleOAuthSubmit = () => {
-    console.log('Open OAuth...');
-    // rebase function here
-    // show loader...
-    this.setState({ joinModalOpen: false, loginModalOpen: false });
+  handleCancelModal = () => {
+    this.setState({ joinModalOpen: false });
   };
 
-  handleCancelModal = () => {
-    console.log('Cancel btn click...');
-    this.setState({ joinModalOpen: false, loginModalOpen: false });
+  handleLoginError = (err: Object) => {
+    if (err) this.setState({ error: true, loading: false });
+  };
+
+  handleOAuthResult = (err: Object, data: Object) => {
+    if (err) this.setState({ error: true, loading: false });
+    if (data.user) this.props.history.push('/dashboard');
+  };
+
+  handleGoogleOAuthSubmit = (evt: SyntheticEvent) => {
+    evt.preventDefault();
+    this.setState({ joinModalOpen: false });
+    base.authWithOAuthRedirect('google', this.handleLoginError);
   };
 
   props: {
@@ -85,9 +93,10 @@ export default class HomePage extends Component {
 
         <AppBar
           authed={authed}
-          rightBtnLabel={authed ? 'Dashboard' : 'Login'}
+          rightBtnLabel={authed ? 'Dashboard' : 'Sign in'}
+          rightBtnIcon={authed ? '' : 'fa fa-google'}
           rightBtnHandler={
-            authed ? this.handleDashboardClick : this.handleLoginClick
+            authed ? this.handleDashboardClick : this.handleGoogleOAuthSubmit
           }
         />
 
@@ -123,15 +132,9 @@ export default class HomePage extends Component {
         </div>
 
         <AuthModal
-          title="Signup with Google"
+          title="Signup with your Google account"
+          submitBtnLabel="Signup with Google"
           open={this.state.joinModalOpen}
-          handleCancel={this.handleCancelModal}
-          handleSubmit={this.handleGoogleOAuthSubmit}
-        />
-
-        <AuthModal
-          title="Signin with Google"
-          open={this.state.loginModalOpen}
           handleCancel={this.handleCancelModal}
           handleSubmit={this.handleGoogleOAuthSubmit}
         />
