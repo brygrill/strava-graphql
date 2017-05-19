@@ -53,6 +53,20 @@
   color: #fff;
 }
 
+/* Cursor */
+.plata-cursor-pointer {
+  cursor: pointer;
+}
+
+/* Font Size */
+.plata-font-size-1 {
+  font-size: 1rem !important;
+}
+
+.plata-font-size-1-5 {
+  font-size: 1.5rem !important;
+}
+
 /* Padding */
 .plata-padding-1 {
   padding: 1rem;
@@ -60,6 +74,20 @@
 
 .plata-padding-2 {
   padding: 2rem;
+}
+
+/* Margin */
+.plata-margin-top-half {
+  margin-top: 0.5rem;
+}
+
+.plata-margin-bottom-0 {
+  margin-bottom: 0;
+}
+
+/* Align */
+.plata-align-center {
+  text-align: center;
 }
 
 /* CSS Transition Group */

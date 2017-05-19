@@ -1,4 +1,6 @@
 // @flow
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable react/jsx-indent */
 import React, { Component } from 'react';
 import type { Children } from 'react';
 
@@ -45,7 +47,8 @@ const cardContent = [
 // Render Home page
 export default class HomePage extends Component {
   state = {
-    joinModalOpen: false,
+    authModalOpen: false,
+    authModalContentSignup: true,
     error: false,
     loading: false,
   };
@@ -54,8 +57,17 @@ export default class HomePage extends Component {
     base.authGetOAuthRedirectResult(this.handleOAuthResult);
   }
 
-  handleJoinClick = () => {
-    this.setState({ joinModalOpen: true });
+  handleSignupClick = () => {
+    this.setState({ authModalOpen: true });
+  };
+
+  handleSigninClick = () => {
+    this.setState({ authModalContentSignup: false, authModalOpen: true });
+  };
+
+  handleAlternativeClick = () => {
+    const { authModalContentSignup } = this.state;
+    this.setState({ authModalContentSignup: !authModalContentSignup });
   };
 
   handleDashboardClick = () => {
@@ -63,7 +75,7 @@ export default class HomePage extends Component {
   };
 
   handleCancelModal = () => {
-    this.setState({ joinModalOpen: false });
+    this.setState({ authModalOpen: false });
   };
 
   handleLoginError = (err: Object) => {
@@ -77,7 +89,7 @@ export default class HomePage extends Component {
 
   handleGoogleOAuthSubmit = (evt: SyntheticEvent) => {
     evt.preventDefault();
-    this.setState({ joinModalOpen: false });
+    this.setState({ authModalOpen: false });
     base.authWithOAuthRedirect('google', this.handleLoginError);
   };
 
@@ -88,6 +100,7 @@ export default class HomePage extends Component {
 
   render() {
     const { authed } = this.props.appState;
+    const { authModalContentSignup } = this.state;
     return (
       <AppContainer>
 
@@ -96,7 +109,7 @@ export default class HomePage extends Component {
           rightBtnLabel={authed ? 'Dashboard' : 'Sign in'}
           rightBtnIcon={authed ? '' : 'fa fa-google'}
           rightBtnHandler={
-            authed ? this.handleDashboardClick : this.handleGoogleOAuthSubmit
+            authed ? this.handleDashboardClick : this.handleSigninClick
           }
         />
 
@@ -105,7 +118,7 @@ export default class HomePage extends Component {
             headline="Plata helps you plan your running & triathlon training."
             subhead="Add your plan to Plata. View and update it from anywhere. Focus on your swim, bike, run."
             btnLabel="Let's Go"
-            onBtnClick={this.handleJoinClick}
+            onBtnClick={this.handleSignupClick}
           />
         </div>
 
@@ -127,16 +140,47 @@ export default class HomePage extends Component {
         <div className="mdl-grid plata-section-40 plata-back-prime-dark">
           <HomeFooter
             btnLabel="Get Started - It's Free"
-            onBtnClick={this.handleJoinClick}
+            onBtnClick={this.handleSignupClick}
           />
         </div>
 
         <AuthModal
-          title="Signup with your Google account"
-          submitBtnLabel="Signup with Google"
-          open={this.state.joinModalOpen}
+          title={authModalContentSignup ? 'Sign up for Plata' : 'Sign In'}
+          sub={authModalContentSignup ? 'Get started with a free account' : ''}
+          icon="fa fa-google plata-font-size-1-5"
+          submitBtnLabel="Sign in with Google"
+          open={this.state.authModalOpen}
           handleCancel={this.handleCancelModal}
           handleSubmit={this.handleGoogleOAuthSubmit}
+          alternative={
+            authModalContentSignup
+              ? <h6>
+                  Or
+                  {' '}
+                  <a
+                    role="button"
+                    className="plata-cursor-pointer"
+                    onClick={this.handleAlternativeClick}
+                  >
+                    sign in
+                  </a>
+                  {' '}
+                  to your existing account
+                </h6>
+              : <h6>
+                  Or
+                  {' '}
+                  <a
+                    role="button"
+                    className="plata-cursor-pointer"
+                    onClick={this.handleAlternativeClick}
+                  >
+                    sign up
+                  </a>
+                  {' '}
+                  for a new account
+                </h6>
+          }
         />
 
       </AppContainer>
