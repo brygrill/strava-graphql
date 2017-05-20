@@ -1,13 +1,12 @@
 // @flow
 import React, { Component } from 'react';
-import type { Children } from 'react';
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
 import AppFooter from './AppFooter';
 
 class BaseContainer extends Component {
   props: {
-    children: Children,
+    children: any,
   };
 
   render() {

@@ -2,7 +2,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/jsx-indent */
 import React, { Component } from 'react';
-import type { Children } from 'react';
 
 import base from '../rebase';
 
@@ -10,20 +9,9 @@ import AppContainer from '../components/AppContainer';
 import AppBar from '../components/AppBar';
 import Hero from '../components/home/HomeHero';
 import Card from '../components/home/HomeCard';
+import CardWrapper from '../components/home/HomeCardWrap';
 import HomeFooter from '../components/home/HomeFooter';
 import AuthModal from '../components/AuthModal';
-
-// Disable signup btns until ready
-const btnsDisabled = true;
-
-// Grid to wrap cards
-const CardWrapper = (props: { children: Children }) => {
-  return (
-    <div className="mdl-cell mdl-cell--4-col-desktop mdl-cell--6-col-tablet mdl-cell--1m-offset-tablet mdl-cell--12-col mdl-cell--middle plata-home-individual-card">
-      {props.children}
-    </div>
-  );
-};
 
 // Card content
 const cardContent = [
@@ -54,14 +42,26 @@ export default class HomePage extends Component {
     authModalContentSignup: true,
     error: false,
     loading: false,
+    readyForSignUp: false,
   };
 
   componentDidMount() {
     base.authGetOAuthRedirectResult(this.handleOAuthResult);
+    this.fetchReadyForSignups();
+  }
+
+  fetchReadyForSignups() {
+    base
+      .fetch('ready', {
+        context: this,
+      })
+      .then(readyForSignUp => {
+        this.setState({ readyForSignUp });
+      });
   }
 
   handleSignupClick = () => {
-    this.setState({ authModalOpen: true });
+    this.setState({ authModalContentSignup: true, authModalOpen: true });
   };
 
   handleSigninClick = () => {
@@ -155,7 +155,7 @@ export default class HomePage extends Component {
           title={authModalContentSignup ? 'Sign up for Plata' : 'Sign In'}
           sub={authModalContentSignup ? 'Get started with a free account' : ''}
           icon="fa fa-google plata-font-size-1-5"
-          disabled={btnsDisabled}
+          disabled={!this.state.readyForSignUp}
           submitBtnLabel="Sign in with Google"
           open={this.state.authModalOpen}
           handleCancel={this.handleCancelModal}
