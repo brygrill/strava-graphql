@@ -42,21 +42,21 @@ export default class HomePage extends Component {
     authModalContentSignup: true,
     error: false,
     loading: false,
-    readyForSignUp: false,
+    readyForSignup: false,
   };
 
   componentDidMount() {
     base.authGetOAuthRedirectResult(this.handleOAuthResult);
-    this.fetchReadyForSignups();
+    this.fetchReadyForSignup();
   }
 
-  fetchReadyForSignups() {
+  fetchReadyForSignup() {
     base
       .fetch('ready', {
         context: this,
       })
-      .then(readyForSignUp => {
-        this.setState({ readyForSignUp });
+      .then(readyForSignup => {
+        this.setState({ readyForSignup });
       });
   }
 
@@ -155,7 +155,7 @@ export default class HomePage extends Component {
           title={authModalContentSignup ? 'Sign up for Plata' : 'Sign In'}
           sub={authModalContentSignup ? 'Get started with a free account' : ''}
           icon="fa fa-google plata-font-size-1-5"
-          disabled={!this.state.readyForSignUp}
+          disabled={!this.state.readyForSignup}
           submitBtnLabel="Sign in with Google"
           open={this.state.authModalOpen}
           handleCancel={this.handleCancelModal}
