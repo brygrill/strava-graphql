@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 export default class MyComponent extends Component {
-  defaultProps: {};
+  static defaultProps = {};
   state = {};
   props: {};
   render() {

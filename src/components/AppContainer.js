@@ -5,15 +5,9 @@ import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
 import AppFooter from './AppFooter';
 
-const DefaultChild = () => <h3>Base Container</h3>;
-
 class BaseContainer extends Component {
-  defaultProps: {
-    children: DefaultChild,
-  };
-
   props: {
-    children?: Children,
+    children: Children,
   };
 
   render() {

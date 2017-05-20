@@ -13,6 +13,9 @@ import Card from '../components/home/HomeCard';
 import HomeFooter from '../components/home/HomeFooter';
 import AuthModal from '../components/AuthModal';
 
+// Disable signup btns until ready
+const btnsDisabled = true;
+
 // Grid to wrap cards
 const CardWrapper = (props: { children: Children }) => {
   return (
@@ -148,6 +151,7 @@ export default class HomePage extends Component {
           title={authModalContentSignup ? 'Sign up for Plata' : 'Sign In'}
           sub={authModalContentSignup ? 'Get started with a free account' : ''}
           icon="fa fa-google plata-font-size-1-5"
+          disabled={btnsDisabled}
           submitBtnLabel="Sign in with Google"
           open={this.state.authModalOpen}
           handleCancel={this.handleCancelModal}

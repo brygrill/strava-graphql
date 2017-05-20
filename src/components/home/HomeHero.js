@@ -3,9 +3,14 @@ import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 
 export default class HomeHeroComponent extends Component {
+  static defaultProps = {
+    disabled: false,
+  };
+
   props: {
     headline: string,
     subhead: string,
+    disabled?: boolean,
     btnLabel: string,
     onBtnClick: Function,
   };
@@ -23,6 +28,7 @@ export default class HomeHeroComponent extends Component {
         <RaisedButton
           label={this.props.btnLabel}
           secondary
+          disabled={this.props.disabled}
           onTouchTap={this.props.onBtnClick}
         />
       </div>

@@ -11,8 +11,13 @@ const iconStyle = {
   width: '5rem',
 };
 export default class HomeFooterComponent extends Component {
+  static defaultProps = {
+    disabled: false,
+  };
+
   props: {
     btnLabel: string,
+    disabled?: boolean,
     onBtnClick: Function,
   };
 
@@ -32,6 +37,7 @@ export default class HomeFooterComponent extends Component {
             <RaisedButton
               label={this.props.btnLabel}
               secondary
+              disabled={this.props.disabled}
               onTouchTap={this.props.onBtnClick}
             />
           </div>

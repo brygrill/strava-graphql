@@ -2,9 +2,6 @@
 import React, { Component } from 'react';
 
 export default class AppFooter extends Component {
-  defaultProps: {};
-  state = {};
-  props: {};
   render() {
     return (
       <footer className="mdl-mini-footer plata-app-footer">

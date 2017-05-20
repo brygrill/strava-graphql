@@ -5,11 +5,16 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FontIcon from 'material-ui/FontIcon';
 
 export default class AuthModal extends Component {
+  static defaultProps = {
+    disabled: false,
+  };
+
   props: {
     open: false,
     title: string,
     sub: string,
     icon: string,
+    disabled?: boolean,
     submitBtnLabel: string,
     handleCancel: Function,
     handleSubmit: Function,
@@ -22,6 +27,7 @@ export default class AuthModal extends Component {
       title,
       sub,
       icon,
+      disabled,
       submitBtnLabel,
       handleCancel,
       handleSubmit,
@@ -36,6 +42,7 @@ export default class AuthModal extends Component {
             <h6 className="plata-margin-top-half">{sub}</h6>
             <RaisedButton
               primary
+              disabled={disabled}
               icon={<FontIcon className={icon} />}
               label={submitBtnLabel}
               onTouchTap={handleSubmit}
