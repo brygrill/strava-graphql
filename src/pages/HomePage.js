@@ -121,7 +121,9 @@ export default class HomePage extends Component {
             headline="Plata helps you plan your running & triathlon training."
             subhead="Add your plan to Plata. View and update it from anywhere. Focus on your swim, bike, run."
             btnLabel="Let's Go"
-            onBtnClick={this.handleSignupClick}
+            onBtnClick={
+              authed ? this.handleDashboardClick : this.handleSignupClick
+            }
           />
         </div>
 
@@ -143,7 +145,9 @@ export default class HomePage extends Component {
         <div className="mdl-grid plata-section-40 plata-back-prime-dark">
           <HomeFooter
             btnLabel="Get Started - It's Free"
-            onBtnClick={this.handleSignupClick}
+            onBtnClick={
+              authed ? this.handleDashboardClick : this.handleSignupClick
+            }
           />
         </div>
 
