@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 import AppContainer from '../components/AppContainer';
 
-import base from '../rebase';
+import { base } from '../rebase';
 
 export default class DashboardPage extends Component {
   state = {

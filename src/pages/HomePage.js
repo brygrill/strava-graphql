@@ -2,8 +2,9 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/jsx-indent */
 import React, { Component } from 'react';
+import firebase from 'firebase/app';
 
-import base from '../rebase';
+import { app, base } from '../rebase';
 
 import AppContainer from '../components/AppContainer';
 import AppBar from '../components/AppBar';
@@ -12,6 +13,8 @@ import Card from '../components/home/HomeCard';
 import CardWrapper from '../components/home/HomeCardWrap';
 import HomeFooter from '../components/home/HomeFooter';
 import AuthModal from '../components/AuthModal';
+
+const provider = new firebase.auth.GoogleAuthProvider();
 
 // Card content
 const cardContent = [
@@ -46,7 +49,8 @@ export default class HomePage extends Component {
   };
 
   componentDidMount() {
-    base.authGetOAuthRedirectResult(this.handleOAuthResult);
+    // base.authGetOAuthRedirectResult(this.handleOAuthResult);
+    this.handleOAuthResult();
     this.fetchReadyForSignup();
   }
 
@@ -85,15 +89,24 @@ export default class HomePage extends Component {
     if (err) this.setState({ error: true, loading: false });
   };
 
-  handleOAuthResult = (err: Object, data: Object) => {
-    if (err) this.setState({ error: true, loading: false });
-    if (data.user) this.props.history.push('/dashboard');
+  handleOAuthResult = () => {
+    return app.auth().getRedirectResult().then(
+      data => {
+        if (data.user) this.props.history.push('/dashboard');
+      },
+      err => {
+        if (err) this.setState({ error: true, loading: false });
+      },
+    );
   };
 
   handleGoogleOAuthSubmit = (evt: SyntheticEvent) => {
     evt.preventDefault();
-    this.setState({ authModalOpen: false });
-    base.authWithOAuthRedirect('google', this.handleLoginError);
+    this.setState({ authModalOpen: false, loading: true });
+    // base.authWithOAuthRedirect('google', this.handleLoginError);
+    app.auth().signInWithRedirect(provider).then(() => {
+      return this.handleLoginError;
+    });
   };
 
   props: {

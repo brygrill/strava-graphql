@@ -5,7 +5,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
-import base from './rebase';
+import { app } from './rebase';
 
 import HomePage from './pages/HomePage';
 import DashboardPage from './pages/DashboardPage';
@@ -22,15 +22,24 @@ export default class App extends Component {
     },
   };
 
-  componentWillMount() {
-    base.onAuth(this.updateAuthState);
+  componentDidMount() {
+    // base.onAuth(this.listenForAuthChange);
+    this.listenForAuthChange();
+    //app.auth().onAuthStateChanged(this.listenForAuthChange());
   }
 
-  updateAuthState = (user: Object) => {
-    if (user)
-      this.setState({ loading: false, authed: true, user: { uid: user.uid } });
-    if (!user)
-      this.setState({ loading: false, authed: false, user: { uid: null } });
+  listenForAuthChange = () => {
+    return app.auth().onAuthStateChanged(user => {
+      console.log('Auth State Change: ', user);
+      if (user)
+        this.setState({
+          loading: false,
+          authed: true,
+          user: { uid: user.uid },
+        });
+      if (!user)
+        this.setState({ loading: false, authed: false, user: { uid: null } });
+    });
   };
 
   render() {
