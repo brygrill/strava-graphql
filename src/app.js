@@ -4,6 +4,7 @@
 /* eslint-disable react/jsx-closing-bracket-location */
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import ReactGA from 'react-ga';
 
 import { app } from './rebase';
 
@@ -12,6 +13,14 @@ import DashboardPage from './pages/DashboardPage';
 import NotFound from './pages/NotFoundPage';
 
 import { AppRoute, PrivateRoute, NoMatchRoute } from './routes';
+
+// Initialize React GA
+ReactGA.initialize(process.env.REACT_APP_GA);
+
+const gaEvents = () => {
+  ReactGA.set({ page: window.location.pathname + window.location.search });
+  ReactGA.pageview(window.location.pathname + window.location.search);
+};
 
 export default class App extends Component {
   state = {
@@ -46,7 +55,7 @@ export default class App extends Component {
     const { loading } = this.state;
     return loading
       ? <div>Loading...</div>
-      : <Router>
+      : <Router onUpdate={gaEvents}>
           <Switch>
             <AppRoute
               path="/"
