@@ -8,6 +8,8 @@ import theme from './theme';
 import App from './app';
 import './theme/index.css';
 
+import registerServiceWorker from './registerServiceWorker';
+
 injectTapEventPlugin();
 
 const Plata = () => (
@@ -17,3 +19,4 @@ const Plata = () => (
 );
 
 ReactDOM.render(<Plata />, document.getElementById('root'));
+registerServiceWorker();
