@@ -118,7 +118,7 @@ export default class HomePage extends Component {
     const { authed } = this.props.appState;
     const { authModalContentSignup } = this.state;
     return (
-      <AppContainer>
+      <AppContainer pageTitle={null}>
 
         <AppBar
           authed={authed}
