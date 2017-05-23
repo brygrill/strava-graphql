@@ -19,41 +19,24 @@
   <meta name="theme-color" content="#006db3">
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
 
-  <!-- Web Application Manifest
-  <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-
-
-  <Add to homescreen for Chrome on Android>
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="application-name" content="Plata">
-  <link rel="icon" sizes="192x192" href="%PUBLIC_URL%/icons/android-chrome-192x192.png">
-
-  <Add to homescreen for Safari on iOS
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Plata">
-  <link rel="apple-touch-icon" href="%PUBLIC_URL%/icons/apple-touch-icon.png">
-
-  <Tile icon for Win8 (144x144 + tile color)>
-  <meta name="msapplication-TileImage" content="%PUBLIC_URL%/icons/mstile-150x150.png">
-  <meta name="msapplication-TileColor" content="#1CAF9A">
-  -->
-
   <!-- Styles -->
   <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
 </head>
 
 <body>
   <div id="root"></div>
-  <!--  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
-        navigator.serviceWorker.register('/service-worker.js');
-      });
-    }
-  </script>-->
+
+  <!-- Font Awesome -->
   <script src="https://use.fontawesome.com/2e0866859c.js"></script>
+
+  <!-- Google Analytics -->
+  <script>
+    window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) }; ga.l = +new Date;
+    ga('create', 'UA-99111620-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
 </body>
 
 </html>

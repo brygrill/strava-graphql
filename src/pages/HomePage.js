@@ -129,7 +129,7 @@ export default class HomePage extends Component {
           }
         />
 
-        <div className="mdl-grid plata-background-img plata-section-50">
+        <div className="mdl-grid plata-back-prime plata-section-50">
           <Hero
             headline="Plata helps you plan your running & triathlon training."
             subhead="Add your plan to Plata. View and update it from anywhere. Focus on your swim, bike, run."

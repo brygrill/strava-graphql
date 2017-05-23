@@ -3,8 +3,7 @@
 /* eslint-disable react/jsx-indent-props */
 /* eslint-disable react/jsx-closing-bracket-location */
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import GoogleAnalytics from 'react-ga';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import { app } from './rebase';
 
@@ -13,15 +12,6 @@ import DashboardPage from './pages/DashboardPage';
 import NotFound from './pages/NotFoundPage';
 
 import { AppRoute, PrivateRoute, NoMatchRoute } from './routes';
-
-// Init GA
-GoogleAnalytics.initialize(process.env.REACT_APP_GA);
-
-const trackPage = () => {
-  GoogleAnalytics.set({ page: window.location.pathname });
-  GoogleAnalytics.pageview(window.location.pathname);
-  return null;
-};
 
 // Render App
 export default class App extends Component {
@@ -39,7 +29,6 @@ export default class App extends Component {
 
   listenForAuthChange = () => {
     return app.auth().onAuthStateChanged(user => {
-      console.log('Auth State Change: ', user);
       if (user)
         this.setState({
           loading: false,
@@ -57,7 +46,6 @@ export default class App extends Component {
       ? <div>Loading...</div>
       : <Router>
           <div>
-            <Route path="/" component={trackPage} />
             <Switch>
               <AppRoute
                 path="/"

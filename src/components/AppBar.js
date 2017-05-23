@@ -27,6 +27,7 @@ export default class AppBarComponent extends Component {
         title={<span className="plata-appbar-title">PLATA</span>}
         showMenuIconButton={authed}
         onTitleTouchTap={this.handleTitleClick}
+        zDepth={0}
         iconElementRight={
           <FlatButton
             label={rightBtnLabel}
