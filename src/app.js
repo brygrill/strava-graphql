@@ -3,8 +3,8 @@
 /* eslint-disable react/jsx-indent-props */
 /* eslint-disable react/jsx-closing-bracket-location */
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
-import ReactGA from 'react-ga';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import GoogleAnalytics from 'react-ga';
 
 import { app } from './rebase';
 
@@ -14,14 +14,16 @@ import NotFound from './pages/NotFoundPage';
 
 import { AppRoute, PrivateRoute, NoMatchRoute } from './routes';
 
-// Initialize React GA
-ReactGA.initialize(process.env.REACT_APP_GA);
+// Init GA
+GoogleAnalytics.initialize(process.env.REACT_APP_GA);
 
-const gaEvents = () => {
-  ReactGA.set({ page: window.location.pathname + window.location.search });
-  ReactGA.pageview(window.location.pathname + window.location.search);
+const trackPage = () => {
+  GoogleAnalytics.set({ page: window.location.pathname });
+  GoogleAnalytics.pageview(window.location.pathname);
+  return null;
 };
 
+// Render App
 export default class App extends Component {
   state = {
     loading: true,
@@ -32,9 +34,7 @@ export default class App extends Component {
   };
 
   componentDidMount() {
-    // base.onAuth(this.listenForAuthChange);
     this.listenForAuthChange();
-    //app.auth().onAuthStateChanged(this.listenForAuthChange());
   }
 
   listenForAuthChange = () => {
@@ -55,21 +55,24 @@ export default class App extends Component {
     const { loading } = this.state;
     return loading
       ? <div>Loading...</div>
-      : <Router onUpdate={gaEvents}>
-          <Switch>
-            <AppRoute
-              path="/"
-              exact
-              appState={this.state}
-              component={HomePage}
-            />
-            <PrivateRoute
-              path="/dashboard"
-              appState={this.state}
-              component={DashboardPage}
-            />
-            <NoMatchRoute appState={this.state} component={NotFound} />
-          </Switch>
+      : <Router>
+          <div>
+            <Route path="/" component={trackPage} />
+            <Switch>
+              <AppRoute
+                path="/"
+                exact
+                appState={this.state}
+                component={HomePage}
+              />
+              <PrivateRoute
+                path="/dashboard"
+                appState={this.state}
+                component={DashboardPage}
+              />
+              <NoMatchRoute appState={this.state} component={NotFound} />
+            </Switch>
+          </div>
         </Router>;
   }
 }
