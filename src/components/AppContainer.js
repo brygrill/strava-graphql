@@ -1,24 +1,22 @@
 // @flow
 import React, { Component } from 'react';
-import type { Children } from 'react';
+import { Helmet } from 'react-helmet';
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
-import { basePageStyle } from '../css';
-
-const DefaultChild = () => <h3>Base Container</h3>;
+import AppFooter from './AppFooter';
 
 class BaseContainer extends Component {
-  defaultProps: {
-    children: DefaultChild,
-  };
-
   props: {
-    children?: Children,
+    children: any,
+    pageTitle: any,
   };
 
   render() {
     return (
-      <div style={basePageStyle}>
+      <div>
+        <Helmet defaultTitle="Plata App" titleTemplate="%s | Plata App">
+          <title>{this.props.pageTitle}</title>
+        </Helmet>
         <CSSTransitionGroup
           transitionName="plata-transition"
           transitionAppear
@@ -26,8 +24,9 @@ class BaseContainer extends Component {
           transitionEnter={false}
           transitionLeave={false}
         >
-          <div style={basePageStyle}>
+          <div>
             {this.props.children}
+            <AppFooter />
           </div>
         </CSSTransitionGroup>
       </div>

@@ -5,18 +5,15 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
-import base from './rebase';
+import { app } from './rebase';
 
-import HomePage from './pages/home';
-import DashboardPage from './pages/dashboard';
-import NotFound from './pages/notfound';
+import HomePage from './pages/HomePage';
+import DashboardPage from './pages/DashboardPage';
+import NotFound from './pages/NotFoundPage';
 
-import { AppRoute, NoMatchRoute } from './routes';
+import { AppRoute, PrivateRoute, NoMatchRoute } from './routes';
 
-import LoadingComponent from './components/loading';
-
-import { colors } from './css';
-
+// Render App
 export default class App extends Component {
   state = {
     loading: true,
@@ -26,35 +23,44 @@ export default class App extends Component {
     },
   };
 
-  componentWillMount() {
-    base.onAuth(this.updateAuthState);
+  componentDidMount() {
+    this.listenForAuthChange();
   }
 
-  updateAuthState = (user: Object) => {
-    if (user)
-      this.setState({ loading: false, authed: true, user: { uid: user.uid } });
-    if (!user)
-      this.setState({ loading: false, authed: false, user: { uid: null } });
+  listenForAuthChange = () => {
+    return app.auth().onAuthStateChanged(user => {
+      if (user)
+        this.setState({
+          loading: false,
+          authed: true,
+          user: { uid: user.uid },
+        });
+      if (!user)
+        this.setState({ loading: false, authed: false, user: { uid: null } });
+    });
   };
 
   render() {
-    const { loading, authed } = this.state;
+    const { loading } = this.state;
     return loading
-      ? <LoadingComponent
-          msg="Getting to work..."
-          size="large"
-          back={colors.primary}
-        />
+      ? <div>Loading...</div>
       : <Router>
-          <Switch>
-            <AppRoute
-              path="/"
-              exact
-              appState={this.state}
-              component={authed ? DashboardPage : HomePage}
-            />
-            <NoMatchRoute appState={this.state} component={NotFound} />
-          </Switch>
+          <div>
+            <Switch>
+              <AppRoute
+                path="/"
+                exact
+                appState={this.state}
+                component={HomePage}
+              />
+              <PrivateRoute
+                path="/dashboard"
+                appState={this.state}
+                component={DashboardPage}
+              />
+              <NoMatchRoute appState={this.state} component={NotFound} />
+            </Switch>
+          </div>
         </Router>;
   }
 }
