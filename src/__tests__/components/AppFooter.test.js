@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
-import LoadingComponent from '../loading';
+import AppFooter from '../../components/AppFooter';
 
-describe('<LoadingComponent />', () => {
+describe('<AppFooter />', () => {
   it('Renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<LoadingComponent />, div);
+    ReactDOM.render(<AppFooter />, div);
   });
-  it('Matches snapshot', () => {
-    const component = renderer.create(<LoadingComponent />);
+  it('Matches snapshot with child', () => {
+    const component = renderer.create(<AppFooter />);
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });

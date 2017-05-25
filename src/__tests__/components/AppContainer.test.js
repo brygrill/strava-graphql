@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import renderer from 'react-test-renderer';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import App from '../app';
+import AppContainer from '../../components/AppContainer';
 
-describe('<App />', () => {
+describe('<AppContainer />', () => {
   it('Renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<MuiThemeProvider><App /></MuiThemeProvider>, div);
+    ReactDOM.render(<MuiThemeProvider><AppContainer /></MuiThemeProvider>, div);
   });
 });

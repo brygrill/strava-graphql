@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { MemoryRouter } from 'react-router-dom';
-import { PrivateRoute, PublicRoute, AppRoute, NoMatchRoute } from './index';
+import { PrivateRoute, PublicRoute, AppRoute, NoMatchRoute } from '../routes';
 
 const Public = () => <h3>Public</h3>;
 const Protected = () => <h3>Protected</h3>;

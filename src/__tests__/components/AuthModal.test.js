@@ -1,21 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
-import ContainerComponent from '../container';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import AuthModal from '../../components/AuthModal';
 
-describe('<ContainerComponent />', () => {
+describe('<AuthModal />', () => {
   it('Renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(
-      <ContainerComponent><h1>TEST!</h1></ContainerComponent>,
+      <MuiThemeProvider><AuthModal open /></MuiThemeProvider>,
       div,
     );
   });
-  /*  it('Matches snapshot with child', () => {
+  it('Matches snapshot with child', () => {
     const component = renderer.create(
-      <ContainerComponent><h1>TEST!</h1></ContainerComponent>,
+      <MuiThemeProvider><AuthModal open /></MuiThemeProvider>,
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
-  });*/
+  });
 });
