@@ -14,5 +14,4 @@ cache:
 
 script:
   - yarn run test
-  - yarn run flow
   - yarn run build
