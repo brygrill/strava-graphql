@@ -129,10 +129,10 @@ export default class HomePage extends Component {
           }
         />
 
-        <div className="mdl-grid plata-back-prime plata-section-50">
+        <div className="mdl-grid sbr-back-prime sbr-section-50">
           <Hero
-            headline="Plata helps you plan your running & triathlon training."
-            subhead="Add your plan to Plata. View and update it from anywhere. Focus on your swim, bike, run."
+            headline="TriPlan helps you plan your triathlon & run training."
+            subhead="Add your plan to TriPlan. View and update it from anywhere. Focus on your swim, bike, run."
             btnLabel="Let's Go"
             onBtnClick={
               authed ? this.handleDashboardClick : this.handleSignupClick
@@ -140,7 +140,7 @@ export default class HomePage extends Component {
           />
         </div>
 
-        <div className="mdl-grid plata-section-40 plata-home-cards-section">
+        <div className="mdl-grid sbr-section-40 sbr-home-cards-section">
           {cardContent.map(card => {
             return (
               <CardWrapper key={card.title}>
@@ -155,7 +155,7 @@ export default class HomePage extends Component {
           })}
         </div>
 
-        <div className="mdl-grid plata-section-40 plata-back-prime-dark">
+        <div className="mdl-grid sbr-section-40 sbr-back-prime-dark">
           <HomeFooter
             btnLabel="Get Started - It's Free"
             onBtnClick={
@@ -165,9 +165,9 @@ export default class HomePage extends Component {
         </div>
 
         <AuthModal
-          title={authModalContentSignup ? 'Sign up for Plata' : 'Sign In'}
+          title={authModalContentSignup ? 'Sign up for TriPlan' : 'Sign In'}
           sub={authModalContentSignup ? 'Get started with a free account' : ''}
-          icon="fa fa-google plata-font-size-1-5"
+          icon="fa fa-google sbr-font-size-1-5"
           disabled={!this.state.readyForSignup}
           submitBtnLabel="Sign in with Google"
           open={this.state.authModalOpen}
@@ -180,7 +180,7 @@ export default class HomePage extends Component {
                   {' '}
                   <a
                     role="button"
-                    className="plata-cursor-pointer"
+                    className="sbr-cursor-pointer"
                     onClick={this.handleAlternativeClick}
                   >
                     sign in
@@ -193,7 +193,7 @@ export default class HomePage extends Component {
                   {' '}
                   <a
                     role="button"
-                    className="plata-cursor-pointer"
+                    className="sbr-cursor-pointer"
                     onClick={this.handleAlternativeClick}
                   >
                     sign up

@@ -37,9 +37,9 @@ export default class AuthModal extends Component {
     return (
       <div>
         <Dialog open={open} onRequestClose={handleCancel}>
-          <div className="plata-align-center ">
-            <h3 className="plata-margin-bottom-0">{title} </h3>
-            <h6 className="plata-margin-top-half">{sub}</h6>
+          <div className="sbr-align-center ">
+            <h3 className="sbr-margin-bottom-0">{title} </h3>
+            <h6 className="sbr-margin-top-half">{sub}</h6>
             <RaisedButton
               primary
               disabled={disabled}

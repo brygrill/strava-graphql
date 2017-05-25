@@ -1,22 +1,22 @@
 /* Heights */
-.plata-section-50 {
+.sbr-section-50 {
   min-height: 50rem;
 }
 
-.plata-section-40 {
+.sbr-section-40 {
   min-height: 40rem;
 }
 
-.plata-section-30 {
+.sbr-section-30 {
   min-height: 30rem;
 }
 
-.plata-section-20 {
+.sbr-section-20 {
   min-height: 20rem;
 }
 
 /* Backgrounds */
-.plata-background-img {
+.sbr-background-img {
   background-image: url('https://firebasestorage.googleapis.com/v0/b/plata-fire-public/o/plata-app-header-img-black.jpg?alt=media');
   background-size: cover;
   background-position: 50% 50%;
@@ -24,113 +24,113 @@
   background-attachment: fixed;
 }
 
-.plata-back-prime {
+.sbr-back-prime {
   background-color: #039be5;
 }
 
-.plata-back-prime-light {
+.sbr-back-prime-light {
   background-color: #63ccff;
 }
 
-.plata-back-prime-dark {
+.sbr-back-prime-dark {
   background-color: #006db3;
 }
 
-.plata-back-grey {
+.sbr-back-grey {
   background-color: #212121;
 }
 
-.plata-back-grey-light {
+.sbr-back-grey-light {
   background-color: #484848;
 }
 
-.plata-back-grey-dark {
+.sbr-back-grey-dark {
   background-color: #000000;
 }
 
 /* Text */
-.plata-color-white {
+.sbr-color-white {
   color: #fff;
 }
 
 /* Cursor */
-.plata-cursor-pointer {
+.sbr-cursor-pointer {
   cursor: pointer;
 }
 
 /* Font Size */
-.plata-font-size-1 {
+.sbr-font-size-1 {
   font-size: 1rem !important;
 }
 
-.plata-font-size-1-5 {
+.sbr-font-size-1-5 {
   font-size: 1.5rem !important;
 }
 
 /* Padding */
-.plata-padding-1 {
+.sbr-padding-1 {
   padding: 1rem;
 }
 
-.plata-padding-2 {
+.sbr-padding-2 {
   padding: 2rem;
 }
 
 /* Margin */
-.plata-margin-top-half {
+.sbr-margin-top-half {
   margin-top: 0.5rem;
 }
 
-.plata-margin-bottom-0 {
+.sbr-margin-bottom-0 {
   margin-bottom: 0;
 }
 
 /* Align */
-.plata-align-center {
+.sbr-align-center {
   text-align: center;
 }
 
 /* CSS Transition Group */
-.plata-transition-appear {
+.sbr-transition-appear {
   opacity: 0.01;
 }
 
-.plata-transition-appear.plata-transition-appear-active {
+.sbr-transition-appear.sbr-transition-appear-active {
   opacity: 1;
   transition: opacity .5s ease-in;
 }
 
-.plata-transition-leave {
+.sbr-transition-leave {
   opacity: 1;
 }
 
-.plata-transition-leave.plata-transition-leave-active {
+.sbr-transition-leave.sbr-transition-leave-active {
   opacity: 0.01;
   transition: opacity 300ms ease-in;
 }
 
 /* Custom Component Classes */
-.plata-appbar-title {
+.sbr-appbar-title {
   cursor: pointer;
 }
 
-.plata-app-footer a{
+.sbr-app-footer a{
   color: #ffffff;
 }
-.plata-home-cards-section {
+.sbr-home-cards-section {
   padding: 1rem;
 }
 
-.plata-home-individual-card {
+.sbr-home-individual-card {
   padding: 2rem;
 }
 
-.plata-home-card-media {
+.sbr-home-card-media {
   text-align: center;
   padding: 4rem;
 }
 
-.plata-home-card-content {
+.sbr-home-card-content {
   min-height: 5rem !important;
   font-size: 1.25rem !important;
 }
@@ -146,30 +146,30 @@
 
 /* Desktop and Up */
 @media (min-width: 992px) {
-  .plata-home-cards-section {
+  .sbr-home-cards-section {
     padding: 8rem 2rem;
   }
-  .plata-home-individual-card {
+  .sbr-home-individual-card {
     padding: 3rem;
   }
 }
 
 /* Large Desktops and Up */
 @media (min-width: 1200px) {
-  .plata-home-cards-section {
+  .sbr-home-cards-section {
     padding: 10rem 2rem;
   }
-  .plata-home-individual-card {
+  .sbr-home-individual-card {
     padding: 4rem;
   }
 }
 
 /* Super Large Screens and Up */
 @media (min-width: 1400px) {
-  .plata-home-cards-section {
+  .sbr-home-cards-section {
     padding: 10rem 5rem;
   }
-  .plata-home-individual-card {
+  .sbr-home-individual-card {
     padding: 5rem;
   }
 }

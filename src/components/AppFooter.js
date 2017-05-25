@@ -4,10 +4,10 @@ import React, { Component } from 'react';
 export default class AppFooter extends Component {
   render() {
     return (
-      <footer className="mdl-mini-footer plata-app-footer">
+      <footer className="mdl-mini-footer sbr-app-footer">
         <div className="mdl-mini-footer__right-section">
           <a
-            href="https://github.com/brygrill/plata-app"
+            href="https://github.com/brygrill/sbr-training"
             target="_blank"
             rel="noopener noreferrer"
           >

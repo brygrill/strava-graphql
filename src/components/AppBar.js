@@ -24,7 +24,7 @@ export default class AppBarComponent extends Component {
     const { authed, rightBtnLabel, rightBtnIcon, rightBtnHandler } = this.props;
     return (
       <AppBar
-        title={<span className="plata-appbar-title">PLATA</span>}
+        title={<span className="sbr-appbar-title">TriPlan</span>}
         showMenuIconButton={authed}
         onTitleTouchTap={this.handleTitleClick}
         zDepth={0}

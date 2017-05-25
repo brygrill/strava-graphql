@@ -14,11 +14,11 @@ class BaseContainer extends Component {
   render() {
     return (
       <div>
-        <Helmet defaultTitle="Plata App" titleTemplate="%s | Plata App">
+        <Helmet defaultTitle="TriPlan" titleTemplate="%s | TriPlan">
           <title>{this.props.pageTitle}</title>
         </Helmet>
         <CSSTransitionGroup
-          transitionName="plata-transition"
+          transitionName="sbr-transition"
           transitionAppear
           transitionAppearTimeout={500}
           transitionEnter={false}

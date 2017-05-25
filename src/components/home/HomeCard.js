@@ -15,7 +15,7 @@ export default class HomeCard extends Component {
     return (
       <Card>
         <CardMedia
-          className="plata-home-card-media"
+          className="sbr-home-card-media"
           style={{ backgroundColor: background }}
         >
           <div>
@@ -26,7 +26,7 @@ export default class HomeCard extends Component {
           </div>
         </CardMedia>
         <CardTitle title={title} />
-        <CardText className="plata-home-card-content">
+        <CardText className="sbr-home-card-content">
           {content}
         </CardText>
       </Card>
