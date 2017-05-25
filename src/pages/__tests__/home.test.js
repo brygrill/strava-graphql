@@ -2,7 +2,7 @@ import React, { ReactDefaultInjection } from 'react';
 import ReactDOM from 'react-dom';
 import { MemoryRouter } from 'react-router-dom';
 import renderer from 'react-test-renderer';
-import HomePage from '../home';
+import HomePage from '../HomePage';
 
 const mockState = {
   loading: true,
@@ -20,11 +20,11 @@ describe('<HomePage />', () => {
       div,
     );
   });
-  /*  it('Matches snapshot', () => {
+  it('Matches snapshot', () => {
     const component = renderer.create(
       <MemoryRouter><HomePage appState={mockState} /></MemoryRouter>,
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
-  });*/
+  });
 });
