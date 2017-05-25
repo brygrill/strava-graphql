@@ -1,5 +1,5 @@
-# SBR-Planner
-[![Build Status](https://travis-ci.org/brygrill/plata-app.svg?branch=master)](https://travis-ci.org/brygrill/plata-app) 
+# TriPlan
+[![Build Status](https://travis-ci.org/brygrill/sbr-training.svg?branch=master)](https://travis-ci.org/brygrill/sbr-training) 
 
 React + Firebase app to help manage your swim, bike, run 🏊 🚴 🏃
 
