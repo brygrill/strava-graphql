@@ -12,37 +12,25 @@ import { app, base } from '../rebase';
 
 import AppContainer from '../components/AppContainer';
 
-const provider = new firebase.auth.GoogleAuthProvider();
-
 // Render Home page
 export default class HomePage extends Component {
   state = {
+    readyForSignup: false,
+    loading: false,
+    error: false,
     authModalOpen: true,
     authModalContentSignup: true,
-    number: '',
-    phoneId: null,
-    error: false,
-    loading: false,
-    readyForSignup: false,
+    phoneNumber: '',
+    recaptchaHandler: null,
+    recaptchaSolved: false,
+    showConfirmationCodeInput: false,
+    confirmResults: null,
+    confirmCode: '',
   };
 
   componentDidMount() {
-    this.handleOAuthResult();
     this.fetchReadyForSignup();
-
-    const phoneId = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
-      size: 'invisible',
-      callback: function(response) {
-        console.log(response);
-        // reCAPTCHA solved, allow signInWithPhoneNumber.
-        // ...
-      },
-      'expired-callback': function() {
-        // Response expired. Ask user to solve reCAPTCHA again.
-        // ...
-      },
-    });
-    this.setState({ phoneId });
+    this.initReCaptcha();
   }
 
   fetchReadyForSignup() {
@@ -55,16 +43,31 @@ export default class HomePage extends Component {
       });
   }
 
+  initReCaptcha = () => {
+    const self = this;
+    const recaptchaHandler = new firebase.auth
+      .RecaptchaVerifier('sbr-recaptcha-container', {
+      size: 'normal',
+      callback: function(response) {
+        // reCAPTCHA solved, allow signInWithPhoneNumber.
+        console.log('reCAPTCHA solved');
+        self.setState({ recaptchaSolved: true });
+      },
+      'expired-callback': function() {
+        // Response expired. Ask user to solve reCAPTCHA again.
+        console.log('Please solve reCAPTCHA again');
+        this.setState({ error: true, loading: false });
+      },
+    });
+    this.setState({ recaptchaHandler });
+  };
+
   handleSigninClick = () => {
     this.setState({ authModalContentSignup: true, authModalOpen: true });
   };
 
   handleCancelModal = () => {
     this.setState({ authModalContentSignup: true, authModalOpen: true });
-  };
-
-  handleLoginError = (err: Object) => {
-    if (err) this.setState({ error: true, loading: false });
   };
 
   handleOAuthResult = () => {
@@ -78,37 +81,51 @@ export default class HomePage extends Component {
     );
   };
 
-  handleGoogleOAuthSubmit = (evt: SyntheticEvent) => {
+  setPhone = (evt: Object, phoneNumber: string) => {
     evt.preventDefault();
-    this.setState({ authModalOpen: false, loading: true });
-    app.auth().signInWithRedirect(provider).then(() => {
-      return this.handleLoginError;
-    });
+    this.setState({ phoneNumber });
   };
 
-  setPhone = (evt: object, number: string) => {
+  setConfirmCode = (evt: Object, confirmCode: string) => {
     evt.preventDefault();
-    console.log(number);
-    this.setState({ number });
+    this.setState({ confirmCode });
   };
 
-  handleRecaptcha = () => {
-    console.log('here');
+  handleSignInByPhone = () => {
     firebase
       .auth()
-      .signInWithPhoneNumber('+17173336834', this.state.phoneId)
-      .then(function(confirmationResult) {
-        console.log(confirmationResult);
-        var verificationCode = window.prompt(
+      .signInWithPhoneNumber(
+        `+1${this.state.phoneNumber}`,
+        this.state.recaptchaHandler,
+      )
+      .then(confirmResults => {
+        // SMS sent to mobile
+        // Show input to enter code from SMS
+        console.log(confirmResults);
+        this.setState({ showConfirmationCodeInput: true, confirmResults });
+        /*        var verificationCode = window.prompt(
           'Please enter the verification ' +
             'code that was sent to your mobile device.',
         );
-        return confirmationResult.confirm(verificationCode);
+        return confirmResults.confirm(verificationCode);*/
       })
-      .catch(function(error) {
-        console.log(error);
-        // Handle Errors here.
+      .catch(() => {
+        this.setState({ error: true, loading: false });
       });
+  };
+
+  handleSubmitConfirmCode = () => {
+    const { confirmResults, confirmCode } = this.state;
+    if (confirmResults) {
+      return confirmResults
+        .confirm(confirmCode)
+        .then(result => {
+          if (result.user) this.props.history.push('/dashboard');
+        })
+        .catch(() => {
+          this.setState({ error: true, loading: false });
+        });
+    }
   };
 
   props: {
@@ -124,16 +141,30 @@ export default class HomePage extends Component {
           <Dialog open modal>
             <div className="sbr-align-center ">
               <h3 className="sbr-margin-bottom-0">Sign In</h3>
-              <h6 className="sbr-margin-top-half" />
-              <TextField id="sbr-signin-by-phone" onChange={this.setPhone} />
+              <div className="sbr-margin-top-half">
+                <TextField
+                  id="sbr-siginin-phone-input"
+                  onChange={this.setPhone}
+                />
+                <TextField
+                  id="sbr-siginin-confirm-code-input"
+                  onChange={this.setConfirmCode}
+                />
+              </div>
               <RaisedButton
                 primary
                 icon={<FontIcon className={'fa fa-phone sbr-font-size-1-5'} />}
-                label="Sign in with Phone Number"
-                onTouchTap={this.handleRecaptcha}
+                label="Sign in with Mobile"
+                onTouchTap={this.handleSignInByPhone}
+              />
+              <RaisedButton
+                primary
+                icon={<FontIcon className={'fa fa-phone sbr-font-size-1-5'} />}
+                label="Submit Confirm Code"
+                onTouchTap={this.handleSubmitConfirmCode}
               />
             </div>
-            <div id="recaptcha-container" />
+            <div id="sbr-recaptcha-container" />
           </Dialog>
         </div>
 
