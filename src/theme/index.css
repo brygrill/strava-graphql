@@ -16,14 +16,6 @@
 }
 
 /* Backgrounds */
-.sbr-background-img {
-  background-image: url('https://firebasestorage.googleapis.com/v0/b/plata-fire-public/o/plata-app-header-img-black.jpg?alt=media');
-  background-size: cover;
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
-
 .sbr-back-prime {
   background-color: #039be5;
 }

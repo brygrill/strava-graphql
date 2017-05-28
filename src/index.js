@@ -12,11 +12,11 @@ import registerServiceWorker from './registerServiceWorker';
 
 injectTapEventPlugin();
 
-const Plata = () => (
+const TriPlan = () => (
   <MuiThemeProvider muiTheme={getMuiTheme(theme)}>
     <App />
   </MuiThemeProvider>
 );
 
-ReactDOM.render(<Plata />, document.getElementById('root'));
+ReactDOM.render(<TriPlan />, document.getElementById('root'));
 registerServiceWorker();

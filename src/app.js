@@ -9,9 +9,10 @@ import { app } from './rebase';
 
 import HomePage from './pages/HomePage';
 import DashboardPage from './pages/DashboardPage';
+//import LandingPage from './pages/LandingPage';
 import NotFound from './pages/NotFoundPage';
 
-import { AppRoute, PrivateRoute, NoMatchRoute } from './routes';
+import { PrivateRoute, PublicRoute, NoMatchRoute } from './routes';
 
 // Render App
 export default class App extends Component {
@@ -29,6 +30,7 @@ export default class App extends Component {
 
   listenForAuthChange = () => {
     return app.auth().onAuthStateChanged(user => {
+      console.log(user);
       if (user)
         this.setState({
           loading: false,
@@ -47,7 +49,7 @@ export default class App extends Component {
       : <Router>
           <div>
             <Switch>
-              <AppRoute
+              <PublicRoute
                 path="/"
                 exact
                 appState={this.state}
@@ -58,6 +60,11 @@ export default class App extends Component {
                 appState={this.state}
                 component={DashboardPage}
               />
+              {/*              <AppRoute
+                path="/landing"
+                appState={this.state}
+                component={LandingPage}
+              />*/}
               <NoMatchRoute appState={this.state} component={NotFound} />
             </Switch>
           </div>

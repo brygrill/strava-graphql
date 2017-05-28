@@ -3,55 +3,46 @@
 /* eslint-disable react/jsx-indent */
 import React, { Component } from 'react';
 import firebase from 'firebase/app';
+import Dialog from 'material-ui/Dialog';
+import RaisedButton from 'material-ui/RaisedButton';
+import FontIcon from 'material-ui/FontIcon';
+import TextField from 'material-ui/TextField';
 
 import { app, base } from '../rebase';
 
 import AppContainer from '../components/AppContainer';
-import AppBar from '../components/AppBar';
-import Hero from '../components/home/HomeHero';
-import Card from '../components/home/HomeCard';
-import CardWrapper from '../components/home/HomeCardWrap';
-import HomeFooter from '../components/home/HomeFooter';
-import AuthModal from '../components/AuthModal';
 
 const provider = new firebase.auth.GoogleAuthProvider();
-
-// Card content
-const cardContent = [
-  {
-    title: 'Create',
-    background: '#4caf50',
-    icon: 'fa fa-wrench',
-    content: 'Build a weekly template & customize each week of your plan.',
-  },
-  {
-    title: 'Manage',
-    background: '#fbc02d',
-    icon: 'fa fa-tachometer',
-    content: 'View workouts, weekly schedule & stats from any device.',
-  },
-  {
-    title: 'Adjust',
-    background: '#00acc1',
-    icon: 'fa fa-sliders',
-    content: 'Update workout details & move workouts around with ease.',
-  },
-];
 
 // Render Home page
 export default class HomePage extends Component {
   state = {
-    authModalOpen: false,
+    authModalOpen: true,
     authModalContentSignup: true,
+    number: '',
+    phoneId: null,
     error: false,
     loading: false,
     readyForSignup: false,
   };
 
   componentDidMount() {
-    // base.authGetOAuthRedirectResult(this.handleOAuthResult);
     this.handleOAuthResult();
     this.fetchReadyForSignup();
+
+    const phoneId = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+      size: 'invisible',
+      callback: function(response) {
+        console.log(response);
+        // reCAPTCHA solved, allow signInWithPhoneNumber.
+        // ...
+      },
+      'expired-callback': function() {
+        // Response expired. Ask user to solve reCAPTCHA again.
+        // ...
+      },
+    });
+    this.setState({ phoneId });
   }
 
   fetchReadyForSignup() {
@@ -64,25 +55,12 @@ export default class HomePage extends Component {
       });
   }
 
-  handleSignupClick = () => {
+  handleSigninClick = () => {
     this.setState({ authModalContentSignup: true, authModalOpen: true });
   };
 
-  handleSigninClick = () => {
-    this.setState({ authModalContentSignup: false, authModalOpen: true });
-  };
-
-  handleAlternativeClick = () => {
-    const { authModalContentSignup } = this.state;
-    this.setState({ authModalContentSignup: !authModalContentSignup });
-  };
-
-  handleDashboardClick = () => {
-    this.props.history.push('/dashboard');
-  };
-
   handleCancelModal = () => {
-    this.setState({ authModalOpen: false });
+    this.setState({ authModalContentSignup: true, authModalOpen: true });
   };
 
   handleLoginError = (err: Object) => {
@@ -103,10 +81,34 @@ export default class HomePage extends Component {
   handleGoogleOAuthSubmit = (evt: SyntheticEvent) => {
     evt.preventDefault();
     this.setState({ authModalOpen: false, loading: true });
-    // base.authWithOAuthRedirect('google', this.handleLoginError);
     app.auth().signInWithRedirect(provider).then(() => {
       return this.handleLoginError;
     });
+  };
+
+  setPhone = (evt: object, number: string) => {
+    evt.preventDefault();
+    console.log(number);
+    this.setState({ number });
+  };
+
+  handleRecaptcha = () => {
+    console.log('here');
+    firebase
+      .auth()
+      .signInWithPhoneNumber('+17173336834', this.state.phoneId)
+      .then(function(confirmationResult) {
+        console.log(confirmationResult);
+        var verificationCode = window.prompt(
+          'Please enter the verification ' +
+            'code that was sent to your mobile device.',
+        );
+        return confirmationResult.confirm(verificationCode);
+      })
+      .catch(function(error) {
+        console.log(error);
+        // Handle Errors here.
+      });
   };
 
   props: {
@@ -115,94 +117,25 @@ export default class HomePage extends Component {
   };
 
   render() {
-    const { authed } = this.props.appState;
-    const { authModalContentSignup } = this.state;
     return (
-      <AppContainer pageTitle={null}>
+      <AppContainer pageTitle="Home">
 
-        <AppBar
-          authed={authed}
-          rightBtnLabel={authed ? 'Dashboard' : 'Sign in'}
-          rightBtnIcon={authed ? '' : 'fa fa-google'}
-          rightBtnHandler={
-            authed ? this.handleDashboardClick : this.handleSigninClick
-          }
-        />
-
-        <div className="mdl-grid sbr-back-prime sbr-section-50">
-          <Hero
-            headline="TriPlan helps you plan your triathlon & run training."
-            subhead="Add your plan to TriPlan. View and update it from anywhere. Focus on your swim, bike, run."
-            btnLabel="Let's Go"
-            onBtnClick={
-              authed ? this.handleDashboardClick : this.handleSignupClick
-            }
-          />
+        <div>
+          <Dialog open modal>
+            <div className="sbr-align-center ">
+              <h3 className="sbr-margin-bottom-0">Sign In</h3>
+              <h6 className="sbr-margin-top-half" />
+              <TextField id="sbr-signin-by-phone" onChange={this.setPhone} />
+              <RaisedButton
+                primary
+                icon={<FontIcon className={'fa fa-phone sbr-font-size-1-5'} />}
+                label="Sign in with Phone Number"
+                onTouchTap={this.handleRecaptcha}
+              />
+            </div>
+            <div id="recaptcha-container" />
+          </Dialog>
         </div>
-
-        <div className="mdl-grid sbr-section-40 sbr-home-cards-section">
-          {cardContent.map(card => {
-            return (
-              <CardWrapper key={card.title}>
-                <Card
-                  title={card.title}
-                  background={card.background}
-                  icon={card.icon}
-                  content={card.content}
-                />
-              </CardWrapper>
-            );
-          })}
-        </div>
-
-        <div className="mdl-grid sbr-section-40 sbr-back-prime-dark">
-          <HomeFooter
-            btnLabel="Get Started - It's Free"
-            onBtnClick={
-              authed ? this.handleDashboardClick : this.handleSignupClick
-            }
-          />
-        </div>
-
-        <AuthModal
-          title={authModalContentSignup ? 'Sign up for TriPlan' : 'Sign In'}
-          sub={authModalContentSignup ? 'Get started with a free account' : ''}
-          icon="fa fa-google sbr-font-size-1-5"
-          disabled={!this.state.readyForSignup}
-          submitBtnLabel="Sign in with Google"
-          open={this.state.authModalOpen}
-          handleCancel={this.handleCancelModal}
-          handleSubmit={this.handleGoogleOAuthSubmit}
-          alternative={
-            authModalContentSignup
-              ? <h6>
-                  Or
-                  {' '}
-                  <a
-                    role="button"
-                    className="sbr-cursor-pointer"
-                    onClick={this.handleAlternativeClick}
-                  >
-                    sign in
-                  </a>
-                  {' '}
-                  to your existing account
-                </h6>
-              : <h6>
-                  Or
-                  {' '}
-                  <a
-                    role="button"
-                    className="sbr-cursor-pointer"
-                    onClick={this.handleAlternativeClick}
-                  >
-                    sign up
-                  </a>
-                  {' '}
-                  for a new account
-                </h6>
-          }
-        />
 
       </AppContainer>
     );

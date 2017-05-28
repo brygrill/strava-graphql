@@ -7,14 +7,17 @@ import FontIcon from 'material-ui/FontIcon';
 export default class AuthModal extends Component {
   static defaultProps = {
     disabled: false,
+    modal: false,
+    open: false,
   };
 
   props: {
-    open: false,
+    open?: false,
     title: string,
     sub: string,
     icon: string,
     disabled?: boolean,
+    modal?: boolean,
     submitBtnLabel: string,
     handleCancel: Function,
     handleSubmit: Function,
@@ -28,6 +31,7 @@ export default class AuthModal extends Component {
       sub,
       icon,
       disabled,
+      modal,
       submitBtnLabel,
       handleCancel,
       handleSubmit,
@@ -36,7 +40,7 @@ export default class AuthModal extends Component {
 
     return (
       <div>
-        <Dialog open={open} onRequestClose={handleCancel}>
+        <Dialog open={open} modal={modal} onRequestClose={handleCancel}>
           <div className="sbr-align-center ">
             <h3 className="sbr-margin-bottom-0">{title} </h3>
             <h6 className="sbr-margin-top-half">{sub}</h6>

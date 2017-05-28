@@ -3,12 +3,15 @@ import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
-import AppFooter from './AppFooter';
-
 class BaseContainer extends Component {
+  static defaultProps = {
+    children: null,
+    pageTitle: '',
+  };
+
   props: {
-    children: any,
-    pageTitle: any,
+    children?: any,
+    pageTitle?: any,
   };
 
   render() {
@@ -26,7 +29,6 @@ class BaseContainer extends Component {
         >
           <div>
             {this.props.children}
-            <AppFooter />
           </div>
         </CSSTransitionGroup>
       </div>
