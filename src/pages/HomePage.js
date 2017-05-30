@@ -5,17 +5,21 @@
 
 import React, { Component } from 'react';
 import firebase from 'firebase/app';
+
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
 import FontIcon from 'material-ui/FontIcon';
 import TextField from 'material-ui/TextField';
 import LinearProgress from 'material-ui/LinearProgress';
 
+import { PhoneNumberUtil, PhoneNumberFormat } from 'google-libphonenumber';
+
 import { app } from '../rebase';
 
 import AppContainer from '../components/AppContainer';
 
 // HELPER FUNCTIONS
+// Form messages
 const setInstructions = instrux => {
   switch (instrux) {
     case 'recaptcha':
@@ -31,6 +35,31 @@ const setInstructions = instrux => {
   }
 };
 
+// Handle phone number
+const formatPhoneNumber = input => {
+  // string non numbers and limit to 10 digits
+  let phone = input.replace(/\D/g, '');
+  phone = phone.substring(0, 10);
+
+  // format based on size
+  const size = phone.length;
+
+  if (size < 4) phone = `(${phone}`;
+  else if (size < 7) {
+    phone = `(${phone.substring(0, 3)}) ${phone.substring(3, 6)}`;
+  } else {
+    phone = `(${phone.substring(0, 3)}) ${phone.substring(3, 6)}-${phone.substring(6, 10)}`;
+  }
+  return phone;
+};
+
+const phoneUtil = PhoneNumberUtil.getInstance();
+const validatePhoneNumber = phone => {
+  const tel = phoneUtil.parse(phone);
+  return phoneUtil.format(tel, PhoneNumberFormat.NATIONAL);
+};
+
+// Reset state
 const resetState = {
   loading: false,
   error: false,
@@ -90,7 +119,8 @@ export default class HomePage extends Component {
   // HANDLE INPUTS
   setPhone = (evt: Object, phoneNumber: string) => {
     evt.preventDefault();
-    this.setState({ phoneNumber });
+    const formattedNumber = formatPhoneNumber(phoneNumber);
+    this.setState({ phoneNumber: formattedNumber });
   };
 
   setConfirmCode = (evt: Object, confirmCode: string) => {
