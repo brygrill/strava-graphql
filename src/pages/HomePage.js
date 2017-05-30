@@ -1,86 +1,93 @@
 // @flow
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/jsx-indent */
+/* global grecaptcha */
+
 import React, { Component } from 'react';
 import firebase from 'firebase/app';
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
 import FontIcon from 'material-ui/FontIcon';
 import TextField from 'material-ui/TextField';
+import LinearProgress from 'material-ui/LinearProgress';
 
-import { app, base } from '../rebase';
+import { app } from '../rebase';
 
 import AppContainer from '../components/AppContainer';
 
-// Render Home page
+// HELPER FUNCTIONS
+const setInstructions = instrux => {
+  switch (instrux) {
+    case 'recaptcha':
+      return 'If prompted, please solve the reCAPTCHA puzzle to confirm you are a human.';
+    case 'recaptcha-expired':
+      return 'Your chance to solve the puzzle expired! Please try again.';
+    case 'confirm':
+      return 'Your code has been sent. Check your phone!';
+    case 'error':
+      return 'Something went wrong, please try again!';
+    default:
+      return 'A sign in code will be sent to your phone. Standard messaging rates apply.';
+  }
+};
+
+const resetState = {
+  loading: false,
+  error: false,
+  phoneNumber: '',
+  confirmCode: '',
+  instructionsMsg: 'phone',
+  recaptchaSolved: false,
+  recaptchaExpired: false,
+  showConfirmationCodeInput: false,
+  confirmResults: null,
+};
+
+// HOME PAGE COMPONENT
+// DISPLAYS SIGNIN BY PHONE
 export default class HomePage extends Component {
   state = {
-    readyForSignup: false,
+    readyForSignup: true,
     loading: false,
     error: false,
     authModalOpen: true,
     authModalContentSignup: true,
     phoneNumber: '',
+    confirmCode: '',
+    instructionsMsg: 'phone',
     recaptchaHandler: null,
     recaptchaSolved: false,
+    recaptchaExpired: false,
     showConfirmationCodeInput: false,
     confirmResults: null,
-    confirmCode: '',
   };
 
   componentDidMount() {
-    this.fetchReadyForSignup();
     this.initReCaptcha();
   }
 
-  fetchReadyForSignup() {
-    base
-      .fetch('ready', {
-        context: this,
-      })
-      .then(readyForSignup => {
-        this.setState({ readyForSignup });
-      });
-  }
-
+  // PREP COMPONENT
   initReCaptcha = () => {
     const self = this;
     const recaptchaHandler = new firebase.auth
       .RecaptchaVerifier('sbr-recaptcha-container', {
-      size: 'normal',
+      size: 'invisible',
       callback: function(response) {
-        // reCAPTCHA solved, allow signInWithPhoneNumber.
-        console.log('reCAPTCHA solved');
         self.setState({ recaptchaSolved: true });
       },
       'expired-callback': function() {
-        // Response expired. Ask user to solve reCAPTCHA again.
-        console.log('Please solve reCAPTCHA again');
-        this.setState({ error: true, loading: false });
+        self.setState({
+          error: true,
+          loading: false,
+          recaptchaExpired: true,
+          instructionsMsg: 'recaptcha-expired',
+        });
       },
     });
     this.setState({ recaptchaHandler });
   };
 
-  handleSigninClick = () => {
-    this.setState({ authModalContentSignup: true, authModalOpen: true });
-  };
-
-  handleCancelModal = () => {
-    this.setState({ authModalContentSignup: true, authModalOpen: true });
-  };
-
-  handleOAuthResult = () => {
-    return app.auth().getRedirectResult().then(
-      data => {
-        if (data.user) this.props.history.push('/dashboard');
-      },
-      err => {
-        if (err) this.setState({ error: true, loading: false });
-      },
-    );
-  };
-
+  // HANDLE INPUTS
   setPhone = (evt: Object, phoneNumber: string) => {
     evt.preventDefault();
     this.setState({ phoneNumber });
@@ -91,8 +98,12 @@ export default class HomePage extends Component {
     this.setState({ confirmCode });
   };
 
+  // HANDLE AUTH
   handleSignInByPhone = () => {
-    firebase
+    this.setState({
+      instructionsMsg: 'recaptcha',
+    });
+    return app
       .auth()
       .signInWithPhoneNumber(
         `+1${this.state.phoneNumber}`,
@@ -101,16 +112,26 @@ export default class HomePage extends Component {
       .then(confirmResults => {
         // SMS sent to mobile
         // Show input to enter code from SMS
-        console.log(confirmResults);
-        this.setState({ showConfirmationCodeInput: true, confirmResults });
-        /*        var verificationCode = window.prompt(
-          'Please enter the verification ' +
-            'code that was sent to your mobile device.',
-        );
-        return confirmResults.confirm(verificationCode);*/
+        this.setState({
+          instructionsMsg: 'confirm',
+          showConfirmationCodeInput: true,
+          confirmResults,
+          phoneNumber: '',
+          loading: true,
+        });
       })
       .catch(() => {
-        this.setState({ error: true, loading: false });
+        this.setState({
+          error: true,
+          loading: false,
+          instructionsMsg: 'error',
+        });
+        if (this.state.recaptchaHandler) {
+          this.state.recaptchaHandler.render().then(widgetId => {
+            // $FlowFixMe
+            grecaptcha.reset(widgetId);
+          });
+        }
       });
   };
 
@@ -120,51 +141,107 @@ export default class HomePage extends Component {
       return confirmResults
         .confirm(confirmCode)
         .then(result => {
+          this.setState(resetState);
           if (result.user) this.props.history.push('/dashboard');
         })
         .catch(() => {
-          this.setState({ error: true, loading: false });
+          this.setState({
+            error: true,
+            loading: false,
+            instructionsMsg: 'error',
+          });
         });
     }
   };
 
+  // PROPS
   props: {
     appState: Object,
     history: Object,
   };
 
+  // RENDER COMPONENT
   render() {
+    const {
+      loading,
+      readyForSignup,
+      instructionsMsg,
+      showConfirmationCodeInput,
+      phoneNumber,
+      confirmCode,
+    } = this.state;
+
+    const actions = showConfirmationCodeInput
+      ? [
+          <RaisedButton
+            primary
+            key="sbr-siginin-confirm-code-input-key"
+            label="Submit Confirmation Code"
+            onTouchTap={this.handleSubmitConfirmCode}
+          />,
+        ]
+      : [
+          <RaisedButton
+            primary
+            disabled={!readyForSignup}
+            key="sbr-siginin-phone-input-key"
+            icon={<FontIcon className={'fa fa-phone sbr-font-size-1-5'} />}
+            label="Sign in with Mobile"
+            onTouchTap={this.handleSignInByPhone}
+          />,
+        ];
+
     return (
       <AppContainer pageTitle="Home">
 
         <div>
-          <Dialog open modal>
-            <div className="sbr-align-center ">
+          <Dialog open modal actions={actions}>
+            <LinearProgress
+              style={loading ? { display: 'inherit' } : { display: 'none' }}
+              mode="indeterminate"
+            />
+            <div>
+
               <h3 className="sbr-margin-bottom-0">Sign In</h3>
+
               <div className="sbr-margin-top-half">
-                <TextField
-                  id="sbr-siginin-phone-input"
-                  onChange={this.setPhone}
-                />
-                <TextField
-                  id="sbr-siginin-confirm-code-input"
-                  onChange={this.setConfirmCode}
-                />
+                <form>
+                  <TextField
+                    id={
+                      showConfirmationCodeInput
+                        ? 'sbr-siginin-confirm-code-input'
+                        : 'sbr-siginin-phone-input'
+                    }
+                    type={showConfirmationCodeInput ? 'text' : 'tel'}
+                    floatingLabelText={
+                      showConfirmationCodeInput
+                        ? 'Confirmation Code'
+                        : 'Phone Number'
+                    }
+                    onChange={
+                      showConfirmationCodeInput
+                        ? this.setConfirmCode
+                        : this.setPhone
+                    }
+                    value={
+                      showConfirmationCodeInput ? confirmCode : phoneNumber
+                    }
+                  />
+                </form>
+
+                <div className="sbr-padding-1-top sbr-grey500">
+                  {setInstructions(instructionsMsg)}
+                </div>
+
+                <div className="mdl-grid" style={{ display: 'none' }}>
+                  <div
+                    className="mdl-cell--12-col"
+                    id="sbr-recaptcha-container"
+                  />
+                </div>
+
               </div>
-              <RaisedButton
-                primary
-                icon={<FontIcon className={'fa fa-phone sbr-font-size-1-5'} />}
-                label="Sign in with Mobile"
-                onTouchTap={this.handleSignInByPhone}
-              />
-              <RaisedButton
-                primary
-                icon={<FontIcon className={'fa fa-phone sbr-font-size-1-5'} />}
-                label="Submit Confirm Code"
-                onTouchTap={this.handleSubmitConfirmCode}
-              />
             </div>
-            <div id="sbr-recaptcha-container" />
           </Dialog>
         </div>
 

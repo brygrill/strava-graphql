@@ -45,6 +45,11 @@
   color: #fff;
 }
 
+.sbr-grey500 {
+  color: #9e9e9e;
+}
+
+
 /* Cursor */
 .sbr-cursor-pointer {
   cursor: pointer;
@@ -62,6 +67,10 @@
 /* Padding */
 .sbr-padding-1 {
   padding: 1rem;
+}
+
+.sbr-padding-1-top {
+  padding-top: 1rem;
 }
 
 .sbr-padding-2 {
