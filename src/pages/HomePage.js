@@ -90,7 +90,7 @@ const resetState = {
 // DISPLAYS SIGNIN BY PHONE
 export default class HomePage extends Component {
   state = {
-    readyForSignup: true,
+    readyForSignup: false,
     loading: false,
     error: false,
     validNumberError: false,
