@@ -31,11 +31,11 @@ const setInstructions = instrux => {
     case 'error':
       return 'Something went wrong, please try again!';
     default:
-      return 'A sign in code will be sent to your phone. Standard messaging rates apply.';
+      return 'A sign in code will be sent to your phone. Standard messaging rates apply. US Only.';
   }
 };
 
-// Handle phone number
+// Format phone number input
 const formatPhoneNumber = input => {
   // string non numbers and limit to 10 digits
   let phone = input.replace(/\D/g, '');
@@ -53,16 +53,30 @@ const formatPhoneNumber = input => {
   return phone;
 };
 
-const phoneUtil = PhoneNumberUtil.getInstance();
+// Validate phone number
 const validatePhoneNumber = phone => {
-  const tel = phoneUtil.parse(phone);
-  return phoneUtil.format(tel, PhoneNumberFormat.NATIONAL);
+  const phoneUtil = PhoneNumberUtil.getInstance();
+  // parse and convert to E164 format
+  // validate the number and return
+  // E164 format if it is valid
+  return new Promise((resolve, reject) => {
+    console.log('here');
+    const tel = phoneUtil.parse(phone, 'US');
+    console.log(tel);
+    const telE164 = phoneUtil.format(tel, PhoneNumberFormat.E164);
+    console.log(telE164);
+    const valid = phoneUtil.isValidNumberForRegion(tel, 'US');
+    console.log(valid);
+    if (valid) return resolve(telE164);
+    return reject(valid);
+  });
 };
 
 // Reset state
 const resetState = {
   loading: false,
   error: false,
+  validNumberError: false,
   phoneNumber: '',
   confirmCode: '',
   instructionsMsg: 'phone',
@@ -79,6 +93,7 @@ export default class HomePage extends Component {
     readyForSignup: true,
     loading: false,
     error: false,
+    validNumberError: false,
     authModalOpen: true,
     authModalContentSignup: true,
     phoneNumber: '',
@@ -130,38 +145,47 @@ export default class HomePage extends Component {
 
   // HANDLE AUTH
   handleSignInByPhone = () => {
-    this.setState({
-      instructionsMsg: 'recaptcha',
-    });
-    return app
-      .auth()
-      .signInWithPhoneNumber(
-        `+1${this.state.phoneNumber}`,
-        this.state.recaptchaHandler,
-      )
-      .then(confirmResults => {
-        // SMS sent to mobile
-        // Show input to enter code from SMS
+    return validatePhoneNumber(this.state.phoneNumber)
+      .then(validNumber => {
         this.setState({
-          instructionsMsg: 'confirm',
-          showConfirmationCodeInput: true,
-          confirmResults,
-          phoneNumber: '',
-          loading: true,
+          instructionsMsg: 'recaptcha',
+          validNumberError: false,
         });
+        return app
+          .auth()
+          .signInWithPhoneNumber(validNumber, this.state.recaptchaHandler)
+          .then(confirmResults => {
+            // SMS sent to mobile
+            // Show input to enter code from SMS
+            this.setState({
+              instructionsMsg: 'confirm',
+              showConfirmationCodeInput: true,
+              confirmResults,
+              phoneNumber: '',
+              loading: true,
+            });
+          })
+          .catch(() => {
+            this.setState({
+              error: true,
+              loading: false,
+              instructionsMsg: 'error',
+            });
+            if (this.state.recaptchaHandler) {
+              this.state.recaptchaHandler.render().then(widgetId => {
+                // $FlowFixMe
+                grecaptcha.reset(widgetId);
+              });
+            }
+          });
       })
-      .catch(() => {
+      .catch(invalid => {
         this.setState({
           error: true,
+          validNumberError: true,
           loading: false,
           instructionsMsg: 'error',
         });
-        if (this.state.recaptchaHandler) {
-          this.state.recaptchaHandler.render().then(widgetId => {
-            // $FlowFixMe
-            grecaptcha.reset(widgetId);
-          });
-        }
       });
   };
 
@@ -196,6 +220,7 @@ export default class HomePage extends Component {
       loading,
       readyForSignup,
       instructionsMsg,
+      validNumberError,
       showConfirmationCodeInput,
       phoneNumber,
       confirmCode,
@@ -247,6 +272,9 @@ export default class HomePage extends Component {
                       showConfirmationCodeInput
                         ? 'Confirmation Code'
                         : 'Phone Number'
+                    }
+                    errorText={
+                      validNumberError ? 'Must be a valid US number' : null
                     }
                     onChange={
                       showConfirmationCodeInput
