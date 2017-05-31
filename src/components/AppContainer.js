@@ -17,7 +17,7 @@ class BaseContainer extends Component {
   render() {
     return (
       <div>
-        <Helmet defaultTitle="TriPlan" titleTemplate="%s | TriPlan">
+        <Helmet defaultTitle="Velox" titleTemplate="%s | Velox">
           <title>{this.props.pageTitle}</title>
         </Helmet>
         <CSSTransitionGroup
