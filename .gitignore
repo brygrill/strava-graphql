@@ -6,6 +6,7 @@ database.rules.json
 .env
 config.js
 config.json
+secrets.js
 
 # Logs
 logs

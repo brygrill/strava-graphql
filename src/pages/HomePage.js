@@ -53,6 +53,17 @@ const formatPhoneNumber = input => {
   return phone;
 };
 
+const allowedUser = phone => {
+  return fetch(
+    `https://us-central1-velox-f43d6.cloudfunctions.net/allowed?num=${phone}`,
+  )
+    .then(resp => {
+      return resp.json();
+    })
+    .catch(() => {
+      return false;
+    });
+};
 // Validate phone number
 const validatePhoneNumber = phone => {
   const phoneUtil = PhoneNumberUtil.getInstance();
@@ -60,15 +71,23 @@ const validatePhoneNumber = phone => {
   // validate the number and return
   // E164 format if it is valid
   return new Promise((resolve, reject) => {
-    console.log('here');
     const tel = phoneUtil.parse(phone, 'US');
-    console.log(tel);
     const telE164 = phoneUtil.format(tel, PhoneNumberFormat.E164);
-    console.log(telE164);
-    const valid = phoneUtil.isValidNumberForRegion(tel, 'US');
-    console.log(valid);
-    if (valid) return resolve(telE164);
-    return reject(valid);
+    // if number is allowed user
+    // validate and format
+    allowedUser(telE164.slice(2))
+      .then(allowed => {
+        if (allowed.valid) {
+          const valid = phoneUtil.isValidNumberForRegion(tel, 'US');
+          if (valid) return resolve(telE164);
+          return reject(valid);
+        } else {
+          return reject(false);
+        }
+      })
+      .catch(() => {
+        return reject(false);
+      });
   });
 };
 
@@ -90,7 +109,6 @@ const resetState = {
 // DISPLAYS SIGNIN BY PHONE
 export default class HomePage extends Component {
   state = {
-    readyForSignup: false,
     loading: false,
     error: false,
     validNumberError: false,
@@ -180,6 +198,7 @@ export default class HomePage extends Component {
           });
       })
       .catch(invalid => {
+        console.log(invalid);
         this.setState({
           error: true,
           validNumberError: true,
@@ -218,7 +237,6 @@ export default class HomePage extends Component {
   render() {
     const {
       loading,
-      readyForSignup,
       instructionsMsg,
       validNumberError,
       showConfirmationCodeInput,
@@ -238,7 +256,6 @@ export default class HomePage extends Component {
       : [
           <RaisedButton
             primary
-            disabled={!readyForSignup}
             key="sbr-siginin-phone-input-key"
             icon={<FontIcon className={'fa fa-phone sbr-font-size-1-5'} />}
             label="Sign in with Mobile"
