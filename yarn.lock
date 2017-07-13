@@ -5532,12 +5532,6 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-re-base@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/re-base/-/re-base-3.0.0.tgz#f0f4dbf4e0750c7252996031aeecfdc1e1378945"
-  dependencies:
-    firebase "^4.0.0"
-
 react-addons-create-fragment@^15.4.0:
   version "15.5.4"
   resolved "https://registry.yarnpkg.com/react-addons-create-fragment/-/react-addons-create-fragment-15.5.4.tgz#048acb2f332a3f450beae0be66824ed91e66e122"
