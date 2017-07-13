@@ -1,34 +1,34 @@
 // @flow
 import React, { Component } from 'react';
+import fire from '../fire';
 
 import AppContainer from '../components/AppContainer';
 
-import { base } from '../rebase';
-
 export default class DashboardPage extends Component {
   state = {
-    userSchedule: null,
+    weeks: null,
   };
-
-  componentDidMount() {
-    try {
-      const { user } = this.props.appState;
-      base.syncState(`schedules/${user.uid}`, {
-        context: this,
-        state: 'userSchedule',
-        isNullable: true,
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  }
 
   props: {
     appState: Object,
   };
 
+  fetchUserData = (key: string, user: string) => {
+    const updatedState = {};
+    const data = fire.database().ref(`${key}/${user}`);
+    data.on('value', data => {
+      updatedState[key] = data.val();
+      this.setState(updatedState);
+    });
+  };
+
+  componentDidMount() {
+    const { user } = this.props.appState;
+    this.fetchUserData('weeks', user.uid);
+  }
+
   render() {
-    console.log(this.props);
+    console.log(this.state);
     return (
       <AppContainer authed={this.props.appState.authed}>
         <div className="mdl-grid">

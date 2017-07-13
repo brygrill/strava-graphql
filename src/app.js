@@ -5,7 +5,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
-import { app } from './rebase';
+import fire from './fire';
 
 import HomePage from './pages/HomePage';
 import DashboardPage from './pages/DashboardPage';
@@ -28,7 +28,7 @@ export default class App extends Component {
   }
 
   listenForAuthChange = () => {
-    return app.auth().onAuthStateChanged(user => {
+    return fire.auth().onAuthStateChanged(user => {
       if (user)
         this.setState({
           loading: false,

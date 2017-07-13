@@ -14,7 +14,7 @@ import LinearProgress from 'material-ui/LinearProgress';
 
 import { PhoneNumberUtil, PhoneNumberFormat } from 'google-libphonenumber';
 
-import { app } from '../rebase';
+import fire from '../fire';
 
 import AppContainer from '../components/AppContainer';
 
@@ -53,6 +53,7 @@ const formatPhoneNumber = input => {
   return phone;
 };
 
+// verify the number is allowed
 const allowedUser = phone => {
   return fetch(
     `https://us-central1-velox-f43d6.cloudfunctions.net/allowed?num=${phone}`,
@@ -64,6 +65,7 @@ const allowedUser = phone => {
       return false;
     });
 };
+
 // Validate phone number
 const validatePhoneNumber = phone => {
   const phoneUtil = PhoneNumberUtil.getInstance();
@@ -169,7 +171,7 @@ export default class HomePage extends Component {
           instructionsMsg: 'recaptcha',
           validNumberError: false,
         });
-        return app
+        return fire
           .auth()
           .signInWithPhoneNumber(validNumber, this.state.recaptchaHandler)
           .then(confirmResults => {
@@ -265,7 +267,6 @@ export default class HomePage extends Component {
 
     return (
       <AppContainer pageTitle="Home">
-
         <div>
           <Dialog open modal actions={actions}>
             <LinearProgress
@@ -319,7 +320,6 @@ export default class HomePage extends Component {
             </div>
           </Dialog>
         </div>
-
       </AppContainer>
     );
   }
