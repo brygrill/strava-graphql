@@ -5,6 +5,18 @@ import fire from '../fire';
 
 import AppContainer from '../components/AppContainer';
 
+const saveToken = (code, uid) => {
+  return fetch(
+    `https://us-central1-velox-f43d6.cloudfunctions.net/strava?code=${code}&uid=${uid}`,
+  )
+    .then(resp => {
+      return resp.json();
+    })
+    .catch(() => {
+      return false;
+    });
+};
+
 export default class DashboardPage extends Component {
   state = {
     weeks: null,
@@ -39,7 +51,7 @@ export default class DashboardPage extends Component {
     const code = params.get('code');
     if (code) {
       console.log(code);
-      this.saveStravaToken(uid, code).then(token => {
+      saveToken(uid, code).then(token => {
         console.log(token);
         history.push('/dashboard');
       });
