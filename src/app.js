@@ -9,6 +9,7 @@ import fire from './fire';
 
 import HomePage from './pages/HomePage';
 import DashboardPage from './pages/DashboardPage';
+import StravaAuthPage from './pages/StravaAuthPage';
 import NotFound from './pages/NotFoundPage';
 
 import { PrivateRoute, PublicRoute, NoMatchRoute } from './routes';
@@ -57,6 +58,11 @@ export default class App extends Component {
                 path="/dashboard"
                 appState={this.state}
                 component={DashboardPage}
+              />
+              <PrivateRoute
+                path="/strava"
+                appState={this.state}
+                component={StravaAuthPage}
               />
               <NoMatchRoute appState={this.state} component={NotFound} />
             </Switch>

@@ -1,14 +1,9 @@
 // @flow
 import React, { Component } from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
 
 import fire from '../fire';
 
 import AppContainer from '../components/AppContainer';
-
-const clientID = process.env.REACT_APP_STRAVA_CLIENTID;
-const URI = 'http://localhost:3000/strava';
-const authUrl = `https://www.strava.com/oauth/authorize?client_id=${clientID}&response_type=code&redirect_uri=${URI}&approval_prompt=force&scope=view_private`;
 
 export default class DashboardPage extends Component {
   state = {
@@ -30,31 +25,45 @@ export default class DashboardPage extends Component {
     });
   };
 
-  handleStravaCallback = (search, history) => {
+  saveStravaToken = (uid, code) => {
+    console.log('Saving token...');
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        return resolve({ accessToken: '12345' });
+      }, 2000);
+    });
+  };
+
+  handleStravaCallback = (uid, search, history) => {
     const params = new URLSearchParams(search);
     const code = params.get('code');
     if (code) {
       console.log(code);
-      history.replace('/dashboard');
+      this.saveStravaToken(uid, code).then(token => {
+        console.log(token);
+        history.push('/dashboard');
+      });
+    } else {
+      console.log('no code');
+      history.push('/dashboard');
     }
   };
 
   componentDidMount() {
-    console.log('Dashboard - DCM');
+    console.log('StravaAuth - DCM');
     const { user } = this.props.appState;
-    //const { search } = this.props.location.search;
-    this.fetchUserData('weeks', user.uid);
-    //this.handleStravaCallback(this.props.location.search, this.props.history);
+    this.handleStravaCallback(
+      user.uid,
+      this.props.location.search,
+      this.props.history,
+    );
   }
 
   render() {
-    //console.log(this.state);
-    //console.log(this.props);
     return (
       <AppContainer authed={this.props.appState.authed}>
         <div className="mdl-grid">
-          dashboard page
-          <RaisedButton label="Default" href={authUrl} />
+          Authenticating with Strava...
         </div>
       </AppContainer>
     );
