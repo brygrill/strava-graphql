@@ -9,32 +9,13 @@ admin.initializeApp(functions.config().firebase);
 
 // connect to db
 const db = admin.database();
-const ref = db.ref('allowedUsers');
+const ref = db.ref();
 
-// POST temp code to strava
-const postStravaToken = (uid, code) => {
-  //const ref = db.ref(`users/${uid}`);
-
-  const body = {
-    client_id: functions.config().strava.id,
-    client_secret: functions.config().strava.secret,
-    code,
-  };
-
-  return axios
-    .post('https://www.strava.com/oauth/token', body)
-    .then(data => {
-      console.log(data.data);
-    })
-    .catch(err => {
-      console.log(err);
-    });
-};
-
+// ----------- ALLOWED --------------------
 // Fetch Currently Allowed Users
 exports.allowed = functions.https.onRequest((req, res) => {
   cors(req, res, () => {
-    ref.once('value').then(data => {
+    ref.child('allowedUsers').once('value').then(data => {
       const allowedUsers = values(data.val());
       if (allowedUsers.includes(req.query.num)) {
         res.json({ valid: true });
@@ -45,10 +26,59 @@ exports.allowed = functions.https.onRequest((req, res) => {
   });
 });
 
+// ----------- STRAVA --------------------
 // Save Strava Access Code
+const updateStravaToken = (uid, token) => {
+  return ref
+    .child('users')
+    .child(uid)
+    .update({
+      strava: {
+        token,
+      },
+    })
+    .then(data => {
+      return data;
+    })
+    .catch(err => {
+      console.log(err);
+      return err;
+    });
+};
+
+// Post temp code to Strava
+const postStravaToken = code => {
+  const body = {
+    client_id: functions.config().strava.id,
+    client_secret: functions.config().strava.secret,
+    code,
+  };
+
+  return axios
+    .post('https://www.strava.com/oauth/token', body)
+    .then(data => {
+      return data.data.access_token;
+    })
+    .catch(err => {
+      console.log(err);
+      return err;
+    });
+};
+
 exports.strava = functions.https.onRequest((req, res) => {
   cors(req, res, () => {
-    postStravaToken(req.query.code, req.query.uid);
-    res.json({ worked: true });
+    postStravaToken(req.query.code)
+      .then(token => {
+        updateStravaToken(req.query.uid, token)
+          .then(() => {
+            res.json({ tokenUpdated: true });
+          })
+          .catch(() => {
+            res.json({ tokenUpdated: false });
+          });
+      })
+      .catch(() => {
+        res.json({ tokenUpdated: false });
+      });
   });
 });

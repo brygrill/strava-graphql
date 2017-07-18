@@ -12,7 +12,8 @@ const authUrl = `https://www.strava.com/oauth/authorize?client_id=${clientID}&re
 
 export default class DashboardPage extends Component {
   state = {
-    weeks: null,
+    week: null,
+    user: null,
   };
 
   props: {
@@ -21,7 +22,7 @@ export default class DashboardPage extends Component {
     history: Object,
   };
 
-  fetchUserData = (key: string, user: string) => {
+  fetchUserData1 = (key: string, user: string) => {
     const updatedState = {};
     const data = fire.database().ref(`${key}/${user}`);
     data.on('value', data => {
@@ -30,31 +31,35 @@ export default class DashboardPage extends Component {
     });
   };
 
-  handleStravaCallback = (search, history) => {
-    const params = new URLSearchParams(search);
-    const code = params.get('code');
-    if (code) {
-      console.log(code);
-      history.replace('/dashboard');
-    }
+  fetchUserInfo = (user: string) => {
+    const ref = fire.database().ref();
+    ref.child('users').child(user).on('value', data => {
+      this.setState({ user: data.val() });
+    });
+  };
+
+  fetchWeekInfo = (user: string) => {
+    const ref = fire.database().ref();
+    ref.child('weeks').child(user).on('value', data => {
+      this.setState({ week: data.val() });
+    });
   };
 
   componentDidMount() {
     console.log('Dashboard - DCM');
     const { user } = this.props.appState;
-    //const { search } = this.props.location.search;
-    this.fetchUserData('weeks', user.uid);
-    //this.handleStravaCallback(this.props.location.search, this.props.history);
+    this.fetchUserInfo(user.uid);
+    this.fetchWeekInfo(user.uid);
   }
 
   render() {
-    //console.log(this.state);
+    console.log(this.state);
     //console.log(this.props);
     return (
       <AppContainer authed={this.props.appState.authed}>
         <div className="mdl-grid">
           dashboard page
-          <RaisedButton label="Default" href={authUrl} />
+          <RaisedButton label="Connect with Strava" href={authUrl} />
         </div>
       </AppContainer>
     );

@@ -1,8 +1,6 @@
 // @flow
 import React, { Component } from 'react';
 
-import fire from '../fire';
-
 import AppContainer from '../components/AppContainer';
 
 const saveToken = (code, uid) => {
@@ -18,32 +16,10 @@ const saveToken = (code, uid) => {
 };
 
 export default class DashboardPage extends Component {
-  state = {
-    weeks: null,
-  };
-
   props: {
     appState: Object,
     location: Object,
     history: Object,
-  };
-
-  fetchUserData = (key: string, user: string) => {
-    const updatedState = {};
-    const data = fire.database().ref(`${key}/${user}`);
-    data.on('value', data => {
-      updatedState[key] = data.val();
-      this.setState(updatedState);
-    });
-  };
-
-  saveStravaToken = (uid, code) => {
-    console.log('Saving token...');
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        return resolve({ accessToken: '12345' });
-      }, 2000);
-    });
   };
 
   handleStravaCallback = (uid, search, history) => {
@@ -51,7 +27,7 @@ export default class DashboardPage extends Component {
     const code = params.get('code');
     if (code) {
       console.log(code);
-      saveToken(uid, code).then(token => {
+      saveToken(code, uid).then(token => {
         console.log(token);
         history.push('/dashboard');
       });
