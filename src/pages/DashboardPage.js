@@ -3,17 +3,16 @@ import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import fire from '../fire';
+import { stravaOAuthUrl } from '../config';
 
 import AppContainer from '../components/AppContainer';
 
-const clientID = process.env.REACT_APP_STRAVA_CLIENTID;
-const URI = 'http://localhost:3000/strava';
-const authUrl = `https://www.strava.com/oauth/authorize?client_id=${clientID}&response_type=code&redirect_uri=${URI}&approval_prompt=force&scope=view_private`;
+const authUrl = stravaOAuthUrl();
 
 export default class DashboardPage extends Component {
   state = {
-    week: null,
-    user: null,
+    userData: null,
+    stravaData: null,
   };
 
   props: {
@@ -22,34 +21,17 @@ export default class DashboardPage extends Component {
     history: Object,
   };
 
-  fetchUserData1 = (key: string, user: string) => {
-    const updatedState = {};
-    const data = fire.database().ref(`${key}/${user}`);
-    data.on('value', data => {
-      updatedState[key] = data.val();
-      this.setState(updatedState);
-    });
-  };
-
-  fetchUserInfo = (user: string) => {
+  fetchUserData = (user: string) => {
     const ref = fire.database().ref();
     ref.child('users').child(user).on('value', data => {
-      this.setState({ user: data.val() });
-    });
-  };
-
-  fetchWeekInfo = (user: string) => {
-    const ref = fire.database().ref();
-    ref.child('weeks').child(user).on('value', data => {
-      this.setState({ week: data.val() });
+      this.setState({ userData: data.val() });
     });
   };
 
   componentDidMount() {
     console.log('Dashboard - DCM');
     const { user } = this.props.appState;
-    this.fetchUserInfo(user.uid);
-    this.fetchWeekInfo(user.uid);
+    this.fetchUserData(user.uid);
   }
 
   render() {
