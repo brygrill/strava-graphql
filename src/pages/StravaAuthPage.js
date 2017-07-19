@@ -1,12 +1,12 @@
 // @flow
 import React, { Component } from 'react';
 
+import { stravaFunctionUrl } from '../config';
+
 import AppContainer from '../components/AppContainer';
 
 const saveToken = (code, uid) => {
-  return fetch(
-    `https://us-central1-velox-f43d6.cloudfunctions.net/strava?code=${code}&uid=${uid}`,
-  )
+  return fetch(stravaFunctionUrl(code, uid))
     .then(resp => {
       return resp.json();
     })
@@ -16,13 +16,17 @@ const saveToken = (code, uid) => {
 };
 
 export default class DashboardPage extends Component {
+  state = {
+    error: false,
+  };
+
   props: {
     appState: Object,
     location: Object,
     history: Object,
   };
 
-  handleStravaCallback = (uid, search, history) => {
+  handleStravaCallback = (uid: string, search: string, history: Object) => {
     const params = new URLSearchParams(search);
     const code = params.get('code');
     if (code) {

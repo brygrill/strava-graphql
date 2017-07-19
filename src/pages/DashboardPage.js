@@ -11,6 +11,8 @@ const authUrl = stravaOAuthUrl();
 
 export default class DashboardPage extends Component {
   state = {
+    loading: false,
+    error: false,
     userData: null,
     stravaData: null,
   };

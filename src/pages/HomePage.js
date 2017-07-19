@@ -15,6 +15,7 @@ import LinearProgress from 'material-ui/LinearProgress';
 import { PhoneNumberUtil, PhoneNumberFormat } from 'google-libphonenumber';
 
 import fire from '../fire';
+import { allowedFunctionUrl } from '../config';
 
 import AppContainer from '../components/AppContainer';
 
@@ -55,9 +56,7 @@ const formatPhoneNumber = input => {
 
 // verify the number is allowed
 const allowedUser = phone => {
-  return fetch(
-    `https://us-central1-velox-f43d6.cloudfunctions.net/allowed?num=${phone}`,
-  )
+  return fetch(allowedFunctionUrl(phone))
     .then(resp => {
       return resp.json();
     })
