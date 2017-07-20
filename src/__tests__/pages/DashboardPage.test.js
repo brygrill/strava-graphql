@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { MuiThemeProvider } from 'material-ui/styles';
 import DashboardPage from '../../pages/DashboardPage';
 
 const state = {
   loading: true,
   authed: false,
   user: {
-    uid: null,
+    uid: process.env.REACT_APP_USER_FOR_TESTS,
   },
 };
 
