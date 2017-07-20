@@ -1,20 +1,3 @@
-/* Heights */
-.sbr-section-50 {
-  min-height: 50rem;
-}
-
-.sbr-section-40 {
-  min-height: 40rem;
-}
-
-.sbr-section-30 {
-  min-height: 30rem;
-}
-
-.sbr-section-20 {
-  min-height: 20rem;
-}
-
 /* Backgrounds */
 .sbr-back-prime {
   background-color: #039be5;
@@ -40,57 +23,6 @@
   background-color: #000000;
 }
 
-/* Text */
-.sbr-color-white {
-  color: #fff;
-}
-
-.sbr-grey500 {
-  color: #9e9e9e;
-}
-
-
-/* Cursor */
-.sbr-cursor-pointer {
-  cursor: pointer;
-}
-
-/* Font Size */
-.sbr-font-size-1 {
-  font-size: 1rem !important;
-}
-
-.sbr-font-size-1-5 {
-  font-size: 1.5rem !important;
-}
-
-/* Padding */
-.sbr-padding-1 {
-  padding: 1rem;
-}
-
-.sbr-padding-1-top {
-  padding-top: 1rem;
-}
-
-.sbr-padding-2 {
-  padding: 2rem;
-}
-
-/* Margin */
-.sbr-margin-top-half {
-  margin-top: 0.5rem;
-}
-
-.sbr-margin-bottom-0 {
-  margin-bottom: 0;
-}
-
-/* Align */
-.sbr-align-center {
-  text-align: center;
-}
-
 /* CSS Transition Group */
 .sbr-transition-appear {
   opacity: 0.01;
@@ -110,67 +42,18 @@
   transition: opacity 300ms ease-in;
 }
 
-/* Custom Component Classes */
-.sbr-appbar-title {
-  cursor: pointer;
-}
-
-.sbr-app-footer a{
-  color: #ffffff;
-}
-.sbr-home-cards-section {
-  padding: 1rem;
-}
-
-.sbr-home-individual-card {
-  padding: 2rem;
-}
-
-.sbr-home-card-media {
-  text-align: center;
-  padding: 4rem;
-}
-
-.sbr-home-card-content {
-  min-height: 5rem !important;
-  font-size: 1.25rem !important;
-}
-
 /* Media Queries */
 /* Small screen and Up */
-@media (min-width: 576px) {
-}
+@media (min-width: 576px) {}
 
 /* Tablets and Up */
-@media (min-width: 768px) {
-}
+@media (min-width: 768px) {}
 
 /* Desktop and Up */
-@media (min-width: 992px) {
-  .sbr-home-cards-section {
-    padding: 8rem 2rem;
-  }
-  .sbr-home-individual-card {
-    padding: 3rem;
-  }
-}
+@media (min-width: 992px) {}
 
 /* Large Desktops and Up */
-@media (min-width: 1200px) {
-  .sbr-home-cards-section {
-    padding: 10rem 2rem;
-  }
-  .sbr-home-individual-card {
-    padding: 4rem;
-  }
-}
+@media (min-width: 1200px) {}
 
 /* Super Large Screens and Up */
-@media (min-width: 1400px) {
-  .sbr-home-cards-section {
-    padding: 10rem 5rem;
-  }
-  .sbr-home-individual-card {
-    padding: 5rem;
-  }
-}
+@media (min-width: 1400px) {}

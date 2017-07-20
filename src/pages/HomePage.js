@@ -15,6 +15,7 @@ import Dialog, {
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 import { LinearProgress } from 'material-ui/Progress';
+import { withStyles, createStyleSheet } from 'material-ui/styles';
 
 import { PhoneNumberUtil, PhoneNumberFormat } from 'google-libphonenumber';
 
@@ -36,7 +37,7 @@ const setInstructions = instrux => {
     case 'error':
       return 'Something went wrong, please try again!';
     default:
-      return 'A sign in code will be sent to your phone. Standard messaging rates apply. US Only.';
+      return 'A code will be sent to your phone. Standard messaging rates apply. US Only.';
   }
 };
 
@@ -69,33 +70,6 @@ const allowedUser = phone => {
     });
 };
 
-// Validate phone number
-const validatePhoneNumber = phone => {
-  const phoneUtil = PhoneNumberUtil.getInstance();
-  // parse and convert to E164 format
-  // validate the number and return
-  // E164 format if it is valid
-  return new Promise((resolve, reject) => {
-    const tel = phoneUtil.parse(phone, 'US');
-    const telE164 = phoneUtil.format(tel, PhoneNumberFormat.E164);
-    // if number is allowed user
-    // validate and format
-    allowedUser(telE164.slice(2))
-      .then(allowed => {
-        if (allowed.valid) {
-          const valid = phoneUtil.isValidNumberForRegion(tel, 'US');
-          if (valid) return resolve(telE164);
-          return reject(valid);
-        } else {
-          return reject(false);
-        }
-      })
-      .catch(() => {
-        return reject(false);
-      });
-  });
-};
-
 // Reset state
 const resetState = {
   loading: false,
@@ -110,9 +84,17 @@ const resetState = {
   confirmResults: null,
 };
 
+// STYLESHEET
+const styleSheet = createStyleSheet('HomePage', theme => ({
+  textField: {
+    paddingBottom: '1.25rem',
+    width: 250,
+  },
+}));
+
 // HOME PAGE COMPONENT
 // DISPLAYS SIGNIN BY PHONE
-export default class HomePage extends Component {
+class HomePage extends Component {
   state = {
     loading: false,
     error: false,
@@ -132,6 +114,7 @@ export default class HomePage extends Component {
   props: {
     appState: Object,
     history: Object,
+    classes: Object,
   };
 
   componentDidMount() {
@@ -142,17 +125,22 @@ export default class HomePage extends Component {
     return codeInput
       ? <Button
           key="sbr-siginin-confirm-code-input-key"
+          raised
+          color="primary"
           onClick={this.handleSubmitConfirmCode}
         >
           Submit Confirmation Code
         </Button>
       : <Button
           key="sbr-siginin-phone-input-key"
+          raised
+          color="primary"
           onClick={this.handleSignInByPhone}
         >
           Sign in with Mobile
         </Button>;
   };
+
   // PREP COMPONENT
   initReCaptcha = () => {
     const self = this;
@@ -188,8 +176,37 @@ export default class HomePage extends Component {
   };
 
   // HANDLE AUTH
+  validatePhoneNumber = phone => {
+    // set loading to true so you can see its working on it..
+    this.setState({ loading: true });
+    // start validate number
+    const phoneUtil = PhoneNumberUtil.getInstance();
+    // parse and convert to E164 format
+    // validate the number and return
+    // E164 format if it is valid
+    return new Promise((resolve, reject) => {
+      const tel = phoneUtil.parse(phone, 'US');
+      const telE164 = phoneUtil.format(tel, PhoneNumberFormat.E164);
+      // if number is allowed user
+      // validate and format
+      allowedUser(telE164.slice(2))
+        .then(allowed => {
+          if (allowed.valid) {
+            const valid = phoneUtil.isValidNumberForRegion(tel, 'US');
+            if (valid) return resolve(telE164);
+            return reject(valid);
+          } else {
+            return reject(false);
+          }
+        })
+        .catch(() => {
+          return reject(false);
+        });
+    });
+  };
+
   handleSignInByPhone = () => {
-    return validatePhoneNumber(this.state.phoneNumber)
+    return this.validatePhoneNumber(this.state.phoneNumber)
       .then(validNumber => {
         this.setState({
           instructionsMsg: 'recaptcha',
@@ -255,6 +272,8 @@ export default class HomePage extends Component {
 
   // RENDER COMPONENT
   render() {
+    const classes = this.props.classes;
+
     const {
       loading,
       instructionsMsg,
@@ -279,6 +298,7 @@ export default class HomePage extends Component {
                 <div>
                   <form>
                     <TextField
+                      className={classes.textField}
                       id={
                         showConfirmationCodeInput
                           ? 'sbr-siginin-confirm-code-input'
@@ -328,3 +348,5 @@ export default class HomePage extends Component {
     );
   }
 }
+
+export default withStyles(styleSheet)(HomePage);
