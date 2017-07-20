@@ -1,8 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import Dialog from 'material-ui/Dialog';
-import RaisedButton from 'material-ui/RaisedButton';
-import FontIcon from 'material-ui/FontIcon';
+import Button from 'material-ui/Button';
 
 export default class AuthModal extends Component {
   static defaultProps = {
@@ -15,7 +14,6 @@ export default class AuthModal extends Component {
     open?: false,
     title: string,
     sub: string,
-    icon: string,
     disabled?: boolean,
     modal?: boolean,
     submitBtnLabel: string,
@@ -29,7 +27,6 @@ export default class AuthModal extends Component {
       open,
       title,
       sub,
-      icon,
       disabled,
       modal,
       submitBtnLabel,
@@ -44,13 +41,9 @@ export default class AuthModal extends Component {
           <div className="sbr-align-center ">
             <h3 className="sbr-margin-bottom-0">{title} </h3>
             <h6 className="sbr-margin-top-half">{sub}</h6>
-            <RaisedButton
-              primary
-              disabled={disabled}
-              icon={<FontIcon className={icon} />}
-              label={submitBtnLabel}
-              onTouchTap={handleSubmit}
-            />
+            <Button primary disabled={disabled} onTouchTap={handleSubmit}>
+              {submitBtnLabel}
+            </Button>
             <div>{alternative}</div>
           </div>
         </Dialog>

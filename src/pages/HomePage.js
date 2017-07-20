@@ -6,11 +6,15 @@
 import React, { Component } from 'react';
 import firebase from 'firebase/app';
 
-import Dialog from 'material-ui/Dialog';
-import RaisedButton from 'material-ui/RaisedButton';
-import FontIcon from 'material-ui/FontIcon';
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from 'material-ui/Dialog';
+import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
-import LinearProgress from 'material-ui/LinearProgress';
+import { LinearProgress } from 'material-ui/Progress';
 
 import { PhoneNumberUtil, PhoneNumberFormat } from 'google-libphonenumber';
 
@@ -125,10 +129,30 @@ export default class HomePage extends Component {
     confirmResults: null,
   };
 
+  props: {
+    appState: Object,
+    history: Object,
+  };
+
   componentDidMount() {
     this.initReCaptcha();
   }
 
+  setModalActions = (codeInput: boolean) => {
+    return codeInput
+      ? <Button
+          key="sbr-siginin-confirm-code-input-key"
+          onClick={this.handleSubmitConfirmCode}
+        >
+          Submit Confirmation Code
+        </Button>
+      : <Button
+          key="sbr-siginin-phone-input-key"
+          onClick={this.handleSignInByPhone}
+        >
+          Sign in with Mobile
+        </Button>;
+  };
   // PREP COMPONENT
   initReCaptcha = () => {
     const self = this;
@@ -151,14 +175,15 @@ export default class HomePage extends Component {
   };
 
   // HANDLE INPUTS
-  setPhone = (evt: Object, phoneNumber: string) => {
+  setPhone = (evt: Object) => {
     evt.preventDefault();
-    const formattedNumber = formatPhoneNumber(phoneNumber);
+    const formattedNumber = formatPhoneNumber(evt.target.value);
     this.setState({ phoneNumber: formattedNumber });
   };
 
-  setConfirmCode = (evt: Object, confirmCode: string) => {
+  setConfirmCode = (evt: Object) => {
     evt.preventDefault();
+    const confirmCode = evt.target.value;
     this.setState({ confirmCode });
   };
 
@@ -228,12 +253,6 @@ export default class HomePage extends Component {
     }
   };
 
-  // PROPS
-  props: {
-    appState: Object,
-    history: Object,
-  };
-
   // RENDER COMPONENT
   render() {
     const {
@@ -245,77 +264,63 @@ export default class HomePage extends Component {
       confirmCode,
     } = this.state;
 
-    const actions = showConfirmationCodeInput
-      ? [
-          <RaisedButton
-            primary
-            key="sbr-siginin-confirm-code-input-key"
-            label="Submit Confirmation Code"
-            onTouchTap={this.handleSubmitConfirmCode}
-          />,
-        ]
-      : [
-          <RaisedButton
-            primary
-            key="sbr-siginin-phone-input-key"
-            icon={<FontIcon className={'fa fa-phone sbr-font-size-1-5'} />}
-            label="Sign in with Mobile"
-            onTouchTap={this.handleSignInByPhone}
-          />,
-        ];
-
     return (
       <AppContainer pageTitle="Home">
         <div>
-          <Dialog open modal actions={actions}>
+          <Dialog open>
             <LinearProgress
               style={loading ? { display: 'inherit' } : { display: 'none' }}
-              mode="indeterminate"
             />
             <div>
+              <DialogTitle>
+                {'Sign In'}
+              </DialogTitle>
+              <DialogContent>
+                <div>
+                  <form>
+                    <TextField
+                      id={
+                        showConfirmationCodeInput
+                          ? 'sbr-siginin-confirm-code-input'
+                          : 'sbr-siginin-phone-input'
+                      }
+                      type={showConfirmationCodeInput ? 'text' : 'tel'}
+                      label={
+                        showConfirmationCodeInput
+                          ? 'Confirmation Code'
+                          : 'Phone Number'
+                      }
+                      helperText={
+                        validNumberError ? 'Must be a valid US number' : ''
+                      }
+                      onChange={
+                        showConfirmationCodeInput
+                          ? this.setConfirmCode
+                          : this.setPhone
+                      }
+                      value={
+                        showConfirmationCodeInput ? confirmCode : phoneNumber
+                      }
+                    />
+                  </form>
 
-              <h3 className="sbr-margin-bottom-0">Sign In</h3>
+                  <DialogContentText>
+                    {setInstructions(instructionsMsg)}
+                  </DialogContentText>
 
-              <div className="sbr-margin-top-half">
-                <form>
-                  <TextField
-                    id={
-                      showConfirmationCodeInput
-                        ? 'sbr-siginin-confirm-code-input'
-                        : 'sbr-siginin-phone-input'
-                    }
-                    type={showConfirmationCodeInput ? 'text' : 'tel'}
-                    floatingLabelText={
-                      showConfirmationCodeInput
-                        ? 'Confirmation Code'
-                        : 'Phone Number'
-                    }
-                    errorText={
-                      validNumberError ? 'Must be a valid US number' : null
-                    }
-                    onChange={
-                      showConfirmationCodeInput
-                        ? this.setConfirmCode
-                        : this.setPhone
-                    }
-                    value={
-                      showConfirmationCodeInput ? confirmCode : phoneNumber
-                    }
-                  />
-                </form>
+                  <div className="mdl-grid" style={{ display: 'none' }}>
+                    <div
+                      className="mdl-cell--12-col"
+                      id="sbr-recaptcha-container"
+                    />
+                  </div>
 
-                <div className="sbr-padding-1-top sbr-grey500">
-                  {setInstructions(instructionsMsg)}
                 </div>
 
-                <div className="mdl-grid" style={{ display: 'none' }}>
-                  <div
-                    className="mdl-cell--12-col"
-                    id="sbr-recaptcha-container"
-                  />
-                </div>
-
-              </div>
+              </DialogContent>
+              <DialogActions>
+                {this.setModalActions(showConfirmationCodeInput)}
+              </DialogActions>
             </div>
           </Dialog>
         </div>

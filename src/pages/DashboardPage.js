@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
+import Button from 'material-ui/Button';
 
 import fire from '../fire';
 import { stravaOAuthUrl } from '../config';
@@ -43,7 +43,9 @@ export default class DashboardPage extends Component {
       <AppContainer authed={this.props.appState.authed}>
         <div className="mdl-grid">
           dashboard page
-          <RaisedButton label="Connect with Strava" href={authUrl} />
+          <Button raised href={authUrl}>
+            Connect with Strava
+          </Button>
         </div>
       </AppContainer>
     );
