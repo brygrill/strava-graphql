@@ -9,8 +9,8 @@ export const stravaOAuthUrl = () => {
   return authUrl;
 };
 
-export const stravaFunctionUrl = (code: string, uid: string) => {
-  return `https://us-central1-velox-f43d6.cloudfunctions.net/strava?code=${code}&uid=${uid}`;
+export const stravaFunctionUrl = (code: string) => {
+  return `https://us-central1-velox-f43d6.cloudfunctions.net/strava/token?code=${code}`;
 };
 
 export const allowedFunctionUrl = (phone: string) => {

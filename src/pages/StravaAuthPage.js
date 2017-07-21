@@ -1,16 +1,22 @@
 // @flow
 import React, { Component } from 'react';
+import axios from 'axios';
 
+import fire from '../fire';
 import { stravaFunctionUrl } from '../config';
 
 import AppContainer from '../components/AppContainer';
 
-const saveToken = (code, uid) => {
-  return fetch(stravaFunctionUrl(code, uid))
+const saveToken = (code, token) => {
+  const config = { headers: { Authorization: `Bearer ${token}` } };
+  return axios
+    .get(stravaFunctionUrl(code), config)
     .then(resp => {
-      return resp.json();
+      console.log(resp);
+      return resp.data;
     })
-    .catch(() => {
+    .catch(err => {
+      console.log(err);
       return false;
     });
 };
@@ -30,11 +36,22 @@ export default class DashboardPage extends Component {
     const params = new URLSearchParams(search);
     const code = params.get('code');
     if (code) {
-      console.log(code);
-      saveToken(code, uid).then(token => {
-        console.log(token);
-        history.push('/dashboard');
-      });
+      fire
+        .auth()
+        .currentUser.getIdToken()
+        .then(function(idToken) {
+          saveToken(code, idToken)
+            .then(() => {
+              history.push('/dashboard');
+            })
+            .catch(() => {
+              this.setState({ error: true });
+            });
+        })
+        .catch(function(error) {
+          console.error(error);
+          this.setState({ error: true });
+        });
     } else {
       console.log('no code');
       history.push('/dashboard');

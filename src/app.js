@@ -31,14 +31,15 @@ export default class App extends Component {
 
   listenForAuthChange = () => {
     return fire.auth().onAuthStateChanged(user => {
-      if (user)
+      if (user) {
         this.setState({
           loading: false,
           authed: true,
           user: { uid: user.uid },
         });
-      if (!user)
-        this.setState({ loading: false, authed: false, user: { uid: null } });
+      } else {
+        this.setState({ loading: false, authed: false, user: null });
+      }
     });
   };
 

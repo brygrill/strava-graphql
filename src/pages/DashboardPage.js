@@ -37,7 +37,7 @@ export default class DashboardPage extends Component {
   }
 
   render() {
-    console.log(this.state);
+    //console.log(this.state);
     //console.log(this.props);
     return (
       <AppContainer authed={this.props.appState.authed}>
