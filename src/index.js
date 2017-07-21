@@ -1,20 +1,14 @@
 // @flow
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
-import createPalette from 'material-ui/styles/palette';
-import lightBlue from 'material-ui/colors/lightBlue';
+import { MuiThemeProvider } from 'material-ui/styles';
 
 import App from './app';
+
+import theme from './theme';
 import './theme/index.css';
 
 import registerServiceWorker from './registerServiceWorker';
-
-const theme = createMuiTheme({
-  palette: createPalette({
-    primary: lightBlue,
-  }),
-});
 
 const AppAndTheme = () => (
   <MuiThemeProvider theme={theme}>

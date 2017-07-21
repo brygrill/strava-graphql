@@ -1,14 +1,12 @@
 // @flow
-// https://material.io/color/#!/?view.left=0&view.right=0&primary.color=212121&secondary.color=039BE5
+import { createMuiTheme } from 'material-ui/styles';
+import createPalette from 'material-ui/styles/palette';
+import lightBlue from 'material-ui/colors/lightBlue';
 
-export default {
-  palette: {
-    primary1Color: '#039be5',
-    primary2Color: '#006db3',
-    primary3Color: '#63ccff',
-  },
-  toolbar: {},
-  cardText: {
-    textColor: 'rgba(0,0,0,.54)',
-  },
-};
+const theme = createMuiTheme({
+  palette: createPalette({
+    primary: lightBlue,
+  }),
+});
+
+export default theme;

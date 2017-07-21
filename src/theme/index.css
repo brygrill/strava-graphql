@@ -1,26 +1,6 @@
-/* Backgrounds */
-.sbr-back-prime {
-  background-color: #039be5;
-}
-
-.sbr-back-prime-light {
-  background-color: #63ccff;
-}
-
-.sbr-back-prime-dark {
-  background-color: #006db3;
-}
-
-.sbr-back-grey {
-  background-color: #212121;
-}
-
-.sbr-back-grey-light {
-  background-color: #484848;
-}
-
-.sbr-back-grey-dark {
-  background-color: #000000;
+/* Globals */
+body {
+  font-family: 'Roboto', sans-serif;
 }
 
 /* CSS Transition Group */
