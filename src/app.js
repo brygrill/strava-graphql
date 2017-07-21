@@ -14,6 +14,8 @@ import NotFound from './pages/NotFoundPage';
 
 import { PrivateRoute, PublicRoute, NoMatchRoute } from './routes';
 
+import TopLinearLoader from './components/TopLinearLoader';
+
 // Render App
 export default class App extends Component {
   state = {
@@ -38,7 +40,7 @@ export default class App extends Component {
           user: { uid: user.uid },
         });
       } else {
-        this.setState({ loading: false, authed: false, user: null });
+        this.setState({ loading: false, authed: false, user: { uid: null } });
       }
     });
   };
@@ -46,7 +48,7 @@ export default class App extends Component {
   render() {
     const { loading } = this.state;
     return loading
-      ? <div>Loading...</div>
+      ? <div><TopLinearLoader /></div>
       : <Router>
           <div>
             <Switch>
