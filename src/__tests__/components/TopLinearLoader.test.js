@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { MuiThemeProvider } from 'material-ui/styles';
-import AppContainer from '../../components/AppContainer';
+import TopLinearLoader from '../../components/TopLinearLoader';
 
-describe('<AppContainer />', () => {
+describe('<TopLinearLoader />', () => {
   it('Renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<MuiThemeProvider><AppContainer /></MuiThemeProvider>, div);
+    ReactDOM.render(
+      <MuiThemeProvider><TopLinearLoader /></MuiThemeProvider>,
+      div,
+    );
   });
 });
