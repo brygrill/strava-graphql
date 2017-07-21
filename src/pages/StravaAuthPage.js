@@ -1,5 +1,11 @@
 // @flow
 import React, { Component } from 'react';
+import Dialog, {
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from 'material-ui/Dialog';
+import { LinearProgress } from 'material-ui/Progress';
 import axios from 'axios';
 
 import fire from '../fire';
@@ -32,14 +38,14 @@ export default class DashboardPage extends Component {
     history: Object,
   };
 
-  handleStravaCallback = (uid: string, search: string, history: Object) => {
+  handleStravaCallback = (search: string, history: Object) => {
     const params = new URLSearchParams(search);
     const code = params.get('code');
     if (code) {
       fire
         .auth()
         .currentUser.getIdToken()
-        .then(function(idToken) {
+        .then(idToken => {
           saveToken(code, idToken)
             .then(() => {
               history.push('/dashboard');
@@ -49,30 +55,35 @@ export default class DashboardPage extends Component {
             });
         })
         .catch(function(error) {
-          console.error(error);
           this.setState({ error: true });
         });
     } else {
-      console.log('no code');
       history.push('/dashboard');
     }
   };
 
   componentDidMount() {
     console.log('StravaAuth - DCM');
-    const { user } = this.props.appState;
-    this.handleStravaCallback(
-      user.uid,
-      this.props.location.search,
-      this.props.history,
-    );
+    this.handleStravaCallback(this.props.location.search, this.props.history);
   }
 
   render() {
     return (
       <AppContainer authed={this.props.appState.authed}>
-        <div className="mdl-grid">
-          Authenticating with Strava...
+        <div>
+          <Dialog open>
+            <LinearProgress />
+            <div>
+              <DialogTitle>
+                {'Authenticating with Strava'}
+              </DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  Confirming your info with Strava. Just a moment...
+                </DialogContentText>
+              </DialogContent>
+            </div>
+          </Dialog>
         </div>
       </AppContainer>
     );
