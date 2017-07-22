@@ -10,15 +10,22 @@ const styleSheet = createStyleSheet('TopLinearLoader', {
 });
 
 class TopLinearLoader extends Component {
+  static defaultProps = {
+    loading: true,
+  };
+
   props: {
     classes: Object,
+    loading?: Boolean,
   };
 
   render() {
-    const classes = this.props.classes;
+    const { classes, loading } = this.props;
     return (
       <div className={classes.root}>
-        <LinearProgress />
+        <LinearProgress
+          style={loading ? { display: 'inherit' } : { display: 'none' }}
+        />
       </div>
     );
   }

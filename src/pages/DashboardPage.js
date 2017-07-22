@@ -7,12 +7,13 @@ import fetchStrava from '../strava';
 import { stravaOAuthUrl } from '../config';
 
 import AppContainer from '../components/AppContainer';
+import TopLinearLoader from '../components/TopLinearLoader';
 
 const authUrl = stravaOAuthUrl();
 
 export default class DashboardPage extends Component {
   state = {
-    loading: false,
+    loading: true,
     error: false,
     userData: null,
     stravaData: null,
@@ -50,9 +51,14 @@ export default class DashboardPage extends Component {
 
   // Fetch user data then Strava data
   fetchAllData = async (user: string) => {
-    const userData = await this.fetchUserData(user);
-    const stravaData = await this.fetchStravaData(userData.strava.token);
-    this.setState({ userData, stravaData });
+    try {
+      const userData = await this.fetchUserData(user);
+      const stravaData = await this.fetchStravaData(userData.strava.token);
+      this.setState({ userData, stravaData, loading: false });
+    } catch (err) {
+      console.error(err);
+      this.setState({ error: true });
+    }
   };
 
   componentDidMount() {
@@ -62,11 +68,13 @@ export default class DashboardPage extends Component {
   }
 
   render() {
+    const { loading } = this.state;
     console.log(this.state);
     //console.log(this.props);
     return (
-      <AppContainer authed={this.props.appState.authed}>
-        <div className="mdl-grid">
+      <AppContainer authed={this.props.appState.authed} pageTitle="Dashboard">
+        <div><TopLinearLoader loading={loading} /></div>
+        <div>
           dashboard page
           <Button raised href={authUrl}>
             Connect with Strava

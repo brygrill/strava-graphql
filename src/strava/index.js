@@ -1,9 +1,10 @@
 // @flow
 import axios from 'axios';
+import moment from 'moment';
 
 import { stravaBaseApi } from '../config';
 
-const AFTER = '1494820800';
+const lastTenWeeks = moment().subtract(9, 'weeks').startOf('isoWeek').unix();
 
 const instance = axios.create({
   baseURL: stravaBaseApi,
@@ -24,11 +25,13 @@ const getActivities = (token, after) => {
 };
 
 const fetchStrava = (token: string) => {
-  return axios.all([getAthlete(token), getActivities(token, AFTER)]).then(
-    axios.spread((athlete, activities) => {
-      return { athlete: athlete.data, activities: activities.data };
-    }),
-  );
+  return axios
+    .all([getAthlete(token), getActivities(token, lastTenWeeks)])
+    .then(
+      axios.spread((athlete, activities) => {
+        return { athlete: athlete.data, activities: activities.data };
+      }),
+    );
 };
 
 export default fetchStrava;
