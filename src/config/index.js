@@ -1,6 +1,8 @@
 // @flow
 export const appTitle = 'Everyday Training';
 
+export const stravaBaseApi = 'https://www.strava.com/api/v3';
+
 export const stravaOAuthUrl = () => {
   const clientID = process.env.REACT_APP_STRAVA_CLIENTID;
   const URI = 'http://localhost:3000/strava';
