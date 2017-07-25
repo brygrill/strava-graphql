@@ -53,7 +53,9 @@ export default class DashboardPage extends Component {
   fetchAllData = async (user: string) => {
     try {
       const userData = await this.fetchUserData(user);
-      const stravaData = await this.fetchStravaData(userData.strava.token);
+      const stravaData = userData.strava.token
+        ? await this.fetchStravaData(userData.strava.token)
+        : null;
       this.setState({ userData, stravaData, loading: false });
     } catch (err) {
       console.error(err);
