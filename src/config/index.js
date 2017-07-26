@@ -1,5 +1,5 @@
 // @flow
-export const appTitle = 'Everyday Training';
+export const appTitle = 'SBR Training';
 
 export const stravaBaseApi = 'https://www.strava.com/api/v3';
 
