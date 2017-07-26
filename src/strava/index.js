@@ -1,6 +1,7 @@
 // @flow
 import axios from 'axios';
 import moment from 'moment';
+import _ from 'lodash';
 
 import { stravaBaseApi } from '../config';
 import sorted from './sorted';
@@ -13,6 +14,32 @@ const LASTTEN = moment().subtract(9, 'weeks').startOf('isoWeek').unix();
 const CURRENTSTART = moment().startOf('isoWeek');
 
 // FORMAT STRAVA DATA
+const formatHoursStr = sec => {
+  const duration = Number(sec);
+  const hrs = Math.floor(duration / 3600);
+  const mins = Math.floor(duration % 3600 / 60);
+  const minsStr = ('0' + mins).slice(-2);
+  return `${hrs}h ${minsStr}m`;
+};
+
+const formatHoursNum = sec => {
+  const hrs = moment.duration(sec, 'seconds').asHours();
+  return Math.round(hrs * 100) / 100;
+};
+
+const formatWeekStart = (date, human) => {
+  return human
+    ? moment(date).startOf('isoweek').format('MM/DD/YY')
+    : moment(date).startOf('isoweek').format('YYYY-MM-DD');
+};
+
+const weeksTill = (date, includeCurrent) => {
+  const today = moment();
+  return includeCurrent
+    ? Math.abs(today.diff(date, 'weeks')) + 1
+    : Math.abs(today.diff(date, 'weeks'));
+};
+
 // deteremine week object
 const determineWeek = num => {
   switch (num) {
@@ -38,6 +65,7 @@ const determineWeek = num => {
       return 'overflow';
   }
 };
+
 // sort by week
 const sortWeeks = data => {
   return new Promise((resolve, reject) => {
@@ -50,18 +78,99 @@ const sortWeeks = data => {
         const weeksAgo = CURRENTSTART.diff(workoutDate, 'weeks', true);
         const weeksAgoRounded = Math.ceil(weeksAgo);
         if (weeksAgoRounded > 0 && weeksAgoRounded < 10) {
+          sorted[
+            determineWeek(weeksAgoRounded)
+          ].weekStartHuman = formatWeekStart(workoutDate, true);
+          sorted[determineWeek(weeksAgoRounded)].weekStart = formatWeekStart(
+            workoutDate,
+            false,
+          );
           return sorted[determineWeek(weeksAgoRounded)].all.push(item);
         } else if (weeksAgoRounded <= 0) {
+          sorted.current.weekStartHuman = formatWeekStart(workoutDate, true);
+          sorted.current.weekStart = formatWeekStart(workoutDate, false);
           return sorted.current.all.push(item);
         }
         return null;
       });
       resolve(sorted);
     } catch (error) {
+      console.log(error);
       reject(error);
     }
   });
 };
+
+const sumWeekData = weekData => {
+  return new Promise((resolve, reject) => {
+    try {
+      _.mapKeys(weekData, (value, key) => {
+        let totalSuffer = 0;
+        let totalSeconds = 0;
+        let hoursBySport = {
+          swim: {
+            seconds: 0,
+            hoursTotal: 0,
+            hoursTotalHuman: null,
+          },
+          bike: {
+            seconds: 0,
+            hoursTotal: 0,
+            hoursTotalHuman: null,
+          },
+          run: {
+            seconds: 0,
+            hoursTotal: 0,
+            hoursTotalHuman: null,
+          },
+          strength: {
+            seconds: 0,
+            hoursTotal: 0,
+            hoursTotalHuman: null,
+          },
+        };
+        weekData[key].all.map(workout => {
+          if (workout.suffer_score) totalSuffer += workout.suffer_score;
+          if (workout.moving_time) totalSeconds += workout.moving_time;
+          switch (workout.type) {
+            case 'Run':
+              hoursBySport.run.seconds += workout.moving_time;
+              break;
+            case 'Ride':
+              hoursBySport.bike.seconds += workout.moving_time;
+              break;
+            case 'Swim':
+              hoursBySport.swim.seconds += workout.moving_time;
+              break;
+            case 'Crossfit':
+            case 'WeightTraining':
+              hoursBySport.strength.seconds += workout.moving_time;
+              break;
+            default:
+              break;
+          }
+        });
+        // Set total suffer score
+        weekData[key].sufferTotal = totalSuffer;
+        // Set and format total hours
+        weekData[key].hoursTotalHuman = formatHoursStr(totalSeconds);
+        weekData[key].hoursTotal = formatHoursNum(totalSeconds);
+        // Set and format hours by sport
+        _.mapKeys(hoursBySport, (sportVal, sportKey) => {
+          const sport = hoursBySport[sportKey];
+          sport.hoursTotalHuman = formatHoursStr(sport.seconds);
+          sport.hoursTotal = formatHoursNum(sport.seconds);
+        });
+        weekData[key].hoursBySport = hoursBySport;
+        return { totalSuffer, totalSeconds, hoursBySport };
+      });
+      resolve(weekData);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
 // FETCH STRAVA DATA
 const instance = axios.create({
   baseURL: stravaBaseApi,
@@ -94,6 +203,7 @@ const fetchAndFormatStrava = async (token: string) => {
   try {
     const stravaData = await fetchStrava(token);
     stravaData.activities = await sortWeeks(stravaData.activities);
+    stravaData.activities = await sumWeekData(stravaData.activities);
     return stravaData;
   } catch (err) {
     return {
