@@ -33,13 +33,6 @@ const formatWeekStart = (date, human) => {
     : moment(date).startOf('isoweek').format('YYYY-MM-DD');
 };
 
-const weeksTill = (date, includeCurrent) => {
-  const today = moment();
-  return includeCurrent
-    ? Math.abs(today.diff(date, 'weeks')) + 1
-    : Math.abs(today.diff(date, 'weeks'));
-};
-
 // deteremine week object
 const determineWeek = num => {
   switch (num) {
@@ -149,6 +142,7 @@ const sumWeekData = weekData => {
             default:
               break;
           }
+          return null;
         });
         // Set total suffer score
         weekData[key].sufferTotal = totalSuffer;
