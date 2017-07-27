@@ -1,6 +1,5 @@
 // @flow
 import React, { Component } from 'react';
-import Button from 'material-ui/Button';
 
 import fire from '../fire';
 import fetchStrava from '../strava';
@@ -8,6 +7,7 @@ import { stravaOAuthUrl, appTitle } from '../config';
 
 import AppContainer from '../components/AppContainer';
 import TopLinearLoader from '../components/TopLinearLoader';
+import ConnectWithStravaBtn from '../components/ConnectWithStravaBtn';
 import DashboardAppBar from '../components/DashboardAppBar';
 
 const authUrl = stravaOAuthUrl();
@@ -71,17 +71,15 @@ export default class DashboardPage extends Component {
   }
 
   render() {
-    const { loading } = this.state;
+    const { loading, userData } = this.state;
+    const stravaToken = userData ? userData.strava.token : null;
     console.log(this.state);
-    //console.log(this.props);
     return (
       <AppContainer authed={this.props.appState.authed} pageTitle="Dashboard">
         <div><TopLinearLoader loading={loading} /></div>
         <DashboardAppBar appBarTitle={appTitle} />
         <div style={{ marginTop: '80px' }}>
-          <Button raised href={authUrl}>
-            Connect with Strava
-          </Button>
+          <ConnectWithStravaBtn stravaToken={stravaToken} authUrl={authUrl} />
         </div>
       </AppContainer>
     );
