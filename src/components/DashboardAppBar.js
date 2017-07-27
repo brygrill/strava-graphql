@@ -1,44 +1,48 @@
 // @flow
 import React, { Component } from 'react';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
+import Avatar from 'material-ui/Avatar';
 
-const styleSheet = createStyleSheet('DashboardAppBar', {
-  root: {
-    //width: '100%',
-  },
-  flex: {
-    color: '#fff',
-    flex: 1,
-  },
-});
+import ConnectWithStravaBtn from './ConnectWithStravaBtn';
 
-class DashboardAppBar extends Component {
+const AvatarIcon = (props: { src: string }) => {
+  return props.src
+    ? <Avatar alt="Strava Avatar" src={props.src} style={{ margin: '10px' }} />
+    : null;
+};
+
+export default class DashboardAppBar extends Component {
   static defaultProps = {
     appBarTitle: 'Title',
   };
 
   props: {
-    classes: Object,
+    authUrl: string,
+    stravaToken: string,
+    stravaAvatarSrc: string,
     appBarTitle?: string,
   };
 
   render() {
-    const { classes, appBarTitle } = this.props;
+    const { appBarTitle, authUrl, stravaToken, stravaAvatarSrc } = this.props;
     return (
-      <div className={classes.root}>
+      <div>
         <AppBar position="fixed">
           <Toolbar>
-            <Typography type="title" color="inherit" className={classes.flex}>
+            <Typography
+              type="title"
+              color="inherit"
+              style={{ color: '#fff', flex: 1 }}
+            >
               {appBarTitle}
             </Typography>
+            <ConnectWithStravaBtn stravaToken={stravaToken} authUrl={authUrl} />
+            <AvatarIcon src={stravaAvatarSrc} />
           </Toolbar>
         </AppBar>
       </div>
     );
   }
 }
-
-export default withStyles(styleSheet)(DashboardAppBar);

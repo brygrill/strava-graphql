@@ -1,5 +1,8 @@
 // @flow
 import React, { Component } from 'react';
+import { withStyles, createStyleSheet } from 'material-ui/styles';
+import Grid from 'material-ui/Grid';
+import Paper from 'material-ui/Paper';
 
 import fire from '../fire';
 import fetchStrava from '../strava';
@@ -7,12 +10,26 @@ import { stravaOAuthUrl, appTitle } from '../config';
 
 import AppContainer from '../components/AppContainer';
 import TopLinearLoader from '../components/TopLinearLoader';
-import ConnectWithStravaBtn from '../components/ConnectWithStravaBtn';
 import DashboardAppBar from '../components/DashboardAppBar';
 
 const authUrl = stravaOAuthUrl();
 
-export default class DashboardPage extends Component {
+const styleSheet = createStyleSheet('DashboardPage', theme => ({
+  root: {
+    flexGrow: 1,
+    marginTop: 80,
+  },
+  paper: theme.mixins.gutters({
+    paddingTop: 16,
+    paddingBottom: 16,
+  }),
+  card: theme.mixins.gutters({
+    paddingTop: 16,
+    paddingBottom: 16,
+  }),
+}));
+
+class DashboardPage extends Component {
   state = {
     loading: true,
     error: false,
@@ -24,6 +41,7 @@ export default class DashboardPage extends Component {
     appState: Object,
     location: Object,
     history: Object,
+    classes: Object,
   };
 
   // Get data once on mount
@@ -71,17 +89,35 @@ export default class DashboardPage extends Component {
   }
 
   render() {
-    const { loading, userData } = this.state;
+    const { loading, userData, stravaData } = this.state;
+    const { classes } = this.props;
+
     const stravaToken = userData ? userData.strava.token : null;
+    const stravaAvatarSrc = stravaData
+      ? stravaData.athlete.profile_medium
+      : null;
     console.log(this.state);
+
     return (
       <AppContainer authed={this.props.appState.authed} pageTitle="Dashboard">
         <div><TopLinearLoader loading={loading} /></div>
-        <DashboardAppBar appBarTitle={appTitle} />
-        <div style={{ marginTop: '80px' }}>
-          <ConnectWithStravaBtn stravaToken={stravaToken} authUrl={authUrl} />
+        <DashboardAppBar
+          appBarTitle={appTitle}
+          stravaToken={stravaToken}
+          authUrl={authUrl}
+          stravaAvatarSrc={stravaAvatarSrc}
+        />
+        <div className={classes.root}>
+          <Grid container gutter={24}>
+            <Grid item sm={2} hidden={{ xsDown: true }} />
+            <Grid item xs={12} sm={8}>
+              <Paper className={classes.paper} elevation={4} />
+            </Grid>
+          </Grid>
         </div>
       </AppContainer>
     );
   }
 }
+
+export default withStyles(styleSheet)(DashboardPage);
