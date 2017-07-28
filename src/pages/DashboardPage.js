@@ -11,6 +11,7 @@ import { stravaOAuthUrl, appTitle } from '../config';
 import AppContainer from '../components/AppContainer';
 import TopLinearLoader from '../components/TopLinearLoader';
 import DashboardAppBar from '../components/DashboardAppBar';
+import DashboardList from '../components/DashboardList';
 
 const authUrl = stravaOAuthUrl();
 
@@ -96,6 +97,7 @@ class DashboardPage extends Component {
     const stravaAvatarSrc = stravaData
       ? stravaData.athlete.profile_medium
       : null;
+    const userWeek = userData ? userData.week : [];
     console.log(this.state);
 
     return (
@@ -109,9 +111,16 @@ class DashboardPage extends Component {
         />
         <div className={classes.root}>
           <Grid container gutter={24}>
-            <Grid item sm={2} hidden={{ xsDown: true }} />
-            <Grid item xs={12} sm={8}>
-              <Paper className={classes.paper} elevation={4} />
+            <Grid item sm={3} hidden={{ xsDown: true }} />
+            <Grid item xs={12} sm={6}>
+              <Paper className={classes.paper} elevation={4}>
+                <DashboardList
+                  list={userWeek}
+                  listTitle="Schedule"
+                  primary="day"
+                  secondary="details"
+                />
+              </Paper>
             </Grid>
           </Grid>
         </div>

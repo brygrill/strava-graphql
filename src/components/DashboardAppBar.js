@@ -16,12 +16,14 @@ const AvatarIcon = (props: { src: string }) => {
 export default class DashboardAppBar extends Component {
   static defaultProps = {
     appBarTitle: 'Title',
+    stravaToken: null,
+    stravaAvatarSrc: null,
   };
 
   props: {
     authUrl: string,
-    stravaToken: string,
-    stravaAvatarSrc: string,
+    stravaToken?: string,
+    stravaAvatarSrc?: string,
     appBarTitle?: string,
   };
 
