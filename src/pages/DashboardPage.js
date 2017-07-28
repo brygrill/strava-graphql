@@ -98,6 +98,7 @@ class DashboardPage extends Component {
       ? stravaData.athlete.profile_medium
       : null;
     const userWeek = userData ? userData.week : [];
+    const stravaWeekSummary = stravaData ? stravaData.currentWeekSummary : [];
     console.log(this.state);
 
     return (
@@ -116,12 +117,27 @@ class DashboardPage extends Component {
               <Paper className={classes.paper} elevation={4}>
                 <DashboardList
                   list={userWeek}
-                  listTitle="Schedule"
+                  listTitle="Get After It"
                   primary="day"
                   secondary="details"
                 />
               </Paper>
             </Grid>
+            <Grid item sm={3} hidden={{ xsDown: true }} />
+
+            <Grid item sm={3} hidden={{ xsDown: true }} />
+            <Grid item xs={12} sm={6}>
+              <Paper className={classes.paper} elevation={4}>
+                <DashboardList
+                  list={stravaWeekSummary}
+                  listTitle="The Numbers"
+                  titleEmoji=":stopwatch:"
+                  primary="name"
+                  secondary="value"
+                />
+              </Paper>
+            </Grid>
+            <Grid item sm={3} hidden={{ xsDown: true }} />
           </Grid>
         </div>
       </AppContainer>

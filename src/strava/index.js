@@ -165,6 +165,26 @@ const sumWeekData = weekData => {
   });
 };
 
+const formatWeekSummary = data => {
+  return new Promise((resolve, reject) => {
+    try {
+      const sports = data.hoursBySport;
+      const formatted = [
+        { name: 'Swim', value: sports.swim.hoursTotalHuman },
+        { name: 'Bike', value: sports.bike.hoursTotalHuman },
+        { name: 'Run', value: sports.run.hoursTotalHuman },
+        { name: 'Strength', value: sports.strength.hoursTotalHuman },
+        { name: 'Total Hours', value: data.hoursTotalHuman },
+        { name: 'Total Suffers', value: data.sufferTotal },
+      ];
+      resolve(formatted);
+    } catch (error) {
+      console.log(error);
+      reject(error);
+    }
+  });
+};
+
 // FETCH STRAVA DATA
 const instance = axios.create({
   baseURL: stravaBaseApi,
@@ -198,6 +218,10 @@ const fetchAndFormatStrava = async (token: string) => {
     const stravaData = await fetchStrava(token);
     stravaData.activities = await sortWeeks(stravaData.activities);
     stravaData.activities = await sumWeekData(stravaData.activities);
+    stravaData.currentWeekSummary = await formatWeekSummary(
+      stravaData.activities.current,
+    );
+
     return stravaData;
   } catch (err) {
     return {
