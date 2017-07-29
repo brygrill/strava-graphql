@@ -17,7 +17,7 @@ class TopLinearLoader extends Component {
 
   props: {
     classes: Object,
-    loading?: Boolean,
+    loading?: boolean,
   };
 
   render() {

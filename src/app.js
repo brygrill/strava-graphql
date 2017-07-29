@@ -1,7 +1,4 @@
 // @flow
-/* eslint-disable react/jsx-indent */
-/* eslint-disable react/jsx-indent-props */
-/* eslint-disable react/jsx-closing-bracket-location */
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
@@ -14,7 +11,7 @@ import NotFound from './pages/NotFoundPage';
 
 import { PrivateRoute, PublicRoute, NoMatchRoute } from './routes';
 
-import TopLinearLoader from './components/TopLinearLoader';
+import LogoLoader from './components/LogoLoader';
 
 // Render App
 export default class App extends Component {
@@ -47,9 +44,10 @@ export default class App extends Component {
 
   render() {
     const { loading } = this.state;
-    return loading
-      ? <div><TopLinearLoader loading={loading} /></div>
-      : <Router>
+    return (
+      <div>
+        <LogoLoader loading={loading} />
+        <Router>
           <div>
             <Switch>
               <PublicRoute
@@ -71,6 +69,8 @@ export default class App extends Component {
               <NoMatchRoute appState={this.state} component={NotFound} />
             </Switch>
           </div>
-        </Router>;
+        </Router>
+      </div>
+    );
   }
 }
