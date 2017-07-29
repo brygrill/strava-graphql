@@ -48,7 +48,7 @@ export default class App extends Component {
   render() {
     const { loading } = this.state;
     return loading
-      ? <div><TopLinearLoader /></div>
+      ? <div><TopLinearLoader loading={loading} /></div>
       : <Router>
           <div>
             <Switch>

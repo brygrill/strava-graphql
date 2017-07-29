@@ -9,7 +9,7 @@ import fetchStrava from '../strava';
 import { stravaOAuthUrl, appTitle } from '../config';
 
 import AppContainer from '../components/AppContainer';
-import TopLinearLoader from '../components/TopLinearLoader';
+import FullPageLoader from '../components/FullPageLoader';
 import DashboardAppBar from '../components/DashboardAppBar';
 import DashboardList from '../components/DashboardList';
 
@@ -103,7 +103,7 @@ class DashboardPage extends Component {
 
     return (
       <AppContainer authed={this.props.appState.authed} pageTitle="Dashboard">
-        <div><TopLinearLoader loading={loading} /></div>
+        <div><FullPageLoader loading={loading} /></div>
         <DashboardAppBar
           appBarTitle={appTitle}
           stravaToken={stravaToken}
