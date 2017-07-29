@@ -1,6 +1,7 @@
 /* Globals */
 body {
   font-family: 'Roboto', sans-serif;
+  background-color: #1b1b1b;
 }
 
 /* Dimmer Thanks Semantic UI */
@@ -14,6 +15,10 @@ body {
   pointer-events:none;
 }
 
+.sbr-dimmer-display-none {
+  display: none;
+}
+
 .sbr-dimmer {
   display: flex;
   position: fixed;
@@ -23,7 +28,8 @@ body {
   height: 100%;
   text-align: center;
   vertical-align: middle;
-  background-color: rgba(3, 169, 244, 1);
+  background-color: #03a9f4;
+  background-color: #1b1b1b;
   opacity: 1;
   line-height: 1;
   -webkit-animation-fill-mode: both;

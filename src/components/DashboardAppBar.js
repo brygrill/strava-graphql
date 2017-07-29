@@ -33,11 +33,7 @@ export default class DashboardAppBar extends Component {
       <div>
         <AppBar position="fixed">
           <Toolbar>
-            <Typography
-              type="title"
-              color="inherit"
-              style={{ color: '#fff', flex: 1 }}
-            >
+            <Typography type="title" color="inherit" style={{ flex: 1 }}>
               {appBarTitle}
             </Typography>
             <ConnectWithStravaBtn stravaToken={stravaToken} authUrl={authUrl} />
