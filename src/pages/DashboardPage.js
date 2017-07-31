@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
-import Paper from 'material-ui/Paper';
+import Typography from 'material-ui/Typography';
 
 import fire from '../fire';
 import fetchStrava from '../strava';
@@ -11,6 +11,9 @@ import { stravaOAuthUrl, appTitle } from '../config';
 import AppContainer from '../components/AppContainer';
 import FullPageLoader from '../components/FullPageLoader';
 import DashboardAppBar from '../components/DashboardAppBar';
+import DashboardItemContainer from '../components/DashboardItemContainer';
+import DashboardItemContainerWithProgress
+  from '../components/DashboardItemContainerWithProgress';
 import DashboardList from '../components/DashboardList';
 
 const authUrl = stravaOAuthUrl();
@@ -97,6 +100,12 @@ class DashboardPage extends Component {
     const stravaAvatarSrc = stravaData
       ? stravaData.athlete.profile_medium
       : null;
+    const weeklyHrsGoal = userData && stravaData
+      ? stravaData.activities.current.hoursTotal / userData.goals.weeklyHrs
+      : 0;
+    const totalHrsHuman = stravaData
+      ? stravaData.activities.current.hoursTotalHuman
+      : '0h 00m';
     const userWeek = userData ? userData.week : [];
     const stravaWeekSummary = stravaData ? stravaData.currentWeekSummary : [];
     console.log(this.state);
@@ -112,32 +121,39 @@ class DashboardPage extends Component {
         />
         <div className={classes.root}>
           <Grid container gutter={24}>
+
             <Grid item sm={3} hidden={{ xsDown: true }} />
-            <Grid item xs={12} sm={6}>
-              <Paper className={classes.paper} elevation={4}>
-                <DashboardList
-                  list={userWeek}
-                  listTitle="Get After It"
-                  primary="day"
-                  secondary="details"
-                />
-              </Paper>
-            </Grid>
+            <DashboardItemContainerWithProgress value={weeklyHrsGoal}>
+              <Typography type="title">
+                {`Hours this Week: ${totalHrsHuman}`}
+              </Typography>
+            </DashboardItemContainerWithProgress>
             <Grid item sm={3} hidden={{ xsDown: true }} />
 
             <Grid item sm={3} hidden={{ xsDown: true }} />
-            <Grid item xs={12} sm={6}>
-              <Paper className={classes.paper} elevation={4}>
-                <DashboardList
-                  list={stravaWeekSummary}
-                  listTitle="The Numbers"
-                  titleEmoji=":stopwatch:"
-                  primary="name"
-                  secondary="value"
-                />
-              </Paper>
-            </Grid>
+            <DashboardItemContainer>
+              <DashboardList
+                list={userWeek}
+                listTitle="Get After It"
+                titleEmoji=":punch:"
+                primary="day"
+                secondary="details"
+              />
+            </DashboardItemContainer>
             <Grid item sm={3} hidden={{ xsDown: true }} />
+
+            <Grid item sm={3} hidden={{ xsDown: true }} />
+            <DashboardItemContainer>
+              <DashboardList
+                list={stravaWeekSummary}
+                listTitle="KPIs"
+                titleEmoji=""
+                primary="name"
+                secondary="value"
+              />
+            </DashboardItemContainer>
+            <Grid item sm={3} hidden={{ xsDown: true }} />
+
           </Grid>
         </div>
       </AppContainer>

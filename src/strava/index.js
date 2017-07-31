@@ -175,7 +175,7 @@ const formatWeekSummary = data => {
         { name: 'Run', value: sports.run.hoursTotalHuman },
         { name: 'Strength', value: sports.strength.hoursTotalHuman },
         { name: 'Total Hours', value: data.hoursTotalHuman },
-        { name: 'Total Suffers', value: data.sufferTotal },
+        { name: 'Total Suffer', value: data.sufferTotal.toString() },
       ];
       resolve(formatted);
     } catch (error) {

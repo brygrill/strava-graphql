@@ -1,15 +1,15 @@
 {
-  "short_name": "TriPlan",
-  "name": "TriPlan",
+  "short_name": "SBR Training",
+  "name": "SBR Training",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "192x192",
+      "src": "logo_200.png",
+      "sizes": "200x200",
       "type": "image/png"
     }
   ],
   "start_url": "./index.html",
   "display": "standalone",
-  "theme_color": "#006db3",
-  "background_color": "#039be5"
+  "theme_color": "#03a9f4",
+  "background_color": "#03a9f4"
 }
