@@ -18,6 +18,13 @@ import DashboardList from '../components/DashboardList';
 
 const authUrl = stravaOAuthUrl();
 
+const formatGoalVal = (hrs: number, goal: number) => {
+  const hrsToMin = hrs * 60;
+  const goalToMin = goal * 60;
+  const percOfGoal = hrsToMin / goalToMin;
+  return Math.round(percOfGoal * 100);
+};
+
 const styleSheet = createStyleSheet('DashboardPage', theme => ({
   root: {
     flexGrow: 1,
@@ -96,68 +103,69 @@ class DashboardPage extends Component {
     const { loading, userData, stravaData } = this.state;
     const { classes } = this.props;
 
-    const stravaToken = userData ? userData.strava.token : null;
-    const stravaAvatarSrc = stravaData
-      ? stravaData.athlete.profile_medium
-      : null;
-    const weeklyHrsGoal = userData && stravaData
-      ? stravaData.activities.current.hoursTotal / userData.goals.weeklyHrs
-      : 0;
-    const totalHrsHuman = stravaData
-      ? stravaData.activities.current.hoursTotalHuman
-      : '0h 00m';
-    const userWeek = userData ? userData.week : [];
-    const stravaWeekSummary = stravaData ? stravaData.currentWeekSummary : [];
-    console.log(this.state);
+    if (userData && stravaData) {
+      const stravaToken = userData.strava.token.toString();
+      const stravaAvatarSrc = stravaData.athlete.profile_medium;
+      const weeklyHrsGoal = formatGoalVal(
+        stravaData.activities.current.hoursTotal,
+        userData.goals.weeklyHrs,
+      );
+      const totalHrsHuman = stravaData.activities.current.hoursTotalHuman;
+      const userWeek = userData.week;
+      const stravaWeekSummary = stravaData.currentWeekSummary;
+      console.log(this.state);
 
-    return (
-      <AppContainer authed={this.props.appState.authed} pageTitle="Dashboard">
-        <div><FullPageLoader loading={loading} /></div>
-        <DashboardAppBar
-          appBarTitle={appTitle}
-          stravaToken={stravaToken}
-          authUrl={authUrl}
-          stravaAvatarSrc={stravaAvatarSrc}
-        />
-        <div className={classes.root}>
-          <Grid container gutter={24}>
+      return (
+        <AppContainer authed={this.props.appState.authed} pageTitle="Dashboard">
+          <div><FullPageLoader loading={loading} /></div>
+          <DashboardAppBar
+            appBarTitle={appTitle}
+            stravaToken={stravaToken}
+            authUrl={authUrl}
+            stravaAvatarSrc={stravaAvatarSrc}
+          />
+          <div className={classes.root}>
+            <Grid container gutter={24}>
 
-            <Grid item sm={3} hidden={{ xsDown: true }} />
-            <DashboardItemContainerWithProgress value={weeklyHrsGoal}>
-              <Typography type="title">
-                {`Hours this Week: ${totalHrsHuman}`}
-              </Typography>
-            </DashboardItemContainerWithProgress>
-            <Grid item sm={3} hidden={{ xsDown: true }} />
+              <Grid item sm={3} hidden={{ xsDown: true }} />
+              <DashboardItemContainerWithProgress value={weeklyHrsGoal}>
+                <Typography type="title">
+                  {`Hours this Week: ${totalHrsHuman}`}
+                </Typography>
+              </DashboardItemContainerWithProgress>
+              <Grid item sm={3} hidden={{ xsDown: true }} />
 
-            <Grid item sm={3} hidden={{ xsDown: true }} />
-            <DashboardItemContainer>
-              <DashboardList
-                list={userWeek}
-                listTitle="Get After It"
-                titleEmoji=":punch:"
-                primary="day"
-                secondary="details"
-              />
-            </DashboardItemContainer>
-            <Grid item sm={3} hidden={{ xsDown: true }} />
+              <Grid item sm={3} hidden={{ xsDown: true }} />
+              <DashboardItemContainer>
+                <DashboardList
+                  list={userWeek}
+                  listTitle="Get After It"
+                  titleEmoji=":punch:"
+                  primary="day"
+                  secondary="details"
+                />
+              </DashboardItemContainer>
+              <Grid item sm={3} hidden={{ xsDown: true }} />
 
-            <Grid item sm={3} hidden={{ xsDown: true }} />
-            <DashboardItemContainer>
-              <DashboardList
-                list={stravaWeekSummary}
-                listTitle="KPIs"
-                titleEmoji=""
-                primary="name"
-                secondary="value"
-              />
-            </DashboardItemContainer>
-            <Grid item sm={3} hidden={{ xsDown: true }} />
+              <Grid item sm={3} hidden={{ xsDown: true }} />
+              <DashboardItemContainer>
+                <DashboardList
+                  list={stravaWeekSummary}
+                  listTitle="KPIs"
+                  titleEmoji=""
+                  primary="name"
+                  secondary="value"
+                />
+              </DashboardItemContainer>
+              <Grid item sm={3} hidden={{ xsDown: true }} />
 
-          </Grid>
-        </div>
-      </AppContainer>
-    );
+            </Grid>
+          </div>
+        </AppContainer>
+      );
+    }
+    // if data not ready yet, return null
+    return null;
   }
 }
 
