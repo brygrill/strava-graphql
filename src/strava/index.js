@@ -22,6 +22,12 @@ const formatHoursStr = sec => {
   return `${hrs}h ${minsStr}m`;
 };
 
+const formatMiles = meters => {
+  const miles = meters * 0.000621371192;
+  const milesRounded = Math.round(miles * 100) / 100;
+  return milesRounded.toString();
+};
+
 const formatHoursNum = sec => {
   const hrs = moment.duration(sec, 'seconds').asHours();
   return Math.round(hrs * 100) / 100;
@@ -100,6 +106,7 @@ const sumWeekData = weekData => {
       _.mapKeys(weekData, (value, key) => {
         let totalSuffer = 0;
         let totalSeconds = 0;
+        let totalRunMeters = 0;
         let hoursBySport = {
           swim: {
             seconds: 0,
@@ -128,6 +135,7 @@ const sumWeekData = weekData => {
           switch (workout.type) {
             case 'Run':
               hoursBySport.run.seconds += workout.moving_time;
+              totalRunMeters += workout.distance;
               break;
             case 'Ride':
               hoursBySport.bike.seconds += workout.moving_time;
@@ -149,6 +157,8 @@ const sumWeekData = weekData => {
         // Set and format total hours
         weekData[key].hoursTotalHuman = formatHoursStr(totalSeconds);
         weekData[key].hoursTotal = formatHoursNum(totalSeconds);
+        // Set and format total miles
+        weekData[key].runMilesTotal = formatMiles(totalRunMeters);
         // Set and format hours by sport
         _.mapKeys(hoursBySport, (sportVal, sportKey) => {
           const sport = hoursBySport[sportKey];
@@ -173,9 +183,10 @@ const formatWeekSummary = data => {
         { name: 'Swim', value: sports.swim.hoursTotalHuman },
         { name: 'Bike', value: sports.bike.hoursTotalHuman },
         { name: 'Run', value: sports.run.hoursTotalHuman },
+        { name: 'Run Miles', value: data.runMilesTotal },
         { name: 'Strength', value: sports.strength.hoursTotalHuman },
         { name: 'Total Hours', value: data.hoursTotalHuman },
-        { name: 'Total Suffer', value: data.sufferTotal.toString() },
+        { name: 'Total Suffer', value: data.sufferTotal },
       ];
       resolve(formatted);
     } catch (error) {
