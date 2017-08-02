@@ -103,69 +103,74 @@ class DashboardPage extends Component {
     const { loading, userData, stravaData } = this.state;
     const { classes } = this.props;
 
+    let stravaToken = null;
+    let stravaAvatarSrc = null;
+    let weeklyHrsGoal = null;
+    let totalHrsHuman = null;
+    let userWeek = [];
+    let stravaWeekSummary = [];
+
     if (userData && stravaData) {
-      const stravaToken = userData.strava.token.toString();
-      const stravaAvatarSrc = stravaData.athlete.profile_medium;
-      const weeklyHrsGoal = formatGoalVal(
+      stravaToken = userData.strava.token.toString();
+      stravaAvatarSrc = stravaData.athlete.profile_medium;
+      weeklyHrsGoal = formatGoalVal(
         stravaData.activities.current.hoursTotal,
         userData.goals.weeklyHrs,
       );
-      const totalHrsHuman = stravaData.activities.current.hoursTotalHuman;
-      const userWeek = userData.week;
-      const stravaWeekSummary = stravaData.currentWeekSummary;
+      totalHrsHuman = stravaData.activities.current.hoursTotalHuman;
+      userWeek = userData.week;
+      stravaWeekSummary = stravaData.currentWeekSummary;
       console.log(this.state);
-
-      return (
-        <AppContainer authed={this.props.appState.authed} pageTitle="Dashboard">
-          <div><FullPageLoader loading={loading} /></div>
-          <DashboardAppBar
-            appBarTitle={appTitle}
-            stravaToken={stravaToken}
-            authUrl={authUrl}
-            stravaAvatarSrc={stravaAvatarSrc}
-          />
-          <div className={classes.root}>
-            <Grid container gutter={24}>
-
-              <Grid item sm={3} hidden={{ xsDown: true }} />
-              <DashboardItemContainerWithProgress value={weeklyHrsGoal}>
-                <Typography type="title">
-                  {`Hours this Week: ${totalHrsHuman}`}
-                </Typography>
-              </DashboardItemContainerWithProgress>
-              <Grid item sm={3} hidden={{ xsDown: true }} />
-
-              <Grid item sm={3} hidden={{ xsDown: true }} />
-              <DashboardItemContainer>
-                <DashboardList
-                  list={userWeek}
-                  listTitle="Get After It"
-                  titleEmoji=":punch:"
-                  primary="day"
-                  secondary="details"
-                />
-              </DashboardItemContainer>
-              <Grid item sm={3} hidden={{ xsDown: true }} />
-
-              <Grid item sm={3} hidden={{ xsDown: true }} />
-              <DashboardItemContainer>
-                <DashboardList
-                  list={stravaWeekSummary}
-                  listTitle="KPIs"
-                  titleEmoji=""
-                  primary="name"
-                  secondary="value"
-                />
-              </DashboardItemContainer>
-              <Grid item sm={3} hidden={{ xsDown: true }} />
-
-            </Grid>
-          </div>
-        </AppContainer>
-      );
     }
-    // if data not ready yet, return null
-    return null;
+
+    return (
+      <AppContainer authed={this.props.appState.authed} pageTitle="Dashboard">
+        <div><FullPageLoader loading={loading} /></div>
+        <DashboardAppBar
+          appBarTitle={appTitle}
+          stravaToken={stravaToken}
+          authUrl={authUrl}
+          stravaAvatarSrc={stravaAvatarSrc}
+        />
+        <div className={classes.root}>
+          <Grid container gutter={24}>
+
+            <Grid item sm={3} hidden={{ xsDown: true }} />
+            <DashboardItemContainerWithProgress value={weeklyHrsGoal}>
+              <Typography type="headline" align="center">
+                {`Hours this Week: ${totalHrsHuman}`}
+              </Typography>
+            </DashboardItemContainerWithProgress>
+            <Grid item sm={3} hidden={{ xsDown: true }} />
+
+            <Grid item sm={3} hidden={{ xsDown: true }} />
+            <DashboardItemContainer>
+              <DashboardList
+                list={userWeek}
+                listTitle="Do The Work"
+                titleEmoji=""
+                primary="day"
+                secondary="details"
+              />
+            </DashboardItemContainer>
+            <Grid item sm={3} hidden={{ xsDown: true }} />
+
+            <Grid item sm={3} hidden={{ xsDown: true }} />
+            <DashboardItemContainer>
+              <DashboardList
+                list={stravaWeekSummary}
+                listTitle="KPIs"
+                titleEmoji=""
+                primary="name"
+                secondary="value"
+              />
+            </DashboardItemContainer>
+            <Grid item sm={3} hidden={{ xsDown: true }} />
+
+          </Grid>
+        </div>
+      </AppContainer>
+    );
   }
 }
 
