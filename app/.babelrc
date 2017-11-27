@@ -4,18 +4,12 @@
       "presets": []
     },
     "production": {
-      "presets": []
+      "presets": [],
+      "plugins": ["transform-react-remove-prop-types"]
     },
     "test": {
-      "presets": [
-        "es2015",
-        "stage-3"
-      ]
+      "presets": ["env"]
     }
   },
-  "plugins": [
-    "lodash",
-    "transform-flow-strip-types",
-    "transform-class-properties"
-  ]
+  "plugins": ["transform-class-properties", "transform-object-rest-spread"]
 }
