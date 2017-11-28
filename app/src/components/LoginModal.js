@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Form, Modal, Header, Message, Image } from 'semantic-ui-react';
+import { Grid, Form, Header, Modal, Message, Image } from 'semantic-ui-react';
 
 import logo from '../images/logo-gray.png';
 
@@ -15,50 +15,48 @@ const defaultProps = {
   error: true,
 };
 
-const styles = {
-  input: {
-    padding: '0 0 1rem 0',
-  },
-};
-
 export default class AuthBoundary extends Component {
   render() {
     return (
       <Modal open basic>
-        <Image src={logo} size="small" centered />
         <Modal.Content>
-          <Form onSubmit={this.props.onSubmit} error={this.props.error}>
-            <Form.Group>
-              <Form.Input
-                placeholder="Email"
-                name="email"
-                width={7}
-                type="email"
-                style={styles.input}
-                onChange={this.props.onChange}
-              />
-              <Form.Input
-                placeholder="Password"
-                name="password"
-                width={7}
-                type="password"
-                style={styles.input}
-                onChange={this.props.onChange}
-              />
-              <Form.Button
-                content="Sign in"
-                width={2}
-                color="blue"
-                fluid
-                // style={styles.input}
-              />
-            </Form.Group>
-            <Message
-              error
-              header="Invalid Sign in"
-              content="Please enter valid credentials."
-            />
-          </Form>
+          <Grid>
+            <Grid.Column width={4} only="computer" />
+            <Grid.Column width={16} computer={8}>
+              <Grid.Row>
+                <Image src={logo} size="small" centered />
+                <Header as="h2" content="Sign in to SBR Training" inverted textAlign="center" />
+                <Form onSubmit={this.props.onSubmit} error={this.props.error}>
+                  <Form.Input
+                    placeholder="Email"
+                    name="email"
+                    width={16}
+                    type="email"
+                    onChange={this.props.onChange}
+                  />
+                  <Form.Input
+                    placeholder="Password"
+                    name="password"
+                    width={16}
+                    type="password"
+                    onChange={this.props.onChange}
+                  />
+                  <Form.Button
+                    content="Sign in"
+                    width={16}
+                    color="blue"
+                    fluid
+                  />
+                  <Message
+                    error
+                    header="Invalid Sign in"
+                    content="Please enter valid credentials."
+                  />
+                </Form>
+              </Grid.Row>
+            </Grid.Column>
+            <Grid.Column width={4} only="computer" />
+          </Grid>
         </Modal.Content>
       </Modal>
     );
