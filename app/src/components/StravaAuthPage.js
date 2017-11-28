@@ -1,15 +1,8 @@
 // @flow
 import React, { Component } from 'react';
-import Dialog, {
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from 'material-ui/Dialog';
-import { LinearProgress } from 'material-ui/Progress';
 import axios from 'axios';
 
-import fire from '../fire';
-import { stravaFunctionUrl } from '../config';
+import { stravaFunctionUrl, fire } from '../config';
 
 import AppContainer from '../components/AppContainer';
 
@@ -69,23 +62,24 @@ export default class DashboardPage extends Component {
 
   render() {
     return (
-      <AppContainer authed={this.props.appState.authed}>
-        <div>
-          <Dialog open>
-            <LinearProgress />
-            <div>
-              <DialogTitle>
-                {'Authenticating with Strava'}
-              </DialogTitle>
-              <DialogContent>
-                <DialogContentText>
-                  Confirming your info with Strava. Just a moment...
-                </DialogContentText>
-              </DialogContent>
-            </div>
-          </Dialog>
-        </div>
-      </AppContainer>
+      // <AppContainer authed={this.props.appState.authed}>
+      //   <div>
+      //     <Dialog open>
+      //       <LinearProgress />
+      //       <div>
+      //         <DialogTitle>
+      //           {'Authenticating with Strava'}
+      //         </DialogTitle>
+      //         <DialogContent>
+      //           <DialogContentText>
+      //             Confirming your info with Strava. Just a moment...
+      //           </DialogContentText>
+      //         </DialogContent>
+      //       </div>
+      //     </Dialog>
+      //   </div>
+      // </AppContainer>
+      <div>Strava auth page!</div>
     );
   }
 }

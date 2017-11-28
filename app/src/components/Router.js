@@ -1,30 +1,27 @@
-// @flow
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
-import fire from './fire';
+import { fire } from '../config';
 
-import HomePage from './pages/HomePage';
-import DashboardPage from './pages/DashboardPage';
-import StravaAuthPage from './pages/StravaAuthPage';
-import NotFound from './pages/NotFoundPage';
+import { PrivateRoute, PublicRoute, NoMatchRoute } from './Routes';
+import HomePage from './HomePage';
+// import DashboardPage from './DashboardPage';
+import StravaAuthPage from './StravaAuthPage';
+import NotFound from './NotFoundPage';
 
-import { PrivateRoute, PublicRoute, NoMatchRoute } from './routes';
+const Dashboard = () => {
+  return <div>Dashboard!!!</div>;
+};
 
-import LogoLoader from './components/LogoLoader';
-
-// Render App
-export default class App extends Component {
+export default class RouterComponent extends Component {
   state = {
     loading: true,
     authed: false,
-    user: {
-      uid: null,
-    },
+    uid: null,
   };
 
   componentDidMount() {
-    console.log('App - CDM');
+    console.log('Router - cDM');
     this.listenForAuthChange();
   }
 
@@ -34,19 +31,17 @@ export default class App extends Component {
         this.setState({
           loading: false,
           authed: true,
-          user: { uid: user.uid },
+          uid: user.uid,
         });
       } else {
-        this.setState({ loading: false, authed: false, user: { uid: null } });
+        this.setState({ loading: false, authed: false, uid: null });
       }
     });
   };
 
   render() {
-    const { loading } = this.state;
     return (
       <div>
-        <LogoLoader loading={loading} />
         <Router>
           <div>
             <Switch>
@@ -59,7 +54,7 @@ export default class App extends Component {
               <PrivateRoute
                 path="/dashboard"
                 appState={this.state}
-                component={DashboardPage}
+                component={Dashboard}
               />
               <PrivateRoute
                 path="/strava"

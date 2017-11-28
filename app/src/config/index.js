@@ -1,5 +1,12 @@
-// @flow
+import firebase from 'firebase';
+
 export const appTitle = 'SBR Training';
+
+export const fire = firebase.initializeApp({
+  apiKey: process.env.REACT_APP_APIKEY,
+  authDomain: process.env.REACT_APP_AUTHDOMAIN,
+  databaseURL: process.env.REACT_APP_DBURL,
+});
 
 export const stravaBaseApi = 'https://www.strava.com/api/v3';
 
@@ -11,10 +18,10 @@ export const stravaOAuthUrl = () => {
   return authUrl;
 };
 
-export const stravaFunctionUrl = (code: string) => {
+export const stravaFunctionUrl = (code) => {
   return `https://us-central1-velox-f43d6.cloudfunctions.net/strava/token?code=${code}`;
 };
 
-export const allowedFunctionUrl = (phone: string) => {
+export const allowedFunctionUrl = (phone) => {
   return `https://us-central1-velox-f43d6.cloudfunctions.net/allowed?num=${phone}`;
 };

@@ -1,27 +1,15 @@
 {
-  "extends": [
-    "react-app",
-    "plugin:react/recommended",
-    "plugin:flowtype/recommended",
-    "prettier"
-  ],
+  "extends": "airbnb",
   "env": {
     "browser": true,
     "jest": true
   },
   "parser": "babel-eslint",
-  "plugins": [
-    "react",
-    "flowtype",
-    "class-property"
-  ],
+  "plugins": ["react", "class-property"],
   "settings": {
     "react": {
       "pragma": "React",
-      "version": "15.5"
-    },
-    "flowtype": {
-      "onlyFilesWithFlowAnnotation": true
+      "version": "16.0"
     }
   },
   "parserOptions": {
@@ -33,26 +21,14 @@
   "rules": {
     "vars-on-top": "warn",
     "prefer-template": "off",
-    "arrow-body-style": "off",
     "no-underscore-dangle": "off",
-    "import/no-unresolved": [
-      2,
-      {
-        "caseSensitive": false
-      }
-    ],
-    "import/no-extraneous-dependencies": "off",
-    "react/jsx-filename-extension": [
-      1,
-      {
-        "extensions": [
-          ".js",
-          ".jsx"
-        ]
-      }
-    ],
-    "react/forbid-prop-types": "off",
+    "linebreak-style": "off",
     "arrow-parens": "off",
-    "react/prefer-stateless-function": "off"
+    "import/no-dynamic-require": "off",
+    "arrow-body-style": "off",
+    "no-confusing-arrow": "off",
+    "react/jsx-filename-extension": "off",
+    "react/prefer-stateless-function": "off",
+    "react/forbid-prop-types": "off"
   }
 }
