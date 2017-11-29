@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { fire } from '../config';
 
 import { PrivateRoute, PublicRoute, NoMatchRoute } from './Routes';
-import HomePage from './HomePage';
+import HomePage from './SigninPage';
 // import DashboardPage from './DashboardPage';
 import StravaAuthPage from './StravaAuthPage';
 import NotFound from './NotFoundPage';
@@ -21,7 +21,6 @@ export default class RouterComponent extends Component {
   };
 
   componentDidMount() {
-    console.log('Router - cDM');
     this.listenForAuthChange();
   }
 
@@ -46,13 +45,13 @@ export default class RouterComponent extends Component {
           <div>
             <Switch>
               <PublicRoute
-                path="/"
+                path="/signin"
                 exact
                 appState={this.state}
                 component={HomePage}
               />
               <PrivateRoute
-                path="/dashboard"
+                path="/"
                 appState={this.state}
                 component={Dashboard}
               />

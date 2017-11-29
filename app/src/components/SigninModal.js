@@ -21,8 +21,8 @@ export default class AuthBoundary extends Component {
       <Modal open basic>
         <Modal.Content>
           <Grid>
-            <Grid.Column width={4} only="computer" />
-            <Grid.Column width={16} computer={8}>
+            <Grid.Column width={4} only="computer tablet" />
+            <Grid.Column width={16} computer={8} tablet={8}>
               <Grid.Row>
                 <Image src={logo} size="small" centered />
                 <Header as="h2" content="Sign in to SBR Training" inverted textAlign="center" />

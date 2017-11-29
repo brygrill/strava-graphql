@@ -1,10 +1,9 @@
-// @flow
 import React, { Component } from 'react';
 import axios from 'axios';
 
 import { stravaFunctionUrl, fire } from '../config';
 
-import AppContainer from '../components/AppContainer';
+// import AppContainer from '../components/AppContainer';
 
 const saveToken = (code, token) => {
   const config = { headers: { Authorization: `Bearer ${token}` } };
@@ -41,7 +40,7 @@ export default class DashboardPage extends Component {
         .then(idToken => {
           saveToken(code, idToken)
             .then(() => {
-              history.push('/dashboard');
+              history.push('/');
             })
             .catch(() => {
               this.setState({ error: true });
@@ -51,12 +50,12 @@ export default class DashboardPage extends Component {
           this.setState({ error: true });
         });
     } else {
-      history.push('/dashboard');
+      history.push('/');
     }
   };
 
   componentDidMount() {
-    console.log('StravaAuth - DCM');
+    console.log('StravaAuth - cDM');
     this.handleStravaCallback(this.props.location.search, this.props.history);
   }
 

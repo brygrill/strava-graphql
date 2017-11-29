@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import LoginModal from './LoginModal';
+import SigninModal from './SigninModal';
 import Loading from './Loading';
 
 import { fire } from '../config';
@@ -49,7 +49,7 @@ export default class HomePage extends Component {
   render() {
     if (!this.props.appState.loading) {
       return (
-        <LoginModal
+        <SigninModal
           error={this.state.error}
           onChange={this.handleLoginInputChange}
           onSubmit={this.handleLoginSubmit}

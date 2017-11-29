@@ -15,7 +15,7 @@ export const PrivateRoute = ({ component: Component, appState, ...rest }) => {
         appState.authed ? (
           <Component appState={appState} {...props} />
         ) : (
-          <Redirect to={{ pathname: '/' }} />
+          <Redirect to={{ pathname: '/signin' }} />
         )
       }
     />
@@ -32,7 +32,7 @@ export const PublicRoute = ({ component: Component, appState, ...rest }) => {
         !appState.authed ? (
           <Component appState={appState} {...props} />
         ) : (
-          <Redirect to={{ pathname: '/dashboard' }} />
+          <Redirect to={{ pathname: '/' }} />
         )
       }
     />
