@@ -4,14 +4,10 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { fire } from '../config';
 
 import { PrivateRoute, PublicRoute, NoMatchRoute } from './Routes';
-import HomePage from './SigninPage';
-// import DashboardPage from './DashboardPage';
+import SigninPage from './SigninPage';
+import DashboardPage from './DashboardPage';
 import StravaAuthPage from './StravaAuthPage';
 import NotFound from './NotFoundPage';
-
-const Dashboard = () => {
-  return <div>Dashboard!!!</div>;
-};
 
 export default class RouterComponent extends Component {
   state = {
@@ -48,12 +44,12 @@ export default class RouterComponent extends Component {
                 path="/signin"
                 exact
                 appState={this.state}
-                component={HomePage}
+                component={SigninPage}
               />
               <PrivateRoute
                 path="/"
                 appState={this.state}
-                component={Dashboard}
+                component={DashboardPage}
               />
               <PrivateRoute
                 path="/strava"
