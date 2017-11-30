@@ -4,3 +4,7 @@ body {
   font-family: sans-serif;
   background-color: #000000;
 }
+
+#root {
+  height: 100%
+}

@@ -9,6 +9,8 @@ import DashboardPage from './DashboardPage';
 import StravaAuthPage from './StravaAuthPage';
 import NotFound from './NotFoundPage';
 
+const Fragment = React.Fragment;
+
 export default class RouterComponent extends Component {
   state = {
     loading: true,
@@ -36,31 +38,29 @@ export default class RouterComponent extends Component {
 
   render() {
     return (
-      <div>
-        <Router>
-          <div>
-            <Switch>
-              <PublicRoute
-                path="/signin"
-                exact
-                appState={this.state}
-                component={SigninPage}
-              />
-              <PrivateRoute
-                path="/"
-                appState={this.state}
-                component={DashboardPage}
-              />
-              <PrivateRoute
-                path="/strava"
-                appState={this.state}
-                component={StravaAuthPage}
-              />
-              <NoMatchRoute appState={this.state} component={NotFound} />
-            </Switch>
-          </div>
-        </Router>
-      </div>
+      <Router>
+        <Fragment>
+          <Switch>
+            <PublicRoute
+              path="/signin"
+              exact
+              appState={this.state}
+              component={SigninPage}
+            />
+            <PrivateRoute
+              path="/"
+              appState={this.state}
+              component={DashboardPage}
+            />
+            <PrivateRoute
+              path="/strava"
+              appState={this.state}
+              component={StravaAuthPage}
+            />
+            <NoMatchRoute appState={this.state} component={NotFound} />
+          </Switch>
+        </Fragment>
+      </Router>
     );
   }
 }
