@@ -20,17 +20,13 @@ export default class SidebarMenu extends Component {
           vertical
           inverted
         >
-          <Menu.Item name="home">
-            <Icon name="home" />
-            Home
+          <Menu.Item name="disconnect">
+            <Icon name="window close outline" />
+            Disconnect Strava
           </Menu.Item>
-          <Menu.Item name="gamepad">
-            <Icon name="gamepad" />
-            Games
-          </Menu.Item>
-          <Menu.Item name="camera">
-            <Icon name="camera" />
-            Channels
+          <Menu.Item name="logout">
+            <Icon name="log out" />
+            Log Out
           </Menu.Item>
         </Sidebar>
         <Sidebar.Pusher>{this.props.children}</Sidebar.Pusher>

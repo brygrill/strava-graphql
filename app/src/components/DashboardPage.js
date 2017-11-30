@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Header } from 'semantic-ui-react';
+import { Header, Container } from 'semantic-ui-react';
 
+import Menu from './Menu';
 import SidebarMenu from './SidebarMenu';
+
+const Fragment = React.Fragment;
 
 const propTypes = {
   appState: PropTypes.shape({
@@ -20,11 +23,23 @@ const defaultProps = {
 };
 
 export default class DashboardPage extends Component {
+  state = {
+    sidebar: false,
+  };
+
+  toggleSidebar = () => {
+    this.setState({ sidebar: !this.state.sidebar });
+  };
   render() {
     return (
-      <SidebarMenu visible>
-        <Header inverted content="Dashboard!" />
-      </SidebarMenu>
+      <Fragment>
+        <SidebarMenu visible={this.state.sidebar}>
+          <Menu toggleSidebar={this.toggleSidebar} />
+          <Container style={{ marginTop: '3rem' }}>
+            <Header inverted content="Dashboard!" />
+          </Container>
+        </SidebarMenu>
+      </Fragment>
     );
   }
 }
