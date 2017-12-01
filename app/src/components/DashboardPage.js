@@ -1,48 +1,73 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Header, Container } from 'semantic-ui-react';
+import { Container } from 'semantic-ui-react';
 
 import Menu from './Menu';
 import SidebarMenu from './SidebarMenu';
+import StravaConnect from './StravaConnect';
+import StravaCharts from './StravaCharts';
+
+import { fire, stravaOAuthUrl } from '../config';
 
 const Fragment = React.Fragment;
 
 const propTypes = {
   appState: PropTypes.shape({
-    loading: PropTypes.bool,
-    authed: PropTypes.bool,
     uid: PropTypes.string.isRequired,
   }).isRequired,
 };
 
-const defaultProps = {
-  appState: {
-    loading: true,
-    authed: false,
-  },
-};
-
 export default class DashboardPage extends Component {
   state = {
+    loading: false,
+    error: false,
     sidebar: false,
+    userRef: fire.database().ref(`users/${this.props.appState.uid}`),
+    stravaToken: null,
   };
 
+  // UI
   toggleSidebar = () => {
     this.setState({ sidebar: !this.state.sidebar });
   };
+
+  // FIREBASE
+  getFirebase = () => {
+    this.state.userRef.on('value', userData => {
+      const user = userData.val();
+      if (user && 'strava' in user) {
+        this.setState({ stravaToken: user.strava.token });
+      }
+      console.log(user);
+    });
+  };
+
+  // LOGOUT
+  handleLogOut = () => {
+    fire.auth().signOut();
+  };
+
+  // LIFECYCLE
+  componentDidMount() {
+    this.getFirebase();
+  }
+
   render() {
     return (
-      <Fragment>
-        <SidebarMenu visible={this.state.sidebar}>
+      <SidebarMenu visible={this.state.sidebar} logout={this.handleLogOut}>
+        <Fragment>
           <Menu toggleSidebar={this.toggleSidebar} />
           <Container style={{ marginTop: '3rem' }}>
-            <Header inverted content="Dashboard!" />
+            {this.state.stravaToken ? (
+              <StravaCharts />
+            ) : (
+              <StravaConnect stravaOAuthUrl={stravaOAuthUrl} />
+            )}
           </Container>
-        </SidebarMenu>
-      </Fragment>
+        </Fragment>
+      </SidebarMenu>
     );
   }
 }
 
 DashboardPage.propTypes = propTypes;
-DashboardPage.defaultProps = defaultProps;

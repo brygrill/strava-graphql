@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { Sidebar, Menu, Icon } from 'semantic-ui-react';
 
 const propTypes = {
-  children: PropTypes.element.isRequired,
   visible: PropTypes.bool.isRequired,
+  logout: PropTypes.func.isRequired,
+  children: PropTypes.element.isRequired,
 };
 
 export default class SidebarMenu extends Component {
@@ -24,7 +25,7 @@ export default class SidebarMenu extends Component {
             <Icon name="window close outline" />
             Disconnect Strava
           </Menu.Item>
-          <Menu.Item name="logout">
+          <Menu.Item name="logout" onClick={this.props.logout}>
             <Icon name="log out" />
             Log Out
           </Menu.Item>
