@@ -8,3 +8,7 @@ body {
 #root {
   height: 100%
 }
+
+.back-black {
+  background-color: #000000 !important;
+}

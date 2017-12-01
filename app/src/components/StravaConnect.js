@@ -11,11 +11,18 @@ const propTypes = {
 export default class StravaConnect extends Component {
   render() {
     return (
-      <Segment inverted padded="very" style={{ marginTop: '6rem' }}>
+      <Segment
+        inverted
+        padded="very"
+        textAlign="center"
+        className="back-black"
+        style={{ marginTop: '6rem' }}
+      >
         <Header
           inverted
-          content="Connect to Strava"
-          subheader="We need the data to make the charts."
+          as="h1"
+          content="Welcome"
+          subheader="Please link your Strava account to get started."
         />
         <Image href={this.props.stravaOAuthUrl} src={stravaConnectBtn} />
       </Segment>

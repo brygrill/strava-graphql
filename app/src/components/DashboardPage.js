@@ -54,9 +54,17 @@ export default class DashboardPage extends Component {
 
   render() {
     return (
-      <SidebarMenu visible={this.state.sidebar} logout={this.handleLogOut}>
+      <SidebarMenu
+        visible={this.state.sidebar}
+        showDisconnect={this.state.stravaToken || false}
+        logout={this.handleLogOut}
+      >
         <Fragment>
-          <Menu toggleSidebar={this.toggleSidebar} />
+          <Menu
+            toggleSidebar={this.toggleSidebar}
+            // showDisclaimer={this.state.stravaToken || false}
+            showDisclaimer
+          />
           <Container style={{ marginTop: '3rem' }}>
             {this.state.stravaToken ? (
               <StravaCharts />
