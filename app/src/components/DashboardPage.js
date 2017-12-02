@@ -62,8 +62,7 @@ export default class DashboardPage extends Component {
         <Fragment>
           <Menu
             toggleSidebar={this.toggleSidebar}
-            // showDisclaimer={this.state.stravaToken || false}
-            showDisclaimer
+            showDisclaimer={this.state.stravaToken || false}
           />
           <Container style={{ marginTop: '3rem' }}>
             {this.state.stravaToken ? (

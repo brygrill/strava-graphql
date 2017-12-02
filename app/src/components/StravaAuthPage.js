@@ -1,36 +1,21 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { Segment, Header, Loader } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 
-import { stravaFunctionUrl, fire } from '../config';
+import { saveToken } from '../utils/fetch';
+import { fire } from '../config';
 
-// import AppContainer from '../components/AppContainer';
-
-const saveToken = (code, token) => {
-  const config = { headers: { Authorization: `Bearer ${token}` } };
-  return axios
-    .get(stravaFunctionUrl(code), config)
-    .then(resp => {
-      console.log(resp);
-      return resp.data;
-    })
-    .catch(err => {
-      console.log(err);
-      return false;
-    });
+const propTypes = {
+  location: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
-export default class DashboardPage extends Component {
+export default class StravaAuthPage extends Component {
   state = {
     error: false,
   };
 
-  props: {
-    appState: Object,
-    location: Object,
-    history: Object,
-  };
-
-  handleStravaCallback = (search: string, history: Object) => {
+  handleStravaCallback = (search, history) => {
     const params = new URLSearchParams(search);
     const code = params.get('code');
     if (code) {
@@ -40,13 +25,16 @@ export default class DashboardPage extends Component {
         .then(idToken => {
           saveToken(code, idToken)
             .then(() => {
-              history.push('/');
+              setTimeout(() => {
+                history.push('/');
+              }, 5000);
+              // history.push('/');
             })
             .catch(() => {
               this.setState({ error: true });
             });
         })
-        .catch(function(error) {
+        .catch(() => {
           this.setState({ error: true });
         });
     } else {
@@ -61,24 +49,23 @@ export default class DashboardPage extends Component {
 
   render() {
     return (
-      // <AppContainer authed={this.props.appState.authed}>
-      //   <div>
-      //     <Dialog open>
-      //       <LinearProgress />
-      //       <div>
-      //         <DialogTitle>
-      //           {'Authenticating with Strava'}
-      //         </DialogTitle>
-      //         <DialogContent>
-      //           <DialogContentText>
-      //             Confirming your info with Strava. Just a moment...
-      //           </DialogContentText>
-      //         </DialogContent>
-      //       </div>
-      //     </Dialog>
-      //   </div>
-      // </AppContainer>
-      <div>Strava auth page!</div>
+      <Segment
+        inverted
+        padded="very"
+        textAlign="center"
+        className="back-black"
+        style={{ marginTop: '6rem' }}
+      >
+        <Loader active inline="centered" />
+        <Header
+          inverted
+          as="h1"
+          content="Authenticating with Strava"
+          subheader="This should only take a moment..."
+        />
+      </Segment>
     );
   }
 }
+
+StravaAuthPage.propTypes = propTypes;
