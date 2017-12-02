@@ -3,7 +3,6 @@ const admin = require('firebase-admin');
 const express = require('express');
 const cors = require('cors')({ origin: true });
 const axios = require('axios');
-const values = require('lodash.values');
 const app = express();
 
 // init functions
@@ -12,21 +11,6 @@ admin.initializeApp(functions.config().firebase);
 // connect to db
 const db = admin.database();
 const ref = db.ref();
-
-// ----------- ALLOWED --------------------
-// Fetch Currently Allowed Users
-exports.allowed = functions.https.onRequest((req, res) => {
-  cors(req, res, () => {
-    ref.child('allowedUsers').once('value').then(data => {
-      const allowedUsers = values(data.val());
-      if (allowedUsers.includes(req.query.num)) {
-        res.json({ valid: true });
-      } else {
-        res.json({ valid: false });
-      }
-    });
-  });
-});
 
 // ----------- STRAVA --------------------
 // Save Strava Access Code

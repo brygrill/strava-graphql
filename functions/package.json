@@ -6,8 +6,7 @@
     "cors": "^2.8.3",
     "express": "^4.15.3",
     "firebase-admin": "~4.2.1",
-    "firebase-functions": "^0.5.7",
-    "lodash.values": "^4.3.0"
+    "firebase-functions": "^0.5.7"
   },
   "private": true
 }

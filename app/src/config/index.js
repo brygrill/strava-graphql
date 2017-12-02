@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 
-export const appTitle = 'SBR Training';
+export const appTitle = 'Strava Dashboard';
 
 export const fire = firebase.initializeApp({
   apiKey: process.env.REACT_APP_APIKEY,
@@ -16,10 +16,7 @@ const URI = 'http://localhost:3000/strava';
 const prompt = 'force';
 export const stravaOAuthUrl = `https://www.strava.com/oauth/authorize?client_id=${String(clientID)}&response_type=code&redirect_uri=${URI}&approval_prompt=${prompt}&scope=view_private`;
 
+// Get strava token function
 export const stravaFunctionUrl = (code) => {
   return `https://us-central1-velox-f43d6.cloudfunctions.net/strava/token?code=${code}`;
-};
-
-export const allowedFunctionUrl = (phone) => {
-  return `https://us-central1-velox-f43d6.cloudfunctions.net/allowed?num=${phone}`;
 };

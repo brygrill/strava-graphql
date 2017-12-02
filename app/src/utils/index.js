@@ -197,31 +197,31 @@ const formatWeekSummary = data => {
 };
 
 // FETCH STRAVA DATA
-const instance = axios.create({
-  baseURL: stravaBaseApi,
-  timeout: 5000,
-});
+// const instance = axios.create({
+//   baseURL: stravaBaseApi,
+//   timeout: 5000,
+// });
 
-const getAthlete = token => {
-  const config = { headers: { Authorization: `Bearer ${token}` } };
-  return instance.get('/athlete', config);
-};
+// const getAthlete = token => {
+//   const config = { headers: { Authorization: `Bearer ${token}` } };
+//   return instance.get('/athlete', config);
+// };
 
-const getActivities = (token, after) => {
-  const config = { headers: { Authorization: `Bearer ${token}` } };
-  return instance.get(
-    `/athlete/activities?after=${after}&per_page=200`,
-    config,
-  );
-};
+// const getActivities = (token, after) => {
+//   const config = { headers: { Authorization: `Bearer ${token}` } };
+//   return instance.get(
+//     `/athlete/activities?after=${after}&per_page=200`,
+//     config,
+//   );
+// };
 
-const fetchStrava = (token: string) => {
-  return axios.all([getAthlete(token), getActivities(token, LASTTEN)]).then(
-    axios.spread((athlete, activities) => {
-      return { athlete: athlete.data, activities: activities.data };
-    }),
-  );
-};
+// const fetchStrava = (token: string) => {
+//   return axios.all([getAthlete(token), getActivities(token, LASTTEN)]).then(
+//     axios.spread((athlete, activities) => {
+//       return { athlete: athlete.data, activities: activities.data };
+//     }),
+//   );
+// };
 
 // FORMAT AND RETURN
 const fetchAndFormatStrava = async (token: string) => {
