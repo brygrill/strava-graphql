@@ -6,8 +6,10 @@ import Menu from './Menu';
 import SidebarMenu from './SidebarMenu';
 import StravaConnect from './StravaConnect';
 import StravaCharts from './StravaCharts';
+import Loading from './Loading';
 
 import { fire, stravaOAuthUrl } from '../config';
+import { deAuthAthlete } from '../utils/fetch';
 
 const Fragment = React.Fragment;
 
@@ -19,10 +21,11 @@ const propTypes = {
 
 export default class DashboardPage extends Component {
   state = {
-    loading: false,
+    loading: true,
     error: false,
     sidebar: false,
     userRef: fire.database().ref(`users/${this.props.appState.uid}`),
+    userObj: null,
     stravaToken: null,
   };
 
@@ -32,14 +35,31 @@ export default class DashboardPage extends Component {
   };
 
   // FIREBASE
-  getFirebase = () => {
-    this.state.userRef.on('value', userData => {
-      const user = userData.val();
-      if (user && 'strava' in user) {
-        this.setState({ stravaToken: user.strava.token });
-      }
-      console.log(user);
+  getFirebaseOn = () => {
+    this.state.userRef.on('value', user => {
+      const userObj = user.val();
+      this.setState({ userObj });
     });
+  };
+
+  getFirebaseOnce = () => {
+    this.state.userRef
+      .once('value')
+      .then(snapshot => {
+        const userObj = snapshot.val();
+        const stravaToken = snapshot
+          .child('strava')
+          .child('token')
+          .val();
+        if (stravaToken) {
+          this.setState({ stravaToken, userObj, loading: false });
+        } else {
+          this.setState({ loading: false });
+        }
+      })
+      .catch(() => {
+        this.setState({ loading: false, error: false });
+      });
   };
 
   // LOGOUT
@@ -47,17 +67,36 @@ export default class DashboardPage extends Component {
     fire.auth().signOut();
   };
 
+  // DEAUTH
+  handleDeAuth = async () => {
+    this.setState({ loading: true });
+    try {
+      // rm token from firebase
+      this.state.userRef.child('strava').remove();
+      // deauth app in strava
+      await deAuthAthlete(this.state.stravaToken);
+      this.setState({ loading: false, sidebar: false, stravaToken: null });
+    } catch (error) {
+      this.setState({ error: true, sidebar: false, loading: false });
+    }
+  };
+
   // LIFECYCLE
   componentDidMount() {
-    this.getFirebase();
+    this.getFirebaseOn();
+    this.getFirebaseOnce();
   }
 
   render() {
+    if (this.state.loading) {
+      return <Loading />;
+    }
     return (
       <SidebarMenu
         visible={this.state.sidebar}
         showDisconnect={this.state.stravaToken || false}
         logout={this.handleLogOut}
+        deauth={this.handleDeAuth}
       >
         <Fragment>
           <Menu

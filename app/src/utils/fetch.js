@@ -3,7 +3,10 @@ import moment from 'moment';
 
 import { fireFuncStrava, stravaBaseApi } from '../config';
 
-const LASTTEN = moment().subtract(9, 'weeks').startOf('isoWeek').unix();
+const LASTTEN = moment()
+  .subtract(9, 'weeks')
+  .startOf('isoWeek')
+  .unix();
 
 // Fire Function to save Strava OAuth token
 export const saveToken = (code, token) => {
@@ -21,6 +24,7 @@ export const saveToken = (code, token) => {
 };
 
 // Strava API
+// Get Athlete Data
 const instance = axios.create({
   baseURL: stravaBaseApi,
   timeout: 5000,
@@ -39,7 +43,7 @@ const getActivities = (token, after) => {
   );
 };
 
-export const fetchStrava = (token: string) => {
+export const fetchAthleteData = token => {
   return axios.all([getAthlete(token), getActivities(token, LASTTEN)]).then(
     axios.spread((athlete, activities) => {
       return { athlete: athlete.data, activities: activities.data };
@@ -47,4 +51,8 @@ export const fetchStrava = (token: string) => {
   );
 };
 
-export default saveToken;
+// Deauth Athlete
+export const deAuthAthlete = token => {
+  const config = { headers: { Authorization: `Bearer ${token}` } };
+  return axios.post('https://www.strava.com/oauth/deauthorize', {}, config);
+};

@@ -5,13 +5,19 @@ import { Sidebar, Menu, Icon } from 'semantic-ui-react';
 const propTypes = {
   visible: PropTypes.bool.isRequired,
   logout: PropTypes.func.isRequired,
-  showDisconnect: PropTypes.bool.isRequired,
+  deauth: PropTypes.func.isRequired,
+  showDisconnect: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+  ]).isRequired,
   children: PropTypes.element.isRequired,
 };
 
 export default class SidebarMenu extends Component {
   render() {
-    const disconnectVisible = this.props.showDisconnect ? {} : { display: 'none' };
+    const disconnectVisible = this.props.showDisconnect
+      ? {}
+      : { display: 'none' };
     return (
       <Sidebar.Pushable>
         <Sidebar
@@ -23,7 +29,11 @@ export default class SidebarMenu extends Component {
           vertical
           inverted
         >
-          <Menu.Item name="disconnect" style={disconnectVisible}>
+          <Menu.Item
+            name="disconnect"
+            style={disconnectVisible}
+            onClick={this.props.deauth}
+          >
             <Icon name="window close outline" />
             Disconnect Strava
           </Menu.Item>

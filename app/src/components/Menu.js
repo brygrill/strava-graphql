@@ -6,7 +6,10 @@ import poweredByStrava from '../images/api_logo_pwrdBy_strava_stack_gray.svg';
 
 const propTypes = {
   toggleSidebar: PropTypes.func.isRequired,
-  showDisclaimer: PropTypes.bool.isRequired,
+  showDisclaimer: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+  ]).isRequired,
 };
 
 export default class MenuComponent extends Component {
