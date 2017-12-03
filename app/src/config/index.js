@@ -21,4 +21,4 @@ export const stravaOAuthUrl = `https://www.strava.com/oauth/authorize?client_id=
 
 // Firebase function to gen strava access token
 // and save to user in realtime db
-export const fireFuncStrava = 'https://us-central1-velox-f43d6.cloudfunctions.net/strava';
+export const fireFuncStrava = 'https://us-central1-velox-f43d6.cloudfunctions.net/strava/';

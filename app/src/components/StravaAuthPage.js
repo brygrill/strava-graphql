@@ -10,44 +10,47 @@ const propTypes = {
   history: PropTypes.object.isRequired,
 };
 
+const currentUserToken = () => {
+  return fire
+    .auth()
+    .currentUser.getIdToken()
+    .then(token => {
+      return token;
+    })
+    .catch(err => {
+      return err;
+    });
+};
+
 export default class StravaAuthPage extends Component {
   state = {
     error: false,
   };
 
-  handleStravaCallback = (search, history) => {
-    const params = new URLSearchParams(search);
-    const code = params.get('code');
-    if (code) {
-      fire
-        .auth()
-        .currentUser.getIdToken()
-        .then(idToken => {
-          saveToken(code, idToken)
-            .then(() => {
-              setTimeout(() => {
-                history.push('/');
-              }, 5000);
-              // history.push('/');
-            })
-            .catch(() => {
-              this.setState({ error: true });
-            });
-        })
-        .catch(() => {
-          this.setState({ error: true });
-        });
-    } else {
-      history.push('/');
+  handleStravaCallback = async (search, history) => {
+    try {
+      const params = new URLSearchParams(search);
+      const code = params.get('code');
+      if (code) {
+        const fireToken = await currentUserToken();
+        await saveToken(code, fireToken);
+        history.push('/');
+      } else {
+        history.push('/');
+      }
+    } catch (error) {
+      this.setState({ error: true });
     }
   };
 
   componentDidMount() {
-    console.log('StravaAuth - cDM');
     this.handleStravaCallback(this.props.location.search, this.props.history);
   }
 
   render() {
+    if (this.state.error) {
+      return <Header>Error Msg Here</Header>;
+    }
     return (
       <Segment
         inverted

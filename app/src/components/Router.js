@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import { fire } from '../config';
 
@@ -8,6 +8,8 @@ import SigninPage from './SigninPage';
 import DashboardPage from './DashboardPage';
 import StravaAuthPage from './StravaAuthPage';
 import NotFound from './NotFoundPage';
+
+import Loading from './Loading';
 
 const Fragment = React.Fragment;
 
@@ -37,28 +39,29 @@ export default class RouterComponent extends Component {
   };
 
   render() {
+    if (this.state.loading) {
+      return <Loading />;
+    }
     return (
       <Router>
         <Fragment>
-          <Switch>
-            <PublicRoute
-              path="/signin"
-              exact
-              appState={this.state}
-              component={SigninPage}
-            />
-            <PrivateRoute
-              path="/"
-              appState={this.state}
-              component={DashboardPage}
-            />
-            <PrivateRoute
-              path="/strava"
-              appState={this.state}
-              component={StravaAuthPage}
-            />
-            <NoMatchRoute appState={this.state} component={NotFound} />
-          </Switch>
+          <PublicRoute
+            path="/signin"
+            appState={this.state}
+            component={SigninPage}
+          />
+          <PrivateRoute
+            path="/"
+            exact
+            appState={this.state}
+            component={DashboardPage}
+          />
+          <PrivateRoute
+            path="/strava"
+            appState={this.state}
+            component={StravaAuthPage}
+          />
+          <NoMatchRoute appState={this.state} component={NotFound} />
         </Fragment>
       </Router>
     );

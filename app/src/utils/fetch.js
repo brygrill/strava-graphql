@@ -1,6 +1,9 @@
 import axios from 'axios';
+import moment from 'moment';
 
 import { fireFuncStrava, stravaBaseApi } from '../config';
+
+const LASTTEN = moment().subtract(9, 'weeks').startOf('isoWeek').unix();
 
 // Fire Function to save Strava OAuth token
 export const saveToken = (code, token) => {
