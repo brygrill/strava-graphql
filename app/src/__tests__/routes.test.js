@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { MemoryRouter } from 'react-router-dom';
-import { PrivateRoute, PublicRoute, AppRoute, NoMatchRoute } from '../routes';
+import { PrivateRoute, PublicRoute, NoMatchRoute } from '../components/Routes';
 
 const Public = () => <h3>Public</h3>;
 const Protected = () => <h3>Protected</h3>;
-const Home = () => <h3>Home</h3>;
 const NotFound = () => <h3>Not Found</h3>;
 
 const unAuthedState = {
@@ -34,15 +33,6 @@ describe('<Routes />', () => {
     ReactDOM.render(
       <MemoryRouter>
         <PublicRoute path="/public" appState={authedState} component={Public} />
-      </MemoryRouter>,
-      div,
-    );
-  });
-  it('App Route Renders Properly', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(
-      <MemoryRouter>
-        <AppRoute path="/" appState={authedState} component={Home} />
       </MemoryRouter>,
       div,
     );
