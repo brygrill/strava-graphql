@@ -41,8 +41,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "deploy:dev": "yarn run build && zsh scripts/dev-deploy.sh",
-    "deploy": "yarn run build && firebase deploy --only hosting",
+    "deploy": "yarn build && now deploy ./build -n stravadash",
+    "deploy:fire": "yarn run build && firebase deploy --only hosting",
     "functions": "firebase deploy --only functions"
   }
 }
