@@ -105,7 +105,7 @@ export default class DashboardPage extends Component {
           />
           <Container style={{ marginTop: '3rem' }}>
             {this.state.stravaToken ? (
-              <StravaCharts />
+              <StravaCharts token={this.state.stravaToken} />
             ) : (
               <StravaConnect stravaOAuthUrl={stravaOAuthUrl} />
             )}
