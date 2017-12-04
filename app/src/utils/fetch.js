@@ -1,12 +1,6 @@
 import axios from 'axios';
-import moment from 'moment';
 
 import { fireFuncStrava, stravaBaseApi } from '../config';
-
-const LASTTEN = moment()
-  .subtract(9, 'weeks')
-  .startOf('isoWeek')
-  .unix();
 
 // Fire Function to save Strava OAuth token
 export const saveToken = (code, token) => {
@@ -14,28 +8,28 @@ export const saveToken = (code, token) => {
   return axios
     .post(fireFuncStrava, { code }, config)
     .then(resp => {
-      console.log(resp);
       return resp.data;
     })
-    .catch(err => {
-      console.log(err);
+    .catch(() => {
       return false;
     });
 };
 
 // Strava API
-// Get Athlete Data
+// Init Strava
 const instance = axios.create({
   baseURL: stravaBaseApi,
   timeout: 5000,
 });
 
-const getAthlete = token => {
+// Get athlete profile
+export const getAthlete = token => {
   const config = { headers: { Authorization: `Bearer ${token}` } };
   return instance.get('/athlete', config);
 };
 
-const getActivities = (token, after) => {
+// Get activities since X
+export const getActivities = (token, after) => {
   const config = { headers: { Authorization: `Bearer ${token}` } };
   return instance.get(
     `/athlete/activities?after=${after}&per_page=200`,
@@ -43,8 +37,9 @@ const getActivities = (token, after) => {
   );
 };
 
-export const fetchAthleteData = token => {
-  return axios.all([getAthlete(token), getActivities(token, LASTTEN)]).then(
+// Get athlete and activities
+export const fetchAthleteData = (token, after) => {
+  return axios.all([getAthlete(token), getActivities(token, after)]).then(
     axios.spread((athlete, activities) => {
       return { athlete: athlete.data, activities: activities.data };
     }),
