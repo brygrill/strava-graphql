@@ -4,6 +4,7 @@ database.rules.json
 
 # Secrets
 .env
+.runtimeconfig.json
 config.js
 config.json
 secrets.js

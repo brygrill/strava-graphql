@@ -12,6 +12,7 @@
     }
   },
   "rules": {
+    "linebreak-style": "off",
     "vars-on-top": "warn",
     "arrow-body-style": "off",
     "no-underscore-dangle": "off",
