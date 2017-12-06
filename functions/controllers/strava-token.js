@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const controllers = {
+module.exports = {
   updateStravaToken(ref, uid, token) {
     return ref
       .child('users')
@@ -37,5 +37,3 @@ const controllers = {
       });
   },
 };
-
-module.exports = controllers;

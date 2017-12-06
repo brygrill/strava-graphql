@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-import { fireFuncStrava, stravaBaseApi } from '../config';
+import { functionsAccess, stravaBaseApi } from '../config';
 
 // Fire Function to save Strava OAuth token
 export const saveToken = (code, token) => {
   const config = { headers: { Authorization: `Bearer ${token}` } };
   return axios
-    .post(fireFuncStrava, { code }, config)
+    .post(functionsAccess, { code }, config)
     .then(resp => {
       return resp.data;
     })
