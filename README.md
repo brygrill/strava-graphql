@@ -1,9 +1,11 @@
-# Swim-Bike-Run-OCR Training App
+# Dash
 [![Build Status](https://travis-ci.org/brygrill/sbr-training.svg?branch=master)](https://travis-ci.org/brygrill/sbr-training) 
 
-React + Firebase app to plan and analyze triathlon, OCR, and run training. 🏊 🚴 🏃 💪
+Some visualizations for your Strava data 🏊 🚴 🏃 💪
 
 Built With:
-- [Firebase Functions](https://firebase.google.com/docs/functions/)
-- [Firebase Phone Auth](https://firebase.google.com/docs/auth/web/phone-auth)
-- [material-ui](https://github.com/callemall/material-ui)
+- React
+- GraphQL
+- Apollo
+- Firebase
+- Firebase Functions
