@@ -21,13 +21,8 @@ if (env === 'production') {
 }
 
 // Serve graphql
-app.use(
-  '/',
-  graphqlHTTP({
-    schema,
-    graphiql: env !== 'production', // only graphiql in dev
-  }),
-);
+// Only serve graphiql in dev
+app.use('/', graphqlHTTP({ schema, graphiql: env !== 'production' }));
 
 // Export app
 module.exports = app;

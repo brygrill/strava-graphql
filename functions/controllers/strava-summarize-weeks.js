@@ -12,10 +12,8 @@ const instance = axios.create({
 
 const getActivities = (token, after) => {
   const config = { headers: { Authorization: `Bearer ${token}` } };
-  return instance.get(
-    `/athlete/activities?after=${after}&per_page=200`,
-    config,
-  );
+  const endpoint = `/athlete/activities?after=${after}&per_page=200`;
+  return instance.get(endpoint, config);
 };
 
 module.exports = (token, count) => {
