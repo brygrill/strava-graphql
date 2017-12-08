@@ -20,7 +20,7 @@ const propTypes = {
   }).isRequired,
 };
 
-export default class DashboardPage extends Component {
+export default class GraphiQLPage extends Component {
   state = {
     loading: true,
     error: false,
@@ -117,4 +117,4 @@ export default class DashboardPage extends Component {
   }
 }
 
-DashboardPage.propTypes = propTypes;
+GraphiQLPage.propTypes = propTypes;

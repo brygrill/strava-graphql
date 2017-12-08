@@ -31,4 +31,4 @@ export const stravaOAuthUrl = `https://www.strava.com/oauth/authorize?client_id=
 export const functionsAccess =
   'https://us-central1-velox-f43d6.cloudfunctions.net/access/';
 
-export const functionsGraphql = 'https://us-central1-velox-f43d6.cloudfunctions.net/graphql';
+export const functionsGraphql = 'https://us-central1-velox-f43d6.cloudfunctions.net/graphql/';

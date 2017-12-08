@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Segment, Header, Loader } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
-import { saveToken } from '../utils/fetch';
-import { fire } from '../config';
+import { saveToken } from '../../utils';
+import { fire } from '../../config';
 
 const propTypes = {
   location: PropTypes.object.isRequired,

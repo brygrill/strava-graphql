@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import SigninModal from './SigninModal';
-import Loading from './Loading';
+import SigninModal from '../SigninModal';
+import Loading from '../Loading';
 
-import { fire } from '../config';
+import { fire } from '../../config';
 
 const propTypes = {
   appState: PropTypes.shape({

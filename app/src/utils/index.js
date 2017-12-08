@@ -3,15 +3,18 @@ import axios from 'axios';
 import { fire, functionsAccess } from '../config';
 
 export const currentUserToken = () => {
-  return fire
-    .auth()
-    .currentUser.getIdToken()
-    .then(token => {
-      return token;
-    })
-    .catch(err => {
-      return err;
-    });
+  if (fire.auth().currentUser) {
+    return fire
+      .auth()
+      .currentUser.getIdToken()
+      .then(token => {
+        return token;
+      })
+      .catch(err => {
+        return err;
+      });
+  }
+  return null;
 };
 
 // Fire Function to save Strava OAuth token

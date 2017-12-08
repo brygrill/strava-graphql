@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import { fire } from '../config';
+import { fire } from '../../config';
 
 import { PrivateRoute, PublicRoute, NoMatchRoute } from './Routes';
-import SigninPage from './SigninPage';
-import DashboardPage from './DashboardPage';
-import StravaAuthPage from './StravaAuthPage';
-import NotFound from './NotFoundPage';
+import SigninPage from '../pages/SigninPage';
+import DashboardPage from '../pages/DashboardPage';
+import StravaAuthPage from '../pages/StravaAuthPage';
+import NotFound from '../pages/NotFoundPage';
 
-import Loading from './Loading';
+import Loading from '../Loading';
 
 const Fragment = React.Fragment;
 
@@ -58,6 +58,11 @@ export default class RouterComponent extends Component {
           />
           <PrivateRoute
             path="/strava"
+            appState={this.state}
+            component={StravaAuthPage}
+          />
+          <PrivateRoute
+            path="/graphiql"
             appState={this.state}
             component={StravaAuthPage}
           />
