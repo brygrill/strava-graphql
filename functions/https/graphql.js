@@ -15,14 +15,22 @@ const app = express();
 // Init middleware
 app.use(cors);
 
-// Only use auth in production
+// Auth middleware
 if (env === 'production') {
   app.use(mw.auth(admin));
 }
 
+// User middleware
+// Used to pass user info to context
+app.use(mw.user(admin.database().ref('users')));
+
 // Serve graphql
 // Only serve graphiql in dev
-app.use('/', graphqlHTTP({ schema, graphiql: env !== 'production' }));
+app.use('/', graphqlHTTP((req) => ({
+  schema,
+  context: { user: req.user, strava_token: req.strava_token },
+  graphiql: env !== 'production',
+})));
 
 // Export app
 module.exports = app;

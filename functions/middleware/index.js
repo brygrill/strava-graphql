@@ -29,4 +29,30 @@ module.exports = {
         });
     };
   },
+  user(ref) {
+    return (req, res, next) => {
+      if (req.user || process.env.NODE_ENV !== 'production') {
+        ref
+          .child('RDD0hXJdZQTU7Fp2aFZfsNLI6SA3')
+          .once('value')
+          .then(snapshot => {
+            const stravaToken = snapshot
+              .child('strava')
+              .child('token')
+              .val();
+            if (stravaToken) {
+              req.strava_token = stravaToken;
+              next();
+            } else {
+              next();
+            }
+          })
+          .catch(() => {
+            next();
+          });
+      } else {
+        next();
+      }
+    };
+  },
 };

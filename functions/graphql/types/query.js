@@ -26,7 +26,8 @@ module.exports = new GraphQLObjectType({
         },
       },
       description: 'Summarize Strava activites by week',
-      resolve(obj, args) {
+      resolve(_, args, ctx) {
+        console.log(ctx);
         return weekSummaryLoader(args.token, args.count).then(data => {
           return data;
         });
