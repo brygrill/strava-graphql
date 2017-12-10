@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Container } from 'semantic-ui-react';
+import { Container, Segment, Header } from 'semantic-ui-react';
 
 import WeekSummaryView from '../hocs/WeekSummaryView';
 
@@ -20,12 +20,12 @@ const propTypes = {
   }).isRequired,
 };
 
-export default class GraphiQLPage extends Component {
+export default class DashboardPage extends Component {
   state = {
-    loading: true,
+    loading: false,
     error: false,
     sidebar: false,
-    userRef: fire.database().ref(`users/${this.props.appState.uid}`),
+    // userRef: fire.database().ref(`users/${this.props.appState.uid}`),
     userObj: null,
     stravaToken: null,
   };
@@ -83,38 +83,23 @@ export default class GraphiQLPage extends Component {
   };
 
   // LIFECYCLE
-  componentDidMount() {
-    this.getFirebaseOn();
-    this.getFirebaseOnce();
-  }
+  // componentDidMount() {
+  //   this.getFirebaseOn();
+  //   this.getFirebaseOnce();
+  // }
 
   render() {
     if (this.state.loading) {
       return <Loading />;
     }
     return (
-      <MenuSidebar
-        visible={this.state.sidebar}
-        showDisconnect={this.state.stravaToken || false}
-        logout={this.handleLogOut}
-        deauth={this.handleDeAuth}
-      >
-        <Fragment>
-          <MenuTop
-            toggleSidebar={this.toggleSidebar}
-            showDisclaimer={this.state.stravaToken || false}
-          />
-          <Container style={{ marginTop: '3rem' }}>
-            {this.state.stravaToken ? (
-              <WeekSummaryView token={this.state.stravaToken} />
-            ) : (
-              <StravaConnect stravaOAuthUrl={stravaOAuthUrl} />
-            )}
-          </Container>
-        </Fragment>
-      </MenuSidebar>
+      <Segment inverted padded className="back-black">
+        <Header as="h2" inverted textAlign="center">
+          GraphiQL Page
+        </Header>
+      </Segment>
     );
   }
 }
 
-GraphiQLPage.propTypes = propTypes;
+DashboardPage.propTypes = propTypes;

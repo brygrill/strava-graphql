@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Container, Segment, Header } from 'semantic-ui-react';
+import { Container } from 'semantic-ui-react';
 
 import WeekSummaryView from '../hocs/WeekSummaryView';
 
@@ -22,10 +22,10 @@ const propTypes = {
 
 export default class DashboardPage extends Component {
   state = {
-    loading: false,
+    loading: true,
     error: false,
     sidebar: false,
-    // userRef: fire.database().ref(`users/${this.props.appState.uid}`),
+    userRef: fire.database().ref(`users/${this.props.appState.uid}`),
     userObj: null,
     stravaToken: null,
   };
@@ -83,21 +83,36 @@ export default class DashboardPage extends Component {
   };
 
   // LIFECYCLE
-  // componentDidMount() {
-  //   this.getFirebaseOn();
-  //   this.getFirebaseOnce();
-  // }
+  componentDidMount() {
+    this.getFirebaseOn();
+    this.getFirebaseOnce();
+  }
 
   render() {
     if (this.state.loading) {
       return <Loading />;
     }
     return (
-      <Segment inverted padded className="back-black">
-        <Header as="h2" inverted textAlign="center">
-          Dashboard Page
-        </Header>
-      </Segment>
+      <MenuSidebar
+        visible={this.state.sidebar}
+        showDisconnect={this.state.stravaToken || false}
+        logout={this.handleLogOut}
+        deauth={this.handleDeAuth}
+      >
+        <Fragment>
+          <MenuTop
+            toggleSidebar={this.toggleSidebar}
+            showDisclaimer={this.state.stravaToken || false}
+          />
+          <Container style={{ marginTop: '3rem' }}>
+            {this.state.stravaToken ? (
+              <WeekSummaryView token={this.state.stravaToken} />
+            ) : (
+              <StravaConnect stravaOAuthUrl={stravaOAuthUrl} />
+            )}
+          </Container>
+        </Fragment>
+      </MenuSidebar>
     );
   }
 }

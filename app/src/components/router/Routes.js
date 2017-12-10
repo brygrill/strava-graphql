@@ -2,18 +2,23 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+import PrivateWrapper from './PrivateWrapper';
+
 const propTypes = {
   component: PropTypes.func.isRequired,
   appState: PropTypes.object.isRequired,
 };
 
 export const PrivateRoute = ({ component: Component, appState, ...rest }) => {
+  console.log(appState);
   return (
     <Route
       {...rest}
       render={props =>
         appState.authed ? (
-          <Component appState={appState} {...props} />
+          <PrivateWrapper uid={appState.uid} {...props}>
+            <Component {...props} />
+          </PrivateWrapper>
         ) : (
           <Redirect to={{ pathname: '/signin' }} />
         )

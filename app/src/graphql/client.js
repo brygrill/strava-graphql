@@ -10,23 +10,20 @@ const httpLink = createHttpLink({
   uri,
 });
 
-const authLink = setContext(
-  (_, { headers }) =>
-    new Promise((resolve, reject) => {
-      currentUserToken()
-        .then(token => {
-          resolve({
-            headers: {
-              ...headers,
-              authorization: token ? `Bearer ${token}` : null,
-            },
-          });
-        })
-        .catch(() => {
-          reject({ headers });
-        });
-    }),
-);
+const authLink = setContext(async (_, { headers }) => {
+  const token = await currentUserToken();
+  console.log(token);
+  try {
+    return {
+      headers: {
+        ...headers,
+        authorization: token ? `Bearer ${token}` : null,
+      },
+    };
+  } catch (error) {
+    return { headers };
+  }
+});
 
 const client = new ApolloClient({
   link: authLink.concat(httpLink),

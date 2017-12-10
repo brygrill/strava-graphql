@@ -31,9 +31,9 @@ module.exports = {
   },
   user(ref) {
     return (req, res, next) => {
-      if (req.user || process.env.NODE_ENV !== 'production') {
+      if (req.user) {
         ref
-          .child('RDD0hXJdZQTU7Fp2aFZfsNLI6SA3')
+          .child(req.user.uid)
           .once('value')
           .then(snapshot => {
             const stravaToken = snapshot
