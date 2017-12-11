@@ -89,6 +89,7 @@ export default class DashboardPage extends Component {
   // }
 
   render() {
+    console.log(this.props);
     if (this.state.loading) {
       return <Loading />;
     }

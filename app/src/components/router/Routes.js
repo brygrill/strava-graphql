@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import PrivateWrapper from './PrivateWrapper';
+import AppWrapper from '../hocs/AppWrapper';
 
 const propTypes = {
   component: PropTypes.func.isRequired,
@@ -16,9 +16,9 @@ export const PrivateRoute = ({ component: Component, appState, ...rest }) => {
       {...rest}
       render={props =>
         appState.authed ? (
-          <PrivateWrapper uid={appState.uid} {...props}>
+          <AppWrapper {...props}>
             <Component {...props} />
-          </PrivateWrapper>
+          </AppWrapper>
         ) : (
           <Redirect to={{ pathname: '/signin' }} />
         )

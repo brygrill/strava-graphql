@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import gql from 'graphql-tag';
+import { graphql } from 'react-apollo';
 import { Container } from 'semantic-ui-react';
 
 import MenuTop from '../MenuTop';
@@ -16,7 +18,11 @@ const propTypes = {
   children: PropTypes.element.isRequired,
 };
 
-export default class DashboardPage extends Component {
+const defaultProps = {
+  dash: null,
+}
+
+class AppWrapper extends Component {
   state = {
     loading: false,
     error: false,
@@ -72,11 +78,16 @@ export default class DashboardPage extends Component {
   };
 
   // LIFECYCLE
-  componentDidMount() {
-    this.getFirebaseOnce();
-  }
+  // componentDidMount() {
+  //   this.getFirebaseOnce();
+  // }
 
   render() {
+    const { children } = this.props;
+
+    const childrenWithProps = React.Children.map(children, child =>
+      React.cloneElement(child, { dash: this.props.dash }));
+
     console.log(this.props);
     if (this.state.loading) {
       return <Loading />;
@@ -94,7 +105,7 @@ export default class DashboardPage extends Component {
             showDisclaimer={this.state.stravaToken || false}
           />
           <Container style={{ marginTop: '3rem' }}>
-            {this.props.children}
+            {childrenWithProps}
           </Container>
         </Fragment>
       </MenuSidebar>
@@ -102,4 +113,24 @@ export default class DashboardPage extends Component {
   }
 }
 
-DashboardPage.propTypes = propTypes;
+AppWrapper.propTypes = propTypes;
+AppWrapper.defaultProps = defaultProps;
+
+// https://www.apollographql.com/docs/react/features/subscriptions.html
+const DASH_USER_QUERY = gql`
+query DashUserQuery {
+  dash {
+    uid
+    strava_token
+  }
+}
+`;
+
+export default graphql(DASH_USER_QUERY, {
+// options: ({ token }) => ({ variables: { count: 12, token } }),
+  props: ({ data: { loading, error, dash } }) => ({
+    loading,
+    error,
+    dash,
+  }),
+})(AppWrapper);
