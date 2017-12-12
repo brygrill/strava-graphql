@@ -14,48 +14,36 @@ import { deAuthAthlete } from '../../utils';
 const Fragment = React.Fragment;
 
 const propTypes = {
-  uid: PropTypes.string.isRequired,
+  dash: PropTypes.shape({
+    uid: PropTypes.string,
+    strava_token: PropTypes.string,
+  }).isRequired,
+  loading: PropTypes.bool,
+  error: PropTypes.any,
   children: PropTypes.element.isRequired,
 };
 
 const defaultProps = {
-  dash: null,
-}
+  loading: false,
+  error: false,
+  dash: {
+    uid: null,
+    strava_token: null,
+  },
+};
 
 class AppWrapper extends Component {
   state = {
     loading: false,
     error: false,
     sidebar: false,
-    userRef: fire.database().ref('users'),
-    userObj: null,
-    stravaToken: null,
+    userRef: fire.database().ref(`users/${this.props.dash.uid}`),
+    strava: this.props.dash.strava_token,
   };
 
   // UI
   toggleSidebar = () => {
     this.setState({ sidebar: !this.state.sidebar });
-  };
-
-  // FIREBASE
-  getFirebaseOnce = () => {
-    this.state.userRef
-      .child(this.props.uid)
-      .once('value')
-      .then(snapshot => {
-        const stravaToken = snapshot
-          .child('strava')
-          .child('token')
-          .val();
-        if (stravaToken) {
-          this.setState({ stravaToken, loading: false });
-        } else {
-          this.setState({ loading: false });
-        }
-      })
-      .catch(() => {
-        this.setState({ loading: false, error: false });
-      });
   };
 
   // LOGOUT
@@ -70,26 +58,22 @@ class AppWrapper extends Component {
       // rm token from firebase
       this.state.userRef.child('strava').remove();
       // deauth app in strava
-      await deAuthAthlete(this.state.stravaToken);
-      this.setState({ loading: false, sidebar: false, stravaToken: null });
+      await deAuthAthlete(this.props.dash.strava_token);
+      this.setState({ loading: false, sidebar: false, strava: null });
     } catch (error) {
       this.setState({ error: true, sidebar: false, loading: false });
     }
   };
 
-  // LIFECYCLE
-  // componentDidMount() {
-  //   this.getFirebaseOnce();
-  // }
-
   render() {
     const { children } = this.props;
 
     const childrenWithProps = React.Children.map(children, child =>
-      React.cloneElement(child, { dash: this.props.dash }));
+      React.cloneElement(child, { dash: this.props.dash }),
+    );
 
     console.log(this.props);
-    if (this.state.loading) {
+    if (this.state.loading || this.props.loading) {
       return <Loading />;
     }
     return (
@@ -116,18 +100,17 @@ class AppWrapper extends Component {
 AppWrapper.propTypes = propTypes;
 AppWrapper.defaultProps = defaultProps;
 
-// https://www.apollographql.com/docs/react/features/subscriptions.html
 const DASH_USER_QUERY = gql`
-query DashUserQuery {
-  dash {
-    uid
-    strava_token
+  query DashUserQuery {
+    dash {
+      uid
+      strava_token
+    }
   }
-}
 `;
 
 export default graphql(DASH_USER_QUERY, {
-// options: ({ token }) => ({ variables: { count: 12, token } }),
+  // options: ({ token }) => ({ variables: { count: 12, token } }),
   props: ({ data: { loading, error, dash } }) => ({
     loading,
     error,
