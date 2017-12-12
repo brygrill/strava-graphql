@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Segment, Header } from 'semantic-ui-react';
 
 import Loading from '../Loading';
+import WeekSummaryView from '../hocs/WeekSummaryView';
 
 const propTypes = {
   loading: PropTypes.bool,
@@ -29,6 +30,7 @@ export default class DashboardPage extends Component {
         <Header as="h2" inverted textAlign="center">
           Dashboard Page
         </Header>
+        <WeekSummaryView />
       </Segment>
     );
   }

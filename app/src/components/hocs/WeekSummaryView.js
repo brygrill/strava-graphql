@@ -18,28 +18,32 @@ class WeekSummaryView extends Component {
     } else if (this.props.error) {
       return <h1 style={{ color: '#fff' }}>Error</h1>;
     }
-    return <ChartBar data={this.props.summarizeWeeks} />;
+    return <ChartBar data={this.props.strava.activity.week_summary} />;
   }
 }
 
 WeekSummaryView.propTypes = propTypes;
 
 const WEEKS_SUMMARY_QUERY = gql`
-  query WeekSummaryForBarChart($count: Int!, $token: String!) {
-    summarizeWeeks(count: $count, token: $token) {
-      weekOf
-      totalTimeHrs
-      totalTimeHrsStr
-      totalSuffer
+  query WeekSummaryForBarChart($count: Int!) {
+    strava {
+      activity {
+        week_summary(count: $count) {
+          weekOf
+          totalTimeHrs
+          totalTimeHrsStr
+          totalSuffer
+        }
+      }
     }
   }
 `;
 
 export default graphql(WEEKS_SUMMARY_QUERY, {
-  options: ({ token }) => ({ variables: { count: 12, token } }),
-  props: ({ data: { loading, error, summarizeWeeks } }) => ({
+  options: { variables: { count: 12 } },
+  props: ({ data: { loading, error, strava } }) => ({
     loading,
     error,
-    summarizeWeeks,
+    strava,
   }),
 })(WeekSummaryView);
