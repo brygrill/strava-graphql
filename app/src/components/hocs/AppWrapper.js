@@ -20,6 +20,7 @@ const propTypes = {
   }).isRequired,
   loading: PropTypes.bool,
   error: PropTypes.any,
+  history: PropTypes.object.isRequired,
   children: PropTypes.element.isRequired,
 };
 
@@ -80,6 +81,7 @@ class AppWrapper extends Component {
       <MenuSidebar
         visible={this.state.sidebar}
         showDisconnect={this.state.stravaToken || false}
+        push={this.props.history.push}
         logout={this.handleLogOut}
         deauth={this.handleDeAuth}
       >

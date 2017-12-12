@@ -7,6 +7,7 @@ import { PrivateRoute, PublicRoute, NoMatchRoute } from './Routes';
 import SigninPage from '../pages/SigninPage';
 import DashboardPage from '../pages/DashboardPage';
 import GraphiqlPage from '../pages/GraphiqlPage';
+import SettingsPage from '../pages/SettingsPage';
 import StravaAuthPage from '../pages/StravaAuthPage';
 import NotFound from '../pages/NotFoundPage';
 
@@ -66,6 +67,11 @@ export default class RouterComponent extends Component {
             path="/graphiql"
             appState={this.state}
             component={GraphiqlPage}
+          />
+          <PrivateRoute
+            path="/settings"
+            appState={this.state}
+            component={SettingsPage}
           />
           <NoMatchRoute appState={this.state} component={NotFound} />
         </Fragment>

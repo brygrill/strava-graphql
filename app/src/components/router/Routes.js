@@ -10,14 +10,13 @@ const propTypes = {
 };
 
 export const PrivateRoute = ({ component: Component, appState, ...rest }) => {
-  console.log(appState);
   return (
     <Route
       {...rest}
       render={props =>
         appState.authed ? (
           <AppWrapper {...props}>
-            <Component {...props} />
+            <Component />
           </AppWrapper>
         ) : (
           <Redirect to={{ pathname: '/signin' }} />

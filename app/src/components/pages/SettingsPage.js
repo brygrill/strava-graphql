@@ -14,7 +14,7 @@ const defaultProps = {
   error: false,
 };
 
-export default class DashboardPage extends Component {
+export default class SettingsPage extends Component {
   state = {
     loading: false,
     error: false,
@@ -27,12 +27,12 @@ export default class DashboardPage extends Component {
     return (
       <Segment inverted padded className="back-black">
         <Header as="h2" inverted textAlign="center">
-          Dashboard Page
+          Settings Page
         </Header>
       </Segment>
     );
   }
 }
 
-DashboardPage.propTypes = propTypes;
-DashboardPage.defaultProps = defaultProps;
+SettingsPage.propTypes = propTypes;
+SettingsPage.defaultProps = defaultProps;
