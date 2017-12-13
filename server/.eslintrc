@@ -1,0 +1,22 @@
+{
+  "root": true,
+  "extends": "airbnb-base",
+  "env": {
+    "node": true
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "ecmaVersion": 6,
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "rules": {
+    "linebreak-style": "off",
+    "vars-on-top": "warn",
+    "arrow-body-style": "off",
+    "no-underscore-dangle": "off",
+    "arrow-parens": "off",
+    "no-param-reassign": [2, { "props": false }]
+  }
+}
