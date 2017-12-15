@@ -1,9 +1,0 @@
-type Query {
-  # Root Query
-  books: [Book]
-}
-
-type Book {
-  title: String
-  author: String
-}

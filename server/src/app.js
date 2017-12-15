@@ -11,6 +11,8 @@ import mw from './middleware';
 // import schema from './graphql/schema';
 import schema from './graphql/schema/test.gql';
 
+console.log(schema);
+
 // Some fake data
 const books = [
   {
@@ -39,6 +41,8 @@ const myGraphQLSchema = makeExecutableSchema({
   typeDefs: schema,
   resolvers,
 });
+
+console.log(myGraphQLSchema);
 
 // Init app
 const app = express();
