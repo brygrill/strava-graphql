@@ -5,7 +5,7 @@ const _ = require('lodash');
 const weekStart = moment().startOf('isoWeek');
 
 const helpers = {
-  currentWeekStart: moment().startOf('isoWeek'),
+  currentWeekStart: weekStart,
   lastXWeeks(x) {
     // x would be 12 for example
     // to get the last 12 including the current week
@@ -18,13 +18,13 @@ const helpers = {
   seedWeeks(weeks) {
     const range = _.range(weeks).map((item, index) => {
       return {
-        weekOf: moment(weekStart)
+        week_of: moment(weekStart)
           .subtract(item, 'week')
           .format('MMM Do'),
-        totalTimeSec: 0,
-        totalTimeHrs: 0,
-        totalSuffer: 0,
-        weekNum: index,
+        time_total_sec: 0,
+        time_total_hrs: 0,
+        suffer_total: 0,
+        week_num: index,
       };
     });
     return range.reverse();

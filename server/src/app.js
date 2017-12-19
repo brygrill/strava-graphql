@@ -4,26 +4,27 @@ import helmet from 'helmet';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
-import graphqlHTTP from 'express-graphql';
+// import graphqlHTTP from 'express-graphql';
 import { makeExecutableSchema } from 'graphql-tools';
 import admin from './config';
 import mw from './middleware';
 // import schema from './graphql/schema';
-import schema from './graphql/schema/test.gql';
+import schema from './graphql/schema/index.gql';
+import resolvers from './graphql/resolvers';
 
-console.log(schema);
+// console.log(schema);
 
-// Some fake data
-const books = [
-  {
-    title: "Harry Potter and the Sorcerer's stone",
-    author: 'J.K. Rowling',
-  },
-  {
-    title: 'Jurassic Park',
-    author: 'Michael Crichton',
-  },
-];
+// // Some fake data
+// const books = [
+//   {
+//     title: "Harry Potter and the Sorcerer's stone",
+//     author: 'J.K. Rowling',
+//   },
+//   {
+//     title: 'Jurassic Park',
+//     author: 'Michael Crichton',
+//   },
+// ];
 
 // The GraphQL schema in string form
 // const typeDefs = `
@@ -32,9 +33,9 @@ const books = [
 // `;
 
 // The resolvers
-const resolvers = {
-  Query: { books: () => books },
-};
+// const resolvers = {
+//   Query: { books: () => books },
+// };
 
 // Put together a schema
 const myGraphQLSchema = makeExecutableSchema({
@@ -42,7 +43,7 @@ const myGraphQLSchema = makeExecutableSchema({
   resolvers,
 });
 
-console.log(myGraphQLSchema);
+// console.log(myGraphQLSchema);
 
 // Init app
 const app = express();
@@ -59,11 +60,11 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // Auth middleware
-// app.use(mw.auth(admin));
+app.use(mw.auth(admin));
 
-// // User middleware
-// // Used to pass user info to context
-// app.use(mw.user(admin.database().ref('users')));
+// User middleware
+// Used to pass user info to context
+app.use(mw.user(admin.database().ref('users')));
 
 // Serve graphql
 // Only serve graphiql in dev
@@ -75,10 +76,19 @@ if (process.env.NODE_ENV !== 'production') {
 app.use(
   '/graphql',
   bodyParser.json(),
-  graphqlExpress({ schema: myGraphQLSchema }),
+  graphqlExpress(req => ({
+    schema: myGraphQLSchema,
+    context: { uid: req.user.uid, strava_token: req.strava_token },
+  })),
 );
 
-app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
+// app.use(
+//   '/graphql',
+//   bodyParser.json(),
+//   graphqlExpress({ schema: myGraphQLSchema, context: { uid: req.user.uid, strava_token: req.strava_token }}),
+// );
+
+// app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 
 // Export app
 export default app;

@@ -25,11 +25,11 @@ const weekSummaryLoader = (token, count) => {
         // Find the week the activity is in
         // add activity time to total hours
         const weekStart = weekStartDate(item.start_date);
-        const weekOfTheActivity = _.find(weeks, { weekOf: weekStart });
+        const weekOfTheActivity = _.find(weeks, { week_of: weekStart });
         if (weekOfTheActivity) {
           // accumulate activity time
-          weekOfTheActivity.totalTimeSec += item.moving_time;
-          weekOfTheActivity.totalSuffer += item.suffer_score;
+          weekOfTheActivity.time_total_sec += item.moving_time;
+          weekOfTheActivity.suffer_total += item.suffer_score;
         }
         return item;
       });
