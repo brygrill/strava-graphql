@@ -1,7 +1,7 @@
 import axios from 'axios';
 import _ from 'lodash';
 
-import helpers from '../helpers';
+import helpers from '../../helpers';
 
 const { lastXWeeks, seedWeeks, weekStartDate } = helpers;
 

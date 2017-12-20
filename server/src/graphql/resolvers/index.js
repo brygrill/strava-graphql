@@ -1,7 +1,7 @@
 import moment from 'moment';
 import helpers from '../../helpers';
-import weekSummaryLoader from '../../controllers/strava-summarize-weeks';
-import stravaToken from '../../controllers/strava-token';
+import weekSummaryLoader from './strava-summarize-weeks';
+import stravaToken from './strava-token';
 
 const { formatHoursNum } = helpers;
 const { postStravaToken, updateStravaToken } = stravaToken;
@@ -22,8 +22,15 @@ const resolverMap = {
       return `Return activity data for ${args.id}`;
     },
     async week_summary(_, args, ctx) {
-      const data = await weekSummaryLoader(ctx.strava_token, args.count);
-      return data;
+      if (!ctx.strava_token) {
+        throw new Error('Must include Strava access token!');
+      }
+      try {
+        const data = await weekSummaryLoader(ctx.strava_token, args.count);
+        return data;
+      } catch (error) {
+        throw new Error('Error fetching Strava data');
+      }
     },
   },
   Dash: {
@@ -52,9 +59,9 @@ const resolverMap = {
   },
   Mutation: {
     async add_strava_token(_, args, ctx) {
-      const accessToken = await postStravaToken(args.code);
-      const updatedUser = await updateStravaToken(ctx.uid, accessToken);
-      return updatedUser;
+      const token = await postStravaToken(args.code);
+      const user = await updateStravaToken(ctx.uid, token);
+      return user;
     },
   },
 };

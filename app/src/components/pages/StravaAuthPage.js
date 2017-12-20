@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { saveToken } from '../../utils';
 import { fire } from '../../config';
 
-import StravaAuthView from '../hocs/StravaAuthView';
+import StravaAuthView from '../hocs/StravaAuthMutation';
 
 const propTypes = {
   location: PropTypes.object.isRequired,

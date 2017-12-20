@@ -19,9 +19,9 @@ class WeekSummaryView extends Component {
     try {
       const params = new URLSearchParams(search);
       const code = params.get('code');
-      console.log(code);
       if (code) {
         const token = await this.props.mutate({ variables: { code } });
+        // console.log(code);
         console.log(token);
         history.push('/');
       } else {
@@ -64,10 +64,8 @@ WeekSummaryView.propTypes = propTypes;
 const ADD_STRAVA_TOKEN = gql`
   mutation addStravaToken($code: String!) {
     add_strava_token(code: $code) {
-      dash {
-        uid
-        strava_token
-      }
+      uid
+      strava_token
     }
   }
 `;

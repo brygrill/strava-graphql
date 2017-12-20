@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import AppWrapper from '../hocs/AppWrapper';
+import AppWrapper from '../hocs/AppWrapperQuery';
 
 const propTypes = {
   component: PropTypes.func.isRequired,

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Segment } from 'semantic-ui-react';
 
 import Loading from '../Loading';
-import WeekSummaryView from '../hocs/MainStravaView';
+import WeekSummaryView from '../hocs/MainStravaQuery';
 
 const propTypes = {
   loading: PropTypes.bool,
