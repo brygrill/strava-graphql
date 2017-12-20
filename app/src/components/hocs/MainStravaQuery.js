@@ -3,39 +3,57 @@ import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 
-import StravaConnect from '../StravaOAuthConnect';
 import ChartBar from '../ChartBar';
 import Loading from '../Loading';
+import StravaConnect from '../StravaOAuthConnect';
 
 import { stravaOAuthUrl } from '../../config';
 
+const Fragment = React.Fragment;
+
 const propTypes = {
-  token: PropTypes.string.isRequired,
+  strava: PropTypes.object,
+  loading: PropTypes.bool,
+  error: PropTypes.any,
+  handleError: PropTypes.func.isRequired,
+};
+
+const defaultProps = {
+  loading: false,
+  error: false,
+  strava: {
+    activity: {
+      week_summary: [],
+    },
+  },
 };
 
 class WeekSummaryView extends Component {
+  componentWillReceiveProps(nextProps) {
+    // listen for error from graphql query and pass to parent
+    if (this.props.error !== nextProps.error) {
+      this.props.handleError(nextProps.error);
+    }
+  }
   render() {
-    console.log(this.props);
     if (this.props.loading) {
       return <Loading />;
     }
-    // swollow this err for now
-    // else if (this.props.error) {
-    //   return <h1 style={{ color: '#fff' }}>Error</h1>;
-    // }
+
     return (
-      <div>
+      <Fragment>
         {this.props.strava ? (
           <ChartBar data={this.props.strava.activity.week_summary} />
         ) : (
           <StravaConnect stravaOAuthUrl={stravaOAuthUrl} />
         )}
-      </div>
+      </Fragment>
     );
   }
 }
 
 WeekSummaryView.propTypes = propTypes;
+WeekSummaryView.defaultProps = defaultProps;
 
 const WEEKS_SUMMARY_QUERY = gql`
   query WeekSummaryForBarChart($count: Int!) {

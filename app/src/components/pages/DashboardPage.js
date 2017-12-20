@@ -21,13 +21,22 @@ export default class DashboardPage extends Component {
     error: false,
   };
 
+  handleError = error => {
+    this.setState({ error });
+  };
+
   render() {
-    if (this.state.loading) {
+    if (this.state.loading || this.props.loading) {
       return <Loading />;
     }
+
+    if (this.state.error || this.props.error) {
+      return <div>Error!!!</div>;
+    }
+
     return (
       <Segment inverted padded className="back-black">
-        <WeekSummaryView />
+        <WeekSummaryView handleError={this.handleError} />
       </Segment>
     );
   }

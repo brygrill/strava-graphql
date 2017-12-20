@@ -4,14 +4,11 @@ import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import { Segment, Header, Loader } from 'semantic-ui-react';
 
-import StravaConnect from '../StravaOAuthConnect';
-import ChartBar from '../ChartBar';
-import Loading from '../Loading';
-
-import { stravaOAuthUrl } from '../../config';
-
 const propTypes = {
-  token: PropTypes.string.isRequired,
+  mutate: PropTypes.func.isRequired,
+  location: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  handleError: PropTypes.func.isRequired,
 };
 
 class WeekSummaryView extends Component {
@@ -20,21 +17,17 @@ class WeekSummaryView extends Component {
       const params = new URLSearchParams(search);
       const code = params.get('code');
       if (code) {
-        const token = await this.props.mutate({ variables: { code } });
-        // console.log(code);
-        console.log(token);
+        await this.props.mutate({ variables: { code } });
         history.push('/');
       } else {
         history.push('/');
       }
     } catch (error) {
-      console.log(error);
+      this.props.handleError(error);
     }
   };
 
   componentDidMount() {
-    console.log(this.props);
-    console.log('StravaAuthView cDM');
     this.handleStravaCallback(this.props.location.search, this.props.history);
   }
 
