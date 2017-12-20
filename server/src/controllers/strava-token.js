@@ -1,7 +1,12 @@
-const axios = require('axios');
+import axios from 'axios';
+import admin from '../config';
+
+const db = admin.database();
+const ref = db.ref();
 
 const stravaToken = {
-  updateStravaToken(ref, uid, token) {
+  // save access_token to firebase
+  updateStravaToken(uid, token) {
     return ref
       .child('users')
       .child(uid)
@@ -19,10 +24,11 @@ const stravaToken = {
       });
   },
   // Post temp code to Strava
-  postStravaToken(strava, code) {
+  // return access_token
+  postStravaToken(code) {
     const body = {
-      client_id: strava.client_id,
-      client_secret: strava.client_secret,
+      client_id: process.env.STRAVA_CLIENT_ID,
+      client_secret: process.env.STRAVA_CLIENT_SECRET,
       code,
     };
 

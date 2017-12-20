@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 
+import StravaConnect from '../StravaOAuthConnect';
 import ChartBar from '../ChartBar';
 import Loading from '../Loading';
+
+import { stravaOAuthUrl } from '../../config';
 
 const propTypes = {
   token: PropTypes.string.isRequired,
@@ -15,10 +18,20 @@ class WeekSummaryView extends Component {
     console.log(this.props);
     if (this.props.loading) {
       return <Loading />;
-    } else if (this.props.error) {
-      return <h1 style={{ color: '#fff' }}>Error</h1>;
     }
-    return <ChartBar data={this.props.strava.activity.week_summary} />;
+    // swollow this err for now
+    // else if (this.props.error) {
+    //   return <h1 style={{ color: '#fff' }}>Error</h1>;
+    // }
+    return (
+      <div>
+        {this.props.strava ? (
+          <ChartBar data={this.props.strava.activity.week_summary} />
+        ) : (
+          <StravaConnect stravaOAuthUrl={stravaOAuthUrl} />
+        )}
+      </div>
+    );
   }
 }
 
@@ -29,10 +42,10 @@ const WEEKS_SUMMARY_QUERY = gql`
     strava {
       activity {
         week_summary(count: $count) {
-          weekOf
-          totalTimeHrs
-          totalTimeHrsStr
-          totalSuffer
+          week_of
+          time_total_hrs
+          time_total_hrs_str
+          suffer_total
         }
       }
     }

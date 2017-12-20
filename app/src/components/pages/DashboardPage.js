@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Segment, Header } from 'semantic-ui-react';
+import { Segment } from 'semantic-ui-react';
 
 import Loading from '../Loading';
-import WeekSummaryView from '../hocs/WeekSummaryView';
+import WeekSummaryView from '../hocs/MainStravaView';
 
 const propTypes = {
   loading: PropTypes.bool,
@@ -27,9 +27,6 @@ export default class DashboardPage extends Component {
     }
     return (
       <Segment inverted padded className="back-black">
-        <Header as="h2" inverted textAlign="center">
-          Dashboard Page
-        </Header>
         <WeekSummaryView />
       </Segment>
     );

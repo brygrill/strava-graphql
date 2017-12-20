@@ -41,9 +41,9 @@ export default class ChartBar extends Component {
             margin={{ top: 0, right: 10, left: 0, bottom: 0 }}
           >
             <Tooltip />
-            <XAxis dataKey="weekOf" />
+            <XAxis dataKey="week_of" />
             <YAxis />
-            <Bar dataKey="totalTimeHrs" fill="#82ca9d" />
+            <Bar dataKey="time_total_hrs" fill="#82ca9d" />
           </BarChart>
         </ResponsiveContainer>
       </Segment>

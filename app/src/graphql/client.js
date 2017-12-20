@@ -4,7 +4,7 @@ import { setContext } from 'apollo-link-context';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
 import { currentUserToken } from '../utils';
-import { functionsGraphql as uri } from '../config';
+import { graphql as uri } from '../config';
 
 const httpLink = createHttpLink({
   uri,

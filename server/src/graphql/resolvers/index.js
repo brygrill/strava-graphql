@@ -1,8 +1,10 @@
 import moment from 'moment';
 import helpers from '../../helpers';
 import weekSummaryLoader from '../../controllers/strava-summarize-weeks';
+import stravaToken from '../../controllers/strava-token';
 
 const { formatHoursNum } = helpers;
+const { postStravaToken, updateStravaToken } = stravaToken;
 
 const resolverMap = {
   WeekSummary: {
@@ -46,6 +48,13 @@ const resolverMap = {
     },
     strava(_, args, ctx) {
       return { _, args, ctx };
+    },
+  },
+  Mutation: {
+    async add_strava_token(_, args, ctx) {
+      const accessToken = await postStravaToken(args.code);
+      const updatedUser = await updateStravaToken(ctx.uid, accessToken);
+      return updatedUser;
     },
   },
 };

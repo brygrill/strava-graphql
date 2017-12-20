@@ -31,3 +31,7 @@ type Query {
   dash: Dash
   strava: Strava
 }
+
+type Mutation {
+  add_strava_token(code: String!): Dash
+}
