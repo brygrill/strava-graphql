@@ -1,7 +1,7 @@
-const axios = require('axios');
-const _ = require('lodash');
+import axios from 'axios';
+import _ from 'lodash';
 
-const helpers = require('../helpers');
+import helpers from '../../helpers';
 
 const { lastXWeeks, seedWeeks, weekStartDate } = helpers;
 
@@ -16,7 +16,7 @@ const getActivities = (token, after) => {
   return instance.get(endpoint, config);
 };
 
-module.exports = (token, count) => {
+const weekSummaryLoader = (token, count) => {
   // get athlete activities
   return getActivities(token, lastXWeeks(count))
     .then(({ data }) => {
@@ -25,11 +25,11 @@ module.exports = (token, count) => {
         // Find the week the activity is in
         // add activity time to total hours
         const weekStart = weekStartDate(item.start_date);
-        const weekOfTheActivity = _.find(weeks, { weekOf: weekStart });
+        const weekOfTheActivity = _.find(weeks, { week_of: weekStart });
         if (weekOfTheActivity) {
           // accumulate activity time
-          weekOfTheActivity.totalTimeSec += item.moving_time;
-          weekOfTheActivity.totalSuffer += item.suffer_score;
+          weekOfTheActivity.time_total_sec += item.moving_time;
+          weekOfTheActivity.suffer_total += item.suffer_score;
         }
         return item;
       });
@@ -39,3 +39,5 @@ module.exports = (token, count) => {
       return err;
     });
 };
+
+export default weekSummaryLoader;

@@ -28,6 +28,13 @@ const common = {
           loader: 'babel-loader',
         },
       },
+      {
+        test: /\.(graphql|gql)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'graphql-tag/loader',
+        },
+      },
     ],
   },
   plugins: [
@@ -52,7 +59,7 @@ if (TARGET === 'start') {
       new webpack.DefinePlugin({
         'process.env': {
           NODE_ENV: JSON.stringify('development'),
-          PORT: JSON.stringify('3000'),
+          PORT: JSON.stringify('3001'),
         },
       }),
     ],
@@ -67,7 +74,7 @@ if (TARGET === 'build') {
       new webpack.DefinePlugin({
         'process.env': {
           NODE_ENV: JSON.stringify('production'),
-          PORT: JSON.stringify('3000'),
+          PORT: JSON.stringify('3001'),
         },
       }),
     ],

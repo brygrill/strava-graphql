@@ -34,3 +34,5 @@ export const functionsAccess =
 export const functionsGraphqlProd = 'https://us-central1-velox-f43d6.cloudfunctions.net/graphql/';
 
 export const functionsGraphql = 'http://localhost:5000/velox-f43d6/us-central1/graphql/';
+
+export const graphql = 'http://localhost:3001/graphql';

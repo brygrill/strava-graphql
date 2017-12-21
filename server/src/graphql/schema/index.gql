@@ -1,0 +1,37 @@
+type WeekSummary {
+  # Activity summary for a single week. Monday to Sunday
+  week_of: String # Week start in human readable format
+  week_num: String # Week number with 0 being current week
+  time_total_sec: Int # Accumulated moving_time for all activities of the week
+  time_total_hrs: Float # time_total_sec converted to hours
+  time_total_hrs_str: String # total_time_hrs converted to HH:mm
+  suffer_total: Int # Accumulated suffer_score for all activities of the week. Premium only
+}
+
+type Activity {
+  # Strava athlete activity data
+  single_activity(id: Int!): String # Data for a single activity
+  week_summary(count: Int!): [WeekSummary] # Activity data summarized by week
+}
+
+type Dash {
+  # Top level Dash user data
+  uid: String # user id
+  strava_token: String # strava oath access token
+}
+
+type Strava {
+  # Top level Strava user data
+  athlete: String
+  activity: Activity
+}
+
+type Query {
+  # Root query
+  dash: Dash
+  strava: Strava
+}
+
+type Mutation {
+  add_strava_token(code: String!): Dash
+}

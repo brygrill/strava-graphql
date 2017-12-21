@@ -77,6 +77,11 @@ class AppWrapper extends Component {
     if (this.state.loading || this.props.loading) {
       return <Loading />;
     }
+
+    if (this.state.error || this.props.error) {
+      return <div>Error!!!</div>;
+    }
+
     return (
       <MenuSidebar
         visible={this.state.sidebar}
