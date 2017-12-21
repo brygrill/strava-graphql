@@ -5,11 +5,6 @@ import { graphql } from 'react-apollo';
 
 import ChartBar from '../ChartBar';
 import Loading from '../Loading';
-import StravaConnect from '../StravaOAuthConnect';
-
-import { stravaOAuthUrl } from '../../config';
-
-const Fragment = React.Fragment;
 
 const propTypes = {
   strava: PropTypes.object,
@@ -41,13 +36,7 @@ class WeekSummaryView extends Component {
     }
 
     return (
-      <Fragment>
-        {this.props.strava ? (
-          <ChartBar data={this.props.strava.activity.week_summary} />
-        ) : (
-          <StravaConnect stravaOAuthUrl={stravaOAuthUrl} />
-        )}
-      </Fragment>
+      <ChartBar data={this.props.strava.activity.week_summary} />
     );
   }
 }

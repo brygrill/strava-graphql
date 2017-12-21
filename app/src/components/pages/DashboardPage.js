@@ -3,9 +3,16 @@ import PropTypes from 'prop-types';
 import { Segment } from 'semantic-ui-react';
 
 import Loading from '../Loading';
+import StravaConnect from '../StravaOAuthConnect';
 import WeekSummaryView from '../hocs/MainStravaQuery';
 
+import { stravaOAuthUrl } from '../../config';
+
 const propTypes = {
+  dash: PropTypes.shape({
+    uid: PropTypes.string,
+    strava_token: PropTypes.string,
+  }).isRequired,
   loading: PropTypes.bool,
   error: PropTypes.any,
 };
@@ -13,6 +20,10 @@ const propTypes = {
 const defaultProps = {
   loading: false,
   error: false,
+  dash: {
+    uid: null,
+    strava_token: null,
+  },
 };
 
 export default class DashboardPage extends Component {
@@ -36,7 +47,11 @@ export default class DashboardPage extends Component {
 
     return (
       <Segment inverted padded className="back-black">
-        <WeekSummaryView handleError={this.handleError} />
+        {this.props.dash.strava_token ? (
+          <WeekSummaryView handleError={this.handleError} />
+        ) : (
+          <StravaConnect stravaOAuthUrl={stravaOAuthUrl} />
+        )}
       </Segment>
     );
   }
