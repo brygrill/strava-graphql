@@ -44,12 +44,9 @@
     "semantic-ui-react": "^0.77.0"
   },
   "scripts": {
-    "format": "prettier --single-quote --trailing-comma all --write './src/**/*.js'",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "deploy": "yarn build && now deploy ./build -n stravadash",
-    "deploy:fire": "yarn run build && firebase deploy --only hosting",
-    "functions": "firebase deploy --only functions"
+    "deploy": "yarn build && now deploy ./build -n stravadash"
   }
 }
